@@ -1,0 +1,6 @@
+ToDo: 
+single login with community.zikula.org
+import bugtracker
+get TracForge running for our setup ?
+improve documentation
+train 2-3 people doing all the stuff
