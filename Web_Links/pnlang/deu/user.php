@@ -160,5 +160,4 @@ define('_WL_YOURNAME', 'Name');
 define('_WL_1WEEK', '1 Woche');
 define('_WL_2WEEKS', '2 Wochen');
 define('_WL_30DAYS', '30 Tage');
-
 ?>
