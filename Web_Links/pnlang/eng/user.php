@@ -96,7 +96,7 @@ define('_WL_OFALL', 'of all');
 define('_WL_ONLYREGUSERSMODIFY','Sorry! Only registered users can suggest link modifications.');
 define('_WL_OUTSIDEVOTERS', 'Outside voters');
 define('_WL_OVERALLRATING', 'Overall rating');
-define('_WL_PAGETITLE', 'Page title');
+define('_WL_PAGETITLE', 'Web Links');
 define('_WL_PAGEURL', 'Page URL');
 define('_WL_POPULAR', 'Popular');
 define('_WL_POPULARITY', 'Popularity');

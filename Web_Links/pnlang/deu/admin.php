@@ -9,7 +9,7 @@ define('_WL_BLOCKUNREGMODIFY', 'unregistrierten Benutzern das Vorschlagen von Än
 define('_WL_BROKENLINKSREP', 'als defekt gemeldete Links');
 define('_WL_CATEGORY', 'Kategorie');
 define('_WL_CATVIEW', 'Kategorien verwalten');
-define('_WL_CONF', 'Konfirguration');
+define('_WL_CONF', 'Konfiguration');
 define('_WL_CONFIGUPDATED', 'Konfiguration aktualisiert');
 define('_WL_DAYS', 'Tage');
 define('_WL_DBSTATUS', 'Datenbankbestand');
