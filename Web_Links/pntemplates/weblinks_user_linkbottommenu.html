@@ -1,0 +1,13 @@
+<br />
+<!--[if $access_comment_cat && $access_comment_link]-->
+<a href="<!--[pnmodurl modname=Web_Links type=user func=ratelink lid=$weblinks.lid]-->"><!--[pnml name="_WL_RATESITE"]--></a> |
+<a href="<!--[pnmodurl modname=Web_Links type=user func=modifylinkrequest lid=$weblinks.lid]-->"><!--[pnml name="_WL_MODIFY"]--></a> |
+<!--[/if]-->
+<a href="<!--[pnmodurl modname=Web_Links type=user func=brokenlink lid=$weblinks.lid]-->"><!--[pnml name="_WL_REPORTBROKEN"]--></a>
+<!--[if $access_read_cat && $access_read_link]-->
+| <a href="<!--[pnmodurl modname=Web_Links type=user func=viewlinkdetails lid=$weblinks.lid]-->"><!--[pnml name="_WL_DETAILS"]--></a>
+<!--[/if]-->
+<!--[if $access_read_cat && $access_read_link && $weblinks.totalcomments != 0]-->
+| <a href="<!--[pnmodurl modname=Web_Links type=user func=viewlinkcomments lid=$weblinks.lid]-->"><!--[pnml name="_WL_COMMENTS"]--> (<!--[$weblinks.totalcomments|pnVarPrepForDisplay]-->)</a>
+<!--[/if]-->
+<!--[detecteditorial lid=$weblinks.lid img=0]-->

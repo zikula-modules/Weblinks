@@ -1,0 +1,29 @@
+<!--[opentable]-->
+<!--[include file="weblinks_user_search.html"]-->
+<div style="text-align:center">
+<!--[include file="weblinks_user_links.html"]-->
+</div>
+<!--[closetable]-->
+<!--[opentable]-->
+
+
+
+
+
+
+
+
+
+
+<div style="text-align:center">
+[ <a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$lid]-->"><!--[pnml name="_WL_VISITTHISSITE"]--></a>
+<!--[if $access_comment_cat || $access_comment_link == 1 ]-->
+ | <a href="<!--[pnmodurl modname=Web_Links type=user func=ratelink lid=$lid]-->"><!--[pnml name="_WL_RATETHISSITE"]--></a>
+<!--[/if]-->
+]<br />
+<!--[if $useoutsidevoting == 1]-->
+<br /><!--[pnml name="_WL_ISTHISYOURSITE"]--> <a href="<!--[pnmodurl modname=Web_Links type=user func=outsidelinksetup lid=$lid]-->"><!--[pnml name="_WL_ALLOWTORATE"]--></a>
+<!--[/if]-->
+</div>
+<!--[closetable]-->
+<!--[pndebug]-->

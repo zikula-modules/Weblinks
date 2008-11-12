@@ -1,0 +1,56 @@
+<!--[include file="weblinks_admin_menu.htm"]-->
+<!--[pnthemegetvar name=bgcolor2 assign=bgcolor2]-->
+<!--[opentable]-->
+<h2><!--[pnml name="_WL_WEBLINKSADMIN"]--></h2>
+<!--[closetable]-->
+<!--[opentable]-->
+<h2><!--[pnml name="_WL_USERMODREQUEST"]--> (<!--[$totalmodrequests|pnVarPrepForDisplay]-->)</h2><br />
+<table width="95%"><tr><td>
+<!--[foreach from=$modrequests item=modrequests]-->
+<table border="1" cellpadding="5" cellspacing="0" width="100%">
+<tr>
+<td>
+<table width="100%" style="background-color:<!--[$bgcolor2]-->;">
+<tr>
+<td valign="top" style="width:45%"><strong><!--[pnml name="_WL_ORIGINAL"]--></strong></td>
+<td rowspan="5" valign="top" align="left"><span class="pn-sub"><br /><!--[pnml name="_WL_DESCRIPTION"]-->:<br /><!--[$modrequests.origdescription|pnVarPrepForDisplay]--></span></td>
+</tr>
+<tr><td valign="top" style="width:45%;"><span class="pn-sub"><!--[pnml name="_WL_TITLE"]-->: <!--[$modrequests.origtitle|pnVarPrepForDisplay]--></span></td></tr>
+<tr><td valign="top" style="width:45%;"><span class="pn-sub"><!--[pnml name="_WL_URL"]-->: <a href="<!--[$modrequests.origurl|pnVarPrepForDisplay]-->"><!--[$modrequests.origurl|pnVarPrepForDisplay]--></a></span></td></tr>
+<tr><td valign="top" style="width:45%;"><span class="pn-sub"><!--[pnml name="_WL_CATEGORY"]-->: <!--[$modrequests.origcidtitle|pnVarPrepForDisplay]--></span></td></tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table width="100%">
+<tr>
+<td valign="top" style="width:45%"><strong><!--[pnml name="_WL_PROPOSED"]--></strong></td>
+<td rowspan="5" valign="top" align="left"><span class="pn-sub"><br /><!--[pnml name="_WL_DESCRIPTION"]-->:<br /><!--[$modrequests.description|pnVarPrepForDisplay]--></span></td>
+</tr>
+<tr><td valign="top" style="width:45%"><span class="pn-sub"><!--[pnml name="_WL_TITLE"]-->: <!--[$modrequests.title|pnVarPrepForDisplay]--></span></td></tr>
+<tr><td valign="top" style="width:45%"><span class="pn-sub"><!--[pnml name="_WL_URL"]-->: <a href="<!--[$modrequests.url|pnVarPrepForDisplay]-->"><!--[$modrequests.url|pnVarPrepForDisplay]--></a></span></td></tr>
+<tr><td valign="top" style="width:45%"><span class="pn-sub"><!--[pnml name="_WL_CATEGORY"]-->: <!--[$modrequests.cidtitle|pnVarPrepForDisplay]--></span></td></tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%">
+<tr>
+<!--[if $modrequests.modifysubmitteremail == ""]-->
+<td align="left"><span class="pn-sub"><!--[pnml name="_WL_SUBMITTER"]-->: <!--[$modrequests.modifysubmitter|pnVarPrepForDisplay]--></span></td>
+<!--[else]-->
+<td align="left"><span class="pn-sub"><!--[pnml name="_WL_SUBMITTER"]-->: <a href="mailto:<!--[$modrequests.modifysubmitteremail|pnVarPrepForDisplay]-->"><!--[$modrequests.modifysubmitter|pnVarPrepForDisplay]--></a></span></td>
+<!--[/if]-->
+<!--[if $modrequests.owneremail == ""]-->
+<td align="center"><span class="pn-sub"><!--[pnml name="_WL_OWNER"]-->: <!--[$modrequests.owner|pnVarPrepForDisplay]--></span></td>
+<!--[else]-->
+<td align="center"><span class="pn-sub"><!--[pnml name="_WL_OWNER"]-->: <a href="mailto:<!--[$modrequests.owneremail|pnVarPrepForDisplay]-->"><!--[$modrequests.owner|pnVarPrepForDisplay]--></a></span></td>
+<!--[/if]-->
+<td align="right"><span class="pn-sub">( <a href="<!--[pnmodurl modname=Web_Links type=admin func=changemodrequests requestid=$modrequests.requestid authid=$authid]-->"><!--[pnml name="_WL_ACCEPT"]--></a> / <a href="<!--[pnmodurl modname=Web_Links type=admin func=changeignorerequests requestid=$modrequests.requestid authid=$authid]-->"><!--[pnml name="_WL_IGNORE"]--></a> )</span></td></tr></table>
+<!--[/foreach]-->
+<!--[if $totalmodrequests == 0]-->
+<div style="text-align:center"><!--[pnml name="_WL_NOMODREQUESTS"]--></div><br />
+<!--[/if]-->
+</td></tr></table>
+<!--[closetable]-->

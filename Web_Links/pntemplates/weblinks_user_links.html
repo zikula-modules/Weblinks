@@ -1,0 +1,14 @@
+[
+<!--[if $mainlink == true]-->
+<a href="<!--[pnmodurl modname=Web_Links type=user func=main]-->"><!--[pnml name="_WL_INDEX"]--></a> |
+<!--[/if]-->
+<!--[if $userpermission == "admin"]-->
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=main]-->"><!--[pnml name="_WL_ADD"]--></a> |
+<!--[elseif $userpermission == "comment"]-->
+<a href="<!--[pnmodurl modname=Web_Links type=user func=addlink]-->"><!--[pnml name="_WL_ADD"]--></a> |
+<!--[/if]-->
+<a href="<!--[pnmodurl modname=Web_Links type=user func=newlinks]-->"><!--[pnml name="_WL_NEW"]--></a> |
+<a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular]-->"><!--[pnml name="_WL_POPULAR"]--></a> |
+<a href="<!--[pnmodurl modname=Web_Links type=user func=toprated]-->"><!--[pnml name="_WL_TOPRATED"]--></a> |
+<a href="<!--[pnmodurl modname=Web_Links type=user func=randomlink]-->"><!--[pnml name="_WL_RANDOM"]--></a>
+]

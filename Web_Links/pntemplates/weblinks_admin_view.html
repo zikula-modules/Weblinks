@@ -1,0 +1,40 @@
+<!--[include file="weblinks_admin_header.html"]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=info.gif set=icons/large alt='_WL_OVERVIEW' altml=true]--></div>
+<h2><!--[pnml name="_WL_OVERVIEW"]--></h2>
+<div>
+<br />
+<div style="text-align:center;font-size: 20px;color:#f00;"><!--[pnml name="_WL_WARNING" html=true]--></div>
+<fieldset>
+<legend><!--[pnml name="_WL_DBSTATUS"]--></legend>
+<!--[pnml name="_WL_THEREARE"]--> <strong><!--[$numrows|pnVarPrepForDisplay]--></strong> <!--[pnml name="_WL_LINKSINDB"]--><br /><br />
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=listbrokenlinks]-->"><!--[pnml name="_WL_BROKENLINKSREP"]--> (<!--[$totalbrokenlinks|pnVarPrepForDisplay]-->)</a><br /><br />
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=listmodrequests]-->"><!--[pnml name="_WL_LINKMODREQUEST"]--> (<!--[$totalmodrequests|pnVarPrepForDisplay]-->)</a>
+</fieldset>
+
+<!--[if $newweblinks]-->
+<fieldset>
+<legend><!--[pnml name="_WL_LINKSWAITINGVAL"]--></legend>
+<!--[foreach from=$newweblinks item=newweblinks]-->
+<form action="<!--[pnmodurl modname=Web_Links type=admin func=addlink]-->" method="post" enctype="application/x-www-form-urlencoded"><div>
+<input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Web_Links"]-->" />
+<input type="hidden" name="new" value="1" />
+<input type="hidden" name="lid" value="<!--[$newweblinks.lid|pnVarPrepForDisplay]-->" />
+<input type="hidden" name="submitter" value="<!--[$newweblinks.submitter|pnVarPrepForDisplay]-->" />
+<strong><!--[pnml name="_WL_LINKID"]-->: <!--[$newweblinks.lid]--></strong><br />
+<!--[pnml name="_WL_SUBMITTER"]-->: <!--[$newweblinks.submitter|pnVarPrepForDisplay]--><br />
+<!--[pnml name="_WL_PAGETITLE"]-->: <input type="text" name="title" value="<!--[$newweblinks.title|pnVarPrepForDisplay]-->" size="50" maxlength="100" /><br />
+<!--[pnml name="_WL_PAGEURL"]-->: <input type="text" name="url" value="<!--[$newweblinks.url|pnVarPrepForDisplay]-->" size="75" maxlength="254" />&nbsp;[ <a target="_blank" href="<!--[$newweblinks.url|pnVarPrepForDisplay]-->"><!--[pnml name="_WL_VISIT"]--></a> ]<br />
+<!--[pnml name="_WL_DESCRIPTION"]-->: <br /><textarea name="description" cols="80" rows="10"><!--[$newweblinks.description|pnvarprephtmldisplay]--></textarea><br />
+<!--[pnml name="_WL_NAME"]-->: <input type="text" name="name" size="20" maxlength="100" value="<!--[$newweblinks.name|pnVarPrepForDisplay]-->" />&nbsp;&nbsp;
+<!--[pnml name="_WL_EMAIL"]-->: <input type="text" name="email" size="20" maxlength="100" value="<!--[$newweblinks.email|pnVarPrepForDisplay]-->" /><br />
+<!--[pnml name="_WL_CATEGORY"]-->: <select name="cat"><!--[catlist scat=0 sel=$newweblinks.cid]--></select>
+<div class="wl-formbuttons"><!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_ADDCATEGORY" title="_WL_ADDLINK"]--></div>
+ [ <a href="<!--[pnmodurl modname=Web_Links type=admin func=delnew lid=$newweblinks.lid authid=$authid]-->"><!--[pnml name="_WL_DELLINK"]--></a> ]
+</div></form><br /><hr /><br />
+<!--[/foreach]-->
+</fieldset>
+<!--[/if]-->
+<br  />
+</div>
+</div>

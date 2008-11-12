@@ -1,0 +1,41 @@
+<!--[opentable]-->
+<!--[include file="weblinks_user_search.html"]-->
+<div style="text-align:center">
+<!--[include file="weblinks_user_links.html"]-->
+</div>
+<!--[closetable]-->
+<!--[opentable]-->
+<h2><!--[pnml name="_WL_MAINCAT"]--></h2>
+<table border="0" cellspacing="10" cellpadding="10" width="98%" summary="<!--[pnml name="_WL_MAINCAT"]-->">
+<!--[assign var="count" value="0"]-->
+<!--[foreach from=$categories item=category]-->
+<!--[if $category.parent_id =="0"]-->
+<!--[if $count == 0]-->
+<tr>
+<!--[/if]-->
+<!--[math equation="$count+1" assign="count"]-->
+<td valign="top" style="width:50%">
+<h3><!--[pnimg src="folder.gif" alt=""]-->&nbsp;&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$category.cat_id]-->"><!--[$category.title|pnVarPrepForDisplay]--></a> (<!--[countsublinks catid=$category.cat_id]-->)<!--[categorynewlinkgraphic catid=$category.cat_id]--></h3>
+<!--[if $category.cdescription ne ""]-->
+<!--[$category.cdescription|pnvarprephtmldisplay]--><br />
+<!--[/if]-->
+<!--[foreach from=$subcategories item=subcategory]-->
+<!--[if $subcategory.parent_id == $category.cat_id]-->
+&nbsp;&nbsp;&nbsp;<!--[pnimg src="folder.gif" alt=""]-->&nbsp;&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->"><!--[$subcategory.title|pnVarPrepForDisplay]--></a><!--[subcategorynewlinkgraphic scatid=$subcategory.cat_id]--><br />
+<!--[/if]-->
+<!--[/foreach]-->
+<!--[if $count == 1]-->
+</td>
+<!--[elseif $count == 2]-->
+</td></tr>
+<!--[assign var="count" value="0"]-->
+<!--[/if]-->
+<!--[/if]-->
+<!--[/foreach]-->
+<!--[if $count == 1]-->
+<td>&nbsp;</td></tr>
+<!--[/if]-->
+</table>
+<br />
+<div style="text-align:center"><!--[pnml name="_WL_THEREARE"]--> <strong><!--[numrows]--></strong> <!--[pnml name="_WL_MAIN"]--> <!--[pnml name="_WL_AND"]--> <strong><!--[catnum]--></strong> <!--[pnml name="_WL_CATEGORIES"]--> <!--[pnml name="_WL_INDB"]--></div>
+<!--[closetable]-->

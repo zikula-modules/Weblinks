@@ -1,0 +1,20 @@
+<!--[opentable]-->
+<!--[include file="weblinks_user_search.html"]-->
+<div style="text-align:center">
+<!--[include file="weblinks_user_links.html"]-->
+</div>
+<!--[closetable]-->
+<!--[opentable]-->
+<div style="text-align:center"><strong><!--[pnml name="_WL_REPORTBROKEN"]--></strong><br />
+<form action="<!--[pnmodurl modname="Web_Links" type="user" func="brokenlinks"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Web_Links"]-->" />
+<div>
+<input type="hidden" name="lid" value="<!--[$lid]-->" />
+<input type="hidden" name="modifysubmitter" value="<!--[$ratinguser]-->" />
+<!--[pnml name="_WL_THANKSBROKEN"]--><br />
+<!--[pnml name="_WL_SECURITYBROKEN"]--><br />
+<input type="submit" value="<!--[pnml name="_WL_REPORTBROKEN"]-->" />
+</div>
+</form>
+</div>
+<!--[closetable]-->

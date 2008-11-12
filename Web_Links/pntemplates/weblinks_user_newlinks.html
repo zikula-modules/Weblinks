@@ -1,0 +1,17 @@
+<!--[opentable]-->
+<!--[include file="weblinks_user_search.html"]-->
+<div style="text-align:center">
+<!--[include file="weblinks_user_links.html"]-->
+</div>
+<!--[closetable]-->
+<!--[opentable]-->
+<div style="text-align:center"><h2><!--[pnml name="_WL_NEWLINKS"]--></h2></div>
+<div style="text-align:center"><!--[pnml name="_WL_TOTALNEWLINKS"]-->: <!--[pnml name="_WL_LASTWEEK"]-->: <!--[allweeklinks]--> | <!--[pnml name="_WL_LAST30DAYS"]-->: <!--[allmonthlinks]--><br />
+<!--[pnml name="_WL_SHOW"]-->:
+<a href="<!--[pnmodurl modname=Web_Links type=user func=newlinks newlinkshowdays=7]-->"> <!--[pnml name="_WL_1WEEK"]--></a> |
+<a href="<!--[pnmodurl modname=Web_Links type=user func=newlinks newlinkshowdays=14]-->"> <!--[pnml name="_WL_2WEEKS"]--></a> |
+<a href="<!--[pnmodurl modname=Web_Links type=user func=newlinks newlinkshowdays=30]-->"> <!--[pnml name="_WL_30DAYS"]--></a><br />
+<br /><strong><!--[pnml name="_WL_TOTALFORLAST"]--> <!--[$newlinkshowdays|pnVarPrepForDisplay]--> <!--[pnml name="_WL_DAYS"]--> :</strong><br />
+<!--[newlinksbyday newlinkshowdays=$newlinkshowdays]-->
+</div>
+<!--[closetable]-->

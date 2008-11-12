@@ -1,0 +1,44 @@
+<!--[opentable]-->
+<!--[include file="weblinks_user_search.html"]-->
+<div style="text-align:center">
+<!--[include file="weblinks_user_links.html"]-->
+</div>
+<!--[closetable]-->
+<!--[opentable]-->
+<div style="text-align:center">
+<h2><!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$category.cat_id start=1 links=1 linkmyself=0]--></h2>
+<!--[if $category.cdescription != ""]-->
+<!--[$category.cdescription|pnvarprephtmldisplay]--><br />
+<!--[/if]-->
+</div>
+<!--[if $subcategory]-->
+<div style="text-align:center"><!--[pnml name="_WL_SUBCATSAVAILABLE"]--> <!--[$category.title|pnVarPrepForDisplay]--> <!--[pnml name="_WL_SUBCATEGORIES"]-->:<br />
+<!--[assign var="scount" value="0"]-->
+<!--[foreach from=$subcategory item=subcategory]-->
+<!--[math equation="$scount+1" assign="scount"]-->
+<!--[pnimg src="folder.gif" alt=""]-->&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->"><!--[$subcategory.title|pnVarPrepForDisplay]--></a> (<!--[countsublinks catid=$subcategory.cat_id]-->)&nbsp;<!--[subcategorynewlinkgraphic scatid=$subcategory.cat_id]-->&nbsp;
+<!--[if $scount == 3]-->
+<br />
+<!--[assign var="scount" value="0"]-->
+<!--[/if]-->
+<!--[/foreach]-->
+</div><br />
+<!--[/if]-->
+<!--[include file="weblinks_user_sortlinksbymenu.html"]-->
+<br />
+<!--[foreach from=$weblinks item=weblinks]-->
+<h3><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnVarPrepForDisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></h3>
+<!--[if $userpermission == "admin"]-->
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$weblinks.lid]-->"><!--[pnimg src="editicon.gif" alt="_WL_EDITTHISLINK" altml=true]--></a>
+<!--[/if]-->
+<!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks]--><br />
+<!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]-->
+<!--[if $weblinks.linkratingsummary != "0" || $weblinks.linkratingsummary != "0.0"]-->
+| <!--[pnml name="_WL_RATING"]-->: <!--[$weblinks.linkratingsummary|pnVarPrepForDisplay]--> (<!--[$weblinks.totalvotes]--> <!--[if $weblinks.totalvotes == 1]--><!--[pnml name="_WL_VOTE"]--><!--[else]--><!--[pnml name="_WL_VOTES"]--><!--[/if]-->)
+<br /><!--[ratemakestar linkratingsummary=$weblinks.linkratingsummary]-->
+<!--[/if]-->
+<!--[include file="weblinks_user_linkbottommenu.html"]-->
+<br /><br />
+<!--[/foreach]-->
+<!--[pager show="page" rowcount=$pager.numlinks limit=$pager.itemsperpage txt_first=$L_MORE posvar=startnum	shift=1]-->
+<!--[closetable]-->

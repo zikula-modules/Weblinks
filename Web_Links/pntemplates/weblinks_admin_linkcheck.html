@@ -1,0 +1,14 @@
+<!--[include file="weblinks_admin_menu.htm"]-->
+<!--[opentable]-->
+<h2><!--[pnml name="_WL_WEBLINKSADMIN"]--></h2>
+<!--[closetable]-->
+<!--[opentable]-->
+<h2><!--[pnml name="_WL_LINKVALIDATION"]--></h2>
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=validate cid=0]-->"><!--[pnml name="_WL_CHECKALLLINKS"]--></a><br />
+<strong><!--[pnml name="_WL_CHECKCATEGORIES"]--></strong><br />
+<form action="<!--[pnmodurl modname=Web_Links type=admin func=validate]-->" method="post" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Web_Links"]-->" />
+<div><span class="pn-sub">
+<select name="cid"><!--[catlist scat=0 sel=0]--></select>
+&nbsp;<input type="submit" name="Ok" value="<!--[pnml name="_WL_CHECKCATEGORIES"]-->" /></span></div></form>
+<!--[closetable]-->

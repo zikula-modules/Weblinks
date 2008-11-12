@@ -1,0 +1,20 @@
+<!--[include file="weblinks_admin_header.html"]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=folder.gif set=icons/large alt='_WL_ADDCATEGORY' altml=true]--></div>
+<h2><!--[pnml name="_WL_ADDCATEGORY"]--></h2>
+<!--[opentable]-->
+<form action="<!--[pnmodurl modname=Web_Links type=admin func=addcat]-->" method="post" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Web_Links"]-->" />
+<div>
+<!--[pnml name="_WL_NAME"]-->: <input type="text" name="title" size="30" maxlength="100" />&nbsp;<!--[pnml name="_WL_INCAT"]-->
+<select name="cid">
+<option value="0"><!--[pnml name="_WL_NONE"]--></option>
+<!--[catlist scat=0 sel=0]--></select>
+<br />
+<!--[pnml name="_WL_DESCRIPTION"]-->:<br /><textarea name="cdescription" cols="80" rows="10"></textarea><br />
+<div class="wl-formbuttons">
+<!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_ADD" title="_WL_ADD"]-->
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a></div>
+</div></form>
+<!--[closetable]-->
+</div>

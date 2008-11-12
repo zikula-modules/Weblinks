@@ -1,0 +1,45 @@
+<!--[opentable]-->
+<!--[include file="weblinks_user_search.html"]-->
+<div style="text-align:center">
+<!--[include file="weblinks_user_links.html"]-->
+</div>
+<!--[closetable]-->
+<!--[opentable]-->
+<div style="text-align:center"><strong><!--[pnml name="_WL_LINKPROFILE"]-->: <!--[$displaytitle|pnVarPrepForDisplay]--></strong><br />
+
+
+<!--[if $access_comment_cat || $access_comment_link == 1 ]-->
+<a href="<!--[pnmodurl modname=Web_Links type=user func=modifylinkrequest lid=$lid]-->"><!--[pnml name="_WL_MODIFY"]--></a> |
+<a href="<!--[pnmodurl modname=Web_Links type=user func=brokenlink lid=$lid]-->"><!--[pnml name="_WL_REPORTBROKEN"]--></a>
+<!--[/if]-->
+<br /><!--[pnml name="_WL_TOTALOF"]-->  <!--[$numofcomments|pnVarPrepForDisplay]--> <!--[pnml name="_WL_COMMENTS"]--></div><br />
+<!--[foreach from=$totalcomments item=totalcomments]-->
+<strong> <!--[pnml name="_WL_USER"]-->: </strong>
+<!--[if $userpermission == "comment"]-->
+<!--[$totalcomments.ratinguser|pnVarPrepForDisplay]-->
+<!--[else]-->
+<a href="user.php?op=userinfo&amp;uname=<!--[$totalcomments.ratinguser|pnVarPrepForDisplay]-->"><!--[$totalcomments.ratinguser|pnVarPrepForDisplay]--></a>
+<!--[/if]-->
+<br /><strong><!--[pnml name="_WL_RATING"]-->: </strong><!--[$totalcomments.rating|pnVarPrepForDisplay]-->
+&nbsp;/&nbsp;<!--[$totalcomments.ratingtimestamp|pnVarPrepForDisplay|pndate_format:"%d.%m.%Y %H:%M"]-->
+<br />
+<span class="pn-sub"><!--[pnml name="_WL_USERAVGRATING"]-->: <!--[$totalcomments.useravgrating|pnVarPrepForDisplay]-->
+&nbsp;/&nbsp;
+<!--[pnml name="_WL_NUMRATINGS"]-->: <!--[$totalcomments.usertotalcomments|pnVarPrepForDisplay]--></span>
+<br />
+<!--[if $userpermission == "admin"]-->
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$lid]-->"><!--[pnimg src="editicon.gif" alt="_WL_EDITTHISLINK"]--></a>
+<!--[/if]-->
+ <!--[$totalcomments.ratingcomments|pnmodcallhooks|pnvarprephtmldisplay]--><br />
+<!--[/foreach]-->
+<br /><div style="text-align:center">
+[ <a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$lid]-->"><!--[pnml name="_WL_VISITTHISSITE"]--></a>
+<!--[if $access_comment_cat || $access_comment_link == 1 ]-->
+ | <a href="<!--[pnmodurl modname=Web_Links type=user func=ratelink lid=$lid]-->"><!--[pnml name="_WL_RATETHISSITE"]--></a>
+<!--[/if]-->
+]<br />
+<!--[if $useoutsidevoting == 1]-->
+<br /><!--[pnml name="_WL_ISTHISYOURSITE"]--> <a href="<!--[pnmodurl modname=Web_Links type=user func=outsidelinksetup lid=$lid]-->"><!--[pnml name="_WL_ALLOWTORATE"]--></a>
+<!--[/if]-->
+</div>
+<!--[closetable]-->

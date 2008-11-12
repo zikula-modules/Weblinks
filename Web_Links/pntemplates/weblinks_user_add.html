@@ -1,0 +1,16 @@
+<!--[opentable]-->
+<!--[include file="weblinks_user_search.html"]-->
+<div style="text-align:center">
+<!--[include file="weblinks_user_links.html"]-->
+</div>
+<!--[closetable]-->
+<!--[opentable]-->
+<!--[if $submit eq 0]-->
+<div style="text-align:center;"><strong><!--[pnml name="$text"]--></strong><br />
+[ <a href="<!--[pnmodurl modname=Web_Links type=user func=addlink]-->"><!--[pnml name="_WL_GOBACK"]--></a> ]</div>
+<!--[else]-->
+<div style="text-align:center;"><strong><!--[pnml name="_WL_LINKRECEIVED"]--></strong><br />
+<!--[pnml name="$text"]-->
+</div>
+<!--[/if]-->
+<!--[closetable]-->

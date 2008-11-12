@@ -1,0 +1,36 @@
+<!--[opentable]-->
+<!--[include file="weblinks_user_search.html"]-->
+<div style="text-align:center">
+<!--[include file="weblinks_user_links.html"]-->
+</div>
+<!--[closetable]-->
+<!--[opentable]-->
+<!--[if $mostpoplinkspercentrigger == 1]-->
+<div style="text-align:center"><h2><!--[pnml name="_WL_MOSTPOPULAR"]--> <!--[$toplinkspercent]-->% (<!--[pnml name="_WL_OFALL"]--> <!--[$totalmostpoplinks]--> <!--[pnml name="_WL_LINKS"]-->)</h2></div>
+<!--[else]-->
+<div style="text-align:center"><h2><!--[pnml name="_WL_MOSTPOPULAR"]--> <!--[$mostpoplinks]--></h2></div>
+<!--[/if]-->
+<div style="text-align:center"><!--[pnml name="_WL_SHOWTOP"]-->: [
+<a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=10 ratetype=num]-->">10</a> -
+<a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=25 ratetype=num]-->">25</a> -
+<a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=50 ratetype=num]-->">50</a> |
+<a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=1 ratetype=percent]-->">1%</a> -
+<a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=5 ratetype=percent]-->">5%</a> -
+<a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=10 ratetype=percent]-->">10%</a> ]
+</div><br />
+<!--[foreach from=$weblinks item=weblinks]-->
+<h3><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnVarPrepForDisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></h3>
+<!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblinks.cid start=1 links=1 linkmyself=1]--><br />
+<!--[if $userpermission == "admin"]-->
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=modify lid=$weblinks.lid]-->"><!--[pnimg src="editicon.gif" alt="_WL_EDITTHISLINK"]--></a>
+<!--[/if]-->
+<!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks]--><br />
+<!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]-->
+<!--[if $weblinks.linkratingsummary != "0" || $weblinks.linkratingsummary != "0.0"]-->
+| <!--[pnml name="_WL_RATING"]-->: <!--[$weblinks.linkratingsummary|pnVarPrepForDisplay]--> (<!--[$weblinks.totalvotes]--> <!--[if $weblinks.totalvotes == 1]--><!--[pnml name="_WL_VOTE"]--><!--[else]--><!--[pnml name="_WL_VOTES"]--><!--[/if]-->)
+<br /><!--[ratemakestar linkratingsummary=$weblinks.linkratingsummary]-->
+<!--[/if]-->
+<!--[include file="weblinks_user_linkbottommenu.html"]-->
+<br /><br />
+<!--[/foreach]-->
+<!--[closetable]-->
