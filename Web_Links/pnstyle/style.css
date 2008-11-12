@@ -1,0 +1,6 @@
+/* style the button tag */
+div.wl-formbuttons button {
+    border: 0px;
+	padding: 0px;
+	background-color: transparent;
+}
