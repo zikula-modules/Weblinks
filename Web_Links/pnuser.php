@@ -25,7 +25,7 @@ function Web_Links_user_view()
 {
     // Security check
     if (!SecurityUtil::checkPermission('Web_Links::', '::', ACCESS_READ)) {
-        return LogUtil::registerPermissionError(_MODULENOAUTH, 403);
+        return LogUtil::registerPermissionError();
     }
 
     // Permission check for template
@@ -630,7 +630,7 @@ function Web_Links_user_addlink()
     }
 
 	if (SecurityUtil::checkPermission('Web_Links::', "::", ACCESS_COMMENT) || pnModGetVar('Web_Links', 'links_anonaddlinklock') == 1) {
-		$addlink = true;
+		$addlink = 1;
 	}
 
 	// Create output object

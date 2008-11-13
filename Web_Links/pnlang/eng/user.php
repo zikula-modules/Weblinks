@@ -65,7 +65,7 @@ define('_WL_LINKSNOTUSER4','Why is registration required for access to certain f
 define('_WL_LINKSNOTUSER5','So that you are offered only the highest-quality content,');
 define('_WL_LINKSNOTUSER6','each item is individually reviewed and approved.');
 define('_WL_LINKSNOTUSER7','The site editor aims to offer useful information only.');
-define('_WL_LINKSNOTUSER8','<a href=\"user.php\">Register for a new user account</a>');
+define('_WL_LINKSNOTUSER8','<a href=\"index.php?module=Users&func=register\">Register for a new user account</a>');
 define('_WL_LINKTITLE','Link title');
 define('_WL_LOOKTOREQUEST', 'Thank you! Your request has been submitted for examination.');
 define('_WL_LOWRATING', 'Low rating');
@@ -87,7 +87,7 @@ define('_WL_NOLINKS', 'Sorry! There is no such link');
 define('_WL_NOMATCHES', 'No matches found to your query');
 define('_WL_NOOUTSIDEVOTES', 'keine Stimmen von fremden Seiten');
 define('_WL_NOSUCHLINK', 'Link existiert nicht...');
-define('_WL_NOTE', 'Anmerkung');
+define('_WL_NOTE', 'Note');
 define('_WL_NOUNREGUSERSVOTES', 'No outside votes');
 define('_WL_NUMBEROFRATINGS', 'Number of ratings');
 define('_WL_NUMOFCOMMENTS', 'Number of comments');

@@ -65,7 +65,7 @@ define('_WL_LINKSNOTUSER4','Warum eine Registrierung für einige Funktionen notwe
 define('_WL_LINKSNOTUSER5','Nur so können wir auch sicherstellen, bei Rückfragen');
 define('_WL_LINKSNOTUSER6','Kontakt aufnehmen zu können.');
 define('_WL_LINKSNOTUSER7','Wir möchten bestmögliche und abgeprüfte Inhalte bieten.');
-define('_WL_LINKSNOTUSER8','<a href=\'user.php\'>Registrierung</a>');
+define('_WL_LINKSNOTUSER8','<a href=\'index.php?module=Users&func=register\'>Registrierung</a>');
 define('_WL_LINKTITLE','Link Titel');
 define('_WL_LOOKTOREQUEST', 'Der Beitrag wurde zur weiteren Prüfung übertragen.');
 define('_WL_LOWRATING', 'geringe Wertung');
