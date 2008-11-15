@@ -15,7 +15,7 @@
 */
 
 $modversion['name']				= 'Web_Links';
-$modversion['displayname']    	= 'Web Links';
+$modversion['displayname']    	= 'Weblinks';
 $modversion['description']    	= 'Web Links Module';
 $modversion['version']			= '2.0';
 $modversion['credits']			= 'pndocs/credits.txt';
@@ -28,5 +28,5 @@ $modversion['contact']			= 'http://www.petzi-juist.de/';
 $modversion['admin']			= 1;
 $modversion['user']				= 1;
 $modversion['securityschema']	= array('Web_Links::Category' => 'Category name::Category ID',
-                                      'Web_Links::Link' => 'Category name:Link name:Link ID');
+                                        'Web_Links::Link' => 'Category name:Link name:Link ID');
 ?>
