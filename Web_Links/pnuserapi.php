@@ -13,7 +13,7 @@
 /**
 *
 */
-function Web_Links_userapi_categories()
+function Web_Links_userapi_categories() //fertig
 {
     // Security check
     if (!SecurityUtil::checkPermission('Web_Links::', '::', ACCESS_READ)) {
@@ -29,7 +29,7 @@ function Web_Links_userapi_categories()
                               'level'           => ACCESS_READ));
 
 	// get the objects from the db
-    $objArray = DBUtil::selectObjectArray('links_categories', '', '', '-1', '-1', '', $permFilter);
+    $objArray = DBUtil::selectObjectArray('links_categories', '', 'title', '-1', '-1', '', $permFilter);
 
     // Check for an error with the database code, and if so set an appropriate
     // error message and return
@@ -1058,26 +1058,30 @@ function Web_Links_userapi_editorial($args)
     return $editorial;
 }
 
-function Web_Links_userapi_numrows()
+function Web_Links_userapi_numrows() //fertig
 {
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
+	// get the objects from the db
+    $numrows = DBUtil::selectObjectCount('links_links');
 
-	$sql = "SELECT COUNT(*) FROM $pntable[links_links]";
-	$result =& $dbconn->Execute($sql);
-    list($numrows) = $result->fields;
+    // Check for an error with the database code, and if so set an appropriate
+    // error message and return
+    if ($numrows === false) {
+        return LogUtil::registerError (_GETFAILED);
+    }
 
-	return $numrows;
+    return $numrows;
 }
 
-function Web_Links_userapi_catnum()
+function Web_Links_userapi_catnum() //fertig
 {
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
+	// get the objects from the db
+    $catnum = DBUtil::selectObjectCount('links_categories');
 
-	$sql = "SELECT COUNT(*) FROM $pntable[links_categories]";
-	$result =& $dbconn->Execute($sql);
-    list($catnum) = $result->fields;
+    // Check for an error with the database code, and if so set an appropriate
+    // error message and return
+    if ($catnum === false) {
+        return LogUtil::registerError (_GETFAILED);
+    }
 
     return $catnum;
 }
