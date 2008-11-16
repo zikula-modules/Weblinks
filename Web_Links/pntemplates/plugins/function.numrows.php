@@ -25,15 +25,7 @@
 
 function smarty_function_numrows($params, &$smarty)
 {
-    extract($params);
-	unset($params);
-
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
-
-	$sql = "SELECT COUNT(*) FROM $pntable[links_links]";
-	$result =& $dbconn->Execute($sql);
-    list($numrows) = $result->fields;
+    $numrows = pnModAPIFunc('Web_Links', 'user', 'numrows');
 
 	return $numrows;
 }

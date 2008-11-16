@@ -284,17 +284,17 @@ function Web_Links_admin_addlink() //geht
         return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
     } else {
         /* Check if Title exist */
-        if ($link['title']=="") {
+        if (empty($link['title'])) {
             LogUtil::registerStatus (_WL_ERRORNOTITLE);
             return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
         }
         /* Check if URL exist */
-        if ($link['url']=="") {
+        if (empty($link['url'])) {
             LogUtil::registerStatus (_WL_ERRORNOURL);
             return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
         }
         // Check if Description exist
-        if ($link['description']=="") {
+        if (empty($link['description'])) {
             LogUtil::registerStatus (_WL_ERRORNODESCRIPTION);
             return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
         }

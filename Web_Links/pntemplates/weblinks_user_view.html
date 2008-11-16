@@ -1,9 +1,11 @@
+<!--[*  $Id: weblinks_user_view.html $  *]-->
+<!--[assign var="main" value=1]-->
 <!--[opentable]-->
+<!--[include file="weblinks_user_header.html"]-->
 <!--[include file="weblinks_user_search.html"]-->
-<div style="text-align:center">
 <!--[include file="weblinks_user_links.html"]-->
-</div>
 <!--[closetable]-->
+
 <!--[opentable]-->
 <h2><!--[pnml name="_WL_MAINCAT"]--></h2>
 <table border="0" cellspacing="10" cellpadding="10" width="98%" summary="<!--[pnml name="_WL_MAINCAT"]-->">
@@ -19,7 +21,7 @@
 <!--[if $category.cdescription ne ""]-->
 <!--[$category.cdescription|pnvarprephtmldisplay]--><br />
 <!--[/if]-->
-<!--[foreach from=$subcategories item=subcategory]-->
+<!--[foreach from=$categories item=subcategory]-->
 <!--[if $subcategory.parent_id == $category.cat_id]-->
 &nbsp;&nbsp;&nbsp;<!--[pnimg src="folder.gif" alt=""]-->&nbsp;&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->"><!--[$subcategory.title|pnVarPrepForDisplay]--></a><!--[subcategorynewlinkgraphic scatid=$subcategory.cat_id]--><br />
 <!--[/if]-->

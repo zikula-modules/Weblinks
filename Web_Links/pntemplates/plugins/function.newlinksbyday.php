@@ -44,12 +44,12 @@ function smarty_function_newlinksbyday($params, &$smarty)
     while ($counter <= $newlinkshowdays-1) {
         $newlinkdayRaw = (time()-(86400 * $counter));
         $newlinkday = date("d-M-Y", $newlinkdayRaw);
-        $newlinkView = ml_ftime(_DATEBRIEF, $newlinkdayRaw);
+        $newlinkView = ml_ftime(_WL_DATEBRIEF, $newlinkdayRaw);
         $newlinkDB = Date("Y-m-d", $newlinkdayRaw);
 		$totallinks = 0;
 
-    	$result =& $dbconn->Execute("SELECT $column[cat_id], $column2[title]
-									FROM $pntable[links_links], $pntable[links_categories]
+    	$result =& $dbconn->Execute("SELECT $column[cat_id]
+									FROM $pntable[links_links]
 									WHERE $column[date] LIKE '%$newlinkDB%'
 									AND $column[cat_id]=$column2[cat_id]");
 		while(list($cid, $title)=$result->fields) {
@@ -60,7 +60,7 @@ function smarty_function_newlinksbyday($params, &$smarty)
       	}
         $counter++;
         $allweeklinks = $allweeklinks + $totallinks;
-        echo "<strong><big>&middot;</big></strong> <a href=\"".DataUtil::formatForDisplay(pnModURL('Web_Links', 'user', 'newlinksdate', array('selectdate' => $newlinkdayRaw)))."\">".DataUtil::formatForDisplay($newlinkView)."</a>&nbsp;(".DataUtil::formatForDisplay($totallinks).")<br />";
+        echo "<strong><big>&middot;</big></strong> <a href=\"".pnVarPrepForDisplay(pnModURL('Web_Links', 'user', 'newlinksdate', array('selectdate' => $newlinkdayRaw)))."\">".pnVarPrepForDisplay($newlinkView)."</a>&nbsp;(".pnVarPrepForDisplay($totallinks).")<br />";
     }
     $counter = 0;
     $allmonthlinks = 0;

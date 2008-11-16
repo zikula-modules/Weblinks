@@ -839,9 +839,6 @@ function Web_Links_userapi_modifylinkrequest($args)
 
 function Web_Links_userapi_existingurl($args)
 {
-    // Get arguments from argument array
-    extract($args);
-
 	// Get datbase setup
 	$dbconn =& pnDBGetConn(true);
     $pntable =& pnDBGetTables();
@@ -849,7 +846,7 @@ function Web_Links_userapi_existingurl($args)
 	$column = &$pntable['links_links_column'];
     $sql = "SELECT $column[title]
     	    FROM $pntable[links_links]
-    	    WHERE $column[url]='" . DataUtil::formatForStore($url) . "'";
+    	    WHERE $column[url]='" . DataUtil::formatForStore($args['url']) . "'";
     $existingurl =& $dbconn->Execute($sql);
 
     // Check for an error with the database code
@@ -887,15 +884,15 @@ function Web_Links_userapi_add($args)
 	    $link['text'] = _WL_LINKNOURL;
 	    $link['submit'] = 0;
 	    return $link;
-	} else if (!$args['title']) {
+	} else if (empty($args['title'])) {
 	    $link['text'] = _WL_LINKNOTITLE;
 	    $link['submit'] = 0;
 	    return $link;
-	} else if (!isset($args['cat']) || !is_numeric($args['cat'])) {
+	} else if (empty($args['cat']) || !is_numeric($args['cat'])) {
 	    $link['text'] =_WL_LINKNOCAT;
 	    $link['submit'] = 0;
 	    return $link;
-	} else if (!$args['description']) {
+	} else if (empty($args['description'])) {
 	    $link['text'] =_WL_LINKNODESC;
 	    $link['submit'] = 0;
 	    return $link;
@@ -912,7 +909,7 @@ function Web_Links_userapi_add($args)
     	$nextid = $dbconn->GenId($pntable['links_newlink']);
     	$dbconn->Execute("INSERT INTO $pntable[links_newlink] ($column[lid], $column[cat_id], $column[title], $column[url], $column[description], $column[name], $column[email], $column[submitter]) VALUES ($nextid, ".(int)pnVarPrepForStore($args['cat']).", '".pnVarPrepForStore($args['title'])."', '".pnVarPrepForStore($args['url'])."', '".pnVarPrepForStore($args['description'])."', '".pnVarPrepForStore($args['nname'])."', '".pnVarPrepForStore($args['email'])."', '".pnVarPrepForStore($submitter)."')");
 
-    	if (!$args['email']) {
+    	if (empty($args['email'])) {
         	$link['text'] = _WL_CHECKFORIT;
     	} else {
         	$link['text'] = _WL_EMAILWHENADD;
