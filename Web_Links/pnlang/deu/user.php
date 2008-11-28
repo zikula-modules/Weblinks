@@ -144,7 +144,7 @@ define('_WL_TOTALFORLAST', 'neue Links vergangene');
 define('_WL_TOTALNEWLINKS', 'neue Links insgesamt');
 define('_WL_TOTALVOTES', 'Stimmen insgesamt');
 define('_WL_TRATEDLINKS', 'insgesamt bewerteten Links');
-define('_WL_TRY2SEARCH', 'Suche probieren');
+define('_WL_TRY2SEARCH', 'Suche für den Begriff');
 define('_WL_TVOTESREQ', 'Stimmen mindestens');
 define('_WL_UNREGISTEREDUSERS', 'unregistrierte Benutzer');
 define('_WL_USERANDIP', 'Benutzername und IP werden aufgezeichnet um Missbrauch zu verhindern.');
