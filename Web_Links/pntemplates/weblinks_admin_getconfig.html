@@ -2,11 +2,14 @@
 <!--[include file="weblinks_admin_header.html"]-->
 <div class="pn-admincontainer">
 <div class="pn-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='_MODIFYCONFIG' altml=true]--></div>
-<!--[opentable]-->
 <h2><!--[pnml name="_WL_CONF"]--></h2>
+<br />
 <form action="<!--[pnmodurl modname="Web_Links" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
 <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Web_Links"]-->" />
 <div>
+
+<fieldset>
+<legend><!--[pnml name="_WL_LINKSPERPAGE"]--></legend>
 <table border="0"><tr><td>
 <!--[pnml name="_WL_LINKSPAGE"]--></td><td>
 <select name="config[perpage]" size="1">
@@ -19,64 +22,6 @@
 </select>
 </td></tr>
 <tr><td>
-<!--[pnml name="_WL_ANONWAITDAYS"]--></td><td><input type="text" name="config[anonwaitdays]" value="<!--[$config.anonwaitdays]-->" size="4" /> <!--[pnml name="_WL_DAYS"]-->
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_OUTSIDEWAITDAYS"]--></td><td><input type="text" name="config[outsidewaitdays]" value="<!--[$config.outsidewaitdays]-->" size="4" /> <!--[pnml name="_WL_DAYS"]-->
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_USEOUTSIDEVOTING"]--></td><td>
-<input type="radio" name="config[useoutsidevoting]" value="1"<!--[if $config.useoutsidevoting eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
-<input type="radio" name="config[useoutsidevoting]" value="0"<!--[if $config.useoutsidevoting eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_ANONWEIGHT"]--></td><td><input type="text" name="config[anonweight]" value="<!--[$config.anonweight]-->" size="4" />
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_OUTSIDEWEIGHT"]--></td><td><input type="text" name="config[outsideweight]" value="<!--[$config.outsideweight]-->" size="4" />
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_DETAILVOTEDECIMAL"]--></td><td><input type="text" name="config[detailvotedecimal]" value="<!--[$config.detailvotedecimal]-->" size="4" />
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_MAINVOTEDECIMAL"]--></td><td><input type="text" name="config[mainvotedecimal]" value="<!--[$config.mainvotedecimal]-->" size="4" />
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_TOPLINKSPERCENTRIGGER"]--></td><td><input type="text" name="config[toplinkspercentrigger]" value="<!--[$config.toplinkspercentrigger]-->" size="4" />
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_TOPLINKS"]--></td><td><input type="text" name="config[toplinks]" value="<!--[$config.toplinks]-->" size="4" />
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_MOSTPOPLINKSPERCENTRIGGER"]--></td><td><input type="text" name="config[mostpoplinkspercentrigger]" value="<!--[$config.mostpoplinkspercentrigger]-->" size="4" />
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_MOSTPOPLINKS"]--></td><td><input type="text" name="config[mostpoplinks]" value="<!--[$config.mostpoplinks]-->" size="4" />
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_FEATUREBOX"]--></td><td>
-<input type="radio" name="config[featurebox]" value="1"<!--[if $config.featurebox eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
-<input type="radio" name="config[featurebox]" value="0"<!--[if $config.featurebox eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_LINKVOTEMIN"]--></td><td><input type="text" name="config[linkvotemin]" value="<!--[$config.linkvotemin]-->" size="4" />
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_BLOCKUNREGMODIFY"]--></td><td>
-<input type="radio" name="config[blockunregmodify]" value="1"<!--[if $config.blockunregmodify eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
-<input type="radio" name="config[blockunregmodify]" value="0"<!--[if $config.blockunregmodify eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
-</td></tr>
-<tr><td>
-<!--[pnml name="_WL_TOBEPOPULAR"]--></td><td>
-<select name="config[popular]" size="1">
-<option value="100"<!--[if $config.popular eq '100']--> selected="selected"<!--[/if]-->>100</option>
-<option value="250"<!--[if $config.popular eq '250']--> selected="selected"<!--[/if]-->>250</option>
-<option value="500"<!--[if $config.popular eq '500']--> selected="selected"<!--[/if]-->>500</option>
-<option value="1000"<!--[if $config.popular eq '1000']--> selected="selected"<!--[/if]-->>1000</option>
-<option value="1500"<!--[if $config.popular eq '1500']--> selected="selected"<!--[/if]-->>1500</option>
-<option value="2000"<!--[if $config.popular eq '2000']--> selected="selected"<!--[/if]-->>2000</option>
-</select>
-</td></tr><tr><td>
 <!--[pnml name="_WL_LINKSASNEW"]--></td><td>
 <select name="config[newlinks]" size="1">
 <option value="10"<!--[if $config.newlinks eq '10']--> selected="selected"<!--[/if]-->>10</option>
@@ -106,14 +51,91 @@
 <option value="30"<!--[if $config.linksresults eq '30']--> selected="selected"<!--[/if]-->>30</option>
 <option value="50"<!--[if $config.linksresults eq '50']--> selected="selected"<!--[/if]-->>50</option>
 </select>
-</td></tr><tr><td>
+</td></tr>
+</table>
+</fieldset>
+<fieldset>
+<legend><!--[pnml name="_WL_LINKVOTING"]--></legend>
+<table border="0">
+<tr><td>
+<!--[pnml name="_WL_ANONWAITDAYS"]--></td><td><input type="text" name="config[anonwaitdays]" value="<!--[$config.anonwaitdays]-->" size="4" /> <!--[pnml name="_WL_DAYS"]-->
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_OUTSIDEWAITDAYS"]--></td><td><input type="text" name="config[outsidewaitdays]" value="<!--[$config.outsidewaitdays]-->" size="4" /> <!--[pnml name="_WL_DAYS"]-->
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_USEOUTSIDEVOTING"]--></td><td>
+<input type="radio" name="config[useoutsidevoting]" value="1"<!--[if $config.useoutsidevoting eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
+<input type="radio" name="config[useoutsidevoting]" value="0"<!--[if $config.useoutsidevoting eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_ANONWEIGHT"]--></td><td><input type="text" name="config[anonweight]" value="<!--[$config.anonweight]-->" size="4" />
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_OUTSIDEWEIGHT"]--></td><td><input type="text" name="config[outsideweight]" value="<!--[$config.outsideweight]-->" size="4" />
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_DETAILVOTEDECIMAL"]--></td><td><input type="text" name="config[detailvotedecimal]" value="<!--[$config.detailvotedecimal]-->" size="4" />
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_MAINVOTEDECIMAL"]--></td><td><input type="text" name="config[mainvotedecimal]" value="<!--[$config.mainvotedecimal]-->" size="4" />
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_TOPLINKSPERCENTRIGGER"]--></td><td><input type="text" name="config[toplinkspercentrigger]" value="<!--[$config.toplinkspercentrigger]-->" size="4" />
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_LINKVOTEMIN"]--></td><td><input type="text" name="config[linkvotemin]" value="<!--[$config.linkvotemin]-->" size="4" />
+</td></tr>
+</table>
+</fieldset>
+<fieldset>
+<legend><!--[pnml name="_WL_LINKPOP"]--></legend>
+<table border="0">
+<tr><td>
+<!--[pnml name="_WL_TOBEPOPULAR"]--></td><td>
+<select name="config[popular]" size="1">
+<option value="100"<!--[if $config.popular eq '100']--> selected="selected"<!--[/if]-->>100</option>
+<option value="250"<!--[if $config.popular eq '250']--> selected="selected"<!--[/if]-->>250</option>
+<option value="500"<!--[if $config.popular eq '500']--> selected="selected"<!--[/if]-->>500</option>
+<option value="1000"<!--[if $config.popular eq '1000']--> selected="selected"<!--[/if]-->>1000</option>
+<option value="1500"<!--[if $config.popular eq '1500']--> selected="selected"<!--[/if]-->>1500</option>
+<option value="2000"<!--[if $config.popular eq '2000']--> selected="selected"<!--[/if]-->>2000</option>
+</select>
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_MOSTPOPLINKSPERCENTRIGGER"]--></td><td><input type="text" name="config[mostpoplinkspercentrigger]" value="<!--[$config.mostpoplinkspercentrigger]-->" size="4" />
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_MOSTPOPLINKS"]--></td><td><input type="text" name="config[mostpoplinks]" value="<!--[$config.mostpoplinks]-->" size="4" />
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_TOPLINKS"]--></td><td><input type="text" name="config[toplinks]" value="<!--[$config.toplinks]-->" size="4" />
+</td></tr>
+</table>
+</fieldset>
+<fieldset>
+<legend><!--[pnml name="_WL_LINKSETTINGS"]--></legend>
+<table border="0">
+<tr><td>
+<!--[pnml name="_WL_FEATUREBOX"]--></td><td>
+<input type="radio" name="config[featurebox]" value="1"<!--[if $config.featurebox eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
+<input type="radio" name="config[featurebox]" value="0"<!--[if $config.featurebox eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
+</td></tr>
+<tr><td>
+<!--[pnml name="_WL_BLOCKUNREGMODIFY"]--></td><td>
+<input type="radio" name="config[blockunregmodify]" value="1"<!--[if $config.blockunregmodify eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
+<input type="radio" name="config[blockunregmodify]" value="0"<!--[if $config.blockunregmodify eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
+</td></tr>
+<tr><td>
 <!--[pnml name="_WL_ANONPOSTLINKS"]--></td><td>
 <input type="radio" name="config[links_anonaddlinklock]" value="1"<!--[if $config.links_anonaddlinklock eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
 <input type="radio" name="config[links_anonaddlinklock]" value="0"<!--[if $config.links_anonaddlinklock eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
-</td></tr></table>
+</td></tr>
+</table>
+</fieldset>
+<br />
 <div class="wl-formbuttons">
 <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_MODCONF" title="_WL_MODCONF"]-->
 <a href="<!--[pnmodurl modname=Web_Links type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a></div>
 </div></form>
-<!--[closetable]-->
 </div>

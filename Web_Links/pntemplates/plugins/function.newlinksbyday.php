@@ -26,18 +26,18 @@
 function smarty_function_newlinksbyday($params, &$smarty)
 {
     extract($params);
-	unset($params);
+    unset($params);
 
-	if ( ($newlinkshowdays != "7" && $newlinkshowdays != "14" && $newlinkshowdays != "30") ||
-		(!is_numeric($newlinkshowdays)) || (!isset($newlinkshowdays)) ) {
-		$newlinkshowdays = "7";
-	}
+    if ( ($newlinkshowdays != "7" && $newlinkshowdays != "14" && $newlinkshowdays != "30") ||
+        (!is_numeric($newlinkshowdays)) || (!isset($newlinkshowdays)) ) {
+        $newlinkshowdays = "7";
+    }
 
     $dbconn =& pnDBGetConn(true);
     $pntable =& pnDBGetTables();
 
     $column = &$pntable['links_links_column'];
-	$column2 = &$pntable['links_categories_column'];
+    $column2 = &$pntable['links_categories_column'];
 
     $counter = 0;
     $allweeklinks = 0;
@@ -46,18 +46,18 @@ function smarty_function_newlinksbyday($params, &$smarty)
         $newlinkday = date("d-M-Y", $newlinkdayRaw);
         $newlinkView = ml_ftime(_WL_DATEBRIEF, $newlinkdayRaw);
         $newlinkDB = Date("Y-m-d", $newlinkdayRaw);
-		$totallinks = 0;
+        $totallinks = 0;
 
-    	$result =& $dbconn->Execute("SELECT $column[cat_id]
-									FROM $pntable[links_links]
-									WHERE $column[date] LIKE '%$newlinkDB%'
-									AND $column[cat_id]=$column2[cat_id]");
-		while(list($cid, $title)=$result->fields) {
-        	$result->MoveNext();
-        	if (pnSecAuthAction(0, "Web Links::Category", "$title::$cid", ACCESS_READ)) {
-           		$totallinks++;
-        	}
-      	}
+        $result =& $dbconn->Execute("SELECT $column[cat_id]
+                                    FROM $pntable[links_links]
+                                    WHERE $column[date] LIKE '%$newlinkDB%'
+                                    AND $column[cat_id]=$column2[cat_id]");
+        while(list($cid, $title)=$result->fields) {
+            $result->MoveNext();
+            if (pnSecAuthAction(0, "Web Links::Category", "$title::$cid", ACCESS_READ)) {
+                   $totallinks++;
+            }
+          }
         $counter++;
         $allweeklinks = $allweeklinks + $totallinks;
         echo "<strong><big>&middot;</big></strong> <a href=\"".pnVarPrepForDisplay(pnModURL('Web_Links', 'user', 'newlinksdate', array('selectdate' => $newlinkdayRaw)))."\">".pnVarPrepForDisplay($newlinkView)."</a>&nbsp;(".pnVarPrepForDisplay($totallinks).")<br />";

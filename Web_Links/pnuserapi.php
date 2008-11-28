@@ -28,16 +28,16 @@ function Web_Links_userapi_categories() //fertig
                               'instance_right'  => 'cat_id',
                               'level'           => ACCESS_READ));
 
-	// get the objects from the db
-    $objArray = DBUtil::selectObjectArray('links_categories', '', 'title', '-1', '-1', '', $permFilter);
+    // get the objects from the db
+    $categories = DBUtil::selectObjectArray('links_categories', '', 'title', '-1', '-1', '', $permFilter);
 
     // Check for an error with the database code, and if so set an appropriate
     // error message and return
-    if ($objArray === false) {
+    if ($categories === false) {
         return LogUtil::registerError (_GETFAILED);
     }
 
-    return $objArray;
+    return $categories;
 }
 
 function Web_Links_userapi_category($args)
@@ -52,7 +52,7 @@ function Web_Links_userapi_category($args)
         return LogUtil::registerPermissionError ();
     }
 
-	// define the permission filter to apply
+    // define the permission filter to apply
     $permFilter = array(array('realm'           => 0,
                               'component_left'  => 'Web_Links',
                               'component_right' => 'Category',
@@ -60,7 +60,7 @@ function Web_Links_userapi_category($args)
                               'instance_right'  => 'cat_id',
                               'level'           => ACCESS_READ));
 
-	// get the object from the db
+    // get the object from the db
     $objArray = DBUtil::selectObjectById('links_categories', $args['cid'], 'cat_id', '', $permFilter);
 
     // Check for an error with the database code, and if so set an appropriate
@@ -84,12 +84,12 @@ function Web_Links_userapi_subcategory($args)
         return LogUtil::registerPermissionError ();
     }
 
-	$objArray = array();
+    $objArray = array();
 
     $pntable = pnDBGetTables();
     $weblinkscolumn = &$pntable['links_categories_column'];
 
-	$where = "WHERE $weblinkscolumn[parent_id] = ".(int)DataUtil::formatForStore($args['cid']);
+    $where = "WHERE $weblinkscolumn[parent_id] = ".(int)DataUtil::formatForStore($args['cid']);
 
     // define the permission filter to apply
     $permFilter = array(array('realm'           => 0,
@@ -99,7 +99,7 @@ function Web_Links_userapi_subcategory($args)
                               'instance_right'  => 'cat_id',
                               'level'           => ACCESS_READ));
 
-	// get the objects from the db
+    // get the objects from the db
     $objArray = DBUtil::selectObjectArray('links_categories', $where, 'title', '-1', '-1', '', $permFilter);
 
     // Check for an error with the database code, and if so set an appropriate
@@ -130,7 +130,7 @@ function Web_Links_userapi_weblinks($args)
         return LogUtil::registerError (_MODARGSERROR);
     }
 
-	$objArray = array();
+    $objArray = array();
 
     $pntable = pnDBGetTables();
     $weblinkscolumn = &$pntable['links_links_column'];
@@ -145,7 +145,7 @@ function Web_Links_userapi_weblinks($args)
                               'instance_right'  => 'lid',
                               'level'           => ACCESS_READ));
 
-	// get the objects from the db
+    // get the objects from the db
     $objArray = DBUtil::selectObjectArray('links_links', $where, $args['orderbysql'], $args['startnum']-1, $args['numlinks'], '', $permFilter);
 
     // Check for an error with the database code, and if so set an appropriate
@@ -165,37 +165,37 @@ function Web_Links_userapi_orderbyin($args)
     $column = &$pntable['links_links_column'];
 
     if ($orderby == "titleA") {
-		$orderbysql = "$column[title] ASC";
+        $orderbysql = "$column[title] ASC";
     } else
     if ($orderby == "dateA") {
-		$orderbysql = "$column[date] ASC";
+        $orderbysql = "$column[date] ASC";
     } else
     if ($orderby == "hitsA") {
-		$orderbysql = "$column[hits] ASC";
+        $orderbysql = "$column[hits] ASC";
     } else
     if ($orderby == "ratingA") {
-		$orderbysql = "$column[linkratingsummary] ASC";
+        $orderbysql = "$column[linkratingsummary] ASC";
     } else
     if ($orderby == "titleD") {
-		$orderbysql = "$column[title] DESC";
+        $orderbysql = "$column[title] DESC";
     } else
     if ($orderby == "dateD") {
-		$orderbysql = "$column[date] DESC";
+        $orderbysql = "$column[date] DESC";
     } else
     if ($orderby == "hitsD") {
-		$orderbysql = "$column[hits] DESC";
+        $orderbysql = "$column[hits] DESC";
     } else
     if ($orderby == "ratingD") {
-		$orderbysql = "$column[linkratingsummary] DESC";
+        $orderbysql = "$column[linkratingsummary] DESC";
     } else {
-		$orderbysql = "$column[title] ASC";
-	}
-	return $orderbysql;
+        $orderbysql = "$column[title] ASC";
+    }
+    return $orderbysql;
 }
 
 function Web_Links_userapi_countcatlinks($args)
 {
-	extract($args);
+    extract($args);
 
     if ((!isset($cid) || !is_numeric($cid))) {
         pnSessionSetVar('errormsg', _MODARGSERROR);
@@ -209,7 +209,7 @@ function Web_Links_userapi_countcatlinks($args)
     $sql = "SELECT $column[lid], $column[cat_id], $column[title]
             FROM $pntable[links_links]
             WHERE $column[cat_id]='".(int)DataUtil::formatForStore($cid)."'";
-	$result =& $dbconn->Execute($sql);
+    $result =& $dbconn->Execute($sql);
 
     if ($dbconn->ErrorNo() != 0) {
         error_log("DB Error: " . $dbconn->ErrorMsg());
@@ -220,7 +220,7 @@ function Web_Links_userapi_countcatlinks($args)
     for (; !$result->EOF; $result->MoveNext()) {
         list($lid, $cid, $title) = $result->fields;
         if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cid", ACCESS_OVERVIEW) ||
-    		SecurityUtil::checkPermission('Web_Links::Item', "$title::$lid", ACCESS_OVERVIEW)) {
+            SecurityUtil::checkPermission('Web_Links::Item', "$title::$lid", ACCESS_OVERVIEW)) {
             $numlinks++;
         }
     }
@@ -249,14 +249,14 @@ function Web_Links_userapi_link($args)
     $weblinkscolumn = &$pntable['links_links_column'];
 
     $sql = "SELECT $weblinkscolumn[lid],
-    			   $weblinkscolumn[cat_id],
+                   $weblinkscolumn[cat_id],
                    $weblinkscolumn[title],
                    $weblinkscolumn[url],
-				   $weblinkscolumn[description],
-				   $weblinkscolumn[date],
-				   $weblinkscolumn[name],
-				   $weblinkscolumn[email],
-				   $weblinkscolumn[hits]
+                   $weblinkscolumn[description],
+                   $weblinkscolumn[date],
+                   $weblinkscolumn[name],
+                   $weblinkscolumn[email],
+                   $weblinkscolumn[hits]
             FROM $weblinkstable
             WHERE $weblinkscolumn[lid] = '" . (int)DataUtil::formatForStore($lid) . "'";
     $result =& $dbconn->Execute($sql);
@@ -283,14 +283,14 @@ function Web_Links_userapi_link($args)
 
     // Create the link array
     $link = array('lid' => $lid,
-    			  'cat_id' => $cat_id,
+                  'cat_id' => $cat_id,
                   'title' => $title,
                   'url' => $url,
-				  'description' => $description,
-				  'date' => $date,
-				  'name' => $name,
-				  'email' => $email,
-				  'hits' => $hits);
+                  'description' => $description,
+                  'date' => $date,
+                  'name' => $name,
+                  'email' => $email,
+                  'hits' => $hits);
 
     // Return the link array
     return $link;
@@ -348,7 +348,7 @@ function Web_Links_userapi_random()
     $column = &$pntable['links_links_column'];
 
     $sql = "SELECT $column[cat_id], $column[title]
-    		FROM $pntable[links_links]";
+            FROM $pntable[links_links]";
     $result =& $dbconn->Execute($sql);
 
     // Check for an error
@@ -357,10 +357,10 @@ function Web_Links_userapi_random()
     }
 
     while(list($cid, $title)=$result->fields) {
-		$result->MoveNext();
-		if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cid", ACCESS_READ)) {
-			$totallinks++;
-		}
+        $result->MoveNext();
+        if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cid", ACCESS_READ)) {
+            $totallinks++;
+        }
     }
 
     $result->Close();
@@ -368,7 +368,7 @@ function Web_Links_userapi_random()
     $numrows = $totallinks;
 
     if ($numrows < 1 ) { // if no data
-		return pnVarPrepHTMLDisplay(_WEBLINKS_NOLINKS);
+        return pnVarPrepHTMLDisplay(_WEBLINKS_NOLINKS);
     }
     if ($numrows == 1) {
         $lid = 1;
@@ -385,7 +385,7 @@ function Web_Links_userapi_searchcats($args)
     // Get arguments from argument array
     extract($args);
 
-	$subcategory = array();
+    $subcategory = array();
 
     // Argument check
     if (!isset($query)) {
@@ -403,10 +403,10 @@ function Web_Links_userapi_searchcats($args)
 
     // Get categories
     $sql = "SELECT $weblinkscolumn[title],
-    			   $weblinkscolumn[cat_id]
-    	    FROM $weblinkstable
-    	    WHERE $weblinkscolumn[title] LIKE '%".DataUtil::formatForStore($query)."%'
-    	    ORDER BY $weblinkscolumn[title] DESC";
+                   $weblinkscolumn[cat_id]
+            FROM $weblinkstable
+            WHERE $weblinkscolumn[title] LIKE '%".DataUtil::formatForStore($query)."%'
+            ORDER BY $weblinkscolumn[title] DESC";
     $result =& $dbconn->Execute($sql);
 
     // Check for an error
@@ -420,7 +420,7 @@ function Web_Links_userapi_searchcats($args)
         list($title, $cat_id) = $result->fields;
         if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cat_id", ACCESS_READ)) {
             $subcategory[] = array('title' => $title,
-                            	   'cat_id' => $cat_id);
+                                   'cat_id' => $cat_id);
         }
     }
 
@@ -433,8 +433,8 @@ function Web_Links_userapi_searchcats($args)
 
 function Web_Links_userapi_search_weblinks($args)
 {
-	// get arguments from argument array
-	extract($args);
+    // get arguments from argument array
+    extract($args);
 
     // Argument check
     if (!isset($query)) {
@@ -457,11 +457,11 @@ function Web_Links_userapi_search_weblinks($args)
 
     $column = &$pntable['links_links_column'];
     $sql = "SELECT $column[lid],
-    			   $column[cat_id],
-    			   $column[title],
-    			   $column[url],
-    			   $column[description],
-    			   $column[date],
+                   $column[cat_id],
+                   $column[title],
+                   $column[url],
+                   $column[description],
+                   $column[date],
                    $column[hits],
                    $column[linkratingsummary],
                    $column[totalvotes],
@@ -479,7 +479,7 @@ function Web_Links_userapi_search_weblinks($args)
     }
 
     for (; !$result->EOF; $result->MoveNext()) {
-    	list($lid, $cat_id, $title, $url, $description, $time, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
+        list($lid, $cat_id, $title, $url, $description, $time, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
         if (SecurityUtil::checkPermission('Web_Links::Link', ":$title:$lid", ACCESS_READ)) {
             $weblinks[] = array('lid' => $lid,
                                 'cat_id' => $cat_id,
@@ -491,7 +491,7 @@ function Web_Links_userapi_search_weblinks($args)
                                 'linkratingsummary' => number_format($linkratingsummary, pnModGetVar('Web_Links', 'mainvotedecimal')),
                                 'totalvotes' => $totalvotes,
                                 'totalcomments' => $totalcomments);
-		}
+        }
     }
 
     // All successful database queries produce a result set, and that result
@@ -504,7 +504,7 @@ function Web_Links_userapi_search_weblinks($args)
 
 function Web_Links_userapi_countsearchlinks($args)
 {
-	extract($args);
+    extract($args);
 
     if (!isset($query)) {
         pnSessionSetVar('errormsg', _MODARGSERROR);
@@ -519,14 +519,14 @@ function Web_Links_userapi_countsearchlinks($args)
             FROM $pntable[links_links]
             WHERE $column[title] LIKE '%".DataUtil::formatForStore($query)."%'
             OR $column[description] LIKE '%".DataUtil::formatForStore($query)."%'";
-	$result =& $dbconn->Execute($sql);
+    $result =& $dbconn->Execute($sql);
 
     if ($dbconn->ErrorNo() != 0) {
         error_log("DB Error: " . $dbconn->ErrorMsg());
         return false;
     }
 
-	list($numlinks) = $result->fields;
+    list($numlinks) = $result->fields;
 
     $result->Close();
 
@@ -549,25 +549,25 @@ function Web_Links_userapi_totallinks($args)
 
     $newlinkdb = date("Y-m-d", $selectdate);
     $column = &$pntable['links_links_column'];
-	$column2 = &$pntable['links_categories_column'];
+    $column2 = &$pntable['links_categories_column'];
     //$result =& $dbconn->Execute("SELECT COUNT(*) FROM $pntable[links_links] WHERE $column[date] LIKE '%".DataUtil::formatForStore($newlinkDB)."%'");
-   	$totallinks=0;
-	$result =& $dbconn->Execute("SELECT $column[cat_id], $column2[title]
-							FROM $pntable[links_links], $pntable[links_categories]
-							WHERE $column[date] LIKE '%$newlinkdb%'
-							AND $column[cat_id]=$column2[cat_id]");
+       $totallinks=0;
+    $result =& $dbconn->Execute("SELECT $column[cat_id], $column2[title]
+                            FROM $pntable[links_links], $pntable[links_categories]
+                            WHERE $column[date] LIKE '%$newlinkdb%'
+                            AND $column[cat_id]=$column2[cat_id]");
 
     if ($dbconn->ErrorNo() != 0) {
         error_log("DB Error: " . $dbconn->ErrorMsg());
         return false;
     }
 
-	while(list($cid, $title)=$result->fields) {
-       	$result->MoveNext();
-       	if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cid", ACCESS_READ)) {
-       		$totallinks++;
-       	}
-	}
+    while(list($cid, $title)=$result->fields) {
+           $result->MoveNext();
+           if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cid", ACCESS_READ)) {
+               $totallinks++;
+           }
+    }
 
     $result->Close();
 
@@ -590,10 +590,10 @@ function Web_Links_userapi_weblinksbydate($args)
 
     $column = &$pntable['links_links_column'];
     $sql = "SELECT $column[lid],
-    			   $column[cat_id],
-    			   $column[title],
-    			   $column[description],
-    			   $column[date],
+                   $column[cat_id],
+                   $column[title],
+                   $column[description],
+                   $column[date],
                    $column[hits],
                    $column[linkratingsummary],
                    $column[totalvotes],
@@ -610,11 +610,11 @@ function Web_Links_userapi_weblinksbydate($args)
     }
 
     for (; !$result->EOF; $result->MoveNext()) {
-    	list($lid, $cid, $title, $description, $time, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
+        list($lid, $cid, $title, $description, $time, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
         if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cid", ACCESS_READ) ||
-    		SecurityUtil::checkPermission('Web_Links::Item', "$title::$lid", ACCESS_READ)) {
+            SecurityUtil::checkPermission('Web_Links::Item', "$title::$lid", ACCESS_READ)) {
             $weblinks[] = array('lid' => $lid,
-            					'cid' => $cid,
+                                'cid' => $cid,
                                 'title' => $title,
                                 'description' => $description,
                                 'time' => $time,
@@ -622,12 +622,12 @@ function Web_Links_userapi_weblinksbydate($args)
                                 'linkratingsummary' => $linkratingsummary,
                                 'totalvotes' => $totalvotes,
                                 'totalcomments' => $totalcomments);
-		}
+        }
     }
 
-	$result->Close();
+    $result->Close();
 
-	return $weblinks;
+    return $weblinks;
 }
 
 function Web_Links_userapi_weblinksmostpop($args)
@@ -644,17 +644,17 @@ function Web_Links_userapi_weblinksmostpop($args)
 
     $column = &$pntable['links_links_column'];
     $sql = "SELECT $column[lid],
-    			   $column[cat_id],
-    			   $column[title],
-    			   $column[description],
-    			   $column[date],
+                   $column[cat_id],
+                   $column[title],
+                   $column[description],
+                   $column[date],
                    $column[hits],
                    $column[linkratingsummary],
                    $column[totalvotes],
                    $column[totalcomments]
             FROM $pntable[links_links]
-				ORDER BY $column[hits] DESC
-				LIMIT $mostpoplinks";
+                ORDER BY $column[hits] DESC
+                LIMIT $mostpoplinks";
     $result =& $dbconn->Execute($sql);
 
     // Check for an error with the database code
@@ -664,11 +664,11 @@ function Web_Links_userapi_weblinksmostpop($args)
     }
 
     for (; !$result->EOF; $result->MoveNext()) {
-    	list($lid, $cid, $title, $description, $time, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
+        list($lid, $cid, $title, $description, $time, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
         if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cid", ACCESS_READ) ||
-    		SecurityUtil::checkPermission('Web_Links::Item', "$title::$lid", ACCESS_READ)) {
+            SecurityUtil::checkPermission('Web_Links::Item', "$title::$lid", ACCESS_READ)) {
             $weblinks[] = array('lid' => $lid,
-            					'cid' => $cid,
+                                'cid' => $cid,
                                 'title' => $title,
                                 'description' => $description,
                                 'time' => $time,
@@ -676,12 +676,12 @@ function Web_Links_userapi_weblinksmostpop($args)
                                 'linkratingsummary' => number_format($linkratingsummary, pnModGetVar('Web_Links', 'mainvotedecimal')),
                                 'totalvotes' => $totalvotes,
                                 'totalcomments' => $totalcomments);
-		}
+        }
     }
 
-	$result->Close();
+    $result->Close();
 
-	return $weblinks;
+    return $weblinks;
 }
 
 function Web_Links_userapi_weblinkstoprated($args)
@@ -703,17 +703,17 @@ function Web_Links_userapi_weblinkstoprated($args)
 
     $column = &$pntable['links_links_column'];
     $sql = "SELECT $column[lid],
-    			   $column[cat_id],
-    			   $column[title],
-    			   $column[description],
-    			   $column[date],
+                   $column[cat_id],
+                   $column[title],
+                   $column[description],
+                   $column[date],
                    $column[hits],
                    $column[linkratingsummary],
                    $column[totalvotes],
                    $column[totalcomments]
             FROM $pntable[links_links]
-			WHERE $column[linkratingsummary] != 0 AND $column[totalvotes] >= $linkvotemin
-			ORDER BY $column[linkratingsummary] DESC";
+            WHERE $column[linkratingsummary] != 0 AND $column[totalvotes] >= $linkvotemin
+            ORDER BY $column[linkratingsummary] DESC";
     $result =& $dbconn->SelectLimit($sql, $toplinks, 0);
 
     // Check for an error with the database code
@@ -723,11 +723,11 @@ function Web_Links_userapi_weblinkstoprated($args)
     }
 
     for (; !$result->EOF; $result->MoveNext()) {
-    	list($lid, $cid, $title, $description, $time, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
+        list($lid, $cid, $title, $description, $time, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
         if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cid", ACCESS_READ) ||
-    		SecurityUtil::checkPermission('Web_Links::Item', "$title::$lid", ACCESS_READ)) {
+            SecurityUtil::checkPermission('Web_Links::Item', "$title::$lid", ACCESS_READ)) {
             $weblinks[] = array('lid' => $lid,
-            					'cid' => $cid,
+                                'cid' => $cid,
                                 'title' => $title,
                                 'description' => $description,
                                 'time' => $time,
@@ -735,12 +735,12 @@ function Web_Links_userapi_weblinkstoprated($args)
                                 'linkratingsummary' => number_format($linkratingsummary, pnModGetVar('Web_Links', 'mainvotedecimal')),
                                 'totalvotes' => $totalvotes,
                                 'totalcomments' => $totalcomments);
-		}
+        }
     }
 
-	$result->Close();
+    $result->Close();
 
-	return $weblinks;
+    return $weblinks;
 }
 
 function Web_Links_userapi_brockenlink($args)
@@ -756,7 +756,7 @@ function Web_Links_userapi_brockenlink($args)
 
     // Security check
     if (!SecurityUtil::checkPermission('Web_Links::', "::", ACCESS_READ)) {
-		return LogUtil::registerPermissionError();
+        return LogUtil::registerPermissionError();
     }
 
     // Get datbase setup
@@ -766,14 +766,14 @@ function Web_Links_userapi_brockenlink($args)
     $nextid = $dbconn->GenId($pntable['links_modrequest']);
     $column = &$pntable['links_modrequest_column'];
     $sql ="INSERT INTO $pntable[links_modrequest]
-    			  	  ($column[requestid],
-    			  	   $column[lid],
-    			  	   $column[modifysubmitter],
-    			  	   $column[brokenlink])
+                        ($column[requestid],
+                         $column[lid],
+                         $column[modifysubmitter],
+                         $column[brokenlink])
            VALUES ($nextid,
-           		  ".(int)DataUtil::formatForStore($lid).",
-           		  '".DataUtil::formatForStore($modifysubmitter)."',
-           		  1)";
+                     ".(int)DataUtil::formatForStore($lid).",
+                     '".DataUtil::formatForStore($modifysubmitter)."',
+                     1)";
     $dbconn->Execute($sql);
 
     // Check for an error
@@ -809,22 +809,22 @@ function Web_Links_userapi_modifylinkrequest($args)
     $nextid = $dbconn->GenId($pntable['links_modrequest']);
     $column = &$pntable['links_modrequest_column'];
     $sql ="INSERT INTO $pntable[links_modrequest]
-    			  	  ($column[requestid],
-    			  	   $column[lid],
-    			  	   $column[cat_id],
-    			  	   $column[title],
-    			  	   $column[url],
-    			  	   $column[description],
-    			  	   $column[modifysubmitter],
-    			  	   $column[brokenlink])
+                        ($column[requestid],
+                         $column[lid],
+                         $column[cat_id],
+                         $column[title],
+                         $column[url],
+                         $column[description],
+                         $column[modifysubmitter],
+                         $column[brokenlink])
            VALUES ($nextid,
-           		  '".(int)DataUtil::formatForStore($lid)."',
-           		  '".DataUtil::formatForStore($cat)."',
-           		  '".DataUtil::formatForStore($title)."',
-           		  '".DataUtil::formatForStore($url)."',
-           		  '".DataUtil::formatForStore($description)."',
-           		  '".DataUtil::formatForStore($modifysubmitter)."',
-           		  0)";
+                     '".(int)DataUtil::formatForStore($lid)."',
+                     '".DataUtil::formatForStore($cat)."',
+                     '".DataUtil::formatForStore($title)."',
+                     '".DataUtil::formatForStore($url)."',
+                     '".DataUtil::formatForStore($description)."',
+                     '".DataUtil::formatForStore($modifysubmitter)."',
+                     0)";
     $dbconn->Execute($sql);
 
     // Check for an error
@@ -839,14 +839,14 @@ function Web_Links_userapi_modifylinkrequest($args)
 
 function Web_Links_userapi_existingurl($args)
 {
-	// Get datbase setup
-	$dbconn =& pnDBGetConn(true);
+    // Get datbase setup
+    $dbconn =& pnDBGetConn(true);
     $pntable =& pnDBGetTables();
 
-	$column = &$pntable['links_links_column'];
+    $column = &$pntable['links_links_column'];
     $sql = "SELECT $column[title]
-    	    FROM $pntable[links_links]
-    	    WHERE $column[url]='" . DataUtil::formatForStore($args['url']) . "'";
+            FROM $pntable[links_links]
+            WHERE $column[url]='" . DataUtil::formatForStore($args['url']) . "'";
     $existingurl =& $dbconn->Execute($sql);
 
     // Check for an error with the database code
@@ -856,9 +856,9 @@ function Web_Links_userapi_existingurl($args)
     }
 
     if (!$existingurl->EOF) {
-    	$existingurl = 1;
+        $existingurl = 1;
     } else {
-    	$existingurl = 0;
+        $existingurl = 0;
     }
 
     return $existingurl;
@@ -871,51 +871,51 @@ function Web_Links_userapi_add($args)
         return LogUtil::registerPermissionError();
     }
 
-	$link = array();
+    $link = array();
 
-	$existingurl = pnModAPIFunc('Web_Links', 'user', 'existingurl', array('url' => $args['url']));
-	$valid = pnVarValidate($args['url'], 'url');
+    $existingurl = pnModAPIFunc('Web_Links', 'user', 'existingurl', array('url' => $args['url']));
+    $valid = pnVarValidate($args['url'], 'url');
 
     if ($existingurl == 1) {
-    	$link['text'] = _WL_LINKALREADYEXT;
-    	$link['submit'] = 0;
-    	return $link;
+        $link['text'] = _WL_LINKALREADYEXT;
+        $link['submit'] = 0;
+        return $link;
     } else if ($valid == false) {
-	    $link['text'] = _WL_LINKNOURL;
-	    $link['submit'] = 0;
-	    return $link;
-	} else if (empty($args['title'])) {
-	    $link['text'] = _WL_LINKNOTITLE;
-	    $link['submit'] = 0;
-	    return $link;
-	} else if (empty($args['cat']) || !is_numeric($args['cat'])) {
-	    $link['text'] =_WL_LINKNOCAT;
-	    $link['submit'] = 0;
-	    return $link;
-	} else if (empty($args['description'])) {
-	    $link['text'] =_WL_LINKNODESC;
-	    $link['submit'] = 0;
-	    return $link;
-	} else {
-		if (pnUserLoggedIn()) {
-    		$submitter = pnUserGetVar('uname');
-    	}
+        $link['text'] = _WL_LINKNOURL;
+        $link['submit'] = 0;
+        return $link;
+    } else if (empty($args['title'])) {
+        $link['text'] = _WL_LINKNOTITLE;
+        $link['submit'] = 0;
+        return $link;
+    } else if (empty($args['cat']) || !is_numeric($args['cat'])) {
+        $link['text'] =_WL_LINKNOCAT;
+        $link['submit'] = 0;
+        return $link;
+    } else if (empty($args['description'])) {
+        $link['text'] =_WL_LINKNODESC;
+        $link['submit'] = 0;
+        return $link;
+    } else {
+        if (pnUserLoggedIn()) {
+            $submitter = pnUserGetVar('uname');
+        }
 
         // Get datbase setup
         $dbconn =& pnDBGetConn(true);
         $pntable =& pnDBGetTables();
 
-    	$column = &$pntable['links_newlink_column'];
-    	$nextid = $dbconn->GenId($pntable['links_newlink']);
-    	$dbconn->Execute("INSERT INTO $pntable[links_newlink] ($column[lid], $column[cat_id], $column[title], $column[url], $column[description], $column[name], $column[email], $column[submitter]) VALUES ($nextid, ".(int)pnVarPrepForStore($args['cat']).", '".pnVarPrepForStore($args['title'])."', '".pnVarPrepForStore($args['url'])."', '".pnVarPrepForStore($args['description'])."', '".pnVarPrepForStore($args['nname'])."', '".pnVarPrepForStore($args['email'])."', '".pnVarPrepForStore($submitter)."')");
+        $column = &$pntable['links_newlink_column'];
+        $nextid = $dbconn->GenId($pntable['links_newlink']);
+        $dbconn->Execute("INSERT INTO $pntable[links_newlink] ($column[lid], $column[cat_id], $column[title], $column[url], $column[description], $column[name], $column[email], $column[submitter]) VALUES ($nextid, ".(int)pnVarPrepForStore($args['cat']).", '".pnVarPrepForStore($args['title'])."', '".pnVarPrepForStore($args['url'])."', '".pnVarPrepForStore($args['description'])."', '".pnVarPrepForStore($args['nname'])."', '".pnVarPrepForStore($args['email'])."', '".pnVarPrepForStore($submitter)."')");
 
-    	if (empty($args['email'])) {
-        	$link['text'] = _WL_CHECKFORIT;
-    	} else {
-        	$link['text'] = _WL_EMAILWHENADD;
-    	}
-    	$link['submit'] = 1;
-    	return $link;
+        if (empty($args['email'])) {
+            $link['text'] = _WL_CHECKFORIT;
+        } else {
+            $link['text'] = _WL_EMAILWHENADD;
+        }
+        $link['submit'] = 1;
+        return $link;
     }
 }
 
@@ -934,7 +934,7 @@ function Web_Links_userapi_displaytitle($args)
     $pntable =& pnDBGetTables();
 
     $column = &$pntable['links_links_column'];
-	$sql = "SELECT $column[title]
+    $sql = "SELECT $column[title]
             FROM   $pntable[links_links]
             WHERE  $column[lid]='".(int)DataUtil::formatForStore($lid)."'";
     $result =& $dbconn->Execute($sql);
@@ -966,15 +966,15 @@ function Web_Links_userapi_totalcomments($args)
     $dbconn =& pnDBGetConn(true);
     $pntable =& pnDBGetTables();
 
-	$column = &$pntable['links_votedata_column'];
-	$sql = "SELECT $column[ratinguser],
-				   $column[rating],
-				   $column[ratingcomments],
-				   $column[ratingtimestamp]
-			FROM $pntable[links_votedata]
-			WHERE $column[ratinglid]='".(int)DataUtil::formatForStore($lid)."'
-			AND $column[ratingcomments] != '' ORDER BY $column[ratingtimestamp] DESC";
-	$result =& $dbconn->Execute($sql);
+    $column = &$pntable['links_votedata_column'];
+    $sql = "SELECT $column[ratinguser],
+                   $column[rating],
+                   $column[ratingcomments],
+                   $column[ratingtimestamp]
+            FROM $pntable[links_votedata]
+            WHERE $column[ratinglid]='".(int)DataUtil::formatForStore($lid)."'
+            AND $column[ratingcomments] != '' ORDER BY $column[ratingtimestamp] DESC";
+    $result =& $dbconn->Execute($sql);
 
     // Check for an error
     if ($dbconn->ErrorNo() != 0) {
@@ -983,33 +983,33 @@ function Web_Links_userapi_totalcomments($args)
         return false;
     }
 
-	$numofcomments = $result->PO_RecordCount();
+    $numofcomments = $result->PO_RecordCount();
 
     for (; !$result->EOF; $result->MoveNext()) {
-    	list($ratinguser, $rating, $ratingcomments, $ratingtimestamp) = $result->fields;
-    	    $column = &$pntable['links_votedata_column'];
-    	    $sql = "SELECT SUM($column[rating]),
-    	    		COUNT(*) FROM $pntable[links_votedata]
-    	    		WHERE $column[ratinguser]='".DataUtil::formatForStore($ratinguser)."'";
-        	$result2 =& $dbconn->Execute($sql);
-        	list($useravgrating, $usertotalcomments)=$result2->fields;
-        	$useravgrating = $useravgrating / $usertotalcomments;
-        	$useravgrating = number_format($useravgrating, 1);
+        list($ratinguser, $rating, $ratingcomments, $ratingtimestamp) = $result->fields;
+            $column = &$pntable['links_votedata_column'];
+            $sql = "SELECT SUM($column[rating]),
+                    COUNT(*) FROM $pntable[links_votedata]
+                    WHERE $column[ratinguser]='".DataUtil::formatForStore($ratinguser)."'";
+            $result2 =& $dbconn->Execute($sql);
+            list($useravgrating, $usertotalcomments)=$result2->fields;
+            $useravgrating = $useravgrating / $usertotalcomments;
+            $useravgrating = number_format($useravgrating, 1);
 
             $totalcomments[] = array('ratinguser' => $ratinguser,
-            						 'rating' => $rating,
-            						 'ratingcomments' => $ratingcomments,
+                                     'rating' => $rating,
+                                     'ratingcomments' => $ratingcomments,
                                      'ratingtimestamp' => $ratingtimestamp,
                                      'useravgrating' => $useravgrating,
                                      'usertotalcomments' => $usertotalcomments);
     }
 
-	$result->Close();
+    $result->Close();
 
-	$comments = array('numofcomments' => $numofcomments,
-					  'totalcomments' => $totalcomments);
+    $comments = array('numofcomments' => $numofcomments,
+                      'totalcomments' => $totalcomments);
 
-	return $comments;
+    return $comments;
 }
 
 function Web_Links_userapi_editorial($args)
@@ -1028,9 +1028,9 @@ function Web_Links_userapi_editorial($args)
 
     $column = &$pntable['links_editorials_column'];
     $sql = "SELECT $column[adminid],
-    			   $column[editorialtimestamp],
-    			   $column[editorialtext],
-    			   $column[editorialtitle]
+                   $column[editorialtimestamp],
+                   $column[editorialtext],
+                   $column[editorialtitle]
             FROM $pntable[links_editorials]
             WHERE $column[linkid]=".(int)DataUtil::formatForStore($lid)."";
     $result =& $dbconn->Execute($sql);
@@ -1051,16 +1051,16 @@ function Web_Links_userapi_editorial($args)
     $result->Close();
 
     $editorial = array('adminid' => $adminid,
-    		     	   'editorialtimestamp' => $editorialtimestamp,
-    		     	   'editorialtext' => $editorialtext,
-    		     	   'editorialtitle' => $editorialtitle);
+                        'editorialtimestamp' => $editorialtimestamp,
+                        'editorialtext' => $editorialtext,
+                        'editorialtitle' => $editorialtitle);
 
     return $editorial;
 }
 
 function Web_Links_userapi_numrows() //fertig
 {
-	// get the objects from the db
+    // get the objects from the db
     $numrows = DBUtil::selectObjectCount('links_links');
 
     // Check for an error with the database code, and if so set an appropriate
@@ -1074,7 +1074,7 @@ function Web_Links_userapi_numrows() //fertig
 
 function Web_Links_userapi_catnum() //fertig
 {
-	// get the objects from the db
+    // get the objects from the db
     $catnum = DBUtil::selectObjectCount('links_categories');
 
     // Check for an error with the database code, and if so set an appropriate
@@ -1084,6 +1084,20 @@ function Web_Links_userapi_catnum() //fertig
     }
 
     return $catnum;
+}
+
+function Web_Links_userapi_countsublinks()
+{
+    // get the objects from the db
+    $sublinks = DBUtil::selectObjectCount('links_categories');
+
+    // Check for an error with the database code, and if so set an appropriate
+    // error message and return
+    if ($sublinks === false) {
+        return LogUtil::registerError (_GETFAILED);
+    }
+
+    return $sublinks;
 }
 
 function Web_Links_userapi_votes($args)
@@ -1101,19 +1115,19 @@ function Web_Links_userapi_votes($args)
     $pntable =& pnDBGetTables();
 
     $column = &$pntable['links_links_column'];
-	$column2 = &$pntable['links_categories_column'];
-	$sql = "SELECT $column[cat_id], $column[description], $column2[title]
+    $column2 = &$pntable['links_categories_column'];
+    $sql = "SELECT $column[cat_id], $column[description], $column2[title]
                            FROM $pntable[links_links], $pntable[links_categories]
                            WHERE $column[lid]='".DataUtil::formatForStore($lid)."'
-						   AND $column[cat_id]=$column2[cat_id]";
+                           AND $column[cat_id]=$column2[cat_id]";
     $res =& $dbconn->Execute($sql);
     list($cid, $description, $title) = $res->fields;
 
 /*    if (!pnSecAuthAction(0, 'Web Links::Category', "$title::$cid" , ACCESS_READ)) {
-		echo _BADAUTHKEY;
-		include 'footer.php';
-		return;
-	}
+        echo _BADAUTHKEY;
+        include 'footer.php';
+        return;
+    }
 */
     $useoutsidevoting = pnConfigGetVar('useoutsidevoting');
     $anonymous = pnConfigGetVar('anonymous');
@@ -1332,33 +1346,33 @@ function Web_Links_userapi_votes($args)
 
 
     $votes = array('totalvotesDB' => $totalvotesDB,
-    	     	   'finalrating' => $finalrating,
-    	     	   'regvotes' => $regvotes,
-    	     	   'rvv' => $rvv,
-    	     	   'rvvchartheight' => $rvvchartheight,
-    	     	   'rvvpercent' => $rvvpercent,
-    	     	   'avgRU' => $avgRU,
-    	     	   'topreg' => $topreg,
-    	     	   'bottomreg' => $bottomreg,
-    	     	   'truecomments' => $truecomments,
-    			   'anonvotes' => $anonvotes,
-    			   'avv' => $avv,
-    	     	   'avvchartheight' => $avvchartheight,
-    	     	   'avvpercent' => $avvpercent,
-    	     	   'avgAU' => $avgAU,
-    	     	   'topanon' => $topanon,
-    	     	   'bottomanon' => $bottomanon,
-    	     	   'anonweight' => $anonweight,
-    	     	   'useoutsidevoting' => $useoutsidevoting,
-    	     	   'outsideweight' => $outsideweight,
-    	     	   'outsidevotes' => $outsidevotes,
-    	     	   'ovv' => $ovv,
-    	     	   'ovvchartheight' => $ovvchartheight,
-    	     	   'ovvpercent' => $ovvpercent,
-    	     	   'avgOU' => $avgOU,
-    	     	   'topoutside' => $topoutside,
-    	     	   'bottomoutside' => $bottomoutside,
-    	     	   );
+                    'finalrating' => $finalrating,
+                    'regvotes' => $regvotes,
+                    'rvv' => $rvv,
+                    'rvvchartheight' => $rvvchartheight,
+                    'rvvpercent' => $rvvpercent,
+                    'avgRU' => $avgRU,
+                    'topreg' => $topreg,
+                    'bottomreg' => $bottomreg,
+                    'truecomments' => $truecomments,
+                   'anonvotes' => $anonvotes,
+                   'avv' => $avv,
+                    'avvchartheight' => $avvchartheight,
+                    'avvpercent' => $avvpercent,
+                    'avgAU' => $avgAU,
+                    'topanon' => $topanon,
+                    'bottomanon' => $bottomanon,
+                    'anonweight' => $anonweight,
+                    'useoutsidevoting' => $useoutsidevoting,
+                    'outsideweight' => $outsideweight,
+                    'outsidevotes' => $outsidevotes,
+                    'ovv' => $ovv,
+                    'ovvchartheight' => $ovvchartheight,
+                    'ovvpercent' => $ovvpercent,
+                    'avgOU' => $avgOU,
+                    'topoutside' => $topoutside,
+                    'bottomoutside' => $bottomoutside,
+                    );
 
     return $votes;
 }

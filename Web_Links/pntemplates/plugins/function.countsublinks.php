@@ -2,7 +2,7 @@
 function smarty_function_countsublinks($params, &$smarty)
 {
     extract($params);
-	unset($params);
+    unset($params);
 
     if (!isset($catid) || !is_numeric($catid)){
         pnSessionSetVar('errormsg', _MODARGSERROR);
@@ -27,7 +27,7 @@ function smarty_function_countsublinks($params, &$smarty)
         $result->MoveNext();
         $ct+=CountSubLinks($sid);
     }
-	return $ct;
+    return $ct;
 }
 
 function CountSubLinks($sid)

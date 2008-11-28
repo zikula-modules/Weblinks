@@ -24,7 +24,7 @@ define('_WL_CHECKFORIT', 'keine E-Mail-Adresse angegeben - der Link wird trotzde
 define('_WL_COMMENT', 'Kommentar');
 define('_WL_COMMENTS', 'Kommentare');
 define('_WL_DATE', 'Datum');
-define('_WL_DATEBRIEF', '%d. %b %Y');
+define('_WL_DATEBRIEF', '%d. %B %Y');
 define('_WL_DATESTRING', '%d-%b-%Y');
 define('_WL_DATE1', 'Datum (älteste Einträge zuerst)');
 define('_WL_DATE2', 'Datum (neuste Einträge zuerst)');
