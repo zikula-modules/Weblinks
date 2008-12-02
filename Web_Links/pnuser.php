@@ -116,12 +116,6 @@ function Web_Links_user_visit($args)
     // Get parameters from whatever input we need.
     $lid = (int)FormUtil::getPassedValue('lid', isset($args['lid']) ? $args['lid'] : null, 'GET');
 
-    // Load API.
-    if (!pnModAPILoad('Web_Links', 'user')) {
-        pnSessionSetVar('errormsg', _LOADFAILED);
-        pnRedirect(pnModURL('Web_Links', 'user', 'view'));
-    }
-
     // The API function is called.
     $link = pnModAPIFunc('Web_Links', 'user', 'link', array('lid' => $lid));
 
