@@ -9,6 +9,7 @@
  * @link http://www.petzi-juist.de
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
+define('_WL_ACCEPT','Accept');
 define('_WL_ADDCATEGORY', 'Add a category');
 define('_WL_ADDCATEGORYSUCCESSFULY', 'Category successfully added');
 define('_WL_ADDLINK', 'Add link');
@@ -17,6 +18,7 @@ define('_WL_ANONWAITDAYS', 'Number of days unregistered users need to wait to vo
 define('_WL_ANONWEIGHT', 'Number of unregistered-user votes equivalent to 1 registered-user vote');
 define('_WL_BLOCKUNREGMODIFY', 'Disable unregistered users from suggesting link changes?');
 define('_WL_BROKENLINKSREP', 'Broken link reports');
+define('_WL_CHANGELINKSUCCESSFULY', 'Link was changed successfuly');
 define('_WL_CATEGORY', 'Category');
 define('_WL_CATVIEW', 'Categories administer');
 define('_WL_CONF', 'Configuration');
@@ -44,6 +46,8 @@ define('_WL_FEATUREBOX', 'Show featured link box on web links main page?');
 define('_WL_GOBACK', 'Back');
 define('_WL_HELLO', 'Hello');
 define('_WL_HITS', 'Hits');
+define('_WL_IGNORE','Ignore');
+define('_WL_IGNORELINK','User link modification requests was ignored');
 define('_WL_IGNORELINKSUCCESSFULY', 'Ignore requests');
 define('_WL_INCAT', 'in category');
 define('_WL_LINKID', 'Link ID');
@@ -67,6 +71,7 @@ define('_WL_MODCONF', 'Modify configuration');
 define('_WL_MODIFYCATSUCCESSFULY', 'Category successfully modified');
 define('_WL_MODIFYLINKSUCCESSFULY', 'Link successfully modified');
 define('_WL_MODLINK', 'Modify a link');
+define('_WL_NOMODREQUESTS', 'No link modification requests');
 define('_WL_MOSTPOPLINKS', 'Most-popular links: either a number of links or the percentage to display (percentage as whole number, such as 25/100)');
 define('_WL_MOSTPOPLINKSPERCENTRIGGER', 'Enter 1 to show most-popular links as a percentage (otherwise, enter the number of links to show)');
 define('_WL_NAME', 'Name');
@@ -74,11 +79,14 @@ define('_WL_NEWLINKADDED', 'New link added to the database');
 define('_WL_NEWLINKDELETED', 'New link removed from the database');
 define('_WL_NO', 'no');
 define('_WL_NONE', 'None');
+define('_WL_ORIGINAL','Original');
 define('_WL_OUTSIDEWAITDAYS', 'Number of days outside users (voting from other sites) are required to wait before voting on a link');
 define('_WL_OUTSIDEWEIGHT', 'Number of outside-user votes equivalent to 1 registered-user vote?');
 define('_WL_OVERVIEW', 'Overview');
+define('_WL_OWNER','Owner');
 define('_WL_PAGETITLE', 'Pagetitle');
 define('_WL_PAGEURL', 'URL');
+define('_WL_PROPOSED','Proposed');
 define('_WL_SUBMITTER', 'Submitter');
 define('_WL_TEAM', 'Team.');
 define('_WL_THANKS4YOURSUBMISSION', 'Thank you for your submission!');
@@ -88,6 +96,7 @@ define('_WL_TOPLINKS', 'Leading links: either number of links or the  percentage
 define('_WL_TOPLINKSPERCENTRIGGER', 'Enter 1 to display leading links as a percentage (otherwise, a number of links will be displayed)');
 define('_WL_URL', 'URL');
 define('_WL_USEOUTSIDEVOTING', 'Allow webmasters to put vote links on their site');
+define('_WL_USERMODREQUEST','User link modification requests');
 define('_WL_VISIT', 'Visit');
 define('_WL_WARNING', '!Attention! - This is only a SVN-Version and not finished.<br />Please announce bugs directly to <a href="http://www.petzi-juist.de/module-formicula.phtml">me</a> and not at the cozi.');
 define('_WL_WEAPPROVED', 'Your link submission has been approved for the site\'s search engine. ');

@@ -43,8 +43,7 @@ function smarty_function_newlinksbyday($params, &$smarty)
     $allweeklinks = 0;
     while ($counter <= $newlinkshowdays-1) {
         $newlinkdayRaw = (time()-(86400 * $counter));
-        $newlinkday = date("d-M-Y", $newlinkdayRaw);
-        $newlinkView = ml_ftime(_WL_DATEBRIEF, $newlinkdayRaw);
+        $newlinkView = date(_WL_DATEBRIEF, $newlinkdayRaw);
         $newlinkDB = Date("Y-m-d", $newlinkdayRaw);
         $totallinks = 0;
 
@@ -60,7 +59,7 @@ function smarty_function_newlinksbyday($params, &$smarty)
           }
         $counter++;
         $allweeklinks = $allweeklinks + $totallinks;
-        echo "<strong><big>&middot;</big></strong> <a href=\"".pnVarPrepForDisplay(pnModURL('Web_Links', 'user', 'newlinksdate', array('selectdate' => $newlinkdayRaw)))."\">".pnVarPrepForDisplay($newlinkView)."</a>&nbsp;(".pnVarPrepForDisplay($totallinks).")<br />";
+        echo "<a href=\"".pnVarPrepForDisplay(pnModURL('Web_Links', 'user', 'newlinksdate', array('selectdate' => $newlinkdayRaw)))."\">".pnVarPrepForDisplay($newlinkView)."</a>&nbsp;(".pnVarPrepForDisplay($totallinks).")<br />";
     }
     $counter = 0;
     $allmonthlinks = 0;

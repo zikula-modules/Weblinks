@@ -1,4 +1,15 @@
-<?php // define('', '');
+<?php
+/**
+ * Zikula Application Framework
+ *
+ * Web_Links
+ *
+ * @version $Id$
+ * @copyright 2008 by Petzi-Juist
+ * @link http://www.petzi-juist.de
+ * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
+define('_WL_ACCEPT','akzeptieren');
 define('_WL_ADDCATEGORY', 'Kategorie hinzufügen');
 define('_WL_ADDCATEGORYSUCCESSFULY', 'Kategorie erfolgreich hinzugefügt');
 define('_WL_ADDLINK', 'Link hinzufügen');
@@ -7,6 +18,7 @@ define('_WL_ANONWAITDAYS', 'Tagesanzahl bis anonyme Benutzer einen Link bewerten
 define('_WL_ANONWEIGHT', 'Wieviele Stimmen unregistrierter Benutzer pro 1 Stimme registrierter Benutzer?');
 define('_WL_BLOCKUNREGMODIFY', 'Sollen unregistrierte Benutzer für das Vorschlagen von Änderungen gesperrt werden?');
 define('_WL_BROKENLINKSREP', 'als defekt gemeldete Links');
+define('_WL_CHANGELINKSUCCESSFULY', 'Link wurde erfolgreich geändert');
 define('_WL_CATEGORY', 'Kategorie');
 define('_WL_CATVIEW', 'Kategorien verwalten');
 define('_WL_CONF', 'Konfiguration');
@@ -34,6 +46,8 @@ define('_WL_FEATUREBOX', 'Featured Link-Box auf der Hauptseite anzeigen?');
 define('_WL_GOBACK', 'Zurück');
 define('_WL_HELLO', 'Hallo');
 define('_WL_HITS', 'Hits');
+define('_WL_IGNORE','ignorieren');
+define('_WL_IGNORELINK','Link-Änderungswunsch wurde ignoriert');
 define('_WL_IGNORELINKSUCCESSFULY', 'Meldung ignoriert');
 define('_WL_INCAT', 'in der Kategorie');
 define('_WL_LINKID', 'Link-ID');
@@ -57,6 +71,7 @@ define('_WL_MODCONF', 'Konfiguration ändern');
 define('_WL_MODIFYCATSUCCESSFULY', 'Kategorie erfolgreich modifiziert');
 define('_WL_MODIFYLINKSUCCESSFULY', 'Link erfolgreich modifiziert');
 define('_WL_MODLINK', 'Link modifizieren');
+define('_WL_NOMODREQUESTS', 'keine Änderungswünsche vorhanden');
 define('_WL_MOSTPOPLINKS', 'beliebteste Links: Anzahl oder Prozentsatz zur Anzeige');
 define('_WL_MOSTPOPLINKSPERCENTRIGGER', '1 für Prozentsatz (ansonsten Anzahl)');
 define('_WL_NAME', 'Name');
@@ -64,11 +79,14 @@ define('_WL_NEWLINKADDED', 'neuer Link in die Datenbank aufgenommen');
 define('_WL_NEWLINKDELETED', 'neuer Link wurde gelöscht');
 define('_WL_NO', 'Nein');
 define('_WL_NONE', 'keine');
+define('_WL_ORIGINAL','Original');
 define('_WL_OUTSIDEWAITDAYS', 'Tagesanzahl bis externe Benutzer Stimmen abgeben können');
 define('_WL_OUTSIDEWEIGHT', 'Wieviele externe Stimmen pro 1 Stimme registrierter Benutzer?');
 define('_WL_OVERVIEW', 'Übersicht');
+define('_WL_OWNER','Eigentümer');
 define('_WL_PAGETITLE', 'Seitentitel');
 define('_WL_PAGEURL', 'URL');
+define('_WL_PROPOSED','vorgeschlagene Änderung');
 define('_WL_SUBMITTER', 'eingereicht von');
 define('_WL_TEAM', 'Team');
 define('_WL_THANKS4YOURSUBMISSION', 'Vielen Dank für den Eintrag!');
@@ -78,6 +96,7 @@ define('_WL_TOPLINKS', 'Top Links: Anzahl oder Prozentsatz zur Anzeige');
 define('_WL_TOPLINKSPERCENTRIGGER', '1 für Prozentsatz (ansonsten Anzahl)');
 define('_WL_URL', 'URL');
 define('_WL_USEOUTSIDEVOTING', 'externe Stimmabgabe erlauben');
+define('_WL_USERMODREQUEST','Link-Änderungswünsche');
 define('_WL_VISIT', 'Besuche URL');
 define('_WL_WARNING', '!ACHTUNG! - Dies ist nur eine SVN-Version und noch nicht fertig.<br />Bugs bitte nicht im cozi sondern direkt an <a href="http://www.petzi-juist.de/module-formicula.phtml">mich</a> melden.');
 define('_WL_WEAPPROVED', 'Der folgende Eintrag wurde in die Weblinks aufgenommen: ');

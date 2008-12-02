@@ -24,7 +24,7 @@ define('_WL_CHECKFORIT', 'You didn\'t enter an e-mail address. However, your lin
 define('_WL_COMMENT', 'Comment');
 define('_WL_COMMENTS', 'Comments');
 define('_WL_DATE', 'Date');
-define('_WL_DATEBRIEF','%B %d, %Y');
+define('_WL_DATEBRIEF','%M %d, %Y');
 define('_WL_DATESTRING', '%d-%b-%Y');
 define('_WL_DATE1', 'Date (oldest links listed first)');
 define('_WL_DATE2', 'Date (newest links listed first)');
