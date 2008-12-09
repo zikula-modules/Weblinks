@@ -1,7 +1,7 @@
 <?php
 function Web_Links_admin_main() // fertig
 {
-	return Web_Links_admin_view();
+    return Web_Links_admin_view();
 }
 
 function Web_Links_admin_view()
@@ -9,13 +9,14 @@ function Web_Links_admin_view()
     // Security check
     if ((!SecurityUtil::checkPermission('Web_Links::Category', '::', ACCESS_EDIT)) &&
         (!SecurityUtil::checkPermission('Web_Links::Link', '::', ACCESS_EDIT))) {
-    	return LogUtil::registerPermissionError();
+        return LogUtil::registerPermissionError();
     }
 
     // Create output object
     $pnRender = pnRender::getInstance('Web_Links', false);
 
     $pnRender->assign('numrows', pnModAPIFunc('Web_Links', 'user', 'numrows'));
+    $pnRender->assign('catnum', pnModAPIFunc('Web_Links', 'user', 'catnum'));
     // Status
     $dbconn =& pnDBGetConn(true);
     $pntable =& pnDBGetTables();
@@ -31,8 +32,8 @@ function Web_Links_admin_view()
     $pnRender->assign('authid', pnSecGenAuthKey());
     $pnRender->assign('totalbrokenlinks', $totalbrokenlinks);
     $pnRender->assign('totalmodrequests', $totalmodrequests);
-	$pnRender->assign('newweblinks', pnModAPIFunc('Web_Links', 'admin', 'newweblinks'));
-	$pnRender->assign('authid', pnSecGenAuthKey());
+    $pnRender->assign('newweblinks', pnModAPIFunc('Web_Links', 'admin', 'newweblinks'));
+    $pnRender->assign('authid', pnSecGenAuthKey());
 
     return $pnRender->fetch('weblinks_admin_view.html');
 }
@@ -41,13 +42,13 @@ function Web_Links_admin_catview() // fertig
 {
     // Security check
     if (!SecurityUtil::checkPermission('Web_Links::Category', '::', ACCESS_EDIT)) {
-    	return LogUtil::registerPermissionError();
+        return LogUtil::registerPermissionError();
     }
 
     // Create output object
     $pnRender = pnRender::getInstance('Web_Links', false);
 
-	$pnRender->assign('catnum', pnModAPIFunc('Web_Links', 'user', 'catnum'));
+    $pnRender->assign('catnum', pnModAPIFunc('Web_Links', 'user', 'catnum'));
 
     return $pnRender->fetch('weblinks_admin_catview.html');
 }
@@ -98,7 +99,7 @@ function Web_Links_admin_addcategory() // geht
 
 function Web_Links_admin_modcategory() //fertig
 {
-	$cid = (int)FormUtil::getPassedValue('cid', isset($args['cid']) ? $args['cid'] : null, 'POST');
+    $cid = (int)FormUtil::getPassedValue('cid', isset($args['cid']) ? $args['cid'] : null, 'POST');
 
     // Security check
     if (!SecurityUtil::checkPermission('Web_Links::Category', '::', ACCESS_ADD)) {
@@ -153,11 +154,11 @@ function Web_Links_admin_savemodcategory() // geht
 
     $column = &$pntable['links_categories_column'];
     $sql = "UPDATE $pntable[links_categories]
-    	    SET $column[title]='".DataUtil::formatForStore($title)."', $column[cdescription]='".DataUtil::formatForStore($cdescription)."'
-    	    WHERE $column[cat_id]='".(int)DataUtil::formatForStore($cid)."'";
+            SET $column[title]='".DataUtil::formatForStore($title)."', $column[cdescription]='".DataUtil::formatForStore($cdescription)."'
+            WHERE $column[cat_id]='".(int)DataUtil::formatForStore($cid)."'";
     $dbconn->Execute($sql);
 
-	// the category has been modifyed
+    // the category has been modifyed
     LogUtil::registerStatus (_WL_MODIFYCATSUCCESSFULY);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'catview'));
@@ -215,48 +216,48 @@ function Web_Links_admin_delcategory() // geht
     }
 
         $column = &$pntable['links_categories_column'];
-		// delete category - könnte probleme geben mit unterkategorien
+        // delete category - könnte probleme geben mit unterkategorien
         $sql = "DELETE FROM $pntable[links_categories]
-        		WHERE $column[cat_id] = '".(int)DataUtil::formatForStore($cid)."'";
+                WHERE $column[cat_id] = '".(int)DataUtil::formatForStore($cid)."'";
         $dbconn->Execute($sql);
-		//delete subcategories
+        //delete subcategories
         $sql = "DELETE FROM $pntable[links_categories]
-        		WHERE '".(int)DataUtil::formatForStore($cid)."' = $column[parent_id]";
+                WHERE '".(int)DataUtil::formatForStore($cid)."' = $column[parent_id]";
         $dbconn->Execute($sql);
-		// delete links
+        // delete links
         $column = &$pntable['links_links_column'];
         $sql = "DELETE FROM $pntable[links_links]
                 WHERE $column[cat_id] = '".(int)DataUtil::formatForStore($cid)."'";
         $dbconn->Execute($sql);
 
         // the cat has been deleted
-    	LogUtil::registerStatus (_WL_DELCATSUCCESSFULY);
+        LogUtil::registerStatus (_WL_DELCATSUCCESSFULY);
 
-		return pnRedirect(pnModURL('Web_Links', 'admin', 'catview'));
+        return pnRedirect(pnModURL('Web_Links', 'admin', 'catview'));
 }
 
 function Web_Links_admin_linkview() // fertig
 {
     // Security check
     if (!SecurityUtil::checkPermission('Web_Links::Link', '::', ACCESS_EDIT)) {
-    	return LogUtil::registerPermissionError();
+        return LogUtil::registerPermissionError();
     }
 
     // Create output object
     $pnRender = pnRender::getInstance('Web_Links', false);
 
-	$pnRender->assign('catnum', pnModAPIFunc('Web_Links', 'user', 'catnum'));
-	$pnRender->assign('numrows', pnModAPIFunc('Web_Links', 'user', 'numrows'));
-	if (pnUserLoggedIn()) {
-		$pnRender->assign('submitter', pnUserGetVar('uname'));
-	}
+    $pnRender->assign('catnum', pnModAPIFunc('Web_Links', 'user', 'catnum'));
+    $pnRender->assign('numrows', pnModAPIFunc('Web_Links', 'user', 'numrows'));
+    if (pnUserLoggedIn()) {
+        $pnRender->assign('submitter', pnUserGetVar('uname'));
+    }
 
     return $pnRender->fetch('weblinks_admin_linkview.html');
 }
 
 function Web_Links_admin_addlink() //geht
 {
-	$link = FormUtil::getPassedValue('link', isset($args['link']) ? $args['link'] : null, 'POST');
+    $link = FormUtil::getPassedValue('link', isset($args['link']) ? $args['link'] : null, 'POST');
 
     // Confirm authorisation code.
     if (!SecurityUtil::confirmAuthKey()) {
@@ -275,12 +276,12 @@ function Web_Links_admin_addlink() //geht
 
     $column = &$pntable['links_links_column'];
     $sql = "SELECT COUNT(*) FROM $pntable[links_links]
-    		WHERE $column[url]='".DataUtil::formatForStore($link['url'])."'";
+            WHERE $column[url]='".DataUtil::formatForStore($link['url'])."'";
     $result =& $dbconn->Execute($sql);
 
     list($numrows) = $result->fields;
     if ($numrows>0) {
-    	LogUtil::registerStatus (_WL_ERRORURLEXIST);
+        LogUtil::registerStatus (_WL_ERRORURLEXIST);
         return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
     } else {
         /* Check if Title exist */
@@ -311,9 +312,6 @@ function Web_Links_admin_addlink() //geht
         // Let any hooks know that we have created a new link
         pnModCallHooks('item', 'create', $nextid, 'lid');
 
-        LogUtil::registerStatus (_WL_NEWLINKADDED);
-        return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
-
         if ($link['new']==1) {
             $column = &$pntable['links_newlink_column'];
             $dbconn->Execute("DELETE FROM $pntable[links_newlink] WHERE $column[lid]='".(int)DataUtil::formatForStore($link['lid'])."'");
@@ -322,13 +320,19 @@ function Web_Links_admin_addlink() //geht
                 // $from = $adminmail; ??
                 $subject = _WL_YOURLINKAT." ".DataUtil::formatForDisplay($sitename);
                 $message = _WL_HELLO." ".DataUtil::formatForDisplay($link['name']).":\n\n"._WL_WEAPPROVED."\n\n"._WL_LINKTITLE
-                .": ".DataUtil::formatForDisplay($link['title'])."\n"._WL_URL.": ".DataUtil::formatForDisplay($link['url'])."\n"._WL_DESCRIPTION.": ".DataUtil::formatHTMLDisplay($link['description'])."\n\n\n"
+                .": ".DataUtil::formatForDisplay($link['title'])."\n"._WL_URL.": ".DataUtil::formatForDisplay($link['url'])."\n"._WL_DESCRIPTION.": ".DataUtil::formatForDisplayHTML($link['description'])."\n\n\n"
                 ._WL_YOUCANBROWSEUS. " " .pnGetBaseURL() . "index.php?module=Web_Links\n\n"
                 ._WL_THANKS4YOURSUBMISSION."\n\n".DataUtil::formatForDisplay($sitename)." "._WL_TEAM."";
                 // send the e-mail
                 pnModAPIFunc('Mailer', 'user', 'sendmessage', array('toaddress' => $email, 'subject' => $subject, 'body' => $message));
             }
+            
+            LogUtil::registerStatus (_WL_NEWLINKADDED);
+            return pnRedirect(pnModURL('Web_Links', 'admin', 'view'));       
         }
+        
+        LogUtil::registerStatus (_WL_NEWLINKADDED);
+        return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
     }
 }
 
@@ -353,8 +357,8 @@ function Web_Links_admin_delnew() // geht
             WHERE $column[lid]='".(int)DataUtil::formatForStore($lid)."'";
     $dbconn->Execute($sql);
 
-	// the link has been deleted successfuly
-	LogUtil::registerStatus (_WL_NEWLINKDELETED);
+    // the link has been deleted successfuly
+    LogUtil::registerStatus (_WL_NEWLINKDELETED);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'view'));
 }
@@ -405,8 +409,8 @@ function Web_Links_admin_addeditorial() //geht
                         '".DataUtil::formatForStore($editorialtitle)."')";
     $dbconn->Execute($sql);
 
-	// the link has been deleted successfuly
-	LogUtil::registerStatus (_WL_EDITORIALADDED);
+    // the link has been deleted successfuly
+    LogUtil::registerStatus (_WL_EDITORIALADDED);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
 }
@@ -448,7 +452,7 @@ function Web_Links_admin_modeditorial() //geht
             WHERE $column[linkid]='".(int)DataUtil::formatForStore($lid)."'";
     $dbconn->Execute($sql);
 
-	LogUtil::registerStatus (_WL_EDITORIALMODIFIED);
+    LogUtil::registerStatus (_WL_EDITORIALMODIFIED);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
 }
@@ -468,7 +472,7 @@ function Web_Links_admin_linkcheck() // fertig
 
 function Web_Links_admin_validate()
 {
-	// Get parameters from whatever input we need
+    // Get parameters from whatever input we need
     $cid = (int)FormUtil::getPassedValue('cid', isset($args['cid']) ? $args['cid'] : null, 'POST');
 
     $dbconn =& pnDBGetConn(true);
@@ -520,28 +524,29 @@ function Web_Links_admin_validate()
 
     // Put items into result array.
     for (; !$result->EOF; $result->MoveNext()) {
-    	list($lid, $title, $url, $name, $email, $submitter) = $result->fields;
+        list($lid, $title, $url, $name, $email, $submitter) = $result->fields;
 
-    	if ($url == 'http://' OR $url == '' ) {
-    		$fp = false;
-    	} else {
-    		$vurl = parse_url($url);
-    		$fp = fsockopen($vurl['host'], 80, $errno, $errstr, 15);
-      	}
+        if ($url == 'http://' OR $url == '' ) {
+            $fp = false;
+        } else {
+            $vurl = parse_url($url);
+            $fp = fsockopen($vurl['host'], 80, $errno, $errstr, 15);
+          }
 
     $links[] = array('lid' => $lid,
-	    	   		 'title' => $title,
-				     'url' => $url,
-		       	     'name' => $name,
-		       	     'email' => $email,
-		       	     'submitter' => $submitter,
-		       	     'fp' => $fp);
+                        'title' => $title,
+                     'url' => $url,
+                        'name' => $name,
+                        'email' => $email,
+                        'submitter' => $submitter,
+                        'fp' => $fp);
 
-	}
+    }
 
     $pnRender->assign('links', $links);
+    $pnRender->assign('authid', pnSecGenAuthKey());
 
-	return $pnRender->fetch('weblinks_admin_validate.html');
+    return $pnRender->fetch('weblinks_admin_validate.html');
 }
 
 function Web_Links_admin_deleditorial()
@@ -578,8 +583,8 @@ function Web_Links_admin_deleditorial()
             WHERE $column[linkid]='".(int)DataUtil::formatForStore($lid)."'";
     $dbconn->Execute($sql);
 
-	// the link has been deleted successfuly
-	LogUtil::registerStatus (_WL_EDITORIALDELETED);
+    // the link has been deleted successfuly
+    LogUtil::registerStatus (_WL_EDITORIALDELETED);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
 }
@@ -606,11 +611,11 @@ function Web_Links_admin_listbrokenlinks()
 
     $totalbrokenlinks = $result->PO_RecordCount();
 
-	$pnRender->assign('totalbrokenlinks', $totalbrokenlinks);
-	$pnRender->assign('brokenlinks', pnModAPIFunc('Web_Links', 'admin', 'brokenlinks'));
-	$pnRender->assign('authid', pnSecGenAuthKey());
+    $pnRender->assign('totalbrokenlinks', $totalbrokenlinks);
+    $pnRender->assign('brokenlinks', pnModAPIFunc('Web_Links', 'admin', 'brokenlinks'));
+    $pnRender->assign('authid', pnSecGenAuthKey());
 
-	return $pnRender->fetch('weblinks_admin_listbrokenlinks.html');
+    return $pnRender->fetch('weblinks_admin_listbrokenlinks.html');
 }
 
 function Web_Links_admin_delbrokenlinks()
@@ -651,8 +656,8 @@ function Web_Links_admin_delbrokenlinks()
             WHERE $column[lid]='".(int)DataUtil::formatForStore($lid)."'";
     $dbconn->Execute($sql);
 
-	// the link has been deleted successfuly
-	LogUtil::registerStatus (_WL_DELLINKSUCCESSFULY);
+    // the link has been deleted successfuly
+    LogUtil::registerStatus (_WL_DELLINKSUCCESSFULY);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'listbrokenlinks'));
 }
@@ -692,8 +697,8 @@ function Web_Links_admin_ignorebrokenlinks()
             AND $column[brokenlink]='1'";
     $dbconn->Execute($sql);
 
-	// the link has been ignored successfuly
-	LogUtil::registerStatus (_WL_IGNORELINKSUCCESSFULY);
+    // the link has been ignored successfuly
+    LogUtil::registerStatus (_WL_IGNORELINKSUCCESSFULY);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'listbrokenlinks'));
 }
@@ -708,17 +713,17 @@ function Web_Links_admin_listmodrequests()
     // Create output object
     $pnRender =& new pnRender('Web_Links');
 
-	$totalmodrequests = pnModAPIFunc('Web_Links', 'admin', 'totalmodrequests');
+    $totalmodrequests = pnModAPIFunc('Web_Links', 'admin', 'totalmodrequests');
 
-	$pnRender->assign('totalmodrequests', $totalmodrequests);
+    $pnRender->assign('totalmodrequests', $totalmodrequests);
 
-	$modrequests = pnModAPIFunc('Web_Links', 'admin', 'modrequests');
+    $modrequests = pnModAPIFunc('Web_Links', 'admin', 'modrequests');
 
-	$pnRender->assign('modrequests', $modrequests);
+    $pnRender->assign('modrequests', $modrequests);
 
-	$pnRender->assign('authid', pnSecGenAuthKey());
+    $pnRender->assign('authid', pnSecGenAuthKey());
 
-	return $pnRender->fetch('weblinks_admin_listmodrequests.html');
+    return $pnRender->fetch('weblinks_admin_listmodrequests.html');
 }
 
 function Web_Links_admin_changemodrequests()
@@ -739,8 +744,8 @@ function Web_Links_admin_changemodrequests()
             WHERE $column[requestid]='".(int)DataUtil::formatForStore($requestid)."'";
     $result =& $dbconn->Execute($sql);
 
-	for (; !$result->EOF; $result->MoveNext()) {
-		list($requestid, $lid, $cid, $modtitle, $url, $description)=$result->fields;
+    for (; !$result->EOF; $result->MoveNext()) {
+        list($requestid, $lid, $cid, $modtitle, $url, $description)=$result->fields;
 
         $linkcolumn = &$pntable['links_links_column'];
         $linktable = $pntable['links_links'];
@@ -771,8 +776,8 @@ function Web_Links_admin_changemodrequests()
         $dbconn->Execute($sql);
     }
 
-	// the link has been changed successfuly
-	LogUtil::registerStatus (_WL_CHANGELINKSUCCESSFULY);
+    // the link has been changed successfuly
+    LogUtil::registerStatus (_WL_CHANGELINKSUCCESSFULY);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'listmodrequests'));
 }
@@ -808,18 +813,18 @@ function Web_Links_admin_changeignorerequests()
     $result =& $dbconn->Execute($sql);
     list($title, $cattitle) = $result->fields;
 
-	// Security check
+    // Security check
     if (!SecurityUtil::checkPermission('Web_Links::Link', "$cattitle:$title:$lid", ACCESS_EDIT)) {
         return LogUtil::registerPermissionError();
     }
 
     $column = &$pntable['links_modrequest_column'];
     $sql = "DELETE FROM $pntable[links_modrequest]
-    		WHERE $column[requestid]='".(int)DataUtil::formatForStore($requestid)."'";
+            WHERE $column[requestid]='".(int)DataUtil::formatForStore($requestid)."'";
     $dbconn->Execute($sql);
 
-	// the link has been ignored
-	LogUtil::registerStatus (_WL_IGNORELINK);
+    // the link has been ignored
+    LogUtil::registerStatus (_WL_IGNORELINK);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'listmodrequests'));
 }
@@ -830,54 +835,54 @@ function Web_Links_admin_modlink()
     // Get parameters from whatever input we need
     $lid = (int)FormUtil::getPassedValue('lid', isset($args['lid']) ? $args['lid'] : null, 'GETPOST');
 
-	$link = pnModAPIFunc('Web_Links', 'admin', 'getmodlink', array('lid' => $lid));
+    $link = pnModAPIFunc('Web_Links', 'admin', 'getmodlink', array('lid' => $lid));
 
-	if (!$link) {
+    if (!$link) {
         return pnVarPrepHTMLDisplay(_WL_NOEXISTINGLINK);
     }
 
     // Create output object
     $pnRender = pnRender::getInstance('Web_Links', false);
 
-	$pnRender->assign('link', $link);
-	$pnRender->assign('authid', pnSecGenAuthKey());
+    $pnRender->assign('link', $link);
+    $pnRender->assign('authid', pnSecGenAuthKey());
 
-	if (SecurityUtil::checkPermission('Web_Links::Link', "$link[cattitle]:$link[title]:$link[lid]", ACCESS_EDIT)) {
-		// Modify or Add Editorial
-		$editorial = pnModAPIFunc('Web_Links', 'admin', 'geteditorial', array('lid' => $lid));
+    if (SecurityUtil::checkPermission('Web_Links::Link', "$link[cattitle]:$link[title]:$link[lid]", ACCESS_EDIT)) {
+        // Modify or Add Editorial
+        $editorial = pnModAPIFunc('Web_Links', 'admin', 'geteditorial', array('lid' => $lid));
 
-		$pnRender->assign('editorial', $editorial);
-	}
+        $pnRender->assign('editorial', $editorial);
+    }
 
-	// Show Comments
-	$totalcomments = pnModAPIFunc('Web_Links', 'admin', 'gettotalcomments', array('lid' => $lid));
-	$comments = pnModAPIFunc('Web_Links', 'admin', 'getcomments', array('lid' => $lid));
+    // Show Comments
+    $totalcomments = pnModAPIFunc('Web_Links', 'admin', 'gettotalcomments', array('lid' => $lid));
+    $comments = pnModAPIFunc('Web_Links', 'admin', 'getcomments', array('lid' => $lid));
 
-	$pnRender->assign('totalcomments', $totalcomments);
-	$pnRender->assign('comments', $comments);
+    $pnRender->assign('totalcomments', $totalcomments);
+    $pnRender->assign('comments', $comments);
 
-	// Show Registered Users Votes
-	$totalvotes = pnModAPIFunc('Web_Links', 'admin', 'gettotalvotes', array('lid' => $lid));
-	$votes = pnModAPIFunc('Web_Links', 'admin', 'getvotes', array('lid' => $lid));
+    // Show Registered Users Votes
+    $totalvotes = pnModAPIFunc('Web_Links', 'admin', 'gettotalvotes', array('lid' => $lid));
+    $votes = pnModAPIFunc('Web_Links', 'admin', 'getvotes', array('lid' => $lid));
 
-	$pnRender->assign('totalvotes', $totalvotes);
-	$pnRender->assign('votes', $votes);
+    $pnRender->assign('totalvotes', $totalvotes);
+    $pnRender->assign('votes', $votes);
 
-	// Show Unregistered Users Votes
-	$totalunregvotes = pnModAPIFunc('Web_Links', 'admin', 'gettotalunregvotes', array('lid' => $lid));
-	$unregvotes = pnModAPIFunc('Web_Links', 'admin', 'getunregvotes', array('lid' => $lid));
+    // Show Unregistered Users Votes
+    $totalunregvotes = pnModAPIFunc('Web_Links', 'admin', 'gettotalunregvotes', array('lid' => $lid));
+    $unregvotes = pnModAPIFunc('Web_Links', 'admin', 'getunregvotes', array('lid' => $lid));
 
-	$pnRender->assign('totalunregvotes', $totalunregvotes);
-	$pnRender->assign('unregvotes', $unregvotes);
+    $pnRender->assign('totalunregvotes', $totalunregvotes);
+    $pnRender->assign('unregvotes', $unregvotes);
 
-	// Show Outside Users Votes
-	$totaloutvotes = pnModAPIFunc('Web_Links', 'admin', 'gettotaloutvotes', array('lid' => $lid));
-	$outvotes = pnModAPIFunc('Web_Links', 'admin', 'getoutvotes', array('lid' => $lid));
+    // Show Outside Users Votes
+    $totaloutvotes = pnModAPIFunc('Web_Links', 'admin', 'gettotaloutvotes', array('lid' => $lid));
+    $outvotes = pnModAPIFunc('Web_Links', 'admin', 'getoutvotes', array('lid' => $lid));
 
-	$pnRender->assign('totaloutvotes', $totaloutvotes);
-	$pnRender->assign('outvotes', $outvotes);
+    $pnRender->assign('totaloutvotes', $totaloutvotes);
+    $pnRender->assign('outvotes', $outvotes);
 
-	return $pnRender->fetch('weblinks_admin_modlink.html');
+    return $pnRender->fetch('weblinks_admin_modlink.html');
 }
 
 function Web_Links_admin_modlinks()
@@ -922,8 +927,8 @@ function Web_Links_admin_modlinks()
             WHERE $column[lid]='".(int)DataUtil::formatForStore($link['lid'])."'";
     $dbconn->Execute($sql);
 
-	// the link has been modifyed successfuly
-	LogUtil::registerStatus (_WL_MODIFYLINKSUCCESSFULY);
+    // the link has been modifyed successfuly
+    LogUtil::registerStatus (_WL_MODIFYLINKSUCCESSFULY);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
 }
@@ -964,8 +969,8 @@ function Web_Links_admin_dellink()
     // Let any hooks know that we have deleted an item
     pnModCallHooks('item', 'delete', $lid, '');
 
-	// the link has been deleted successfuly
-	LogUtil::registerStatus (_WL_DELLINKSUCCESSFULY);
+    // the link has been deleted successfuly
+    LogUtil::registerStatus (_WL_DELLINKSUCCESSFULY);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
 }
@@ -1010,101 +1015,101 @@ function Web_Links_admin_delvote()
     $voteresult =& $dbconn->Execute($sql);
     $totalvotesDB = $voteresult->PO_RecordCount();
 
-	$anonvotes = 0;
-	$anonvoteval = 0;
-	$outsidevotes = 0;
-	$outsidevoteval = 0;
-	$regvoteval = 0;
-	$truecomments = $totalvotesDB;
+    $anonvotes = 0;
+    $anonvoteval = 0;
+    $outsidevotes = 0;
+    $outsidevoteval = 0;
+    $regvoteval = 0;
+    $truecomments = $totalvotesDB;
 
-	$anonweight = pnModGetVar('Web_Links', 'anonweight');
-	$anonymous = pnModGetVar('Web_Links', 'anonymous');
-	$outsideweight = pnModGetVar('Web_Links', 'outsideweight');
-	$useoutsidevoting = pnModGetVar('Web_Links', 'useoutsidevoting');
+    $anonweight = pnModGetVar('Web_Links', 'anonweight');
+    $anonymous = pnModGetVar('Web_Links', 'anonymous');
+    $outsideweight = pnModGetVar('Web_Links', 'outsideweight');
+    $useoutsidevoting = pnModGetVar('Web_Links', 'useoutsidevoting');
 
-	while(list($ratingDB, $ratinguserDB, $ratingcommentsDB) = $voteresult->fields) {
-		$voteresult->MoveNext();
-		if ($ratingcommentsDB == "") {
-			--$truecomments;
-		}
-		if ($ratinguserDB == $anonymous) {
-			$anonvotes++;
-			$anonvoteval += $ratingDB;
-		}
-		if ($useoutsidevoting == 1) {
-			if ($ratinguserDB == 'outside') {
-				++$outsidevotes;
-				$outsidevoteval += $ratingDB;
-			}
-		} else {
-			$outsidevotes = 0;
-		}
-		if ($ratinguserDB != $anonymous && $ratinguserDB != "outside") {
-			$regvoteval += $ratingDB;
-		}
-	}
+    while(list($ratingDB, $ratinguserDB, $ratingcommentsDB) = $voteresult->fields) {
+        $voteresult->MoveNext();
+        if ($ratingcommentsDB == "") {
+            --$truecomments;
+        }
+        if ($ratinguserDB == $anonymous) {
+            $anonvotes++;
+            $anonvoteval += $ratingDB;
+        }
+        if ($useoutsidevoting == 1) {
+            if ($ratinguserDB == 'outside') {
+                ++$outsidevotes;
+                $outsidevoteval += $ratingDB;
+            }
+        } else {
+            $outsidevotes = 0;
+        }
+        if ($ratinguserDB != $anonymous && $ratinguserDB != "outside") {
+            $regvoteval += $ratingDB;
+        }
+    }
 
-	$regvotes = $totalvotesDB - $anonvotes - $outsidevotes;
+    $regvotes = $totalvotesDB - $anonvotes - $outsidevotes;
 
-	if ($totalvotesDB == 0) {
-		$finalrating = 0;
-	} else if ($anonvotes == 0 && $regvotes == 0) {
-		/* Figure Outside Only Vote */
-		$finalrating = $outsidevoteval / $outsidevotes;
-		$finalrating = number_format($finalrating, 4);
-	} else if ($outsidevotes == 0 && $regvotes == 0) {
-		/* Figure Anon Only Vote */
-		$finalrating = $anonvoteval / $anonvotes;
-		$finalrating = number_format($finalrating, 4);
-	} else if ($outsidevotes == 0 && $anonvotes == 0) {
-		/* Figure Reg Only Vote */
-		$finalrating = $regvoteval / $regvotes;
-		$finalrating = number_format($finalrating, 4);
-	} else if ($regvotes == 0 && $useoutsidevoting == 1 && $outsidevotes != 0 && $anonvotes != 0 ) {
-		/* Figure Reg and Anon Mix */
-		$avgAU = $anonvoteval / $anonvotes;
-		$avgOU = $outsidevoteval / $outsidevotes;
-		if ($anonweight > $outsideweight ) {
-			/* Anon is 'standard weight' */
-			$newimpact = $anonweight / $outsideweight;
-			$impactAU = $anonvotes;
-			$impactOU = $outsidevotes / $newimpact;
-			$finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
-			$finalrating = number_format($finalrating, 4);
-		} else {
-			/* Outside is 'standard weight' */
-			$newimpact = $outsideweight / $anonweight;
-			$impactOU = $outsidevotes;
-			$impactAU = $anonvotes / $newimpact;
-			$finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
-			$finalrating = number_format($finalrating, 4);
-		}
-	} else {
-		/* Registered User vs. Anonymous vs. Outside User Weight Calutions */
-		$impact = $anonweight;
-		$outsideimpact = $outsideweight;
-		if ($regvotes == 0) {
-			$regvotes = 0;
-		} else {
-			$avgRU = $regvoteval / $regvotes;
-		}
-		if ($anonvotes == 0) {
-			$avgAU = 0;
-		} else {
-			$avgAU = $anonvoteval / $anonvotes;
-		}
-		if ($outsidevotes == 0 ) {
-			$avgOU = 0;
-		} else {
-			$avgOU = $outsidevoteval / $outsidevotes;
-		}
+    if ($totalvotesDB == 0) {
+        $finalrating = 0;
+    } else if ($anonvotes == 0 && $regvotes == 0) {
+        /* Figure Outside Only Vote */
+        $finalrating = $outsidevoteval / $outsidevotes;
+        $finalrating = number_format($finalrating, 4);
+    } else if ($outsidevotes == 0 && $regvotes == 0) {
+        /* Figure Anon Only Vote */
+        $finalrating = $anonvoteval / $anonvotes;
+        $finalrating = number_format($finalrating, 4);
+    } else if ($outsidevotes == 0 && $anonvotes == 0) {
+        /* Figure Reg Only Vote */
+        $finalrating = $regvoteval / $regvotes;
+        $finalrating = number_format($finalrating, 4);
+    } else if ($regvotes == 0 && $useoutsidevoting == 1 && $outsidevotes != 0 && $anonvotes != 0 ) {
+        /* Figure Reg and Anon Mix */
+        $avgAU = $anonvoteval / $anonvotes;
+        $avgOU = $outsidevoteval / $outsidevotes;
+        if ($anonweight > $outsideweight ) {
+            /* Anon is 'standard weight' */
+            $newimpact = $anonweight / $outsideweight;
+            $impactAU = $anonvotes;
+            $impactOU = $outsidevotes / $newimpact;
+            $finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
+            $finalrating = number_format($finalrating, 4);
+        } else {
+            /* Outside is 'standard weight' */
+            $newimpact = $outsideweight / $anonweight;
+            $impactOU = $outsidevotes;
+            $impactAU = $anonvotes / $newimpact;
+            $finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
+            $finalrating = number_format($finalrating, 4);
+        }
+    } else {
+        /* Registered User vs. Anonymous vs. Outside User Weight Calutions */
+        $impact = $anonweight;
+        $outsideimpact = $outsideweight;
+        if ($regvotes == 0) {
+            $regvotes = 0;
+        } else {
+            $avgRU = $regvoteval / $regvotes;
+        }
+        if ($anonvotes == 0) {
+            $avgAU = 0;
+        } else {
+            $avgAU = $anonvoteval / $anonvotes;
+        }
+        if ($outsidevotes == 0 ) {
+            $avgOU = 0;
+        } else {
+            $avgOU = $outsidevoteval / $outsidevotes;
+        }
 
-		$impactRU = $regvotes;
-		$impactAU = $anonvotes / $impact;
-		$impactOU = $outsidevotes / $outsideimpact;
-		$finalrating = (($avgRU * $impactRU) + ($avgAU * $impactAU) + ($avgOU * $impactOU)) / ($impactRU + $impactAU + $impactOU);
-		$finalrating = number_format($finalrating, 4);
-	}
+        $impactRU = $regvotes;
+        $impactAU = $anonvotes / $impact;
+        $impactOU = $outsidevotes / $outsideimpact;
+        $finalrating = (($avgRU * $impactRU) + ($avgAU * $impactAU) + ($avgOU * $impactOU)) / ($impactRU + $impactAU + $impactOU);
+        $finalrating = number_format($finalrating, 4);
+    }
 
     $column = &$pntable['links_links_column'];
     $sql = "UPDATE $pntable[links_links]
@@ -1112,8 +1117,8 @@ function Web_Links_admin_delvote()
             WHERE $column[lid] = '".(int)DataUtil::formatForStore($lid)."'";
     $dbconn->Execute($sql);
 
-	// the comment has been deleted successfuly
-	LogUtil::registerStatus (_WL_DELVOTESUCCESSFULY);
+    // the comment has been deleted successfuly
+    LogUtil::registerStatus (_WL_DELVOTESUCCESSFULY);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'modlink', array('lid' => $lid)));
 }
@@ -1150,15 +1155,15 @@ function Web_Links_admin_delcomment()
 
     $column = &$pntable['links_votedata_column'];
     $dbconn->Execute("UPDATE $pntable[links_votedata]
-						SET $column[ratingcomments]=''
-						WHERE $column[ratingdbid] = '".(int)DataUtil::formatForStore($rid)."'");
+                        SET $column[ratingcomments]=''
+                        WHERE $column[ratingdbid] = '".(int)DataUtil::formatForStore($rid)."'");
     $column = &$pntable['links_links_column'];
     $dbconn->Execute("UPDATE $pntable[links_links]
-						SET $column[totalcomments] = ($column[totalcomments] - 1)
-						WHERE $column[lid] = '".(int)DataUtil::formatForStore($lid)."'");
+                        SET $column[totalcomments] = ($column[totalcomments] - 1)
+                        WHERE $column[lid] = '".(int)DataUtil::formatForStore($lid)."'");
 
-	// the comment has been deleted successfuly
-	LogUtil::registerStatus (_WL_DELCOMMENTSUCCESSFULY);
+    // the comment has been deleted successfuly
+    LogUtil::registerStatus (_WL_DELCOMMENTSUCCESSFULY);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'modlink', array('lid' => $lid)));
 }
@@ -1176,7 +1181,7 @@ function Web_Links_admin_getconfig() //fertig
     // assign the module vars
     $pnRender->assign('config', pnModGetVar('Web_Links'));
 
-	// Return the output that has been generated by this function
+    // Return the output that has been generated by this function
     return $pnRender->fetch('weblinks_admin_getconfig.html');
 }
 
@@ -1187,7 +1192,7 @@ function Web_Links_admin_updateconfig() //fertig
         return LogUtil::registerPermissionError();
     }
 
-	// get our input
+    // get our input
     $config = FormUtil::getPassedValue('config', 'array()', 'POST');
 
     // Confirm authorisation code.
@@ -1195,8 +1200,8 @@ function Web_Links_admin_updateconfig() //fertig
         return LogUtil::registerAuthidError();
     }
 
-	// Update module variables
-	if ( !isset($config['perpage']) || !is_numeric($config['perpage']) ) {
+    // Update module variables
+    if ( !isset($config['perpage']) || !is_numeric($config['perpage']) ) {
         $config['perpage'] = 10;
     }
     pnModSetVar('Web_Links', 'perpage', $config['perpage']);
@@ -1260,6 +1265,11 @@ function Web_Links_admin_updateconfig() //fertig
         $config['featurebox'] = 1;
     }
     pnModSetVar('Web_Links', 'featurebox', $config['featurebox']);
+
+    if ( !isset($config['targetblank']) || !is_numeric($config['targetblank']) ) {
+        $config['targetblank'] = 0;
+    }
+    pnModSetVar('Web_Links', 'targetblank', $config['targetblank']);
 
     if ( !isset($config['linkvotemin']) || !is_numeric($config['linkvotemin']) ) {
         $config['linkvotemin'] = 5;

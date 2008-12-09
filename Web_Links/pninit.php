@@ -69,6 +69,7 @@ function web_links_init()
     pnModSetVar('Web_Links', 'bestlinks', 10);
     pnModSetVar('Web_Links', 'linksresults', 10);
     pnModSetVar('Web_Links', 'links_anonaddlinklock', 1);
+    pnModSetVar('Web_Links', 'targetblank', 0);
 
     // Initialisation successful
     return true;
@@ -109,6 +110,8 @@ function web_links_upgrade($oldversion)
         pnModSetVar('Web_Links', 'bestlinks', 10);
         pnModSetVar('Web_Links', 'linksresults', 10);
         pnModSetVar('Web_Links', 'links_anonaddlinklock', 1);
+        pnModSetVar('UpDownload', 'showlastxdownloads', 1);
+        pnModSetVar('Web_Links', 'targetblank', 0);
 
        	break;
     }

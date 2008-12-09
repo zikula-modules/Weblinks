@@ -1,13 +1,12 @@
 <!--[include file="weblinks_admin_header.html"]-->
 <div class="pn-admincontainer">
 <div class="pn-adminpageicon"><!--[pnimg modname=core src=info.gif set=icons/large alt='_WL_OVERVIEW' altml=true]--></div>
-<h2><!--[pnml name="_WL_OVERVIEW"]--></h2>
+<h2><!--[pnml name="_WL_USERREPBROKEN"]--> (<!--[$totalbrokenlinks|pnVarPrepForDisplay]-->)</h2>
 <div>
 <br />
 <!--[pnthemegetvar name=bgcolor1 assign=bgcolor1]-->
 <!--[pnthemegetvar name=bgcolor2 assign=bgcolor2]-->
-<h2><!--[pnml name="_WL_USERREPBROKEN"]--> (<!--[$totalbrokenlinks|pnVarPrepForDisplay]-->)</h2>
-<div style="text-align:center;"><!--[pnml name="_WL_IGNOREINFO"]--><br /><!--[pnml name="_WL_DELETEINFO"]--></div><br />
+<div style="text-align:center;"><!--[pnml name="_WL_IGNOREINFO" html=true]--><br /><!--[pnml name="_WL_DELETEINFO" html=true]--></div><br />
 <table width="100%">
 <!--[if $totalbrokenlinks == 0]-->
 <tr><td><h2><!--[pnml name="_WL_NOREPORTEDBROKEN"]--></h2></td></tr>

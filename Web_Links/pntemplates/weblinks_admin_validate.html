@@ -1,30 +1,32 @@
-<!--[include file="weblinks_admin_menu.htm"]-->
-<!--[pnthemegetvar name=bgcolor2 assign=bgcolor2]-->
-<!--[opentable]-->
-<h2><!--[pnml name="_WL_WEBLINKSADMIN"]--></h2>
-<!--[closetable]-->
-<!--[opentable]-->
-<table width="100%" border="0">
+<!--[*  $Id: weblinks_admin_validate.html $  *]-->
+<!--[include file="weblinks_admin_header.html"]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=agt_internet.gif set=icons/large alt='_WL_LINKVIEW' altml=true]--></div>
 <!--[if $cid == 0]-->
-<tr><td colspan="3"><div style="text-align:center"><strong><!--[pnml name="_WL_CHECKALLLINKS"]--></strong><br /><!--[pnml name="_WL_BEPATIENT"]--></div></td></tr>
+<h2><!--[pnml name="_WL_CHECKALLLINKS"]--></h2>
 <!--[/if]-->
 <!--[if $cid !=0]-->
-<tr><td colspan="3"><div style="text-align:center"><strong><!--[pnml name="_WL_CHECKCATEGORIES"]-->: <!--[$transfertitle|pnVarPrepForDisplay]--></strong><br /><!--[pnml name="_WL_BEPATIENT"]--></div></td></tr>
+<h2><!--[pnml name="_WL_CHECKCATEGORIES"]--></h2>
 <!--[/if]-->
-<tr><td style="background-color:<!--[$bgcolor2]-->" align="center"><strong><!--[pnml name="_WL_STATUS"]--></strong></td><td style="background-color:<!--[$bgcolor2]-->" width="100%"><strong><!--[pnml name="_WL_LINKTITLE"]--></strong></td><td style="background-color:<!--[$bgcolor2]-->" align="center"><strong><!--[pnml name="_WL_FUNCTIONS"]--></strong></td></tr>
+<!--[pnthemegetvar name=bgcolor2 assign=bgcolor2]-->
+<table width="100%" border="0">
+<tr><td width="25%" style="background-color:<!--[$bgcolor2]-->" align="center"><strong><!--[pnml name="_WL_STATUS"]--></strong></td>
+<td width="50%" style="background-color:<!--[$bgcolor2]-->"><strong><!--[pnml name="_WL_LINKTITLE"]--></strong></td>
+<td width="25%" style="background-color:<!--[$bgcolor2]-->" align="center"><strong><!--[pnml name="_WL_FUNCTIONS"]--></strong></td></tr>
 <!--[foreach from=$links item=links]-->
 <!--[if !$links.fp]-->
-<tr><td align="center"><strong>&nbsp;&nbsp;<!--[pnml name="_WL_FAILED"]-->&nbsp;&nbsp;</strong></td>
+<tr><td align="center"><strong>&nbsp;&nbsp;<!--[pnimg modname=core src=editdelete.gif set=icons/extrasmall altml=true titleml=true alt="_WL_FAILED" title="_WL_FAILED"]-->&nbsp;&nbsp;</strong></td>
 <td>&nbsp;&nbsp;<a href="<!--[$links.url|pnVarPrepForDisplay]-->" target="new"><!--[$links.title|pnVarPrepForDisplay]--></a>&nbsp;&nbsp;</td>
-<td align="center">&nbsp;&nbsp;[ <a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$links.lid authid=$authid]-->"><!--[pnml name="_WL_EDIT"]--></a> | <a href="<!--[pnmodurl modname=Web_Links type=admin func=dellink lid=$links.lid authid=$authid]-->"><!--[pnml name="_WL_DELETE"]--></a> ]&nbsp;&nbsp;
+<td align="center">&nbsp;&nbsp;[&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$links.lid authid=$authid]-->"><!--[pnimg modname=core src=xedit.gif set=icons/extrasmall altml=true titleml=true alt="_EDIT" title="_EDIT"]--></a>&nbsp;|&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=admin func=dellink lid=$links.lid authid=$authid]-->"><!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall altml=true titleml=true alt="_DELETE" title="_DELETE"]--></a>&nbsp;]&nbsp;&nbsp;
 </td></tr>
 <!--[/if]-->
 <!--[if $links.fp]-->
-<tr><td align="center">&nbsp;&nbsp;<!--[pnml name="_WL_OK"]-->&nbsp;&nbsp;</td>
+<tr><td align="center">&nbsp;&nbsp;<!--[pnimg modname=core src=ok.gif set=icons/extrasmall altml=true titleml=true alt="_WL_OK" title="_WL_OK"]-->&nbsp;&nbsp;</td>
 <td>&nbsp;&nbsp;<a href="<!--[$links.url|pnVarPrepForDisplay]-->" target="new"><!--[$links.title|pnVarPrepForDisplay]--></a>&nbsp;&nbsp;</td>
 <td align="center">&nbsp;&nbsp;<!--[pnml name="_WL_NONE"]-->&nbsp;&nbsp;
 </td></tr>
 <!--[/if]-->
 <!--[/foreach]-->
 </table>
-<!--[closetable]-->
+<br  />
+</div>

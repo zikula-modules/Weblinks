@@ -7,11 +7,21 @@
 <div style="text-align:center;font-size: 20px;color:#f00;"><!--[pnml name="_WL_WARNING" html=true]--></div>
 <fieldset>
 <legend><!--[pnml name="_WL_DBSTATUS"]--></legend>
-<!--[pnml name="_WL_THEREARE"]--> <strong><!--[$numrows|pnVarPrepForDisplay]--></strong> <!--[pnml name="_WL_LINKSINDB"]--><br /><br />
+<!--[pnml name="_WL_THEREARE"]--> <strong><!--[$numrows]--></strong> <!--[pnml name="_WL_LINKS"]--> <!--[pnml name="_WL_AND"]--> <strong><!--[$catnum]--></strong> <!--[pnml name="_WL_CATEGORIES"]--> <!--[pnml name="_WL_INDB"]--><br /><br />
 <a href="<!--[pnmodurl modname=Web_Links type=admin func=listbrokenlinks]-->"><!--[pnml name="_WL_BROKENLINKSREP"]--> (<!--[$totalbrokenlinks|pnVarPrepForDisplay]-->)</a><br /><br />
 <a href="<!--[pnmodurl modname=Web_Links type=admin func=listmodrequests]-->"><!--[pnml name="_WL_LINKMODREQUEST"]--> (<!--[$totalmodrequests|pnVarPrepForDisplay]-->)</a>
 </fieldset>
-
+<fieldset>
+<legend><!--[pnml name="_WL_LINKVALIDATION"]--></legend>
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=validate cid=0]-->"><!--[pnml name="_WL_CHECKALLLINKS"]--></a><br />
+<strong><!--[pnml name="_WL_CHECKCATEGORIES"]--></strong><br />
+<form action="<!--[pnmodurl modname=Web_Links type=admin func=validate]-->" method="post" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Web_Links"]-->" />
+<div>
+<select name="cid"><!--[catlist scat=0 sel=0]--></select>
+<div class="wl-formbuttons"><!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_CHECKCATEGORIES" title="_WL_CHECKCATEGORIES"]--></div>
+</div></form>
+</fieldset>
 <!--[if $newweblinks]-->
 <fieldset>
 <legend><!--[pnml name="_WL_LINKSWAITINGVAL"]--></legend>
