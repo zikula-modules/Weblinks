@@ -119,7 +119,6 @@ define('_WL_USEOUTSIDEVOTING', 'Allow webmasters to put vote links on their site
 define('_WL_USERMODREQUEST','User link modification requests');
 define('_WL_USERREPBROKEN', 'User-reported broken links');
 define('_WL_VISIT', 'Visit');
-define('_WL_WARNING', '!Attention! - This is only a SVN-Version and not finished.<br />Please announce bugs directly to <a href="http://www.petzi-juist.de/module-formicula.phtml">me</a> and not at the cozi.');
 define('_WL_WEAPPROVED', 'Your link submission has been approved for the site\'s search engine. ');
 define('_WL_WEBLINKS', 'Web links');
 define('_WL_YES', 'yes');

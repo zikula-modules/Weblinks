@@ -119,7 +119,6 @@ define('_WL_USEOUTSIDEVOTING', 'externe Stimmabgabe erlauben');
 define('_WL_USERMODREQUEST','Link-Änderungswünsche');
 define('_WL_USERREPBROKEN', 'als defekt gemeldete Links');
 define('_WL_VISIT', 'Besuche URL');
-define('_WL_WARNING', '!ACHTUNG! - Dies ist nur eine SVN-Version und noch nicht fertig.<br />Bugs bitte nicht im cozi sondern direkt an <a href="http://www.petzi-juist.de/module-formicula.phtml">mich</a> melden.');
 define('_WL_WEAPPROVED', 'Der folgende Eintrag wurde in die Weblinks aufgenommen: ');
 define('_WL_WEBLINKS', 'Weblinks');
 define('_WL_YES', 'Ja');

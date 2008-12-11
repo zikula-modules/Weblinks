@@ -26,7 +26,7 @@ function smarty_function_popgraphic($params, &$smarty)
 	unset($params);
 
     if ($hits>=pnModGetVar('Web_Links', 'popular')) {
-        echo "&nbsp;<img src=\"modules/Web_Links/pnimages/pop.gif\" alt=\""._WL_POPULAR."\" />";
+        echo "&nbsp;<img src=\"images/icons/extrasmall/flag.gif\" alt=\""._WL_POPULAR."\" title=\""._WL_POPULAR."\" />";
     }
 	return;
 }

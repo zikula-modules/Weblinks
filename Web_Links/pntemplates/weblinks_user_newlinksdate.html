@@ -6,7 +6,7 @@
 <h3><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnVarPrepForDisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></h3>
 <!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblinks.cid start=1 links=1 linkmyself=1]--><br />
 <!--[if $userpermission == "admin"]-->
-<a href="<!--[pnmodurl modname=Web_Links type=admin func=modify lid=$weblinks.lid]-->"><!--[pnimg src="editicon.gif" alt="_WL_EDITTHISLINK"]--></a>
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=modify lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
 <!--[/if]-->
 <!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks]--><br />
 <!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.time|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]-->

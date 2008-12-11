@@ -13,13 +13,14 @@
 <!--[/if]-->
 <!--[math equation="$count+1" assign="count"]-->
 <td valign="top" style="width:50%">
-<h3><!--[pnimg src="folder.gif" alt=""]-->&nbsp;&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$category.cat_id]-->"><!--[$category.title|pnVarPrepForDisplay]--></a> (<!--[countsublinks catid=$category.cat_id]-->)<!--[categorynewlinkgraphic catid=$category.cat_id]--></h3>
+<h3>
+<!--[pnimg modname=core src=folder_blue.gif set=icons/extrasmall altml=true alt="" title=""]-->&nbsp;&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$category.cat_id]-->"><!--[$category.title|pnVarPrepForDisplay]--></a> (<!--[countsublinks catid=$category.cat_id]-->)<!--[categorynewlinkgraphic catid=$category.cat_id]--></h3>
 <!--[if $category.cdescription ne ""]-->
 <!--[$category.cdescription|pnvarprephtmldisplay]--><br />
 <!--[/if]-->
 <!--[foreach from=$categories item=subcategory]-->
 <!--[if $subcategory.parent_id == $category.cat_id]-->
-&nbsp;&nbsp;&nbsp;<!--[pnimg src="folder.gif" alt=""]-->&nbsp;&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->"><!--[$subcategory.title|pnVarPrepForDisplay]--></a><!--[subcategorynewlinkgraphic scatid=$subcategory.cat_id]--><br />
+&nbsp;&nbsp;&nbsp;<!--[pnimg modname=core src=folder_blue.gif set=icons/extrasmall altml=true alt="" title=""]-->&nbsp;&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->"><!--[$subcategory.title|pnVarPrepForDisplay]--></a><!--[subcategorynewlinkgraphic scatid=$subcategory.cat_id]--><br />
 <!--[/if]-->
 <!--[/foreach]-->
 <!--[if $count == 1]-->
@@ -37,3 +38,4 @@
 <br />
 <div style="text-align:center"><!--[pnml name="_WL_THEREARE"]--> <strong><!--[$numrows]--></strong> <!--[pnml name="_WL_LINKS"]--> <!--[pnml name="_WL_AND"]--> <strong><!--[$catnum]--></strong> <!--[pnml name="_WL_CATEGORIES"]--> <!--[pnml name="_WL_INDB"]--></div>
 <!--[closetable]-->
+<br />
