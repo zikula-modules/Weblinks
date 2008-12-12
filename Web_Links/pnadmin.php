@@ -281,25 +281,25 @@ function Web_Links_admin_addlink() //geht
 
     list($numrows) = $result->fields;
     if ($numrows>0) {
-        LogUtil::registerStatus (_WL_ERRORURLEXIST);
+        LogUtil::registerError (_WL_ERRORURLEXIST);
         return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
     } else {
         /* Check if Title exist */
         if (empty($link['title'])) {
-            LogUtil::registerStatus (_WL_ERRORNOTITLE);
+            LogUtil::registerError (_WL_ERRORNOTITLE);
             return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
         }
         /* Check if URL exist */
         if (empty($link['url'])) {
-            LogUtil::registerStatus (_WL_ERRORNOURL);
+            LogUtil::registerError (_WL_ERRORNOURL);
             return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
         }
-        // Check if Description exist
+/*        // Check if Description exist
         if (empty($link['description'])) {
-            LogUtil::registerStatus (_WL_ERRORNODESCRIPTION);
+            LogUtil::registerError (_WL_ERRORNODESCRIPTION);
             return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
         }
-
+*/
         $column = &$pntable['links_links_column'];
         $nextid = $dbconn->GenId($pntable['links_links']);
         $dbconn->Execute("INSERT INTO $pntable[links_links] ($column[lid], $column[cat_id],
@@ -326,11 +326,11 @@ function Web_Links_admin_addlink() //geht
                 // send the e-mail
                 pnModAPIFunc('Mailer', 'user', 'sendmessage', array('toaddress' => $email, 'subject' => $subject, 'body' => $message));
             }
-            
+
             LogUtil::registerStatus (_WL_NEWLINKADDED);
-            return pnRedirect(pnModURL('Web_Links', 'admin', 'view'));       
+            return pnRedirect(pnModURL('Web_Links', 'admin', 'view'));
         }
-        
+
         LogUtil::registerStatus (_WL_NEWLINKADDED);
         return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
     }
