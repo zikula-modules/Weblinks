@@ -6,7 +6,7 @@
 <h2><!--[pnml name="_WL_LINKPROFILE"]-->: <!--[$linkdetails.title|pnVarPrepForDisplay]--></h2><br />
 <!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$linkdetails.cat_id start=1 links=1 linkmyself=1]--><br />
 <!--[if $userpermission == "admin"]-->
-<a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$linkdetails.lid]-->"><!--[pnimg src="editicon.gif" alt="_WL_EDITTHISLINK"]--></a>
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$linkdetails.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
 <!--[/if]-->
 <!--[$linkdetails.description|pnvarprephtmldisplay|pnmodcallhooks]--><br />
 <!--[if $access_read_cat && $access_read_link && $totalcomments != 0]-->
