@@ -23,7 +23,7 @@
 function smarty_function_ratemakestar($params, &$smarty)
 {
     extract($params);
-	unset($params);
+    unset($params);
 
     $score = number_format($linkratingsummary, pnModGetVar('Web_Links', 'mainvotedecimal'));
 
@@ -42,7 +42,7 @@ function smarty_function_ratemakestar($params, &$smarty)
     }
 
     // *** Is there half star
-    if (substr($score,strpos($score,".")+1)==0) {
+    if (substr($score,strpos($score,",")+1)==0) { //irgendwie buggy an dieser stelle?
         $half_stars=0;
     }else {
         $half_stars=1;

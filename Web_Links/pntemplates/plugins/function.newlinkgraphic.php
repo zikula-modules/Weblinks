@@ -27,17 +27,20 @@
 function smarty_function_newlinkgraphic($params, &$smarty)
 {
     extract($params);
-	unset($params);
+    unset($params);
 
     echo "&nbsp;";
-    ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", $time, $datetime);
-    $datetime = ml_ftime(""._WL_DATESTRING."", mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]));
-    $datetime = ucfirst($datetime);
+    ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $time, $datetime);
+
+    $datenow = $datetime[3]."-".$datetime[2]."-".$datetime[1];
+
     $startdate = time();
     $count = 0;
+
     while ($count <= 7) {
-    	$daysold = ml_ftime(""._WL_DATESTRING."", $startdate);
-        if ("$daysold" == "$datetime") {
+        $daysold = ml_ftime(""._WL_DATESTRING."", $startdate);
+
+        if ("$daysold" == "$datenow") {
             if ($count<=1) {
         echo "<img src=\"modules/Web_Links/pnimages/newred.gif\" width=\"34\" height=\"15\" alt=\""._WL_NEWTODAY."\" />";
         }
@@ -51,6 +54,6 @@ function smarty_function_newlinkgraphic($params, &$smarty)
         $count++;
         $startdate = (time()-(86400 * $count));
     }
-	return;
+    return;
 }
 ?>
