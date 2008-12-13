@@ -22,10 +22,6 @@
 <!--[/if]-->
 <!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks]--><br />
 <!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]-->
-<!--[if $weblinks.linkratingsummary != "0" || $weblinks.linkratingsummary != "0.0"]-->
-| <!--[pnml name="_WL_RATING"]-->: <!--[$weblinks.linkratingsummary|pnVarPrepForDisplay]--> (<!--[$weblinks.totalvotes]--> <!--[if $weblinks.totalvotes == 1]--><!--[pnml name="_WL_VOTE"]--><!--[else]--><!--[pnml name="_WL_VOTES"]--><!--[/if]-->)
-<br /><!--[ratemakestar linkratingsummary=$weblinks.linkratingsummary]-->
-<!--[/if]-->
 <!--[include file="weblinks_user_linkbottommenu.html"]-->
 <br /><br />
 <!--[/foreach]-->

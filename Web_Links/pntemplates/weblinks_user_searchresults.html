@@ -11,13 +11,7 @@
 <!--[/if]-->
 <!--[if $weblinks]-->
 <br /><strong><!--[pnml name="_WL_LINKS"]--></strong><br />
-<span class="pn-sub"><!--[pnml name="_WL_SORTLINKSBY"]-->:
-<!--[pnml name="_WL_TITLE"]--> ( <a href="<!--[pnmodurl modname=Web_Links type=user func=search query=$query orderby=titleA]-->" title="<!--[pnml name="_WL_TITLEAZ"]-->">+</a> | <a href="<!--[pnmodurl modname=Web_Links type=user func=search query=$query orderby=titleD]-->" title="<!--[pnml name="_WL_TITLEZA"]-->">-</a> )
-<!--[pnml name="_WL_DATE"]--> ( <a href="<!--[pnmodurl modname=Web_Links type=user func=search query=$query orderby=dateA]-->" title="<!--[pnml name="_WL_DATE1"]-->">+</a> | <a href="<!--[pnmodurl modname=Web_Links type=user func=search query=$query orderby=dateD]-->" title="<!--[pnml name="_WL_DATE2"]-->">-</a> )
-<!--[pnml name="_WL_RATING"]--> ( <a href="<!--[pnmodurl modname=Web_Links type=user func=search query=$query orderby=ratingA]-->" title="<!--[pnml name="_WL_RATING1"]-->">+</a> | <a href="<!--[pnmodurl modname=Web_Links type=user func=search query=$query orderby=ratingD]-->" title="<!--[pnml name="_WL_RATING2"]-->">-</a> )
-<!--[pnml name="_WL_POPULARITY"]--> ( <a href="<!--[pnmodurl modname=Web_Links type=user func=search query=$query orderby=hitsA]-->" title="<!--[pnml name="_WL_POPULARITY1"]-->">+</a> | <a href="<!--[pnmodurl modname=Web_Links type=user func=search query=$query orderby=hitsD]-->" title="<!--[pnml name="_WL_POPULARITY2"]-->">-</a> )
-<br /><strong><!--[pnml name="_WL_SITESSORTED"]-->: <!--[orderbyTrans orderby=$orderby]--></strong><br />
-</span><br />
+<!--[include file="weblinks_user_sortlinksbymenu.html"]--><br />
 <!--[foreach from=$weblinks item=weblinks]-->
 <br /><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnVarPrepForDisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--><br />
 <!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblinks.cat_id start=1 links=1 linkmyself=1]--><br />
@@ -26,10 +20,6 @@
 <!--[/if]-->
 <!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks]--><br />
 <!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]-->
-<!--[if $weblinks.linkratingsummary != "0" || $weblinks.linkratingsummary != "0.0"]-->
-| <!--[pnml name="_WL_RATING"]-->: <!--[$weblinks.linkratingsummary|pnVarPrepForDisplay]--> (<!--[$weblinks.totalvotes]--> <!--[if $weblinks.totalvotes == 1]--><!--[pnml name="_WL_VOTE"]--><!--[else]--><!--[pnml name="_WL_VOTES"]--><!--[/if]-->)
-<br /><!--[ratemakestar linkratingsummary=$weblinks.linkratingsummary]-->
-<!--[/if]-->
 <!--[include file="weblinks_user_linkbottommenu.html"]-->
 <br />
 <!--[/foreach]-->

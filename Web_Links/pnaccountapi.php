@@ -35,7 +35,7 @@ function Web_Links_accountapi_getall($args)
     }
 
     // Create an array of links to return
-    if(SecurityUtil::checkPermission('Web_Links::', '::', ACCESS_COMMENT)) {
+    if(SecurityUtil::checkPermission('Web_Links::Link', '::', ACCESS_ADD)) {
         pnModLangLoad('Web_Links', 'user');
         $items = array(array('url'     => pnModURL('Web_Links', 'user', 'addlink'),
                              'module' => 'core',

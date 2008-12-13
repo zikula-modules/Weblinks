@@ -48,7 +48,7 @@ function web_links_init()
         return false;
     }
 
-	// web_links settings
+    // web_links settings
     pnModSetVar('Web_Links', 'perpage', 10);
     pnModSetVar('Web_Links', 'anonwaitdays', 1);
     pnModSetVar('Web_Links', 'outsidewaitdays', 1);
@@ -81,14 +81,14 @@ function web_links_init()
  */
 function web_links_upgrade($oldversion)
 {
-	// Get database information
-	$dbconn =& pnDBGetConn(true);
+    // Get database information
+    $dbconn =& pnDBGetConn(true);
     $pntable =& pnDBGetTables();
 
-	$prefix = pnConfigGetVar('prefix');
+    $prefix = pnConfigGetVar('prefix');
 
-	switch($oldversion) {
-		case '1.0':
+    switch($oldversion) {
+        case '1.0':
 
         pnModSetVar('Web_Links', 'perpage', 10);
         pnModSetVar('Web_Links', 'anonwaitdays', 1);
@@ -113,7 +113,7 @@ function web_links_upgrade($oldversion)
         pnModSetVar('UpDownload', 'showlastxdownloads', 1);
         pnModSetVar('Web_Links', 'targetblank', 0);
 
-       	break;
+           break;
     }
     // Upgrade successful
     return true;
@@ -150,8 +150,8 @@ function web_links_delete()
         return false;
     }
 
-	// remove module vars
-	pnModDelVar('Web_Links');
+    // remove module vars
+    pnModDelVar('Web_Links');
 
     // Deletion successful
     return true;

@@ -1,4 +1,15 @@
 <?php
+/**
+ * Zikula Application Framework
+ *
+ * Web_Links
+ *
+ * @version $Id$
+ * @copyright 2008 by Petzi-Juist
+ * @link http://www.petzi-juist.de
+ * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
+
 function Web_Links_admin_main() // fertig
 {
     return Web_Links_admin_view();
@@ -82,7 +93,7 @@ function Web_Links_admin_addcategory() // geht
     $result =& $dbconn->Execute($sql);
 
     if (!$result->EOF) {
-        LogUtil::registerStatus (_WL_ERRORTHECATEGORY);
+        LogUtil::registerError (_WL_ERRORTHECATEGORY);
         return pnRedirect(pnModURL('Web_Links', 'admin', 'catview'));
     }
     $column = &$pntable['links_categories_column'];
@@ -309,8 +320,8 @@ function Web_Links_admin_addlink() //geht
                             VALUES ('".DataUtil::formatForStore($nextid)."', ".(int)DataUtil::formatForStore($link['cat']).", '".DataUtil::formatForStore($link['title'])."',
                             '".DataUtil::formatForStore($link['url'])."', '".DataUtil::formatForStore($link['description'])."', now(), '".DataUtil::formatForStore($link['name'])."', '".DataUtil::formatForStore($link['email'])."', '0','".DataUtil::formatForStore($link['submitter'])."',0,0,0)");
 
-        // Let any hooks know that we have created a new link
-        pnModCallHooks('item', 'create', $nextid, 'lid');
+        // Let any hooks know that we have created a new item.
+        pnModCallHooks('item', 'display', $link['lid'], array('module' => 'Web_Links'));
 
         if ($link['new']==1) {
             $column = &$pntable['links_newlink_column'];
@@ -361,100 +372,6 @@ function Web_Links_admin_delnew() // geht
     LogUtil::registerStatus (_WL_NEWLINKDELETED);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'view'));
-}
-
-function Web_Links_admin_addeditorial() //geht
-{
-    $lid = (int)FormUtil::getPassedValue('lid', isset($args['lid']) ? $args['lid'] : null, 'POST');
-    $editorialtitle = FormUtil::getPassedValue('editorialtitle', isset($args['editorialtitle']) ? $args['editorialtitle'] : null, 'POST');
-    $editorialtext = FormUtil::getPassedValue('editorialtext', isset($args['editorialtext']) ? $args['editorialtext'] : null, 'POST');
-
-    // Confirm authorisation code.
-    if (!SecurityUtil::confirmAuthKey()) {
-        return LogUtil::registerAuthidError();
-    }
-
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
-
-    $linkcolumn = &$pntable['links_links_column'];
-    $linktable = $pntable['links_links'];
-    $catcolumn = &$pntable['links_categories_column'];
-    $cattable = $pntable['links_categories'];
-    $sql = "SELECT $linkcolumn[title], $catcolumn[title]
-            FROM $linktable, $cattable
-            WHERE $linkcolumn[lid] = '".(int)DataUtil::formatForStore($lid)."'
-            AND $linkcolumn[cat_id] = $catcolumn[cat_id]";
-    $result =& $dbconn->Execute($sql);
-
-    list($title, $cattitle) = $result->fields;
-
-    // Security check
-    if (!SecurityUtil::checkPermission('Web_Links::Link', "$title::$lid", ACCESS_EDIT)) {
-        return LogUtil::registerPermissionError();
-    }
-
-    $column = &$pntable['links_editorials_column'];
-    $sql = "INSERT INTO $pntable[links_editorials]
-                       ($column[linkid],
-                        $column[adminid],
-                        $column[editorialtimestamp],
-                        $column[editorialtext],
-                        $column[editorialtitle])
-                      VALUES
-                       (".(int)DataUtil::formatForStore($lid).",
-                        '".DataUtil::formatForStore(pnUserGetVar('uid'))."',
-                        now(),
-                        '".DataUtil::formatForStore($editorialtext)."',
-                        '".DataUtil::formatForStore($editorialtitle)."')";
-    $dbconn->Execute($sql);
-
-    // the link has been deleted successfuly
-    LogUtil::registerStatus (_WL_EDITORIALADDED);
-
-    return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
-}
-
-function Web_Links_admin_modeditorial() //geht
-{
-    $lid = (int)FormUtil::getPassedValue('lid', isset($args['lid']) ? $args['lid'] : null, 'POST');
-    $editorialtitle = FormUtil::getPassedValue('editorialtitle', isset($args['editorialtitle']) ? $args['editorialtitle'] : null, 'POST');
-    $editorialtext = FormUtil::getPassedValue('editorialtext', isset($args['editorialtext']) ? $args['editorialtext'] : null, 'POST');
-
-    // Confirm authorisation code.
-    if (!SecurityUtil::confirmAuthKey()) {
-        return LogUtil::registerAuthidError();
-    }
-
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
-
-    $linkcolumn = &$pntable['links_links_column'];
-    $linktable = $pntable['links_links'];
-    $catcolumn = &$pntable['links_categories_column'];
-    $cattable = $pntable['links_categories'];
-    $sql = "SELECT $linkcolumn[title], $catcolumn[title]
-            FROM $linktable, $cattable
-            WHERE $linkcolumn[lid] = '".(int)DataUtil::formatForStore($lid)."'
-            AND $linkcolumn[cat_id] = $catcolumn[cat_id]";
-    $result =& $dbconn->Execute($sql);
-
-    list($title, $cattitle) = $result->fields;
-    // Security check
-    if (!SecurityUtil::checkPermission('Web_Links::Link', "$title::$lid", ACCESS_EDIT)) {
-        return LogUtil::registerPermissionError();
-    }
-
-    $column = &$pntable['links_editorials_column'];
-    $sql = "UPDATE $pntable[links_editorials]
-            SET $column[editorialtext]='".DataUtil::formatForStore($editorialtext)."',
-                $column[editorialtitle]='".DataUtil::formatForStore($editorialtitle)."'
-            WHERE $column[linkid]='".(int)DataUtil::formatForStore($lid)."'";
-    $dbconn->Execute($sql);
-
-    LogUtil::registerStatus (_WL_EDITORIALMODIFIED);
-
-    return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
 }
 
 function Web_Links_admin_linkcheck() // fertig
@@ -547,46 +464,6 @@ function Web_Links_admin_validate()
     $pnRender->assign('authid', pnSecGenAuthKey());
 
     return $pnRender->fetch('weblinks_admin_validate.html');
-}
-
-function Web_Links_admin_deleditorial()
-{
-    $lid = (int)FormUtil::getPassedValue('lid', isset($args['lid']) ? $args['lid'] : null, 'REQUEST');
-
-    // Confirm authorisation code.
-    if (!SecurityUtil::confirmAuthKey()) {
-        return LogUtil::registerAuthidError();
-    }
-
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
-
-    $linkcolumn = &$pntable['links_links_column'];
-    $linktable = $pntable['links_links'];
-    $catcolumn = &$pntable['links_categories_column'];
-    $cattable = $pntable['links_categories'];
-    $sql = "SELECT $linkcolumn[title], $catcolumn[title]
-            FROM $linktable, $cattable
-            WHERE $linkcolumn[lid] = '".(int)DataUtil::formatForStore($lid)."'
-            AND $linkcolumn[cat_id] = $catcolumn[cat_id]";
-    $result =& $dbconn->Execute($sql);
-
-    list($title, $cattitle) = $result->fields;
-
-    // Security check
-    if (!SecurityUtil::checkPermission('Web_Links::Link', "$cattitle:$title:$lid", ACCESS_DELETE)) {
-        return LogUtil::registerPermissionError();
-    }
-
-    $column = &$pntable['links_editorials_column'];
-    $sql = "DELETE FROM $pntable[links_editorials]
-            WHERE $column[linkid]='".(int)DataUtil::formatForStore($lid)."'";
-    $dbconn->Execute($sql);
-
-    // the link has been deleted successfuly
-    LogUtil::registerStatus (_WL_EDITORIALDELETED);
-
-    return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
 }
 
 function Web_Links_admin_listbrokenlinks()
@@ -973,199 +850,6 @@ function Web_Links_admin_dellink()
     LogUtil::registerStatus (_WL_DELLINKSUCCESSFULY);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'linkview'));
-}
-
-function Web_Links_admin_delvote()
-{
-    $lid = (int)FormUtil::getPassedValue('lid', isset($args['lid']) ? $args['lid'] : null, 'GETPOST');
-    $rid = (int)FormUtil::getPassedValue('rid', isset($args['rid']) ? $args['rid'] : null, 'GETPOST');
-
-    // Confirm authorisation code.
-    if (!SecurityUtil::confirmAuthKey()) {
-        return LogUtil::registerAuthidError();
-    }
-
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
-
-    $linkcolumn = &$pntable['links_links_column'];
-    $linktable = $pntable['links_links'];
-    $catcolumn = &$pntable['links_categories_column'];
-    $cattable = $pntable['links_categories'];
-    $sql = "SELECT $linkcolumn[title], $catcolumn[title]
-            FROM $linktable, $cattable
-            WHERE $linkcolumn[lid] = '".(int)DataUtil::formatForStore($lid)."'
-            AND $linkcolumn[cat_id] = $catcolumn[cat_id]";
-    $result =& $dbconn->Execute($sql);
-
-    list($title, $cattitle) = $result->fields;
-
-    // Security check
-    if (!SecurityUtil::checkPermission('Web_Links::Link', "$cattitle:$title:$lid", ACCESS_MODERATE)) {
-        return LogUtil::registerPermissionError();
-    }
-
-    $column = &$pntable['links_votedata_column'];
-    $sql = "DELETE FROM $pntable[links_votedata]
-            WHERE $column[ratingdbid]='".(int)DataUtil::formatForStore($rid)."'";
-    $dbconn->Execute($sql);
-    $sql = "SELECT $column[rating], $column[ratinguser], $column[ratingcomments]
-            FROM $pntable[links_votedata]
-            WHERE $column[ratinglid] = '".(int)DataUtil::formatForStore($lid)."'";
-    $voteresult =& $dbconn->Execute($sql);
-    $totalvotesDB = $voteresult->PO_RecordCount();
-
-    $anonvotes = 0;
-    $anonvoteval = 0;
-    $outsidevotes = 0;
-    $outsidevoteval = 0;
-    $regvoteval = 0;
-    $truecomments = $totalvotesDB;
-
-    $anonweight = pnModGetVar('Web_Links', 'anonweight');
-    $anonymous = pnModGetVar('Web_Links', 'anonymous');
-    $outsideweight = pnModGetVar('Web_Links', 'outsideweight');
-    $useoutsidevoting = pnModGetVar('Web_Links', 'useoutsidevoting');
-
-    while(list($ratingDB, $ratinguserDB, $ratingcommentsDB) = $voteresult->fields) {
-        $voteresult->MoveNext();
-        if ($ratingcommentsDB == "") {
-            --$truecomments;
-        }
-        if ($ratinguserDB == $anonymous) {
-            $anonvotes++;
-            $anonvoteval += $ratingDB;
-        }
-        if ($useoutsidevoting == 1) {
-            if ($ratinguserDB == 'outside') {
-                ++$outsidevotes;
-                $outsidevoteval += $ratingDB;
-            }
-        } else {
-            $outsidevotes = 0;
-        }
-        if ($ratinguserDB != $anonymous && $ratinguserDB != "outside") {
-            $regvoteval += $ratingDB;
-        }
-    }
-
-    $regvotes = $totalvotesDB - $anonvotes - $outsidevotes;
-
-    if ($totalvotesDB == 0) {
-        $finalrating = 0;
-    } else if ($anonvotes == 0 && $regvotes == 0) {
-        /* Figure Outside Only Vote */
-        $finalrating = $outsidevoteval / $outsidevotes;
-        $finalrating = number_format($finalrating, 4);
-    } else if ($outsidevotes == 0 && $regvotes == 0) {
-        /* Figure Anon Only Vote */
-        $finalrating = $anonvoteval / $anonvotes;
-        $finalrating = number_format($finalrating, 4);
-    } else if ($outsidevotes == 0 && $anonvotes == 0) {
-        /* Figure Reg Only Vote */
-        $finalrating = $regvoteval / $regvotes;
-        $finalrating = number_format($finalrating, 4);
-    } else if ($regvotes == 0 && $useoutsidevoting == 1 && $outsidevotes != 0 && $anonvotes != 0 ) {
-        /* Figure Reg and Anon Mix */
-        $avgAU = $anonvoteval / $anonvotes;
-        $avgOU = $outsidevoteval / $outsidevotes;
-        if ($anonweight > $outsideweight ) {
-            /* Anon is 'standard weight' */
-            $newimpact = $anonweight / $outsideweight;
-            $impactAU = $anonvotes;
-            $impactOU = $outsidevotes / $newimpact;
-            $finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
-            $finalrating = number_format($finalrating, 4);
-        } else {
-            /* Outside is 'standard weight' */
-            $newimpact = $outsideweight / $anonweight;
-            $impactOU = $outsidevotes;
-            $impactAU = $anonvotes / $newimpact;
-            $finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
-            $finalrating = number_format($finalrating, 4);
-        }
-    } else {
-        /* Registered User vs. Anonymous vs. Outside User Weight Calutions */
-        $impact = $anonweight;
-        $outsideimpact = $outsideweight;
-        if ($regvotes == 0) {
-            $regvotes = 0;
-        } else {
-            $avgRU = $regvoteval / $regvotes;
-        }
-        if ($anonvotes == 0) {
-            $avgAU = 0;
-        } else {
-            $avgAU = $anonvoteval / $anonvotes;
-        }
-        if ($outsidevotes == 0 ) {
-            $avgOU = 0;
-        } else {
-            $avgOU = $outsidevoteval / $outsidevotes;
-        }
-
-        $impactRU = $regvotes;
-        $impactAU = $anonvotes / $impact;
-        $impactOU = $outsidevotes / $outsideimpact;
-        $finalrating = (($avgRU * $impactRU) + ($avgAU * $impactAU) + ($avgOU * $impactOU)) / ($impactRU + $impactAU + $impactOU);
-        $finalrating = number_format($finalrating, 4);
-    }
-
-    $column = &$pntable['links_links_column'];
-    $sql = "UPDATE $pntable[links_links]
-            SET $column[linkratingsummary]='".DataUtil::formatForStore($finalrating)."', $column[totalvotes]='".DataUtil::formatForStore($totalvotesDB)."', $column[totalcomments]='".DataUtil::formatForStore($truecomments)."'
-            WHERE $column[lid] = '".(int)DataUtil::formatForStore($lid)."'";
-    $dbconn->Execute($sql);
-
-    // the comment has been deleted successfuly
-    LogUtil::registerStatus (_WL_DELVOTESUCCESSFULY);
-
-    return pnRedirect(pnModURL('Web_Links', 'admin', 'modlink', array('lid' => $lid)));
-}
-
-function Web_Links_admin_delcomment()
-{
-    $lid = (int)FormUtil::getPassedValue('lid', isset($args['lid']) ? $args['lid'] : null, 'GETPOST');
-    $rid = (int)FormUtil::getPassedValue('rid', isset($args['rid']) ? $args['rid'] : null, 'GETPOST');
-
-    // Confirm authorisation code.
-    if (!SecurityUtil::confirmAuthKey()) {
-        return LogUtil::registerAuthidError();
-    }
-
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
-
-    $linkcolumn = &$pntable['links_links_column'];
-    $linktable = $pntable['links_links'];
-    $catcolumn = &$pntable['links_categories_column'];
-    $cattable = $pntable['links_categories'];
-    $sql = "SELECT $linkcolumn[title], $catcolumn[title]
-            FROM $linktable, $cattable
-            WHERE $linkcolumn[lid] = '".(int)DataUtil::formatForStore($lid)."'
-            AND $linkcolumn[cat_id] = $catcolumn[cat_id]";
-    $result =& $dbconn->Execute($sql);
-
-    list($title, $cattitle) = $result->fields;
-
-    // Security check
-    if (!SecurityUtil::checkPermission('Web_Links::Link', "$cattitle:$title:$lid", ACCESS_MODERATE)) {
-        return LogUtil::registerPermissionError();
-    }
-
-    $column = &$pntable['links_votedata_column'];
-    $dbconn->Execute("UPDATE $pntable[links_votedata]
-                        SET $column[ratingcomments]=''
-                        WHERE $column[ratingdbid] = '".(int)DataUtil::formatForStore($rid)."'");
-    $column = &$pntable['links_links_column'];
-    $dbconn->Execute("UPDATE $pntable[links_links]
-                        SET $column[totalcomments] = ($column[totalcomments] - 1)
-                        WHERE $column[lid] = '".(int)DataUtil::formatForStore($lid)."'");
-
-    // the comment has been deleted successfuly
-    LogUtil::registerStatus (_WL_DELCOMMENTSUCCESSFULY);
-
-    return pnRedirect(pnModURL('Web_Links', 'admin', 'modlink', array('lid' => $lid)));
 }
 
 function Web_Links_admin_getconfig() //fertig
