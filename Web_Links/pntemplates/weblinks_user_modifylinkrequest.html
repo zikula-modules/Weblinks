@@ -1,8 +1,8 @@
+<!--[*  $Id: weblinks_user_modifylinkrequest.html $  *]-->
 <!--[include file="weblinks_user_header.html"]-->
-
-<!--[opentable]-->
+<div class="wl-borderbox">
 <!--[if $blockunregmodify == 1 && $ratinguser == $anonymous]-->
-<br /><div style="text-align:center"><!--[pnml name="_WL_ONLYREGUSERSMODIFY"]--></div>
+<div style="text-align:center"><!--[pnml name="_WL_ONLYREGUSERSMODIFY"]--></div>
 <!--[assign var="blocknow" value="1"]-->
 <!--[/if]-->
 <!--[if $blocknow != 1]-->
@@ -16,8 +16,10 @@
 <input type="hidden" name="lid" value="<!--[$link.lid|pnVarPrepForDisplay]-->" />
 <input type="hidden" name="modifysubmitter" value="<!--[$ratinguser|pnVarPrepForDisplay]-->" />
 <!--[pnml name="_WL_CATEGORY"]-->: <select name="cat">
-<!--[catlist scat=0 sel=$link.cat_id]--></select><br />
-<input type="submit" value="<!--[pnml name="_WL_SENDREQUEST"]-->" />
+<!--[catlist scat=0 sel=$link.cat_id]--></select>
+<div class="wl-formbuttons" style="padding-top:15px;">
+<!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_SENDREQUEST" title="_WL_SENDREQUEST"]-->
+</div>
 </div></form>
 <!--[/if]-->
-<!--[closetable]-->
+</div>

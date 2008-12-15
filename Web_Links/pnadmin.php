@@ -724,41 +724,6 @@ function Web_Links_admin_modlink()
     $pnRender->assign('link', $link);
     $pnRender->assign('authid', pnSecGenAuthKey());
 
-    if (SecurityUtil::checkPermission('Web_Links::Link', "$link[cattitle]:$link[title]:$link[lid]", ACCESS_EDIT)) {
-        // Modify or Add Editorial
-        $editorial = pnModAPIFunc('Web_Links', 'admin', 'geteditorial', array('lid' => $lid));
-
-        $pnRender->assign('editorial', $editorial);
-    }
-
-    // Show Comments
-    $totalcomments = pnModAPIFunc('Web_Links', 'admin', 'gettotalcomments', array('lid' => $lid));
-    $comments = pnModAPIFunc('Web_Links', 'admin', 'getcomments', array('lid' => $lid));
-
-    $pnRender->assign('totalcomments', $totalcomments);
-    $pnRender->assign('comments', $comments);
-
-    // Show Registered Users Votes
-    $totalvotes = pnModAPIFunc('Web_Links', 'admin', 'gettotalvotes', array('lid' => $lid));
-    $votes = pnModAPIFunc('Web_Links', 'admin', 'getvotes', array('lid' => $lid));
-
-    $pnRender->assign('totalvotes', $totalvotes);
-    $pnRender->assign('votes', $votes);
-
-    // Show Unregistered Users Votes
-    $totalunregvotes = pnModAPIFunc('Web_Links', 'admin', 'gettotalunregvotes', array('lid' => $lid));
-    $unregvotes = pnModAPIFunc('Web_Links', 'admin', 'getunregvotes', array('lid' => $lid));
-
-    $pnRender->assign('totalunregvotes', $totalunregvotes);
-    $pnRender->assign('unregvotes', $unregvotes);
-
-    // Show Outside Users Votes
-    $totaloutvotes = pnModAPIFunc('Web_Links', 'admin', 'gettotaloutvotes', array('lid' => $lid));
-    $outvotes = pnModAPIFunc('Web_Links', 'admin', 'getoutvotes', array('lid' => $lid));
-
-    $pnRender->assign('totaloutvotes', $totaloutvotes);
-    $pnRender->assign('outvotes', $outvotes);
-
     return $pnRender->fetch('weblinks_admin_modlink.html');
 }
 
@@ -804,6 +769,9 @@ function Web_Links_admin_modlinks()
             WHERE $column[lid]='".(int)DataUtil::formatForStore($link['lid'])."'";
     $dbconn->Execute($sql);
 
+    // Let any other modules know we have updated an item
+    pnModCallHooks('item', 'update', $link['lid'], array('module' => 'Web_Links'));
+
     // the link has been modifyed successfuly
     LogUtil::registerStatus (_WL_MODIFYLINKSUCCESSFULY);
 
@@ -843,8 +811,9 @@ function Web_Links_admin_dellink()
     $sql = "DELETE FROM $pntable[links_links]
             WHERE $column[lid]='".(int)DataUtil::formatForStore($lid)."'";
     $dbconn->Execute($sql);
-    // Let any hooks know that we have deleted an item
-    pnModCallHooks('item', 'delete', $lid, '');
+
+    // Let any hooks know that we have deleted an item.
+    pnModCallHooks('item', 'delete', $lid, array('module' => 'Web_Links'));
 
     // the link has been deleted successfuly
     LogUtil::registerStatus (_WL_DELLINKSUCCESSFULY);
@@ -890,41 +859,6 @@ function Web_Links_admin_updateconfig() //fertig
     }
     pnModSetVar('Web_Links', 'perpage', $config['perpage']);
 
-    if ( !isset($config['anonwaitdays']) || !is_numeric($config['anonwaitdays']) ) {
-        $config['anonwaitdays'] = 1;
-    }
-    pnModSetVar('Web_Links', 'anonwaitdays', $config['anonwaitdays']);
-
-    if ( !isset($config['outsidewaitdays']) || !is_numeric($config['outsidewaitdays']) ) {
-        $config['outsidewaitdays'] = 1;
-    }
-    pnModSetVar('Web_Links', 'outsidewaitdays', $config['outsidewaitdays']);
-
-    if ( !isset($config['useoutsidevoting']) || !is_numeric($config['useoutsidevoting']) ) {
-        $config['useoutsidevoting'] = 1;
-    }
-    pnModSetVar('Web_Links', 'useoutsidevoting', $config['useoutsidevoting']);
-
-    if ( !isset($config['anonweight']) || !is_numeric($config['anonweight']) ) {
-        $config['anonweight'] = 10;
-    }
-    pnModSetVar('Web_Links', 'anonweight', $config['anonweight']);
-
-    if ( !isset($config['outsideweight']) || !is_numeric($config['outsideweight']) ) {
-        $config['outsideweight'] = 20;
-    }
-    pnModSetVar('Web_Links', 'outsideweight', $config['outsideweight']);
-
-    if ( !isset($config['detailvotedecimal']) || !is_numeric($config['detailvotedecimal']) ) {
-        $config['detailvotedecimal'] = 2;
-    }
-    pnModSetVar('Web_Links', 'detailvotedecimal', $config['detailvotedecimal']);
-
-    if ( !isset($config['mainvotedecimal']) || !is_numeric($config['mainvotedecimal']) ) {
-        $config['mainvotedecimal'] = 1;
-    }
-    pnModSetVar('Web_Links', 'mainvotedecimal', $config['mainvotedecimal']);
-
     if ( !isset($config['toplinkspercentrigger']) || !is_numeric($config['toplinkspercentrigger']) ) {
         $config['toplinkspercentrigger'] = 0;
     }
@@ -954,11 +888,6 @@ function Web_Links_admin_updateconfig() //fertig
         $config['targetblank'] = 0;
     }
     pnModSetVar('Web_Links', 'targetblank', $config['targetblank']);
-
-    if ( !isset($config['linkvotemin']) || !is_numeric($config['linkvotemin']) ) {
-        $config['linkvotemin'] = 5;
-    }
-    pnModSetVar('Web_Links', 'linkvotemin', $config['linkvotemin']);
 
     if ( !isset($config['blockunregmodify']) || !is_numeric($config['blockunregmodify']) ) {
         $config['blockunregmodify'] = 0;
@@ -990,13 +919,8 @@ function Web_Links_admin_updateconfig() //fertig
     }
     pnModSetVar('Web_Links', 'links_anonaddlinklock', $config['links_anonaddlinklock']);
 
-    // Let any other modules know that the modules configuration has been updated
-//    pnModCallHooks('module','updateconfig','Web_Links', array('module' => 'Web_Links'));  //später
-
     // the module configuration has been updated successfuly
     LogUtil::registerStatus (_WL_CONFIGUPDATED);
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'getconfig'));
 }
-
-?>

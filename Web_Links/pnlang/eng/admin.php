@@ -124,4 +124,3 @@ define('_WL_WEBLINKS', 'Web links');
 define('_WL_YES', 'yes');
 define('_WL_YOUCANBROWSEUS', 'The site\'s search engine is available at: ');
 define('_WL_YOURLINKAT', 'Your link at');
-?>

@@ -1,35 +1,22 @@
 <?php
-// $Id: function.catlist.php,v 1.0 2005/05/23 20:12:22 petzi-juist Exp $
-// ----------------------------------------------------------------------
-// PostNuke Content Management System
-// Copyright (C) 2002 by the PostNuke Development Team.
-// http://www.postnuke.com/
-// ----------------------------------------------------------------------
-// LICENSE
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License (GPL)
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// To read the license please visit http://www.gnu.org/copyleft/gpl.html
-// ----------------------------------------------------------------------
-// Original Author of file: Petzi-Juist
-// Purpose of file: Count Categories
-// ----------------------------------------------------------------------
+/**
+ * Zikula Application Framework
+ *
+ * Web_Links
+ *
+ * @version $Id$
+ * @copyright 2008 by Petzi-Juist
+ * @link http://www.petzi-juist.de
+ * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
 
 function smarty_function_catlist($params, &$smarty)
 {
     extract($params);
-	unset($params);
+    unset($params);
 
     if (!isset($scat) || !is_numeric($scat)){
-    	return _MODARGSERROR;
+        return _MODARGSERROR;
     }
 
     $dbconn =& pnDBGetConn(true);
@@ -42,11 +29,11 @@ function smarty_function_catlist($params, &$smarty)
                         ORDER BY $column[title]");
     while(list($cid)=$result->fields) {
 
-    	$result->MoveNext();
+        $result->MoveNext();
     if ($sel==$cid) {
-    	$selstr=' selected="selected"';
+        $selstr=' selected="selected"';
     } else {
-    	$selstr='';
+        $selstr='';
     }
     $s.="<option value=\"$cid\" $selstr>".catpath($cid,0,0,0)."</option>";
     $s.=catlist($cid, $sel);
@@ -91,7 +78,7 @@ function catpath($cid, $start, $links, $linkmyself) {
 function catlist($scat, $sel)
 {
     if (!isset($scat) || !is_numeric($scat)){
-    	return _MODARGSERROR;
+        return _MODARGSERROR;
     }
 
     $dbconn =& pnDBGetConn(true);
@@ -104,15 +91,14 @@ function catlist($scat, $sel)
                         ORDER BY $column[title]");
     while(list($cid)=$result->fields) {
 
-    	$result->MoveNext();
+        $result->MoveNext();
     if ($sel==$cid) {
-    	$selstr=' selected="selected"';
+        $selstr=' selected="selected"';
     } else {
-    	$selstr='';
+        $selstr='';
     }
     $s.="<option value=\"$cid\" $selstr>".catpath($cid,0,0,0)."</option>";
     $s.=catlist($cid, $sel);
     }
     return $s;
 }
-?>

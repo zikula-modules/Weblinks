@@ -1,6 +1,6 @@
+<!--[*  $Id: weblinks_user_addlink.html $  *]-->
 <!--[include file="weblinks_user_header.html"]-->
-
-<!--[opentable]-->
+<div class="wl-borderbox">
 <h2><!--[pnml name="_WL_ADDALINK"]--></h2>
 <!--[if $addlink == 1]-->
 <strong><!--[pnml name="_WL_INSTRUCTIONS"]-->:</strong><br />
@@ -17,7 +17,7 @@
 <!--[pnml name="_WL_YOUREMAIL"]-->: <input type="text" name="newlink[email]" size="30" maxlength="60" value="<!--[$ye]-->" /><br />
 <div class="wl-formbuttons" style="padding-top:15px;">
 <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_ADDURL" title="_WL_ADDURL"]-->
-<a href="<!--[pnmodurl modname=Web_Links type=user func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a></div><br />
+<a href="<!--[pnmodurl modname=Web_Links type=user func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a></div>
 </div></form>
 <!--[else]-->
 <div style="text-align:center"><!--[pnml name="_WL_LINKSNOTUSER1"]--><br />
@@ -29,4 +29,4 @@
 <!--[pnml name="_WL_LINKSNOTUSER7"]--><br />
 <!--[pnml name="_WL_LINKSNOTUSER8" html=true]--></div>
 <!--[/if]-->
-<!--[closetable]-->
+</div>

@@ -20,7 +20,7 @@ function web_links_pntables()
 
     // Full table definition
     $pntable['links_categories'] = DBUtil::getLimitedTablename('links_categories');
-    $pntable['links_categories_column'] 	= array ('cat_id'       => 'pn_cat_id',
+    $pntable['links_categories_column']     = array ('cat_id'       => 'pn_cat_id',
                                                      'parent_id'    => 'pn_parent_id',
                                                      'title'        => 'pn_title',
                                                      'cdescription' => 'pn_description');
@@ -30,16 +30,16 @@ function web_links_pntables()
                                                      'cdescription' => 'X NOTNULL DEFAULT \'\'');
 
     $pntable['links_editorials'] = DBUtil::getLimitedTablename('links_editorials');
-    $pntable['links_editorials_column'] 	= array ('linkid'             => 'pn_linkid',
+    $pntable['links_editorials_column']     = array ('linkid'             => 'pn_linkid',
                                                      'adminid'            => 'pn_adminid',
                                                      'editorialtimestamp' => 'pn_timestamp',
                                                      'editorialtext'      => 'pn_text',
                                                      'editorialtitle'     => 'pn_title');
     $pntable['links_editorials_column_def'] = array ('linkid'             => 'I NOTNULL DEFAULT 0 PRIMARY',
-                                                 	 'adminid'            => 'C(60) NOTNULL DEFAULT \'\'',
-                                                 	 'editorialtimestamp' => 'T NOTNULL DEFAULT \'1970-01-01 00:00:00\'',
-                                                 	 'editorialtext'      => 'X NOTNULL DEFAULT \'\'',
-                                                 	 'editorialtitle'     => 'C(100) NOTNULL DEFAULT \'\'');
+                                                      'adminid'            => 'C(60) NOTNULL DEFAULT \'\'',
+                                                      'editorialtimestamp' => 'T NOTNULL DEFAULT \'1970-01-01 00:00:00\'',
+                                                      'editorialtext'      => 'X NOTNULL DEFAULT \'\'',
+                                                      'editorialtitle'     => 'C(100) NOTNULL DEFAULT \'\'');
 
     $pntable['links_links'] = DBUtil::getLimitedTablename('links_links');
     $pntable['links_links_column']     = array ('lid'               => 'pn_lid',
@@ -55,7 +55,7 @@ function web_links_pntables()
                                                 'linkratingsummary' => 'pn_ratingsummary',
                                                 'totalvotes'        => 'pn_totalvotes',
                                                 'totalcomments'     => 'pn_totalcomments');
-    $pntable['links_links_column_def'] = array ('lid'           	=> 'I AUTO PRIMARY',
+    $pntable['links_links_column_def'] = array ('lid'               => 'I AUTO PRIMARY',
                                                 'cat_id'            => 'I NOTNULL DEFAULT 0',
                                                 'title'             => 'C(100) NOTNULL DEFAULT \'\'',
                                                 'url'               => 'C(254) NOTNULL DEFAULT \'\'',
@@ -126,4 +126,3 @@ function web_links_pntables()
     return $pntable;
 
 }
-?>

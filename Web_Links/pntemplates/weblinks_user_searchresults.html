@@ -1,6 +1,6 @@
+<!--[*  $Id: weblinks_user_searchresults.html $  *]-->
 <!--[include file="weblinks_user_header.html"]-->
-
-<!--[opentable]-->
+<div class="wl-borderbox">
 <!--[if $query]-->
 <!--[pnml name="_WL_SEARCHRESULTS4"]-->: <strong><!--[$query|pnVarPrepForDisplay]--></strong><br />
 <!--[if $subcategory]-->
@@ -18,8 +18,9 @@
 <!--[if $userpermission eq "admin"]-->
 <a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
 <!--[/if]-->
-<!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks]--><br />
+<!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]--><br />
 <!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]-->
+<!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Web_Links returnurl=$returnurl]-->
 <!--[include file="weblinks_user_linkbottommenu.html"]-->
 <br />
 <!--[/foreach]-->
@@ -39,4 +40,4 @@
 <!--[else]-->
 <div style="text-align:center;"><strong><!--[pnml name="_WL_NOMATCHES"]--></strong></div><br />
 <!--[/if]-->
-<!--[closetable]-->
+</div>

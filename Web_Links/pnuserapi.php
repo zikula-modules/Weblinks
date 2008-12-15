@@ -184,9 +184,7 @@ function Web_Links_userapi_orderbyin($args)
 
 function Web_Links_userapi_countcatlinks($args)
 {
-    extract($args);
-
-    if ((!isset($cid) || !is_numeric($cid))) {
+    if ((!isset($args['cid']) || !is_numeric($args['cid']))) {
         pnSessionSetVar('errormsg', _MODARGSERROR);
         return false;
     }
@@ -197,7 +195,7 @@ function Web_Links_userapi_countcatlinks($args)
     $column = &$pntable['links_links_column'];
     $sql = "SELECT $column[lid], $column[cat_id], $column[title]
             FROM $pntable[links_links]
-            WHERE $column[cat_id]='".(int)DataUtil::formatForStore($cid)."'";
+            WHERE $column[cat_id]='".(int)DataUtil::formatForStore($args['cid'])."'";
     $result =& $dbconn->Execute($sql);
 
     if ($dbconn->ErrorNo() != 0) {
@@ -983,5 +981,3 @@ function Web_Links_userapi_countsublinks()
 
     return $sublinks;
 }
-
-?>

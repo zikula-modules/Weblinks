@@ -14,19 +14,18 @@
 * set modversion info
 */
 
-$modversion['name']				= 'Web_Links';
-$modversion['displayname']    	= 'Weblinks';
-$modversion['description']    	= 'Web Links Module';
-$modversion['version']			= '2.0';
-$modversion['credits']			= 'pndocs/credits.txt';
-$modversion['help']				= 'pndocs/install.txt';
-$modversion['changelog']		= 'pndocs/changelog.txt';
-$modversion['license']			= 'pndocs/license.txt';
-$modversion['official']			= 0;
-$modversion['author']			= 'Petzi-Juist';
-$modversion['contact']			= 'http://www.petzi-juist.de/';
-$modversion['admin']			= 1;
-$modversion['user']				= 1;
-$modversion['securityschema']	= array('Web_Links::Category' => 'Category name::Category ID',
+$modversion['name']                = 'Web_Links';
+$modversion['displayname']        = 'Weblinks';
+$modversion['description']        = 'Web Links Module';
+$modversion['version']            = '2.0';
+$modversion['credits']            = 'pndocs/credits.txt';
+$modversion['help']                = 'pndocs/install.txt';
+$modversion['changelog']        = 'pndocs/changelog.txt';
+$modversion['license']            = 'pndocs/license.txt';
+$modversion['official']            = 0;
+$modversion['author']            = 'Petzi-Juist';
+$modversion['contact']            = 'http://www.petzi-juist.de/';
+$modversion['admin']            = 1;
+$modversion['user']                = 1;
+$modversion['securityschema']    = array('Web_Links::Category' => 'Category name::Category ID',
                                         'Web_Links::Link' => 'Category name:Link name:Link ID');
-?>

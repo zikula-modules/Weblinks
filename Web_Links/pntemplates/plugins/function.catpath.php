@@ -1,8 +1,19 @@
 <?php
+/**
+ * Zikula Application Framework
+ *
+ * Web_Links
+ *
+ * @version $Id$
+ * @copyright 2008 by Petzi-Juist
+ * @link http://www.petzi-juist.de
+ * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
+ 
 function smarty_function_catpath($params, &$smarty)
 {
     extract($params);
-	unset($params);
+    unset($params);
 
     if (!isset($cid) || !is_numeric($cid)){
         return _MODARGSERROR;
@@ -37,4 +48,3 @@ function smarty_function_catpath($params, &$smarty)
     }
     return $cpath;
 }
-?>

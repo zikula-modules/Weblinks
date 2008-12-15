@@ -124,4 +124,3 @@ define('_WL_WEBLINKS', 'Weblinks');
 define('_WL_YES', 'Ja');
 define('_WL_YOUCANBROWSEUS', 'unsere Weblinks online: ');
 define('_WL_YOURLINKAT', 'Link bei');
-?>

@@ -1,6 +1,22 @@
 /* style the button tag */
 div.wl-formbuttons button {
     border: 0px;
-	padding: 0px;
-	background-color: transparent;
+    padding: 0px;
+    background-color: transparent;
+}
+
+div#ratingsratecontent h3, label {
+    display: none;
+}
+
+.wl-linkbox {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #D9DCC2;
+}
+
+.wl-borderbox {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #D9DCC2;
 }

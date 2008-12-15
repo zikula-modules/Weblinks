@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zikula Application Framework
  *
@@ -156,5 +155,3 @@ function web_links_delete()
     // Deletion successful
     return true;
 }
-
-?>
