@@ -20,3 +20,15 @@ div#ratingsratecontent h3, label {
     margin-bottom: 10px;
     border: 1px solid #D9DCC2;
 }
+
+.mostpopularweblinks li, .lastweblinks li {
+    list-style:none;
+    display:block;
+    padding:2px;
+    margin-bottom:2px;
+}
+.mostpopularweblinks li a, .lastweblinks li a{font-weight:bold; text-decoration:none;}
+.mostpopularweblinks li a:hover, .lastweblinks li a:hover{text-decoration:none;}
+.mostpopularweblinks li ul, .lastweblinks li ul{margin:3px 0 3px 10px; font-size:1em; font-weight:normal;}
+.mostpopularweblinks li ul li, .lastweblinks li ul li{margin-bottom:0;}
+.mostpopularweblinks li ul a, .lastweblinks li ul a{font-weight:normal;}

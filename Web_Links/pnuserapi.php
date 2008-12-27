@@ -847,99 +847,6 @@ function Web_Links_userapi_add($args)
     }
 }
 
-function Web_Links_userapi_displaytitle($args)
-{
-    // Get arguments from argument array
-    extract($args);
-
-    // Argument check
-    if (!isset($lid)) {
-        pnSessionSetVar('errormsg', _MODARGSERROR);
-        return false;
-    }
-
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
-
-    $column = &$pntable['links_links_column'];
-    $sql = "SELECT $column[title]
-            FROM   $pntable[links_links]
-            WHERE  $column[lid]='".(int)DataUtil::formatForStore($lid)."'";
-    $result =& $dbconn->Execute($sql);
-
-    // Check for an error with the database code
-    if ($dbconn->ErrorNo() != 0) {
-        error_log("DB Error: " . $dbconn->ErrorMsg());
-        return false;
-    }
-
-    list($displaytitle) = $result->fields;
-
-    $result->Close();
-
-    return $displaytitle;
-}
-
-function Web_Links_userapi_totalcomments($args)
-{
-    // Get arguments from argument array
-    extract($args);
-
-    // Argument check
-    if (!isset($lid)) {
-        pnSessionSetVar('errormsg', _MODARGSERROR);
-        return false;
-    }
-
-    $dbconn =& pnDBGetConn(true);
-    $pntable =& pnDBGetTables();
-
-    $column = &$pntable['links_votedata_column'];
-    $sql = "SELECT $column[ratinguser],
-                   $column[rating],
-                   $column[ratingcomments],
-                   $column[ratingtimestamp]
-            FROM $pntable[links_votedata]
-            WHERE $column[ratinglid]='".(int)DataUtil::formatForStore($lid)."'
-            AND $column[ratingcomments] != '' ORDER BY $column[ratingtimestamp] DESC";
-    $result =& $dbconn->Execute($sql);
-
-    // Check for an error
-    if ($dbconn->ErrorNo() != 0) {
-        // We probably don't want to display a user error here
-        //pnSessionSetVar('errormsg', _WEBLINKSUPDATEDCOUNTFAILED);
-        return false;
-    }
-
-    $numofcomments = $result->PO_RecordCount();
-
-    for (; !$result->EOF; $result->MoveNext()) {
-        list($ratinguser, $rating, $ratingcomments, $ratingtimestamp) = $result->fields;
-            $column = &$pntable['links_votedata_column'];
-            $sql = "SELECT SUM($column[rating]),
-                    COUNT(*) FROM $pntable[links_votedata]
-                    WHERE $column[ratinguser]='".DataUtil::formatForStore($ratinguser)."'";
-            $result2 =& $dbconn->Execute($sql);
-            list($useravgrating, $usertotalcomments)=$result2->fields;
-            $useravgrating = $useravgrating / $usertotalcomments;
-            $useravgrating = number_format($useravgrating, 1);
-
-            $totalcomments[] = array('ratinguser' => $ratinguser,
-                                     'rating' => $rating,
-                                     'ratingcomments' => $ratingcomments,
-                                     'ratingtimestamp' => $ratingtimestamp,
-                                     'useravgrating' => $useravgrating,
-                                     'usertotalcomments' => $usertotalcomments);
-    }
-
-    $result->Close();
-
-    $comments = array('numofcomments' => $numofcomments,
-                      'totalcomments' => $totalcomments);
-
-    return $comments;
-}
-
 function Web_Links_userapi_numrows() //fertig
 {
     // get the objects from the db
@@ -980,4 +887,86 @@ function Web_Links_userapi_countsublinks()
     }
 
     return $sublinks;
+}
+
+function Web_Links_userapi_lastweblinks()
+{
+    if (!isset($args['startnum']) || empty($args['startnum'])) {
+        $args['startnum'] = 1;
+    }
+    if (!isset($args['numlinks']) || empty($args['numlinks'])) {
+        $args['numlinks'] = 10;
+    }
+
+    if (!is_numeric($args['startnum']) ||
+        !is_numeric($args['numlinks'])) {
+        return LogUtil::registerError (_MODARGSERROR);
+    }
+
+    $objArray = array();
+
+    $pntable = pnDBGetTables();
+    $weblinkscolumn = &$pntable['links_links_column'];
+
+    $orderby = "ORDER BY $weblinkscolumn[date] DESC";
+
+    // define the permission filter to apply
+    $permFilter = array(array('realm'           => 0,
+                              'component_left'  => 'Web_Links',
+                              'component_right' => 'Link',
+                              'instance_left'   => 'title',
+                              'instance_right'  => 'lid',
+                              'level'           => ACCESS_READ));
+
+    // get the objects from the db
+    $objArray = DBUtil::selectObjectArray('links_links', '', $orderby, $args['startnum']-1, $args['numlinks'], '', $permFilter);
+
+    // Check for an error with the database code, and if so set an appropriate
+    // error message and return
+    if ($objArray === false) {
+        return LogUtil::registerError (_GETFAILED);
+    }
+
+    return $objArray;
+}
+
+function Web_Links_userapi_mostpopularweblinks()
+{
+    if (!isset($args['startnum']) || empty($args['startnum'])) {
+        $args['startnum'] = 1;
+    }
+    if (!isset($args['numlinks']) || empty($args['numlinks'])) {
+        $args['numlinks'] = 10;
+    }
+
+    if (!is_numeric($args['startnum']) ||
+        !is_numeric($args['numlinks'])) {
+        return LogUtil::registerError (_MODARGSERROR);
+    }
+
+    $objArray = array();
+
+    $pntable = pnDBGetTables();
+    $weblinkscolumn = &$pntable['links_links_column'];
+
+    $orderby = "ORDER BY $weblinkscolumn[hits] DESC";
+
+    // define the permission filter to apply
+    $permFilter = array(array('realm'           => 0,
+                              'component_left'  => 'Web_Links',
+                              'component_right' => 'Link',
+                              'instance_left'   => 'title',
+                              'instance_right'  => 'lid',
+                              'level'           => ACCESS_READ));
+
+    // get the objects from the db
+    $objArray = DBUtil::selectObjectArray('links_links', '', $orderby, $args['startnum']-1, $args['numlinks'], '', $permFilter);
+
+    // Check for an error with the database code, and if so set an appropriate
+    // error message and return
+    if ($objArray === false) {
+        return LogUtil::registerError (_GETFAILED);
+    }
+
+    return $objArray;
 }
