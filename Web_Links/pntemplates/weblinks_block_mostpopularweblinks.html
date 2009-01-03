@@ -1,8 +1,15 @@
 <!--[*  $Id: weblinks_block_mostpopularweblinks.html $  *]-->
 <div class="mostpopularweblinks">
-<ul>
+<ol>
 <!--[foreach from=$weblinks item=weblinks]-->
-<li><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnVarPrepForDisplay]--></a> <!--[$weblinks.hits|pnVarPrepForDisplay]--></li>
+<li>
+<div class="tb">
+<div>
+<div><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnVarPrepForDisplay]--></a></div>
+<div><!--[$weblinks.hits|pnVarPrepForDisplay]--></div>
+</div>
+</div>
+</li>
 <!--[/foreach]-->
-</ul>
+</ol>
 </div>

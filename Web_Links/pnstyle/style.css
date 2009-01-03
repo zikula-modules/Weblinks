@@ -22,7 +22,7 @@ div#ratingsratecontent h3, label {
 }
 
 .mostpopularweblinks li, .lastweblinks li {
-    list-style:none;
+    list-style-type:decimal
     display:block;
     padding:2px;
     margin-bottom:2px;
@@ -32,3 +32,15 @@ div#ratingsratecontent h3, label {
 .mostpopularweblinks li ul, .lastweblinks li ul{margin:3px 0 3px 10px; font-size:1em; font-weight:normal;}
 .mostpopularweblinks li ul li, .lastweblinks li ul li{margin-bottom:0;}
 .mostpopularweblinks li ul a, .lastweblinks li ul a{font-weight:normal;}
+
+.tb {
+    display: table;
+    width: 100%;
+}
+.tb>div {
+    display: table-row;
+}
+.tb>div>div {
+    display: table-cell;
+    width: 95%;
+}

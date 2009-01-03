@@ -73,38 +73,21 @@ function Web_Links_lastweblinksblock_display($blockinfo)
 function Web_Links_lastweblinksblock_modify($blockinfo)
 {
     // Create output object
-    $pnRender = pnRender::getInstance('Feeds', false);
+    $pnRender = pnRender::getInstance('Web_Links', false);
 
     // Get current content
     $vars = pnBlockVarsFromContent($blockinfo['content']);
 
     // Defaults
-    if (empty($vars['feedid'])) {
-        $vars['feedid'] = 1;
+    if (empty($vars['items'])) {
+        $vars['items'] = 10;
     }
-    if (empty($vars['displayimage'])) {
-        $vars['displayimage'] = 0;
-    }
-    if (empty($vars['numitems'])) {
-        $vars['numitems'] = -1;
-    }
-
-    // The API function is called.  The arguments to the function are passed in
-    // as their own arguments array
-    $items = pnModAPIFunc('Feeds', 'user', 'getall');
-
-    // create an array for feednames and id's for the template
-    $allfeeds = array();
-    foreach($items as $item) {
-        $allfeeds[$item['fid']] = $item['name'];
-    }
-    $pnRender->assign('allfeeds', $allfeeds);
 
     // assign the block vars
     $pnRender->assign($vars);
 
     // Return output
-    return $pnRender->fetch('feeds_block_displayfeed_modify.htm');
+//    return $pnRender->fetch('weblinks_block_displayfeed_modify.htm');
 }
 
 /**
@@ -112,9 +95,7 @@ function Web_Links_lastweblinksblock_modify($blockinfo)
  */
 function Web_Links_lastweblinksblock_update($blockinfo)
 {
-    $vars['feedid'] = FormUtil::getPassedValue('feedid', 1, 'POST');
-    $vars['numitems'] = FormUtil::getPassedValue('numitems', 0, 'POST');
-    $vars['displayimage'] = FormUtil::getPassedValue('displayimage', -1, 'POST');
+    $vars['items'] = FormUtil::getPassedValue('numitems', 10, 'POST');
 
     $blockinfo['content'] = pnBlockVarsToContent($vars);
 
