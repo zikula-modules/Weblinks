@@ -1,16 +1,25 @@
 <!--[*  $Id: weblinks_user_brokenlink.html $  *]-->
 <!--[include file="weblinks_user_header.html"]-->
 <div class="wl-borderbox">
-<div style="text-align:center"><strong><!--[pnml name="_WL_REPORTBROKEN"]--></strong><br />
-<form action="<!--[pnmodurl modname="Web_Links" type="user" func="brokenlinks"]-->" method="post" enctype="application/x-www-form-urlencoded">
-<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Web_Links"]-->" />
-<div>
-<input type="hidden" name="lid" value="<!--[$lid]-->" />
-<input type="hidden" name="modifysubmitter" value="<!--[$ratinguser]-->" />
-<!--[pnml name="_WL_THANKSBROKEN"]--><br />
-<!--[pnml name="_WL_SECURITYBROKEN"]--><br />
-<input type="submit" value="<!--[pnml name="_WL_REPORTBROKEN"]-->" />
+
+  <form class="pn-form wl-form" action="<!--[pnmodurl modname="Web_Links" type="user" func="brokenlinks"]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Web_Links"]-->" />
+    <input type="hidden" name="lid" value="<!--[$lid]-->" />
+    <input type="hidden" name="modifysubmitter" value="<!--[$ratinguser]-->" />
+
+    <fieldset class="pn-form-fieldset">
+      <legend><!--[pnml name="_WL_REPORTBROKEN"]--></legend>
+      <p>
+        <!--[pnml name="_WL_THANKSBROKEN"]--><br />
+        <!--[pnml name="_WL_SECURITYBROKEN"]-->
+      </p>
+    </fieldset>
+
+    <div class="pn-formrow pn-formbuttons">
+      <input type="submit" value="<!--[pnml name="_WL_REPORTBROKEN"]-->" />
+    </div>
+
+  </form>
+
 </div>
-</form>
-</div>
-</div>
+<!--[include file="weblinks_user_footer.html"]-->

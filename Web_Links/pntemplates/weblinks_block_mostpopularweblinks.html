@@ -1,15 +1,16 @@
 <!--[*  $Id: weblinks_block_mostpopularweblinks.html $  *]-->
-<div class="mostpopularweblinks">
-<ol>
-<!--[foreach from=$weblinks item=weblinks]-->
-<li>
-<div class="tb">
-<div>
-<div><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnVarPrepForDisplay]--></a></div>
-<div><!--[$weblinks.hits|pnVarPrepForDisplay]--></div>
-</div>
-</div>
-</li>
-<!--[/foreach]-->
+<!--[if $weblinks]-->
+<ol class="mostpopularweblinks">
+  <!--[foreach from=$weblinks item=weblinks name=loop]-->
+  <!--[* $smarty.foreach.loop.iteration *]-->
+  <li>
+    <div class="tb">
+      <div>
+        <div><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnvarprepfordisplay]--></a></div>
+        <div><!--[$weblinks.hits|pnvarprepfordisplay]--></div>
+      </div>
+    </div>
+  </li>
+  <!--[/foreach]-->
 </ol>
-</div>
+<!--[/if]-->

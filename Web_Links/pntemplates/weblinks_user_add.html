@@ -1,12 +1,10 @@
 <!--[*  $Id: weblinks_user_add.html $  *]-->
 <!--[include file="weblinks_user_header.html"]-->
-<div class="wl-borderbox">
-<!--[if $submit eq 0]-->
-<div style="text-align:center;"><strong><!--[pnml name="$text"]--></strong><br />
-[ <a href="<!--[pnmodurl modname=Web_Links type=user func=addlink]-->"><!--[pnml name="_WL_GOBACK"]--></a> ]</div>
-<!--[else]-->
-<div style="text-align:center;"><strong><!--[pnml name="_WL_LINKRECEIVED"]--></strong><br />
-<!--[pnml name="$text"]-->
+<div class="pn-statusmsg">
+  <!--[if $submit eq 0]-->
+    <strong><!--[pnml name="$text"]--></strong><br />[ <a href="<!--[pnmodurl modname=Web_Links type=user func=addlink]-->"><!--[pnml name="_WL_GOBACK"]--></a> ]
+  <!--[else]-->
+    <strong><!--[pnml name="_WL_LINKRECEIVED"]--></strong><br /><!--[pnml name="$text"]-->
+  <!--[/if]-->
 </div>
-<!--[/if]-->
-</div>
+<!--[include file="weblinks_user_footer.html"]-->

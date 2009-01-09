@@ -1,23 +1,29 @@
 <!--[*  $Id: weblinks_user_details.html $  *]-->
 <!--[include file="weblinks_user_header.html"]-->
-<!--[pnthemegetvar name=bgcolor1 assign=bgcolor1]-->
-<!--[pnthemegetvar name=bgcolor2 assign=bgcolor2]-->
+
 <div class="wl-borderbox">
-<h2><!--[pnml name="_WL_LINKPROFILE"]-->: <!--[$weblink.title|pnVarPrepForDisplay]--></h2><br />
-<!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblink.cat_id start=1 links=1 linkmyself=1]--><br />
-<!--[if $userpermission == "admin"]-->
-<a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$linkdetails.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
-<!--[/if]-->
-<!--[$weblink.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]-->
-<!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblink.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblink.hits]-->
-<!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblink.lid module=Web_Links returnurl=$returnurl implode=false]-->
-<!--[ $hooks.Ratings ]-->
-<br />
-<!--[if $access_comment_cat && $access_comment_link]-->
-<a href="<!--[pnmodurl modname=Web_Links type=user func=modifylinkrequest lid=$lid]-->"><!--[pnml name="_WL_MODIFY"]--></a> |
-<!--[/if]-->
-<a href="<!--[pnmodurl modname=Web_Links type=user func=brokenlink lid=$lid]-->"><!--[pnml name="_WL_REPORTBROKEN"]--></a>
-<br /><div style="text-align:center">
-[ <a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$lid]-->"><!--[pnml name="_WL_VISITTHISSITE"]--></a> ]
+  <h3><!--[pnml name="_WL_LINKPROFILE"]-->: <!--[$weblink.title|pnvarprepfordisplay]--></h3>
+  <p><!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblink.cat_id start=1 links=1 linkmyself=1]--></p>
+
+  <p>
+    <!--[if $userpermission == "admin"]-->
+    <a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$linkdetails.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
+    <!--[/if]-->
+    <!--[$weblink.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]-->
+  </p>
+  
+  <p><!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblink.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblink.hits]--></p>
+  
+  <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblink.lid module=Web_Links returnurl=$returnurl implode=false]-->
+  <!--[ $hooks.Ratings ]-->
+
+  <p>
+    <!--[if $access_comment_cat && $access_comment_link]-->
+    <a href="<!--[pnmodurl modname=Web_Links type=user func=modifylinkrequest lid=$lid]-->"><!--[pnml name="_WL_MODIFY"]--></a> |
+    <!--[/if]-->
+    <a href="<!--[pnmodurl modname=Web_Links type=user func=brokenlink lid=$lid]-->"><!--[pnml name="_WL_REPORTBROKEN"]--></a>
+  </p>
+
+  <p>[ <a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$lid]-->"><!--[pnml name="_WL_VISITTHISSITE"]--></a> ]</p>
 </div>
-</div>
+<!--[include file="weblinks_user_footer.html"]-->

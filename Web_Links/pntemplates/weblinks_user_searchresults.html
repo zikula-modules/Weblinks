@@ -1,43 +1,52 @@
 <!--[*  $Id: weblinks_user_searchresults.html $  *]-->
 <!--[include file="weblinks_user_header.html"]-->
-<div class="wl-borderbox">
-<!--[if $query]-->
-<!--[pnml name="_WL_SEARCHRESULTS4"]-->: <strong><!--[$query|pnVarPrepForDisplay]--></strong><br />
-<!--[if $subcategory]-->
-<strong><!--[pnml name="_WL_USUBCATEGORIES"]--></strong><br />
-<!--[foreach from=$subcategory item=subcategory]-->
-<strong><big>&middot;</big></strong>&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->"><!--[catpath cid=$subcategory.cat_id start=1 links=1 linkmyself=1]--></a><br />
-<!--[/foreach]-->
-<!--[/if]-->
-<!--[if $weblinks]-->
-<br /><strong><!--[pnml name="_WL_LINKS"]--></strong><br />
-<!--[include file="weblinks_user_sortlinksbymenu.html"]--><br />
-<!--[foreach from=$weblinks item=weblinks]-->
-<br /><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnVarPrepForDisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--><br />
-<!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblinks.cat_id start=1 links=1 linkmyself=1]--><br />
-<!--[if $userpermission eq "admin"]-->
-<a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
-<!--[/if]-->
-<!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]--><br />
-<!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]-->
-<!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Web_Links returnurl=$returnurl]-->
-<!--[include file="weblinks_user_linkbottommenu.html"]-->
-<br />
-<!--[/foreach]-->
-<!--[pager show="page" rowcount=$pager.numlinks limit=$pager.itemsperpage posvar=startnum shift=1]-->
-<!--[else]-->
-<br /><div style="text-align:center;"><strong><!--[pnml name="_WL_NOMATCHES"]--></strong><br />[ <a href="<!--[pnmodurl modname=Web_Links type=user func=view]-->"><!--[pnml name="_WL_GOBACK"]--></a> ]</div>
-<!--[/if]-->
-<br /><div style="text-align:center">
-<!--[pnml name="_WL_TRY2SEARCH"]--> "<!--[$query|pnVarPrepForDisplay]-->" <!--[pnml name="_WL_INOTHERSENGINES"]--><br />
-<a href="http://www.google.com/search?q=<!--[$query|pnVarPrepForDisplay]-->">Google</a> -
-<a href="http://www.altavista.com/cgi-bin/query?pg=q&amp;sc=on&amp;hl=on&amp;act=2006&amp;par=0&amp;q=<!--[$query|pnVarPrepForDisplay]-->&amp;kl=XX&amp;stype=stext">Alta Vista</a> -
-<a href="http://www.hotbot.com/?MT=<!--[$query|pnVarPrepForDisplay]-->&amp;DU=days&amp;SW=web">HotBot</a> -
-<a href="http://sjc-search.sjc.lycos.com/?query=<!--[$query|pnVarPrepForDisplay]-->">Lycos</a> -
-<a href="http://search.yahoo.com/bin/search?p=<!--[$query|pnVarPrepForDisplay]-->">Yahoo</a> -
-<a href="http://web.ask.com/web?q=<!--[$query|pnVarPrepForDisplay]-->&amp;o=0&amp;qsrc=0">Ask Jeeves</a>
-</div><br />
-<!--[else]-->
-<div style="text-align:center;"><strong><!--[pnml name="_WL_NOMATCHES"]--></strong></div><br />
-<!--[/if]-->
+<div class="wl-borderbox wl-center">
+  <!--[if $query]-->
+  <h3><!--[pnml name="_WL_SEARCHRESULTS4"]-->: <!--[$query|pnvarprepfordisplay]--></h3>
+
+  <!--[if $subcategory]-->
+  <h4><!--[pnml name="_WL_USUBCATEGORIES"]--></h4>
+  <ul>
+    <!--[foreach from=$subcategory item=subcategory]-->
+    <li><a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->" class="wl-catsub"><!--[catpath cid=$subcategory.cat_id start=1 links=1 linkmyself=1]--></a></li>
+    <!--[/foreach]-->
+  </ul>
+  <!--[/if]-->
+
+  <h4><!--[pnml name="_WL_LINKS"]--></h4>
+  <!--[if $weblinks]-->
+  <!--[include file="weblinks_user_sortlinksbymenu.html"]-->
+  <!--[foreach from=$weblinks item=weblinks]-->
+  <dl class="wl-linkbox">
+    <dt><strong><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></strong></dt>
+    <dd><!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblinks.cat_id start=1 links=1 linkmyself=1]--></dd>
+    <dd>
+      <!--[if $userpermission eq "admin"]-->
+      <a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
+      <!--[/if]-->
+      <!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]-->
+    </dd>
+    <dd><!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]--></dd>
+    <dd><!--[include file="weblinks_user_linkbottommenu.html"]--></dd>
+  </dl>
+  <!--[/foreach]-->
+  <!--[pager show="page" rowcount=$pager.numlinks limit=$pager.itemsperpage posvar=startnum shift=1]-->
+
+  <!--[else]-->
+  <p><em><!--[pnml name="_WL_NOMATCHES"]--> [ <a href="<!--[pnmodurl modname=Web_Links type=user func=view]-->"><!--[pnml name="_WL_GOBACK"]--></a> ]</em></p>
+  <!--[/if]-->
+
+  <p>
+    <!--[pnml name="_WL_TRY2SEARCH"]--> "<!--[$query|pnvarprepfordisplay]-->" <!--[pnml name="_WL_INOTHERSENGINES"]--><br />
+    <a href="http://www.google.com/search?q=<!--[$query|pnvarprepfordisplay]-->">Google</a> -
+    <a href="http://www.altavista.com/cgi-bin/query?pg=q&amp;sc=on&amp;hl=on&amp;act=2006&amp;par=0&amp;q=<!--[$query|pnvarprepfordisplay]-->&amp;kl=XX&amp;stype=stext">Alta Vista</a> -
+    <a href="http://www.hotbot.com/?MT=<!--[$query|pnvarprepfordisplay]-->&amp;DU=days&amp;SW=web">HotBot</a> -
+    <a href="http://sjc-search.sjc.lycos.com/?query=<!--[$query|pnvarprepfordisplay]-->">Lycos</a> -
+    <a href="http://search.yahoo.com/bin/search?p=<!--[$query|pnvarprepfordisplay]-->">Yahoo</a> -
+    <a href="http://web.ask.com/web?q=<!--[$query|pnvarprepfordisplay]-->&amp;o=0&amp;qsrc=0">Ask Jeeves</a>
+  </p>
+  <!--[else]-->
+  <p><strong><!--[pnml name="_WL_NOMATCHES"]--></strong></p>
+  <!--[/if]-->
 </div>
+<!--[include file="weblinks_user_footer.html"]-->

@@ -1,50 +1,38 @@
 <!--[*  $Id: weblinks_user_view.html $  *]-->
-<!--[assign var="main" value=1]-->
 <!--[include file="weblinks_user_header.html"]-->
 <div class="wl-borderbox">
-<h2><!--[pnml name="_WL_MAINCAT"]--></h2>
-<table border="0" cellspacing="10" cellpadding="10" width="98%" summary="<!--[pnml name="_WL_MAINCAT"]-->">
-<!--[assign var="count" value="0"]-->
-<!--[foreach from=$categories item=category]-->
-<!--[if $category.parent_id =="0"]-->
-<!--[if $count == 0]-->
-<tr>
-<!--[/if]-->
-<!--[math equation="$count+1" assign="count"]-->
-<td valign="top" style="width:50%">
-<h3>
-<!--[pnimg modname=core src=folder_blue.gif set=icons/extrasmall altml=true alt="" title=""]-->&nbsp;&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$category.cat_id]-->"><!--[$category.title|pnVarPrepForDisplay]--></a> (<!--[countsublinks catid=$category.cat_id]-->)<!--[categorynewlinkgraphic catid=$category.cat_id]--></h3>
-<!--[if $category.cdescription ne ""]-->
-<!--[$category.cdescription|pnvarprephtmldisplay]--><br />
-<!--[/if]-->
-<!--[foreach from=$categories item=subcategory]-->
-<!--[if $subcategory.parent_id == $category.cat_id]-->
-&nbsp;&nbsp;&nbsp;<!--[pnimg modname=core src=folder_blue.gif set=icons/extrasmall altml=true alt="" title=""]-->&nbsp;&nbsp;<a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->"><!--[$subcategory.title|pnVarPrepForDisplay]--></a><!--[subcategorynewlinkgraphic scatid=$subcategory.cat_id]--><br />
-<!--[/if]-->
-<!--[/foreach]-->
-<!--[if $count == 1]-->
-</td>
-<!--[elseif $count == 2]-->
-</td></tr>
-<!--[assign var="count" value="0"]-->
-<!--[/if]-->
-<!--[/if]-->
-<!--[/foreach]-->
-<!--[if $count == 1]-->
-<td>&nbsp;</td></tr>
-<!--[/if]-->
-</table>
-<div style="text-align:center"><!--[pnml name="_WL_THEREARE"]--> <strong><!--[$numrows]--></strong> <!--[pnml name="_WL_LINKS"]--> <!--[pnml name="_WL_AND"]--> <strong><!--[$catnum]--></strong> <!--[pnml name="_WL_CATEGORIES"]--> <!--[pnml name="_WL_INDB"]--></div>
+  <h3><!--[pnml name="_WL_MAINCAT"]--></h3>
+
+  <div class="pn-clearfix">
+    <!--[foreach from=$categories item=category]-->
+    <!--[if $category.parent_id =="0"]-->
+    <dl class="wl-cat">
+      <dt class="wl-catname"><a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$category.cat_id]-->" class="wl-catmain"><!--[$category.title|pnvarprepfordisplay]--></a> (<!--[countsublinks catid=$category.cat_id]-->)<!--[categorynewlinkgraphic catid=$category.cat_id]--></dt>
+      <dd class="wl-catdescr"><!--[if $category.cdescription ne ""]--><!--[$category.cdescription|pnvarprephtmldisplay]--><!--[else]-->&nbsp;<!--[/if]--></dd>
+      <!--[foreach from=$categories item=subcategory]-->
+      <!--[if $subcategory.parent_id == $category.cat_id]-->
+      <dd class="wl-sub"><a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->" class="wl-catsub"><!--[$subcategory.title|pnvarprepfordisplay]--></a><!--[subcategorynewlinkgraphic scatid=$subcategory.cat_id]--></dd>
+      <!--[/if]-->
+      <!--[/foreach]-->
+    </dl>
+    <!--[/if]-->
+    <!--[/foreach]-->
+  </div>
+
+  <p class="wl-center"><!--[pnml name="_WL_THEREARE"]--> <strong><!--[$numrows]--></strong> <!--[pnml name="_WL_LINKS"]--> <!--[pnml name="_WL_AND"]--> <strong><!--[$catnum]--></strong> <!--[pnml name="_WL_CATEGORIES"]--> <!--[pnml name="_WL_INDB"]--></p>
 </div>
+
 <!--[if $linkbox eq 1]-->
-<div class="wl-borderbox" style="overflow:auto;">
-<div class="blocklast" style="float:left;width:50%;">
-<h3><!--[pnml name="_WL_LASTWEBLINKS"]--></h3>
-<!--[$blocklast]-->
-</div>
-<div class="blockmostpopular" style="float:right;width:50%;">
-<h3><!--[pnml name="_WL_MOSTPOPULARWEBLINKS"]--></h3>
-<!--[$blockmostpop]-->
-</div>
+<div class="wl-borderbox pn-clearfix">
+  <div class="blocklast">
+    <h4><!--[pnml name="_WL_LASTWEBLINKS"]--></h4>
+    <!--[$blocklast]-->
+  </div>
+  <div class="blockmostpopular">
+    <h4><!--[pnml name="_WL_MOSTPOPULARWEBLINKS"]--></h4>
+    <!--[$blockmostpop]-->
+  </div>
 </div>
 <!--[/if]-->
+
+<!--[include file="weblinks_user_footer.html"]-->

@@ -1,25 +1,38 @@
 <!--[*  $Id: weblinks_user_modifylinkrequest.html $  *]-->
 <!--[include file="weblinks_user_header.html"]-->
 <div class="wl-borderbox">
-<!--[if $blockunregmodify == 1 && $ratinguser == $anonymous]-->
-<div style="text-align:center"><!--[pnml name="_WL_ONLYREGUSERSMODIFY"]--></div>
-<!--[assign var="blocknow" value="1"]-->
-<!--[/if]-->
-<!--[if $blocknow != 1]-->
-<div style="text-align:center"><strong><!--[pnml name="_WL_REQUESTLINKMOD"]--></strong></div>
-<form action="<!--[pnmodurl modname=Web_Links type=user func=modifylinkrequests]-->" method="post" enctype="application/x-www-form-urlencoded">
-<input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Web_Links"]-->" />
-<div><strong><!--[pnml name="_WL_LINKID"]-->: <!--[$link.lid|pnVarPrepForDisplay]--></strong><br />
-<!--[pnml name="_WL_LINKTITLE"]-->:<br /><input type="text" name="title" value="<!--[$link.title|pnVarPrepForDisplay]-->" size="50" maxlength="100" /><br />
-<!--[pnml name="_WL_URL"]-->:<br /><input type="text" name="url" value="<!--[$link.url|pnVarPrepForDisplay]-->" size="75" maxlength="254" /><br />
-<!--[pnml name="_WL_DESCRIPTION255"]-->: <br /><textarea name="description" cols="80" rows="10"><!--[$link.description|pnvarprephtmldisplay]--></textarea><br />
-<input type="hidden" name="lid" value="<!--[$link.lid|pnVarPrepForDisplay]-->" />
-<input type="hidden" name="modifysubmitter" value="<!--[$ratinguser|pnVarPrepForDisplay]-->" />
-<!--[pnml name="_WL_CATEGORY"]-->: <select name="cat">
-<!--[catlist scat=0 sel=$link.cat_id]--></select>
-<div class="wl-formbuttons" style="padding-top:15px;">
-<!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_SENDREQUEST" title="_WL_SENDREQUEST"]-->
+  <!--[if $blockunregmodify == 1 && $ratinguser == $anonymous]-->
+  <div class="pn-errormsg"><!--[pnml name="_WL_ONLYREGUSERSMODIFY"]--></div>
+  <!--[else]-->
+  <form class="pn-form wl-form" action="<!--[pnmodurl modname=Web_Links type=user func=modifylinkrequests]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Web_Links"]-->" />
+    <input type="hidden" name="lid" value="<!--[$link.lid|pnvarprepfordisplay]-->" />
+    <input type="hidden" name="modifysubmitter" value="<!--[$ratinguser|pnvarprepfordisplay]-->" />
+
+    <fieldset class="pn-form-fieldset">
+      <legend><!--[pnml name="_WL_REQUESTLINKMOD"]--> - <em><!--[pnml name="_WL_LINKID"]-->: <!--[$link.lid|pnvarprepfordisplay]--></em></legend>
+
+      <dl class="pn-clearfix">
+        <dt><label for="title"><!--[pnml name="_WL_LINKTITLE"]-->:</label></dt>
+        <dd><input type="text" id="title" name="title" value="<!--[$link.title|pnvarprepfordisplay]-->" size="50" maxlength="100" /></dd>
+
+        <dt><label for="url"><!--[pnml name="_WL_URL"]-->:</label></dt>
+        <dd><input type="text" id="url" name="url" value="<!--[$link.url|pnvarprepfordisplay]-->" size="75" maxlength="254" /></dd>
+
+        <dt><label for="description"><!--[pnml name="_WL_DESCRIPTION255"]-->:</label></dt>
+        <dd><textarea name="description" id="description" cols="65" rows="10"><!--[$link.description|pnvarprephtmldisplay]--></textarea></dd>
+
+        <dt><label for="cat"><!--[pnml name="_WL_CATEGORY"]-->:</label></dt>
+        <dd><select id="cat" name="cat"><!--[catlist scat=0 sel=$link.cat_id]--></select></dd>
+      </dl>
+
+    </fieldset>
+    <div class="pn-formrow pn-formbuttons">
+      <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_SENDREQUEST" title="_WL_SENDREQUEST"]-->
+    </div>
+
+  </form>
+  <!--[/if]-->
 </div>
-</div></form>
-<!--[/if]-->
-</div>
+<!--[include file="weblinks_user_footer.html"]-->
+
