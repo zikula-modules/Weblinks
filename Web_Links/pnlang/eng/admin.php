@@ -95,6 +95,7 @@ define('_WL_NAME', 'Name');
 define('_WL_NEWLINKADDED', 'New link added to the database');
 define('_WL_NEWLINKDELETED', 'New link removed from the database');
 define('_WL_NO', 'no');
+define('_WL_NOREPORTEDBROKEN', 'No broken links found');
 define('_WL_NONE', 'None');
 define('_WL_OK', 'OK');
 define('_WL_ORIGINAL','Original');

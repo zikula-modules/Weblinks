@@ -1,15 +1,24 @@
 <!--[*  $Id$  *]-->
 <!--[include file="weblinks_admin_header.html"]-->
 <div class="pn-admincontainer">
-<div class="pn-adminpageicon"><!--[pnimg modname=core src=folder.gif set=icons/large alt='_WL_DELCATEGORY' altml=true]--></div>
-<h2><!--[pnml name="_WL_DELCATEGORY"]--></h2>
-<br /><div><strong><!--[pnml name="_WL_DELCATWARNING"]--></strong><br /><br />
-<form action="<!--[pnmodurl modname=Web_Links type=admin func=delcategory]-->" method="post" enctype="application/x-www-form-urlencoded">
-<input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Web_Links"]-->" />
-<input type="hidden" name="cid" value="<!--[$cid]-->" />
-<div class="wl-formbuttons">
-<!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_DELCATEGORY" title="_WL_DELCATEGORY"]-->
-<a href="<!--[pnmodurl modname=Web_Links type=admin func=viewcat]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a></div>
-<br />
-</form></div>
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=folder.gif set=icons/large alt='_WL_DELCATEGORY' altml=true]--></div>
+
+  <form class="pn-adminform" action="<!--[pnmodurl modname=Web_Links type=admin func=delcategory]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <fieldset>
+      <legend><!--[pnml name="_WL_DELCATEGORY"]--></legend>
+      <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Web_Links"]-->" />
+      <input type="hidden" name="cid" value="<!--[$cid]-->" />
+
+      <div class="pn-adminformrow">
+        <p style="font-weight:bold"><!--[pnml name="_WL_DELCATWARNING"]--></p>
+      </div>
+
+    </fieldset>
+    <div class="pn-adminformrow pn-adminformbuttons">
+      <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_DELCATEGORY" title="_WL_DELCATEGORY"]-->
+      <a href="<!--[pnmodurl modname=Web_Links type=admin func=catview]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a>
+    </div>
+  </form>
+
 </div>
+<!--[include file="weblinks_admin_footer.html"]-->
