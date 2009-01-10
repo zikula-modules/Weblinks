@@ -22,11 +22,10 @@
         <label for="cid"><!--[pnml name="_WL_CHECKCATEGORIES"]--></label>
         <select id="cid" name="cid"><!--[catlist scat=0 sel=0]--></select>
       </div>
-      <div class="pn-adminformrow">
-        <label><a href="<!--[pnmodurl modname=Web_Links type=admin func=validate cid=0]-->"><!--[pnml name="_WL_CHECKALLLINKS"]--></a></label>
-      </div>
+
       <div class="pn-adminformrow pn-adminformbuttons">
         <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_CHECKCATEGORIES" title="_WL_CHECKCATEGORIES"]-->
+        [ <a href="<!--[pnmodurl modname=Web_Links type=admin func=validate cid=0]-->"><!--[pnml name="_WL_CHECKALLLINKS"]--></a> ]
       </div>
     </fieldset>
   </form>
@@ -56,6 +55,10 @@
         <input type="text" name="link[url]" value="<!--[$newweblinks.url|pnvarprepfordisplay]-->" size="65" maxlength="254" />
       </div>
       <div class="pn-adminformrow">
+        <label><!--[pnml name="_WL_CATEGORY"]--></label>
+        <select name="link[cat]"><!--[catlist scat=0 sel=$newweblinks.cid]--></select>
+      </div>      
+      <div class="pn-adminformrow">
         <label><!--[pnml name="_WL_DESCRIPTION"]--></label>
         <textarea name="link[description]" cols="65" rows="10"><!--[$newweblinks.description|pnvarprephtmldisplay]--></textarea>
       </div>
@@ -66,10 +69,6 @@
       <div class="pn-adminformrow">
         <label><!--[pnml name="_WL_EMAIL"]--></label>
         <input type="text" name="link[email]" size="20" maxlength="100" value="<!--[$newweblinks.email|pnvarprepfordisplay]-->" />
-      </div>
-      <div class="pn-adminformrow">
-        <label><!--[pnml name="_WL_CATEGORY"]--></label>
-        <select name="link[cat]"><!--[catlist scat=0 sel=$newweblinks.cid]--></select>
       </div>
       <div class="pn-adminformrow pn-adminformbuttons">
         <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_ADDCATEGORY" title="_WL_ADDLINK"]-->
