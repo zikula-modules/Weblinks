@@ -12,7 +12,9 @@
 }
 #wl-main .wl-cat {
   float:left;
-  width:50%;
+  margin:5px;
+  padding:0;
+  width:48%;
 }
 #wl-main a.wl-catmain {
   padding: 2px 0 2px 19px;
@@ -31,13 +33,25 @@
   margin:0 0 0.5em 0;
 }
 #wl-main .wl-sub {
-  margin-left:19px;
+  margin:0 0 5px 19px;
   padding:0;
 }
+
+/*******************************************************************************/
+/* LinkBox
+/*******************************************************************************/
+
 #wl-main .wl-linkbox {
   border:1px solid #D9DCC2;
   margin:1em;
   padding:0.5em;
+}
+#wl-main .wl-linkbox dt {
+  font-size:1.3em;
+  margin:5px;
+}  
+#wl-main .wl-linkbox dd {
+  margin:5px;
 }
 
 /*******************************************************************************/
@@ -74,6 +88,7 @@
 
 #wl-main dl.wl-sublist {
   list-style: none;
+  line-height:2em;  
   margin:0 auto;
   padding:0.5em;
   width:70%;
@@ -88,6 +103,18 @@
   display:inline;
   margin:0 0.5em;
   white-space:nowrap;
+}
+
+/*******************************************************************************/
+/* SortLinks
+/*******************************************************************************/
+
+#wl-main .wl-sortlinks {
+  margin:1em 0;
+}
+#wl-main .wl-sortlinks dt,
+#wl-main .wl-sortlinks dd {
+  margin:5px;
 }
 
 /*******************************************************************************/
@@ -121,15 +148,24 @@
 #wl-main #ratingsratecontent h3 {
   display: none;
 }
+#wl-main #ratingsratecontent ul,
+#wl-main #ratingsratecontent form,
+#wl-main #ratingsratecontent {
+  text-align:center;
+  margin:0 auto;
+}
 
 /*******************************************************************************/
 /* Blocks
 /*******************************************************************************/
 
+#wl-main ol.lastweblinks,
+#wl-main ol.mostpopularweblinks {
+  margin:10px 5px 5px 20px;
+  list-style:decimal;  
+}
 .mostpopularweblinks li,
 .lastweblinks li {
-  list-style-type:decimal
-  display:block;
   padding:2px;
   margin-bottom:2px;
 }
