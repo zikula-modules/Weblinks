@@ -1,33 +1,38 @@
 <!--[*  $Id$  *]-->
 <!--[include file="weblinks_user_header.html"]-->
-<div class="wl-borderbox wl-center">
-  <!--[if $mostpoplinkspercentrigger == 1]-->
-  <h3><!--[pnml name="_WL_MOSTPOPULAR"]--> <!--[$toplinkspercent]-->% (<!--[pnml name="_WL_OFALL"]--> <!--[$totalmostpoplinks]--> <!--[pnml name="_WL_LINKS"]-->)</h3>
-  <!--[else]-->
-  <h3><!--[pnml name="_WL_MOSTPOPULAR"]--> <!--[$mostpoplinks]--></h3>
-  <!--[/if]-->
-  <p>
-    <!--[pnml name="_WL_SHOWTOP"]-->: [
-    <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=10 ratetype=num]-->">10</a> -
-    <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=25 ratetype=num]-->">25</a> -
-    <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=50 ratetype=num]-->">50</a> |
-    <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=1 ratetype=percent]-->">1%</a> -
-    <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=5 ratetype=percent]-->">5%</a> -
-    <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=10 ratetype=percent]-->">10%</a> ]
-  </p>
+<div class="wl-borderbox">
+
+  <div class="wl-center">
+    <!--[if $mostpoplinkspercentrigger == 1]-->
+    <h3><!--[pnml name="_WL_MOSTPOPULAR"]--> <!--[$toplinkspercent]-->% (<!--[pnml name="_WL_OFALL"]--> <!--[$totalmostpoplinks]--> <!--[pnml name="_WL_LINKS"]-->)</h3>
+    <!--[else]-->
+    <h3><!--[pnml name="_WL_MOSTPOPULAR"]--> <!--[$mostpoplinks]--></h3>
+    <!--[/if]-->
+    <p>
+      <!--[pnml name="_WL_SHOWTOP"]-->: [
+      <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=10 ratetype=num]-->">10</a> -
+      <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=25 ratetype=num]-->">25</a> -
+      <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=50 ratetype=num]-->">50</a> |
+      <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=1 ratetype=percent]-->">1%</a> -
+      <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=5 ratetype=percent]-->">5%</a> -
+      <a href="<!--[pnmodurl modname=Web_Links type=user func=mostpopular ratenum=10 ratetype=percent]-->">10%</a> ]
+    </p>
+  </div>
 
   <!--[foreach from=$weblinks item=weblinks]-->
   <dl class="wl-linkbox">
     <dt><strong><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></strong></dt>
     <dd><!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblinks.cid start=1 links=1 linkmyself=1]--></dd>
+    <!--[if $weblinks.description]-->
+    <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]--></p></dd>
+    <!--[/if]-->
+    <dd><!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]--></dd>
     <dd>
+      <!--[include file="weblinks_user_linkbottommenu.html"]-->
       <!--[if $userpermission == "admin"]-->
       <a href="<!--[pnmodurl modname=Web_Links type=admin func=modify lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
       <!--[/if]-->
-      <!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]-->
     </dd>
-    <dd><!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]--></dd>
-    <dd><!--[include file="weblinks_user_linkbottommenu.html"]--></dd>
   </dl>
   <!--[/foreach]-->
 </div>

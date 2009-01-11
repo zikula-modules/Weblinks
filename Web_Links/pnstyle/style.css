@@ -10,6 +10,9 @@
 #wl-main .wl-center {
   text-align:center;
 }
+#wl-main .wl-catrow {
+  margin:0 0 1em 0;
+}
 #wl-main .wl-cat {
   float:left;
   margin:5px;
@@ -25,7 +28,7 @@
   background: url(../../../images/icons/extrasmall/folder_green.gif) no-repeat 0 50%;
 }
 #wl-main .wl-catname {
-  margin:0;
+  margin:0 0 0.5em 0;
   padding:0;
 }
 #wl-main .wl-catdescr {
@@ -33,8 +36,11 @@
   margin:0 0 0.5em 0;
 }
 #wl-main .wl-sub {
-  margin:0 0 5px 19px;
+  margin:0 0 0 19px;
   padding:0;
+}
+#wl-main .wl-stats {
+  margin:1em 0;
 }
 
 /*******************************************************************************/
@@ -44,7 +50,7 @@
 #wl-main .wl-linkbox {
   border:1px solid #D9DCC2;
   margin:1em;
-  padding:0.5em;
+  padding:1em;
 }
 #wl-main .wl-linkbox dt {
   font-size:1.3em;
@@ -60,11 +66,13 @@
 
 #wl-main .blocklast {
   float:left;
-  width:50%;
+  width:48%;
+  margin:0.5em;
 }
 #wl-main .blockmostpopular {
-  float:left;
-  width:50%;
+  float:right;
+  width:48%;
+  margin:0.5em;  
 }
 /*******************************************************************************/
 /* Navigation
@@ -91,7 +99,6 @@
   line-height:2em;  
   margin:0 auto;
   padding:0.5em;
-  width:70%;
 }
 #wl-main dl.wl-sublist dt {
   border-bottom:1px dashed #DDDDDD;
@@ -148,12 +155,14 @@
 #wl-main #ratingsratecontent h3 {
   display: none;
 }
+/*
 #wl-main #ratingsratecontent ul,
 #wl-main #ratingsratecontent form,
 #wl-main #ratingsratecontent {
   text-align:center;
   margin:0 auto;
 }
+*/
 
 /*******************************************************************************/
 /* Blocks
@@ -161,7 +170,7 @@
 
 #wl-main ol.lastweblinks,
 #wl-main ol.mostpopularweblinks {
-  margin:10px 5px 5px 20px;
+  margin:10px 5px 5px 30px;
   list-style:decimal;  
 }
 .mostpopularweblinks li,

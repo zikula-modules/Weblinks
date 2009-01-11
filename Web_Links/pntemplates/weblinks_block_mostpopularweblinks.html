@@ -4,12 +4,8 @@
   <!--[foreach from=$weblinks item=weblinks name=loop]-->
   <!--[* $smarty.foreach.loop.iteration *]-->
   <li>
-    <div class="tb">
-      <div>
-        <div><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnvarprepfordisplay]--></a></div>
-        <div><!--[$weblinks.hits|pnvarprepfordisplay]--></div>
-      </div>
-    </div>
+    <a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnvarprepfordisplay]--></a>
+    <em>(<!--[$weblinks.hits|pnvarprepfordisplay]-->)</em>
   </li>
   <!--[/foreach]-->
 </ol>

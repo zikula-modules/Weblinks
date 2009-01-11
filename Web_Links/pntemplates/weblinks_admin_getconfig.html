@@ -8,7 +8,7 @@
     <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Web_Links"]-->" />
     <fieldset>
       <legend><!--[pnml name="_WL_LINKSPERPAGE"]--></legend>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_LINKSPAGE"]--></label>
         <select name="config[perpage]" size="1">
           <option value="10"<!--[if $config.perpage eq '10']--> selected="selected"<!--[/if]-->>10</option>
@@ -19,7 +19,7 @@
           <option value="50"<!--[if $config.perpage eq '50']--> selected="selected"<!--[/if]-->>50</option>
         </select>
       </div>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_LINKSASNEW"]--></label>
         <select name="config[newlinks]" size="1">
           <option value="10"<!--[if $config.newlinks eq '10']--> selected="selected"<!--[/if]-->>10</option>
@@ -30,7 +30,7 @@
           <option value="50"<!--[if $config.newlinks eq '50']--> selected="selected"<!--[/if]-->>50</option>
         </select>
       </div>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_LINKSASBEST"]--></label>
         <select name="config[bestlinks]" size="1">
           <option value="10"<!--[if $config.bestlinks eq '10']--> selected="selected"<!--[/if]-->>10</option>
@@ -41,7 +41,7 @@
           <option value="50"<!--[if $config.bestlinks eq '50']--> selected="selected"<!--[/if]-->>50</option>
         </select>
       </div>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_LINKSINRES"]--></label>
         <select name="config[linksresults]">
           <option value="10"<!--[if $config.linksresults eq '10']--> selected="selected"<!--[/if]-->>10</option>
@@ -56,7 +56,7 @@
 
     <fieldset>
       <legend><!--[pnml name="_WL_LINKPOP"]--></legend>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_TOBEPOPULAR"]--></label>
         <select name="config[popular]" size="1">
           <option value="100"<!--[if $config.popular eq '100']--> selected="selected"<!--[/if]-->>100</option>
@@ -67,15 +67,15 @@
           <option value="2000"<!--[if $config.popular eq '2000']--> selected="selected"<!--[/if]-->>2000</option>
         </select>
       </div>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_MOSTPOPLINKSPERCENTRIGGER"]--></label>
         <input type="text" name="config[mostpoplinkspercentrigger]" value="<!--[$config.mostpoplinkspercentrigger]-->" size="4" />
       </div>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_MOSTPOPLINKS"]--></label>
         <input type="text" name="config[mostpoplinks]" value="<!--[$config.mostpoplinks]-->" size="4" />
       </div>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_TOPLINKS"]--></label>
         <input type="text" name="config[toplinks]" value="<!--[$config.toplinks]-->" size="4" />
       </div>
@@ -83,29 +83,29 @@
 
     <fieldset>
       <legend><!--[pnml name="_WL_LINKSETTINGS"]--></legend>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_FEATUREBOX"]--></label>
         <input type="radio" name="config[featurebox]" value="1"<!--[if $config.featurebox eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
         <input type="radio" name="config[featurebox]" value="0"<!--[if $config.featurebox eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
       </div>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_TARGETBLANK" html=true]--></label>
         <input type="radio" name="config[targetblank]" value="1"<!--[if $config.targetblank eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
         <input type="radio" name="config[targetblank]" value="0"<!--[if $config.targetblank eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
       </div>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_BLOCKUNREGMODIFY"]--></label>
         <input type="radio" name="config[blockunregmodify]" value="1"<!--[if $config.blockunregmodify eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
         <input type="radio" name="config[blockunregmodify]" value="0"<!--[if $config.blockunregmodify eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
       </div>
-      <div class="pn-adminformrow">
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[pnml name="_WL_ANONPOSTLINKS"]--></label>
         <input type="radio" name="config[links_anonaddlinklock]" value="1"<!--[if $config.links_anonaddlinklock eq '1']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_YES"]-->&nbsp;
         <input type="radio" name="config[links_anonaddlinklock]" value="0"<!--[if $config.links_anonaddlinklock eq '0']--> checked="checked"<!--[/if]--> /><!--[pnml name="_WL_NO"]-->
       </div>
     </fieldset>
 
-    <div class="pn-adminformrow pn-adminformbuttons">
+    <div class="pn-adminformrow pn-clearfix pn-adminformbuttons">
       <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_MODCONF" title="_WL_MODCONF"]-->
       <a href="<!--[pnmodurl modname=Web_Links type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a>
     </div>

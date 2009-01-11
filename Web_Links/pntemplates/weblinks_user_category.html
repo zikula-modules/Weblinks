@@ -1,38 +1,42 @@
 <!--[*  $Id$  *]-->
 <!--[include file="weblinks_user_header.html"]-->
-<div class="wl-borderbox wl-center">
+<div class="wl-borderbox">
 
-  <h3><!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$category.cat_id start=1 links=1 linkmyself=0]--></h3>
-  <!--[if $category.cdescription != ""]-->
-  <p><em><!--[$category.cdescription|pnvarprephtmldisplay]--></em></p>
-  <!--[/if]-->
+  <div class="wl-center">
+    <h3><!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$category.cat_id start=1 links=1 linkmyself=0]--></h3>
+    <!--[if $category.cdescription != ""]-->
+    <p><em><!--[$category.cdescription|pnvarprephtmldisplay]--></em></p>
+    <!--[/if]-->
 
-  <!--[if $subcategory]-->
-  <dl class="wl-sublist">
-    <dt><!--[pnml name="_WL_SUBCATSAVAILABLE"]--> <!--[$category.title|pnvarprepfordisplay]--> <!--[pnml name="_WL_SUBCATEGORIES"]-->:</dt>
-    <!--[foreach from=$subcategory item=subcategory]-->
-    <dd><a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->" class="wl-catsub"><!--[$subcategory.title|pnvarprepfordisplay]--></a> (<!--[countsublinks catid=$subcategory.cat_id]-->)&nbsp;<!--[subcategorynewlinkgraphic scatid=$subcategory.cat_id]--></dd>
-    <!--[/foreach]-->
-  </dl>
-  <!--[/if]-->
+    <!--[if $subcategory]-->
+    <dl class="wl-sublist">
+      <dt><!--[pnml name="_WL_SUBCATSAVAILABLE"]--> <!--[$category.title|pnvarprepfordisplay]--> <!--[pnml name="_WL_SUBCATEGORIES"]-->:</dt>
+      <!--[foreach from=$subcategory item=subcategory]-->
+      <dd><a href="<!--[pnmodurl modname=Web_Links type=user func=category cid=$subcategory.cat_id]-->" class="wl-catsub"><!--[$subcategory.title|pnvarprepfordisplay]--></a> (<!--[countsublinks catid=$subcategory.cat_id]-->)&nbsp;<!--[subcategorynewlinkgraphic scatid=$subcategory.cat_id]--></dd>
+      <!--[/foreach]-->
+    </dl>
+    <!--[/if]-->
+  </div>
 
   <!--[include file="weblinks_user_sortlinksbymenu.html"]-->
 
   <!--[foreach from=$weblinks item=weblinks]-->
   <dl class="wl-linkbox">
     <dt><strong><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></strong></dt>
-    <dd>
-      <!--[if $userpermission == "admin"]-->
-      <a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
-      <!--[/if]-->
-      <!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]-->
-    </dd>
+    <!--[if $weblinks.description]-->
+    <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]--></p></dd>
+    <!--[/if]-->
     <dd><!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]--></dd>
     <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Web_Links returnurl=$returnurl implode=false]-->
     <!--[if $hooks.Ratings]-->
     <dd><!--[ $hooks.Ratings ]--></dd>
     <!--[/if]-->
-    <dd><!--[include file="weblinks_user_linkbottommenu.html"]--></dd>
+    <dd>
+      <!--[include file="weblinks_user_linkbottommenu.html"]-->
+      <!--[if $userpermission == "admin"]-->
+      <a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
+      <!--[/if]-->      
+    </dd>
   </dl>
   <!--[/foreach]-->
 
