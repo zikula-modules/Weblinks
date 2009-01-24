@@ -43,6 +43,10 @@
   margin:1em 0;
 }
 
+#wl-main h2, h3 {
+  border-bottom: 1px dotted #D9DCC2;
+}
+
 /*******************************************************************************/
 /* LinkBox
 /*******************************************************************************/
@@ -55,7 +59,7 @@
 #wl-main .wl-linkbox dt {
   font-size:1.3em;
   margin:5px;
-}  
+}
 #wl-main .wl-linkbox dd {
   margin:5px;
 }
@@ -72,7 +76,7 @@
 #wl-main .blockmostpopular {
   float:right;
   width:48%;
-  margin:0.5em;  
+  margin:0.5em;
 }
 /*******************************************************************************/
 /* Navigation
@@ -96,7 +100,7 @@
 
 #wl-main dl.wl-sublist {
   list-style: none;
-  line-height:2em;  
+  line-height:2em;
   margin:0 auto;
   padding:0.5em;
 }
@@ -171,7 +175,7 @@
 #wl-main ol.lastweblinks,
 #wl-main ol.mostpopularweblinks {
   margin:10px 5px 5px 30px;
-  list-style:decimal;  
+  list-style:decimal;
 }
 .mostpopularweblinks li,
 .lastweblinks li {

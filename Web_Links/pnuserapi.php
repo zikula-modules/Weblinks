@@ -597,14 +597,14 @@ function Web_Links_userapi_weblinksbydate($args)
     }
 
     for (; !$result->EOF; $result->MoveNext()) {
-        list($lid, $cid, $title, $description, $time, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
+        list($lid, $cid, $title, $description, $date, $hits, $linkratingsummary, $totalvotes, $totalcomments) = $result->fields;
         if (SecurityUtil::checkPermission('Web_Links::Category', "$title::$cid", ACCESS_READ) ||
             SecurityUtil::checkPermission('Web_Links::Item', "$title::$lid", ACCESS_READ)) {
             $weblinks[] = array('lid' => $lid,
                                 'cid' => $cid,
                                 'title' => $title,
                                 'description' => $description,
-                                'time' => $time,
+                                'date' => $date,
                                 'hits' => $hits,
                                 'linkratingsummary' => $linkratingsummary,
                                 'totalvotes' => $totalvotes,
@@ -891,6 +891,8 @@ function Web_Links_userapi_countsublinks()
 
 function Web_Links_userapi_lastweblinks()
 {
+    $args['numlinks'] = pnModGetVar('Web_Links', 'linksinblock');
+   
     if (!isset($args['startnum']) || empty($args['startnum'])) {
         $args['startnum'] = 1;
     }
@@ -932,6 +934,8 @@ function Web_Links_userapi_lastweblinks()
 
 function Web_Links_userapi_mostpopularweblinks()
 {
+    $args['numlinks'] = pnModGetVar('Web_Links', 'linksinblock');
+    
     if (!isset($args['startnum']) || empty($args['startnum'])) {
         $args['startnum'] = 1;
     }

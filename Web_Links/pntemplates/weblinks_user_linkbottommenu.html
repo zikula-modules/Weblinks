@@ -1,4 +1,7 @@
 <!--[*  $Id$  *]-->
+<!--[if $userpermission == "admin"]-->
+<a href="<!--[pnmodurl modname=Web_Links type=admin func=modify lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a> |
+<!--[/if]-->
 <!--[if $access_comment_cat && $access_comment_link]-->
 <a href="<!--[pnmodurl modname=Web_Links type=user func=modifylinkrequest lid=$weblinks.lid]-->"><!--[pnml name="_WL_MODIFY"]--></a> |
 <!--[/if]-->

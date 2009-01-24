@@ -22,7 +22,7 @@
   <!--[include file="weblinks_user_sortlinksbymenu.html"]-->
   <!--[foreach from=$weblinks item=weblinks]-->
   <dl class="wl-linkbox">
-    <dt><strong><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></strong></dt>
+    <dt><strong><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></strong></dt>
     <dd><!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblinks.cat_id start=1 links=1 linkmyself=1]--></dd>
     <!--[if $weblinks.description]-->
     <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]--></p></dd>

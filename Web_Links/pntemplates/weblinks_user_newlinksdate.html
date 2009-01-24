@@ -1,12 +1,12 @@
 <!--[*  $Id$  *]-->
 <!--[include file="weblinks_user_header.html"]-->
 <div class="wl-borderbox">
-  
+
   <h3><!--[$dateview|pnvarprepfordisplay]--> - <!--[$totallinks|pnvarprepfordisplay]--> <!--[if $totallinks == 1]--><!--[pnml name="_WL_NEWLINK"]--><!--[else]--><!--[pnml name="_WL_NEWLINKS"]--><!--[/if]--></h3>
 
   <!--[foreach from=$weblinks item=weblinks]-->
   <dl class="wl-linkbox">
-    <dt><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></dt>
+    <dt><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></dt>
     <dd><!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblinks.cid start=1 links=1 linkmyself=1]--></dd>
     <!--[if $weblinks.description]-->
     <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]--></p></dd>
@@ -18,9 +18,6 @@
     <!--[/if]-->
     <dd>
       <!--[include file="weblinks_user_linkbottommenu.html"]-->
-      <!--[if $userpermission == "admin"]-->
-      <a href="<!--[pnmodurl modname=Web_Links type=admin func=modify lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
-      <!--[/if]-->
     </dd>
   </dl>
   <!--[/foreach]-->

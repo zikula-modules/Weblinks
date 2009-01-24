@@ -60,6 +60,7 @@ function Web_Links_mostpopularweblinksblock_display($blockinfo)
     }
 
     $pnRender->assign('weblinks', pnModAPIFunc('Web_Links', 'user', 'mostpopularweblinks'));
+    $pnRender->assign('tb', pnModGetVar('Web_Links', 'targetblank'));
 
     // Populate block info and pass to theme
     $blockinfo['content'] = $pnRender->fetch('weblinks_block_mostpopularweblinks.html');

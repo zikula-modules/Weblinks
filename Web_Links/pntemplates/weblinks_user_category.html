@@ -22,7 +22,7 @@
 
   <!--[foreach from=$weblinks item=weblinks]-->
   <dl class="wl-linkbox">
-    <dt><strong><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></strong></dt>
+    <dt><strong><a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></strong></dt>
     <!--[if $weblinks.description]-->
     <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]--></p></dd>
     <!--[/if]-->
@@ -33,9 +33,6 @@
     <!--[/if]-->
     <dd>
       <!--[include file="weblinks_user_linkbottommenu.html"]-->
-      <!--[if $userpermission == "admin"]-->
-      <a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
-      <!--[/if]-->      
     </dd>
   </dl>
   <!--[/foreach]-->

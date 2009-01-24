@@ -864,6 +864,11 @@ function Web_Links_admin_updateconfig() //fertig
     }
     pnModSetVar('Web_Links', 'toplinkspercentrigger', $config['toplinkspercentrigger']);
 
+    if ( !isset($config['linksinblock']) || !is_numeric($config['linksinblock']) ) {
+        $config['linksinblock'] = 10;
+    }
+    pnModSetVar('Web_Links', 'linksinblock', $config['linksinblock']);
+
     if ( !isset($config['toplinks']) || !is_numeric($config['toplinks']) ) {
         $config['toplinks'] = 25;
     }
