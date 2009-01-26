@@ -11,3 +11,11 @@ Upload;
 Regenerate;
 Upgrade;
 Activate.
+
+#######################################
+###   Hint for the pending module   ###
+#######################################
+
+Name: New Links
+URL:  index.php?module=Web_Links&type=admin
+SQL:  select count(*) from zk_links_newlink
