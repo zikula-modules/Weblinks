@@ -4,12 +4,12 @@
  *
  * Web_Links
  *
- * @version $Id: function.ezcommentscounter.php 40 2009-01-09 14:13:23Z herr.vorragend $
+ * @version $Id$
  * @copyright 2008 by Petzi-Juist
  * @link http://www.petzi-juist.de
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
- 
+
 /**
  * Smarty function to obtain the EZComments counter
  *
