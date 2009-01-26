@@ -1,0 +1,13 @@
+Install as any other pnAPI compatible module:
+
+Upload;
+Regenerate;
+Initialize;
+Activate.
+
+Upgrade from earlier versions just like any other pnAPI compatible module:
+
+Upload;
+Regenerate;
+Upgrade;
+Activate.
