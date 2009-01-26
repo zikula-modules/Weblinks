@@ -9,3 +9,6 @@
 <!--[if $access_read_cat && $access_read_link]-->
 | <a href="<!--[pnmodurl modname=Web_Links type=user func=viewlinkdetails lid=$weblinks.lid]-->"><!--[pnml name="_WL_DETAILS"]--></a>
 <!--[/if]-->
+<!--[if $hooks.EZComments]-->
+| <a href="<!--[pnmodurl modname=Web_Links type=user func=viewlinkdetails lid=$weblinks.lid]-->"><!--[ezcommentscounter lid=$weblinks.lid]--></a>
+<!--[/if]-->

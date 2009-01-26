@@ -32,7 +32,7 @@ define('_WL_EDITORIAL', 'Editorial');
 define('_WL_EDITORIALBY', 'Editorial von');
 define('_WL_EDITTHISLINK', 'Link editieren');
 define('_WL_EMAILWHENADD', 'bei Freischaltung erfolgt eine Benachrichtigung');
-define('_WL_FEELFREE2ADD', 'Kommentar verfassen.');
+define('_WL_FEELFREE2ADD', 'Kommentar verfassen');
 define('_WL_GOBACK', 'Zurück');
 define('_WL_HIGHRATING', 'Hohe Bewertung');
 define('_WL_HITS', 'Hits');

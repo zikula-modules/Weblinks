@@ -25,5 +25,10 @@
   </p>
 
   <p>[ <a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblink.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[pnml name="_WL_VISITTHISSITE"]--></a> ]</p>
+
+
+  <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblink.lid module=Web_Links returnurl=$returnurl implode=false]-->
+  <!--[ $hooks.EZComments ]-->
+
 </div>
 <!--[include file="weblinks_user_footer.html"]-->

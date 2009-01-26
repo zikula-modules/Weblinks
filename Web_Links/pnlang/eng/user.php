@@ -33,7 +33,7 @@ define('_WL_EDITORIAL', 'Editorial');
 define('_WL_EDITORIALBY', 'Editorial by');
 define('_WL_EDITTHISLINK', 'Edit this link');
 define('_WL_EMAILWHENADD', 'Thank you! You\'ll receive an e-mail message when it\'s approved.');
-define('_WL_FEELFREE2ADD', 'Please feel free to add a comment on this site.');
+define('_WL_FEELFREE2ADD', 'Add a comment');
 define('_WL_GOBACK', 'Back');
 define('_WL_HIGHRATING', 'High rating');
 define('_WL_HITS', 'hits');
