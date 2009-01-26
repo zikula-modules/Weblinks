@@ -52,10 +52,11 @@
   <div class="blockmostpopular">
     <h4><!--[pnml name="_WL_MOSTPOPULARWEBLINKS"]--></h4>
     <!--[if $blockmostpop]-->
-    <ol class="lastweblinks">
+    <ol class="mostpopularweblinks">
       <!--[foreach from=$blockmostpop item=weblinks name=loop]-->
       <li>
         <a href="<!--[pnmodurl modname=Web_Links type=user func=visit lid=$weblinks.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a>
+        <em>(<!--[$weblinks.hits|pnvarprepfordisplay]-->)</em>
       </li>
       <!--[/foreach]-->
     </ol>

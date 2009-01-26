@@ -28,15 +28,16 @@
     <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Web_Links"]--></p></dd>
     <!--[/if]-->
     <dd><!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]--></dd>
+    <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Web_Links returnurl=$returnurl implode=false]-->
+    <!--[if $hooks.Ratings]-->
+    <dd><!--[ $hooks.Ratings ]--></dd>
+    <!--[/if]-->
     <dd>
       <!--[include file="weblinks_user_linkbottommenu.html"]-->
-      <!--[if $userpermission eq "admin"]-->
-      <a href="<!--[pnmodurl modname=Web_Links type=admin func=modlink lid=$weblinks.lid]-->"><!--[pnimg modname=core src=editpaste.gif set=icons/extrasmall altml=true titleml=true alt="_WL_EDITTHISLINK" title="_WL_EDITTHISLINK"]--></a>
-      <!--[/if]-->
     </dd>
   </dl>
   <!--[/foreach]-->
-  <!--[pager show="page" rowcount=$pager.numlinks limit=$pager.itemsperpage posvar=startnum shift=1]-->
+  <!--[pager show="page" rowcount=$wlpager.numlinks limit=$wlpager.itemsperpage posvar=startnum shift=1]-->
 
   <!--[else]-->
   <p class="wl-center"><em><!--[pnml name="_WL_NOMATCHES"]--> [ <a href="<!--[pnmodurl modname=Web_Links type=user func=view]-->"><!--[pnml name="_WL_GOBACK"]--></a> ]</em></p>
