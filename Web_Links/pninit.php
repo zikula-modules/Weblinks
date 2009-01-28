@@ -22,11 +22,6 @@ function web_links_init()
         return false;
     }
 
-    // creating editorials table
-    if (!DBUtil::createTable('links_editorials')) {
-        return false;
-    }
-
     // creating links table
     if (!DBUtil::createTable('links_links')) {
         return false;
@@ -42,26 +37,13 @@ function web_links_init()
         return false;
     }
 
-    // creating votedata table
-    if (!DBUtil::createTable('links_votedata')) {
-        return false;
-    }
-
     // web_links settings
     pnModSetVar('Web_Links', 'perpage', 10);
-    pnModSetVar('Web_Links', 'anonwaitdays', 1);
-    pnModSetVar('Web_Links', 'outsidewaitdays', 1);
-    pnModSetVar('Web_Links', 'useoutsidevoting', 1);
-    pnModSetVar('Web_Links', 'anonweight', 10);
-    pnModSetVar('Web_Links', 'outsideweight', 20);
-    pnModSetVar('Web_Links', 'detailvotedecimal', 2);
-    pnModSetVar('Web_Links', 'mainvotedecimal', 1);
     pnModSetVar('Web_Links', 'toplinkspercentrigger', 0);
     pnModSetVar('Web_Links', 'toplinks', 25);
     pnModSetVar('Web_Links', 'mostpoplinkspercentrigger', 0);
     pnModSetVar('Web_Links', 'mostpoplinks', 25);
     pnModSetVar('Web_Links', 'featurebox', 1);
-    pnModSetVar('Web_Links', 'linkvotemin', 5);
     pnModSetVar('Web_Links', 'blockunregmodify', 0);
     pnModSetVar('Web_Links', 'popular', 500);
     pnModSetVar('Web_Links', 'newlinks', 10);
@@ -90,29 +72,22 @@ function web_links_upgrade($oldversion)
     switch($oldversion) {
         case '1.0':
 
-        pnModSetVar('Web_Links', 'perpage', 10);
-        pnModSetVar('Web_Links', 'anonwaitdays', 1);
-        pnModSetVar('Web_Links', 'outsidewaitdays', 1);
-        pnModSetVar('Web_Links', 'useoutsidevoting', 1);
-        pnModSetVar('Web_Links', 'anonweight', 10);
-        pnModSetVar('Web_Links', 'outsideweight', 20);
-        pnModSetVar('Web_Links', 'detailvotedecimal', 2);
-        pnModSetVar('Web_Links', 'mainvotedecimal', 1);
-        pnModSetVar('Web_Links', 'toplinkspercentrigger', 0);
-        pnModSetVar('Web_Links', 'toplinks', 25);
-        pnModSetVar('Web_Links', 'mostpoplinkspercentrigger', 0);
-        pnModSetVar('Web_Links', 'mostpoplinks', 25);
-        pnModSetVar('Web_Links', 'featurebox', 1);
-        pnModSetVar('Web_Links', 'linkvotemin', 5);
-        pnModSetVar('Web_Links', 'blockunregmodify', 0);
-        pnModSetVar('Web_Links', 'popular', 500);
-        pnModSetVar('Web_Links', 'newlinks', 10);
-        pnModSetVar('Web_Links', 'bestlinks', 10);
-        pnModSetVar('Web_Links', 'linksresults', 10);
-        pnModSetVar('Web_Links', 'links_anonaddlinklock', 1);
-        pnModSetVar('UpDownload', 'showlastxdownloads', 1);
-        pnModSetVar('Web_Links', 'targetblank', 0);
-        pnModSetVar('Web_Links', 'linksinblock', 10);
+
+
+    pnModSetVar('Web_Links', 'perpage', 10);
+    pnModSetVar('Web_Links', 'toplinkspercentrigger', 0);
+    pnModSetVar('Web_Links', 'toplinks', 25);
+    pnModSetVar('Web_Links', 'mostpoplinkspercentrigger', 0);
+    pnModSetVar('Web_Links', 'mostpoplinks', 25);
+    pnModSetVar('Web_Links', 'featurebox', 1);
+    pnModSetVar('Web_Links', 'blockunregmodify', 0);
+    pnModSetVar('Web_Links', 'popular', 500);
+    pnModSetVar('Web_Links', 'newlinks', 10);
+    pnModSetVar('Web_Links', 'bestlinks', 10);
+    pnModSetVar('Web_Links', 'linksresults', 10);
+    pnModSetVar('Web_Links', 'links_anonaddlinklock', 1);
+    pnModSetVar('Web_Links', 'targetblank', 0);
+    pnModSetVar('Web_Links', 'linksinblock', 10);
 
            break;
     }
@@ -131,10 +106,6 @@ function web_links_delete()
         return false;
     }
 
-    if (!DBUtil::dropTable('links_editorials')) {
-        return false;
-    }
-
     if (!DBUtil::dropTable('links_links')) {
         return false;
     }
@@ -144,10 +115,6 @@ function web_links_delete()
     }
 
     if (!DBUtil::dropTable('links_newlink')) {
-        return false;
-    }
-
-    if (!DBUtil::dropTable('links_votedata')) {
         return false;
     }
 

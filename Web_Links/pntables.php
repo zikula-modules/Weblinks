@@ -29,18 +29,6 @@ function web_links_pntables()
                                                      'title'        => 'C(50) NOTNULL DEFAULT \'\'',
                                                      'cdescription' => 'X NOTNULL DEFAULT \'\'');
 
-    $pntable['links_editorials'] = DBUtil::getLimitedTablename('links_editorials');
-    $pntable['links_editorials_column']     = array ('linkid'             => 'pn_linkid',
-                                                     'adminid'            => 'pn_adminid',
-                                                     'editorialtimestamp' => 'pn_timestamp',
-                                                     'editorialtext'      => 'pn_text',
-                                                     'editorialtitle'     => 'pn_title');
-    $pntable['links_editorials_column_def'] = array ('linkid'             => 'I NOTNULL DEFAULT 0 PRIMARY',
-                                                      'adminid'            => 'C(60) NOTNULL DEFAULT \'\'',
-                                                      'editorialtimestamp' => 'T NOTNULL DEFAULT \'1970-01-01 00:00:00\'',
-                                                      'editorialtext'      => 'X NOTNULL DEFAULT \'\'',
-                                                      'editorialtitle'     => 'C(100) NOTNULL DEFAULT \'\'');
-
     $pntable['links_links'] = DBUtil::getLimitedTablename('links_links');
     $pntable['links_links_column']     = array ('lid'               => 'pn_lid',
                                                 'cat_id'            => 'pn_cat_id',

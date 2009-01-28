@@ -24,10 +24,11 @@ function Web_Links_adminapi_getlinks()
     pnModLangLoad('Web_Links', 'admin');
 
     $links = array();
-    $links[] = array('url' => pnModURL('Web_Links', 'admin', 'view'),          'text' => _WL_OVERVIEW);
-    $links[] = array('url' => pnModURL('Web_Links', 'admin', 'catview'),      'text' => _WL_CATVIEW);
-    $links[] = array('url' => pnModURL('Web_Links', 'admin', 'linkview'),      'text' => _WL_LINKVIEW);
+    $links[] = array('url' => pnModURL('Web_Links', 'admin', 'view'),        'text' => _WL_OVERVIEW);
+    $links[] = array('url' => pnModURL('Web_Links', 'admin', 'catview'),     'text' => _WL_CATVIEW);
+    $links[] = array('url' => pnModURL('Web_Links', 'admin', 'linkview'),    'text' => _WL_LINKVIEW);
     $links[] = array('url' => pnModURL('Web_Links', 'admin', 'getconfig'),   'text' => _WL_MODCONF);
+    $links[] = array('url' => pnModURL('Web_Links', 'admin', 'import'),      'text' => _WL_IMPORT);
 
     return $links;
 }

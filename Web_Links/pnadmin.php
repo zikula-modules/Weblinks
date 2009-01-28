@@ -929,3 +929,127 @@ function Web_Links_admin_updateconfig() //fertig
 
     return pnRedirect(pnModURL('Web_Links', 'admin', 'getconfig'));
 }
+
+function Web_Links_admin_import()
+{
+    // Security check
+    if ((!SecurityUtil::checkPermission('Web_Links::Category', '::', ACCESS_ADMIN)) &&
+        (!SecurityUtil::checkPermission('Web_Links::Link', '::', ACCESS_ADMIN))) {
+        return LogUtil::registerPermissionError();
+    }
+
+    // Create output object
+    $pnRender = pnRender::getInstance('Web_Links', false);
+
+    if (pnModAvailable('EZComments') && pnModIsHooked('EZComments', 'Web_Links')) {
+        $pnRender->assign('ezcomments', 1);
+    } else {
+        $pnRender->assign('ezcomments', 0);
+    }
+
+    if (pnModAvailable('Ratings') && pnModIsHooked('Ratings', 'Web_Links')) {
+        $pnRender->assign('ratings', 1);
+    } else {
+        $pnRender->assign('ratings', 0);
+    }
+
+    return $pnRender->fetch('weblinks_admin_import.html');
+}
+
+function Web_Links_admin_importratings()
+{
+    // Security check
+    if ((!SecurityUtil::checkPermission('Web_Links::Category', '::', ACCESS_ADMIN)) &&
+        (!SecurityUtil::checkPermission('Web_Links::Link', '::', ACCESS_ADMIN))) {
+        return LogUtil::registerPermissionError();
+    }
+
+    // Confirm authorisation code.
+    if (!SecurityUtil::confirmAuthKey()) {
+        return LogUtil::registerAuthidError();
+    }
+
+    // Security check
+    if (!pnSecAuthAction(0, 'Ratings::', "::", ACCESS_ADMIN)) {
+        return LogUtil::registerError('Web_Links migration: Not Admin');
+    }
+
+    if (!pnModAvailable('Ratings')) {
+          return LogUtil::RegisterError('Ratings not available');
+    }
+
+    pnModDBInfoLoad('Ratings');
+    $pntable = pnDBGetTables();
+    $links_linksdatacolumn = $pntable['links_links_column'];
+    $where = "WHERE $links_linksdatacolumn[totalvotes] != '0'";
+    $votes = DBUtil::SelectObjectArray('links_links', $where);
+    $counter=0;
+    $ratingtype = pnModGetVar('Ratings', 'defaultstyle');
+    foreach ($votes as $v) {
+        $obj = array ('module'    =>    'Web_Links',
+                      'itemid'     =>    $v['lid'],
+                      'ratingtype' =>    $ratingtype,
+                      'rating'     =>    ceil($v['linkratingsummary']*10),
+                      'numratings' =>    $v['totalvotes']);
+
+        if (!DBUtil::insertObject($obj, 'ratings')) return LogUtil::registerError('error inserting votes in ratings table');
+        $counter++;
+    }
+    LogUtil::registerStatus('migrated: '.$counter.' votes from Web_Links to Ratings');
+
+    return pnRedirect(pnModURL('Web_Links', 'admin', 'view'));
+}
+
+function Web_Links_admin_importezcomments()
+{
+    // Security check
+    if ((!SecurityUtil::checkPermission('Web_Links::Category', '::', ACCESS_ADMIN)) &&
+        (!SecurityUtil::checkPermission('Web_Links::Link', '::', ACCESS_ADMIN))) {
+        return LogUtil::registerPermissionError();
+    }
+
+    // Confirm authorisation code.
+    if (!SecurityUtil::confirmAuthKey()) {
+        return LogUtil::registerAuthidError();
+    }
+
+    // Security check
+    if (!pnSecAuthAction(0, 'EZComments::', "::", ACCESS_ADMIN)) {
+        return LogUtil::registerError('Web_Links migration: Not Admin');
+    }
+
+    if (!pnModAvailable('EZComments')) {
+          return LogUtil::RegisterError('EZComments not available');
+    }
+
+    pnModDBInfoLoad('EZComments');
+    $pntable = pnDBGetTables();
+    $links_votedatacolumn = $pntable['links_votedata_column'];
+    $where = "WHERE $links_votedatacolumn[ratingcomments] != ''";
+    $comments = DBUtil::SelectObjectArray('links_votedata', $where);
+    $counter=0;
+
+    foreach ($comments as $c) {
+        $links_linksdatacolumn = $pntable['links_links_column'];
+        $where = "WHERE $links_linksdatacolumn[lid] = ".$c['ratinglid'];
+        $user = DBUtil::SelectObject('links_links', $where);
+        if ($c['ratinguser'] == "Anonymous") {
+            $c['ratinguser'] = _GUEST;
+        }
+        $obj = array ('modname'    =>    'Web_Links',
+                      'objectid'   =>    $c['ratinglid'],
+                      'url'        =>    pnGetBaseURL().'index.php?module=Weblinks&func=viewlinkdetails&lid='.$c['ratinglid'],
+                      'date'       =>    $c['ratingtimestamp'],
+                      'uid'        =>    pnUserGetIDFromName($c['ratinguser']),
+                      'owneruid'   =>    pnUserGetIDFromName($user['submitter']),
+                      'comment'    =>    $c['ratingcomments'],
+                      'subject'    =>    '',
+                      'replyto'    =>    -1,
+                      'ipaddr'     =>    $c['ratinghostname']);
+        if (!DBUtil::insertObject($obj, 'EZComments')) return LogUtil::registerError('error inserting comments in ezcomments table');
+        $counter++;
+    }
+    LogUtil::registerStatus('migrated: '.$counter.' comments from Web_Links to EZComments');
+
+    return pnRedirect(pnModURL('Web_Links', 'admin', 'view'));
+}

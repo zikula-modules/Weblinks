@@ -243,7 +243,8 @@ function Web_Links_userapi_link($args)
                    $weblinkscolumn[date],
                    $weblinkscolumn[name],
                    $weblinkscolumn[email],
-                   $weblinkscolumn[hits]
+                   $weblinkscolumn[hits],
+                   $weblinkscolumn[submitter]
             FROM $weblinkstable
             WHERE $weblinkscolumn[lid] = '" . (int)DataUtil::formatForStore($lid) . "'";
     $result =& $dbconn->Execute($sql);
@@ -259,7 +260,7 @@ function Web_Links_userapi_link($args)
     }
 
     // Obtain the item information from the result set
-    list($lid, $cat_id, $title, $url, $description, $date, $name, $email, $hits) = $result->fields;
+    list($lid, $cat_id, $title, $url, $description, $date, $name, $email, $hits, $submitter) = $result->fields;
 
     $result->Close();
 
@@ -277,7 +278,8 @@ function Web_Links_userapi_link($args)
                   'date' => $date,
                   'name' => $name,
                   'email' => $email,
-                  'hits' => $hits);
+                  'hits' => $hits,
+                  'submitter' => $submitter);
 
     // Return the link array
     return $link;
@@ -892,7 +894,7 @@ function Web_Links_userapi_countsublinks()
 function Web_Links_userapi_lastweblinks()
 {
     $args['numlinks'] = pnModGetVar('Web_Links', 'linksinblock');
-   
+
     if (!isset($args['startnum']) || empty($args['startnum'])) {
         $args['startnum'] = 1;
     }
@@ -935,7 +937,7 @@ function Web_Links_userapi_lastweblinks()
 function Web_Links_userapi_mostpopularweblinks()
 {
     $args['numlinks'] = pnModGetVar('Web_Links', 'linksinblock');
-    
+
     if (!isset($args['startnum']) || empty($args['startnum'])) {
         $args['startnum'] = 1;
     }
