@@ -1,9 +1,17 @@
+#######################################
+###          Installation           ###
+#######################################
+
 Install as any other pnAPI compatible module:
 
 Upload;
 Regenerate;
 Initialize;
 Activate.
+
+#######################################
+###             Update              ###
+#######################################
 
 Upgrade from earlier versions just like any other pnAPI compatible module:
 
@@ -19,3 +27,5 @@ Activate.
 Name: New Links
 URL:  index.php?module=Web_Links&type=admin
 SQL:  select count(*) from zk_links_newlink
+
+// zk_ if this is your table prefix
