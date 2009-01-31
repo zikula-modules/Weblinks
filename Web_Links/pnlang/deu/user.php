@@ -15,6 +15,7 @@ define('_WL_ADDALINK', 'neuen Link hinzufügen');
 define('_WL_ADDEDON', 'Hinzugefügt am');
 define('_WL_ADDURL', 'Diese URL hinzufügen');
 define('_WL_AND', 'und');
+define('_WL_BREAKDOWNBYVAL', 'Aufschlüsselung der Bewertungen nach Werten');
 define('_WL_CATEGORIES', 'Kategorien');
 define('_WL_CATEGORY', 'Kategorie');
 define('_WL_CHECKFORIT', 'keine E-Mail-Adresse angegeben - der Link wird trotzdem geprüft.');
