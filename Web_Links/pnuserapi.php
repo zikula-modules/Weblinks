@@ -797,7 +797,7 @@ function Web_Links_userapi_existingurl($args)
 function Web_Links_userapi_add($args)
 {
     // Security check
-    if (!SecurityUtil::checkPermission('Web_Links::', "::", ACCESS_COMMENT)) {
+    if (!SecurityUtil::checkPermission('Web_Links::Link', "::", ACCESS_ADD)) {
         return LogUtil::registerPermissionError();
     }
 

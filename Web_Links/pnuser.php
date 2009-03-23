@@ -548,7 +548,7 @@ function Web_Links_user_add($args)
     $newlink = FormUtil::getPassedValue('newlink', isset($args['newlink']) ? $args['newlink'] : null, 'POST');
 
     // Security check
-    if (!SecurityUtil::checkPermission('Web_Links::Link', '::', ACCESS_ADD)) {
+    if (!SecurityUtil::checkPermission('Web_Links::Link', "::", ACCESS_ADD)) {
         return LogUtil::registerPermissionError();
     }
 

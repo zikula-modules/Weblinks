@@ -18,8 +18,8 @@ function Web_Links_admin_main() // fertig
 function Web_Links_admin_view()
 {
     // Security check
-    if ((!SecurityUtil::checkPermission('Web_Links::Category', '::', ACCESS_EDIT)) &&
-        (!SecurityUtil::checkPermission('Web_Links::Link', '::', ACCESS_EDIT))) {
+    if ((!SecurityUtil::checkPermission('Web_Links::Category', '::', ACCESS_DELETE)) &&
+        (!SecurityUtil::checkPermission('Web_Links::Link', '::', ACCESS_DELETE))) {
         return LogUtil::registerPermissionError();
     }
 
