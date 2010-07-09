@@ -259,9 +259,8 @@ function Web_Links_admin_linkview() // fertig
 
     $pnRender->assign('catnum', pnModAPIFunc('Web_Links', 'user', 'catnum'));
     $pnRender->assign('numrows', pnModAPIFunc('Web_Links', 'user', 'numrows'));
-    if (pnUserLoggedIn()) {
-        $pnRender->assign('submitter', pnUserGetVar('uname'));
-    }
+    $pnRender->assign('submitter', pnUserGetVar('uname'));
+    $pnRender->assign('submitteremail', pnUserGetVar('email'));
 
     return $pnRender->fetch('weblinks_admin_linkview.html');
 }
