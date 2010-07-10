@@ -572,8 +572,10 @@ function Web_Links_user_add($args)
     $newlink = FormUtil::getPassedValue('newlink', isset($args['newlink']) ? $args['newlink'] : null, 'POST');
 
     // Security check
-    if (!SecurityUtil::checkPermission('Web_Links::', "::", ACCESS_COMMENT)) {
-        return LogUtil::registerPermissionError();
+    if (pnModGetVar('Web_Links', 'links_anonaddlinklock') == 1) {
+        if (!SecurityUtil::checkPermission('Web_Links::', "::", ACCESS_COMMENT)) {
+            return LogUtil::registerPermissionError();
+        }
     }
 
     // Confirm authorisation code
