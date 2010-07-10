@@ -133,5 +133,5 @@ define('_WL_VOTESTORATINGS', '<strong>Web_Links-Bewertungen</strong> werden mit 
 define('_WL_WEAPPROVED', 'Der folgende Eintrag wurde in die Weblinks aufgenommen: ');
 define('_WL_WEBLINKS', 'Weblinks');
 define('_WL_YES', 'Ja');
-define('_WL_YOUCANBROWSEUS', 'unsere Weblinks online: ');
+define('_WL_YOUCANBROWSEUS', 'Unsere Weblinks online: ');
 define('_WL_YOURLINKAT', 'Link bei');

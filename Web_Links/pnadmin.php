@@ -329,12 +329,12 @@ function Web_Links_admin_addlink() //geht
             } else {
                 // $from = $adminmail; ??
                 $subject = _WL_YOURLINKAT." ".DataUtil::formatForDisplay($sitename);
-                $message = _WL_HELLO." ".DataUtil::formatForDisplay($link['name']).":\n\n"._WL_WEAPPROVED."\n\n"._WL_LINKTITLE
+                $message = _WL_HELLO." ".DataUtil::formatForDisplay($link['name']).",\n\n"._WL_WEAPPROVED."\n\n"._WL_LINKTITLE
                 .": ".DataUtil::formatForDisplay($link['title'])."\n"._WL_URL.": ".DataUtil::formatForDisplay($link['url'])."\n"._WL_DESCRIPTION.": ".DataUtil::formatForDisplayHTML($link['description'])."\n\n\n"
                 ._WL_YOUCANBROWSEUS. " " .pnGetBaseURL() . "index.php?module=Web_Links\n\n"
                 ._WL_THANKS4YOURSUBMISSION."\n\n".DataUtil::formatForDisplay($sitename)." "._WL_TEAM."";
                 // send the e-mail
-                pnModAPIFunc('Mailer', 'user', 'sendmessage', array('toaddress' => $email, 'subject' => $subject, 'body' => $message));
+                pnModAPIFunc('Mailer', 'user', 'sendmessage', array('toaddress' => $link['email'], 'subject' => $subject, 'body' => $message));
             }
 
             LogUtil::registerStatus (_WL_NEWLINKADDED);
