@@ -130,7 +130,7 @@ define('_WL_USERMODREQUEST','Link-Änderungswünsche');
 define('_WL_USERREPBROKEN', 'als defekt gemeldete Links');
 define('_WL_VISIT', 'Besuche URL');
 define('_WL_VOTESTORATINGS', '<strong>Web_Links-Bewertungen</strong> werden mit diese Funktion in das <strong>Rating-Modul</strong> importiert.<br /><strong>!Achtung!</strong> - vor Ausführung der Funktion sollte im Bewertungsmodul der Stil der Bewertung festgelegt sein.');
-define('_WL_WEAPPROVED', 'Der folgende Eintrag wurde in die Weblinks aufgenommen: ');
+define('_WL_WEAPPROVED', 'der folgende Eintrag wurde in die Weblinks aufgenommen: ');
 define('_WL_WEBLINKS', 'Weblinks');
 define('_WL_YES', 'Ja');
 define('_WL_YOUCANBROWSEUS', 'Unsere Weblinks online: ');

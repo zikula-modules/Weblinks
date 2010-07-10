@@ -130,7 +130,7 @@ define('_WL_USERMODREQUEST','User link modification requests');
 define('_WL_USERREPBROKEN', 'User-reported broken links');
 define('_WL_VISIT', 'Visit');
 define('_WL_VOTESTORATINGS', 'With this function <strong>Web_Links-Votes</strong> will be imported to the <strong>Rating</strong> module.<br /><strong>!Attention!</strong> - befor you use this function you should set the style of the Ratings.');
-define('_WL_WEAPPROVED', 'Your link submission has been approved for the site\'s search engine. ');
+define('_WL_WEAPPROVED', 'your link submission has been approved for the site\'s search engine. ');
 define('_WL_WEBLINKS', 'Web links');
 define('_WL_YES', 'yes');
 define('_WL_YOUCANBROWSEUS', 'The site\'s search engine is available at: ');
