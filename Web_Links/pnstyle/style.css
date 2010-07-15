@@ -43,7 +43,7 @@
   margin:1em 0;
 }
 
-#wl-main h2, h3 {
+#wl-main h2, #wl-main h3 {
   border-bottom: 1px dotted #D9DCC2;
 }
 
