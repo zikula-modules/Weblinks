@@ -13,7 +13,7 @@
 /**
  * initialise block
  */
-function WebLinks_lastweblinksblock_init()
+function Weblinks_lastweblinksblock_init()
 {
     // Security
     pnSecAddSchema('WeblinksBlock::', 'Block title::');
@@ -22,7 +22,7 @@ function WebLinks_lastweblinksblock_init()
 /**
  * get information on block
  */
-function WebLinks_lastweblinksblock_info()
+function Weblinks_lastweblinksblock_info()
 {
     // Values
     return array('text_type' => 'lastweblinks',
