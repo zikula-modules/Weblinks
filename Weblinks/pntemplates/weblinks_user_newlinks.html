@@ -1,0 +1,15 @@
+<!--[*  $Id$  *]-->
+<!--[include file="weblinks_user_header.html"]-->
+<div class="wl-borderbox wl-center">
+  <h3><!--[pnml name="_WL_NEWLINKS"]--></h3>
+  <p><!--[pnml name="_WL_TOTALNEWLINKS"]-->: <!--[pnml name="_WL_LASTWEEK"]-->: <!--[allweeklinks]--> | <!--[pnml name="_WL_LAST30DAYS"]-->: <!--[allmonthlinks]-->
+    <br />
+    <!--[pnml name="_WL_SHOW"]-->:
+    <a href="<!--[pnmodurl modname=Weblinks type=user func=newlinks newlinkshowdays=7]-->"> <!--[pnml name="_WL_1WEEK"]--></a> |
+    <a href="<!--[pnmodurl modname=Weblinks type=user func=newlinks newlinkshowdays=14]-->"> <!--[pnml name="_WL_2WEEKS"]--></a> |
+    <a href="<!--[pnmodurl modname=Weblinks type=user func=newlinks newlinkshowdays=30]-->"> <!--[pnml name="_WL_30DAYS"]--></a>
+  </p>
+  <p><strong><!--[pnml name="_WL_TOTALFORLAST"]--> <!--[$newlinkshowdays|pnvarprepfordisplay]--> <!--[pnml name="_WL_DAYS"]--> :</strong></p>
+  <!--[newlinksbyday newlinkshowdays=$newlinkshowdays]-->
+</div>
+<!--[include file="weblinks_user_footer.html"]-->

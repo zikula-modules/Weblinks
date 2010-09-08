@@ -1,0 +1,57 @@
+<!--[*  $Id$  *]-->
+<!--[include file="weblinks_user_header.html"]-->
+<div class="wl-borderbox">
+  <!--[if $addlink == 1]-->
+  <dl>
+    <dt><!--[pnml name="_WL_INSTRUCTIONS"]-->:</dt>
+    <dd><!--[pnml name="_WL_SUBMITONCE"]--></dd>
+    <dd><!--[pnml name="_WL_POSTPENDING"]--></dd>
+    <dd><!--[pnml name="_WL_USERANDIP"]--></dd>
+  </dl>
+
+  <form class="pn-form wl-form" action="<!--[pnmodurl modname="Weblinks" type="user" func="add"]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
+    <fieldset class="pn-form-fieldset">
+      <legend><!--[pnml name="_WL_ADDALINK"]--></legend>
+
+      <dl class="pn-clearfix">
+        <dt><label for="title"><!--[pnml name="_WL_SITETITLE"]-->:</label></dt>
+        <dd><input id="title" type="text" name="newlink[title]" size="50" maxlength="100" /></dd>
+
+        <dt><label for="url"><!--[pnml name="_WL_PAGEURL"]-->:</label></dt>
+        <dd><input id="url" type="text" name="newlink[url]" size="75" maxlength="254" value="http://" /></dd>
+
+        <dt><label for="cat"><!--[pnml name="_WL_CATEGORY"]-->:</label></dt>
+        <dd><select id="cat" name="newlink[cid]"><!--[catlist scat=0 sel=0]--></select></dd>
+
+        <dt><label for="description"><!--[pnml name="_WL_LDESCRIPTION"]-->:</label></dt>
+        <dd><textarea id="description" name="newlink[description]" cols="65" rows="10"></textarea></dd>
+
+        <dt><label for="nname"><!--[pnml name="_WL_YOURNAME"]-->:</label></dt>
+        <dd><input id="nname" type="text" name="newlink[submitter]" size="30" maxlength="60" value="<!--[$submitter]-->" /></dd>
+
+        <dt><label for="email"><!--[pnml name="_WL_YOUREMAIL"]-->:</label></dt>
+        <dd><input id="email" type="text" name="newlink[submitteremail]" size="30" maxlength="60" value="<!--[$submitteremail]-->" /></dd>
+      </dl>
+
+    </fieldset>
+    <div class="pn-formrow pn-formbuttons">
+      <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_ADDURL" title="_WL_ADDURL"]-->
+      <a href="<!--[pnmodurl modname=Weblinks type=user func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a>
+    </div>
+  </form>
+
+  <!--[else]-->
+  <div class="pn-informationmsg">
+    <!--[pnml name="_WL_LINKSNOTUSER1"]--><br />
+    <!--[pnml name="_WL_LINKSNOTUSER2"]--><br />
+    <!--[pnml name="_WL_LINKSNOTUSER3"]--><br />
+    <!--[pnml name="_WL_LINKSNOTUSER4"]--><br />
+    <!--[pnml name="_WL_LINKSNOTUSER5"]--><br />
+    <!--[pnml name="_WL_LINKSNOTUSER6"]--><br />
+    <!--[pnml name="_WL_LINKSNOTUSER7"]--><br />
+    <!--[pnml name="_WL_LINKSNOTUSER8" html=true]-->
+  </div>
+  <!--[/if]-->
+</div>
+<!--[include file="weblinks_user_footer.html"]-->

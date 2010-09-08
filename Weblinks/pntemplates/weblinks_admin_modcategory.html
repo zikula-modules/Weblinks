@@ -1,0 +1,25 @@
+<!--[*  $Id$  *]-->
+<!--[include file="weblinks_admin_header.html"]-->
+<div class="pn-admincontainer">
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=folder.gif set=icons/large alt='_WL_MODCATEGORY' altml=true]--></div>
+  <form class="pn-adminform" action="<!--[pnmodurl modname=Weblinks type=admin func=savemodcategory]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <fieldset>
+      <legend><!--[pnml name="_WL_MODCATEGORY"]--></legend>
+      <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
+      <input type="hidden" name="cid" value="<!--[$category.cat_id]-->" />
+      <div class="pn-adminformrow pn-clearfix">
+        <label><!--[pnml name="_WL_NAME"]--></label>
+        <input type="text" name="title" value="<!--[$category.title|pnvarprepfordisplay]-->" size="51" maxlength="50" />
+      </div>
+      <div class="pn-adminformrow pn-clearfix">
+        <label><!--[pnml name="_WL_DESCRIPTION"]--></label>
+        <textarea name="cdescription" cols="50" rows="10"><!--[$category.cdescription|pnvarprepfordisplay]--></textarea>
+      </div>
+    </fieldset>
+    <div class="pn-adminformrow pn-clearfix pn-adminformbuttons">
+      <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_MODCATEGORY" title="_WL_MODCATEGORY"]-->
+      <a href="<!--[pnmodurl modname=Weblinks type=admin func=catview]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a>
+    </div>
+  </form>
+</div>
+<!--[include file="weblinks_admin_footer.html"]-->

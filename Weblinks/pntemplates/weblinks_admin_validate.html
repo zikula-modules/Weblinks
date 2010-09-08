@@ -1,0 +1,44 @@
+<!--[*  $Id$  *]-->
+<!--[include file="weblinks_admin_header.html"]-->
+<div class="pn-admincontainer">
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=agt_internet.gif set=icons/large alt='_WL_LINKVIEW' altml=true]--></div>
+  <!--[if $cid == 0]-->
+  <h2><!--[pnml name="_WL_CHECKALLLINKS"]--></h2>
+  <!--[/if]-->
+  <!--[if $cid != 0]-->
+  <h2><!--[pnml name="_WL_CHECKCATEGORIES"]--></h2>
+  <!--[/if]-->
+
+  <table class="pn-admintable">
+    <thead>
+      <tr>
+        <th><!--[pnml name="_WL_STATUS"]--></th>
+        <th><!--[pnml name="_WL_LINKTITLE"]--></th>
+        <th><!--[pnml name="_WL_FUNCTIONS"]--></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--[foreach from=$links item=links]-->
+      <tr class="<!--[cycle values="pn-odd,pn-even" name=abacs]-->">
+        <!--[if !$links.fp]-->
+        <td><!--[pnimg modname=core src=editdelete.gif set=icons/extrasmall altml=true titleml=true alt="_WL_FAILED" title="_WL_FAILED"]--></td>
+        <td><a href="<!--[$links.url|pnvarprepfordisplay]-->" target="new"><!--[$links.title|pnvarprepfordisplay]--></a></td>
+        <td>[&nbsp;<a href="<!--[pnmodurl modname=Weblinks type=admin func=modlink lid=$links.lid authid=$authid]-->"><!--[pnimg modname=core src=xedit.gif set=icons/extrasmall altml=true titleml=true alt="_EDIT" title="_EDIT"]--></a>&nbsp;|&nbsp;<a href="<!--[pnmodurl modname=Weblinks type=admin func=dellink lid=$links.lid authid=$authid]-->"><!--[pnimg modname=core src=14_layer_deletelayer.gif set=icons/extrasmall altml=true titleml=true alt="_DELETE" title="_DELETE"]--></a>&nbsp;]</td>
+        <!--[/if]-->
+
+        <!--[if $links.fp]-->
+        <td><!--[pnimg modname=core src=ok.gif set=icons/extrasmall altml=true titleml=true alt="_WL_OK" title="_WL_OK"]--></td>
+        <td><a href="<!--[$links.url|pnvarprepfordisplay]-->" target="new"><!--[$links.title|pnvarprepfordisplay]--></a></td>
+        <td><!--[pnml name="_WL_NONE"]--></td>
+        <!--[/if]-->
+      </tr>
+      <!--[ foreachelse ]-->
+      <tr>
+        <td colspan="3"><!--[ pnml name='_WL_NOLINK' ]--></td>
+      </tr>
+      <!--[ /foreach ]-->
+    </tbody>
+  </table>
+
+</div>
+<!--[include file="weblinks_admin_footer.html"]-->
