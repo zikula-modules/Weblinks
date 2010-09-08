@@ -1,0 +1,26 @@
+<!--[*  $Id$  *]-->
+<!--[include file="weblinks_user_header.html"]-->
+<div class="wl-borderbox">
+
+  <form class="pn-form wl-form" action="<!--[pnmodurl modname="Web_Links" type="user" func="brokenlinks"]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Web_Links"]-->" />
+    <input type="hidden" name="lid" value="<!--[$lid]-->" />
+    <input type="hidden" name="modifysubmitter" value="<!--[$ratinguser]-->" />
+
+    <fieldset class="pn-form-fieldset">
+      <legend><!--[pnml name="_WL_REPORTBROKEN"]--></legend>
+      <p>
+        <!--[pnml name="_WL_THANKSBROKEN"]--><br />
+        <!--[pnml name="_WL_SECURITYBROKEN"]-->
+      </p>
+    </fieldset>
+
+    <div class="pn-formrow pn-formbuttons">
+      <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_REPORTBROKEN" title="_WL_REPORTBROKEN"]-->
+      <a href="<!--[pnmodurl modname=Web_Links type=user func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_WL_GOBACK" title="_WL_GOBACK"]--></a>
+    </div>
+
+  </form>
+
+</div>
+<!--[include file="weblinks_user_footer.html"]-->
