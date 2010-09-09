@@ -100,10 +100,41 @@ function Weblinks_upgrade($oldversion)
 
         case '2.0':
         
+    // rename Web_Links to Weblinks
+    pnModDBInfoLoad('Modules');
+    $pntables = pnDBGetTables();
+    $modcolumn = $pntables['modules_column'];
+    $item = array('name' => 'Weblinks');
+    $where = "WHERE $modcolumn[name] = Web_Links";
+    
+    DBUtil::updateObject($item, 'modules', $where);
+    
+    // rename modvars
     $modvars = pnModGetVar('Web_Links');
     if ($modvars) {
         pnModSetVars('Weblinks', $modvars);
         pnModDelVar('Web_Links');
+    }
+    
+    // rename Hooks entries
+    if (pnModAvailable('EZComments')) {
+        pnModDBInfoLoad('EZComments');
+        $pntable = pnDBGetTables();
+        $ezccolumn = $pntables['EZComments_column'];
+        $item = array('modname' => 'Weblinks');
+        $where = "WHERE $ezccolumn[modname] = Web_Links";
+        
+        DBUtil::updateObject($item, 'ezcomments', $where);
+    }
+    
+    if (pnModAvailable('Ratings')) {
+        pnModDBInfoLoad('Ratings');
+        $pntable = pnDBGetTables();
+        $ratcolumn = $pntables['ratings_column'];
+        $item = array('module' => 'Weblinks');
+        $where = "WHERE $ratcolumn[module] = Web_Links";
+        
+        DBUtil::updateObject($item, 'ezcomments', $where);
     }
     
         case '2.0.1':
