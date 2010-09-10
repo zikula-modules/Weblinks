@@ -55,10 +55,12 @@
       </tr>
       <tr>
         <td colspan="3">
-          ( <a href="<!--[pnmodurl modname=Weblinks type=admin func=changemodrequests rid=$modrequests.rid authid=$authid]-->"><!--[pnml name="_WL_ACCEPT"]--></a> / <a href="<!--[pnmodurl modname=Weblinks type=admin func=delmodrequests rid=$modrequests.rid authid=$authid]-->"><!--[pnml name="_WL_IGNORE"]--></a> )
+          <div class="pn-adminformrow pn-clearfix pn-adminformbuttons">
+            <a href="<!--[pnmodurl modname=Weblinks type=admin func=changemodrequests rid=$modrequests.rid authid=$authid]-->"><!--[pnimg modname=core src=button_ok.gif set=icons/small altml=true titleml=true alt="_WL_ACCEPT" title="_WL_ACCEPT"]--></a>
+            <a href="<!--[pnmodurl modname=Weblinks type=admin func=delmodrequests rid=$modrequests.rid authid=$authid]-->"><!--[pnimg modname=core src=editdelete.gif set=icons/small altml=true titleml=true alt="_WL_IGNORE" title="_WL_IGNORE"]--></a>
+          </div>
         </td>
       </tr>
-
     </tbody>
   </table>
 

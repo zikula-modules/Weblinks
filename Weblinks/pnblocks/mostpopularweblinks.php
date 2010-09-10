@@ -45,9 +45,17 @@ function Weblinks_mostpopularweblinksblock_display($blockinfo)
         return;
     }
 
-    // check if the quotes module is available
-    if (!pnModAvailable('WebLinks')) {
+    // check if the module is available
+    if (!pnModAvailable('Weblinks')) {
         return;
+    }
+
+    // Break out options from our content field
+    $vars = pnBlockVarsFromContent($blockinfo['content']);
+
+    // Defaults
+    if (!isset($vars['limit'])) {
+        $vars['limit'] = 5;
     }
 
     // Create output object
@@ -59,7 +67,7 @@ function Weblinks_mostpopularweblinksblock_display($blockinfo)
         return pnBlockThemeBlock($blockinfo);
     }
 
-    $pnRender->assign('weblinks', pnModAPIFunc('Weblinks', 'user', 'mostpopularweblinks'));
+    $pnRender->assign('weblinks', pnModAPIFunc('Weblinks', 'user', 'mostpopularweblinks', array('lastlinks' => $vars['limit'])));
     $pnRender->assign('tb', pnModGetVar('Weblinks', 'targetblank'));
 
     // Populate block info and pass to theme
@@ -73,22 +81,22 @@ function Weblinks_mostpopularweblinksblock_display($blockinfo)
  */
 function Weblinks_mostpopularweblinksblock_modify($blockinfo)
 {
-    // Create output object
-    $pnRender = pnRender::getInstance('Weblinks', false);
-
     // Get current content
     $vars = pnBlockVarsFromContent($blockinfo['content']);
 
     // Defaults
-    if (empty($vars['items'])) {
-        $vars['items'] = 10;
+    if (empty($vars['limit'])) {
+        $vars['limit'] = 5;
     }
+
+    // Create output object
+    $pnRender = & pnRender::getInstance('Weblinks', false);
 
     // assign the block vars
     $pnRender->assign($vars);
 
     // Return output
-//    return $pnRender->fetch('weblinks_block_display_modify.htm');
+    return $pnRender->fetch('weblinks_block_weblinks_modify.html');
 }
 
 /**
@@ -96,9 +104,23 @@ function Weblinks_mostpopularweblinksblock_modify($blockinfo)
  */
 function Weblinks_mostpopularweblinksblock_update($blockinfo)
 {
-    $vars['items'] = FormUtil::getPassedValue('items', 10, 'POST');
+    // Get current content
+    $vars = pnBlockVarsFromContent($blockinfo['content']);
 
+    // alter the corresponding variable
+    $vars['limit'] = (int)FormUtil::getPassedValue('limit', 5, 'POST');
+
+    // Security check
+    if (!SecurityUtil::checkPermission('WeblinksBlock::', "$blockinfo[title]::", ACCESS_ADMIN)) {
+        return false;
+    }
+
+    // write back the new contents
     $blockinfo['content'] = pnBlockVarsToContent($vars);
+
+    // clear the block cache
+    $render = & pnRender::getInstance('Weblinks');
+    $render->clear_cache('weblinks_block_mostpopularweblinks.html');
 
     return $blockinfo;
 }

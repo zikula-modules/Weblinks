@@ -8,13 +8,13 @@
 
   <!--[if $totalbrokenlinks gt 0 || $totalmodrequests gt 0]-->
   <div class="pn-informationmsg">
-      <a href="<!--[pnmodurl modname=WebLinks type=admin func=listbrokenlinks]-->"><!--[pnml name="_WL_BROKENLINKSREP"]--> (<!--[$totalbrokenlinks|pnvarprepfordisplay]-->)</a><br />
-      <a href="<!--[pnmodurl modname=WebLinks type=admin func=listmodrequests]-->"><!--[pnml name="_WL_LINKMODREQUEST"]--> (<!--[$totalmodrequests|pnvarprepfordisplay]-->)</a>
+      <a href="<!--[pnmodurl modname=Weblinks type=admin func=listbrokenlinks]-->"><!--[pnml name="_WL_BROKENLINKSREP"]--> (<!--[$totalbrokenlinks|pnvarprepfordisplay]-->)</a><br />
+      <a href="<!--[pnmodurl modname=Weblinks type=admin func=listmodrequests]-->"><!--[pnml name="_WL_LINKMODREQUEST"]--> (<!--[$totalmodrequests|pnvarprepfordisplay]-->)</a>
   </div>
   <!--[/if]-->
 
-  <form class="pn-adminform" action="<!--[pnmodurl modname=WebLinks type=admin func=validate]-->" method="post" enctype="application/x-www-form-urlencoded">
-    <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="WebLinks"]-->" />
+  <form class="pn-adminform" action="<!--[pnmodurl modname=Weblinks type=admin func=validate]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
     <fieldset>
       <legend><!--[pnml name="_WL_LINKVALIDATION"]--></legend>
       <div class="pn-adminformrow pn-clearfix">
@@ -24,7 +24,7 @@
       </div>
 
       <div class="pn-adminformrow pn-clearfix">
-        [ <a href="<!--[pnmodurl modname=WebLinks type=admin func=validate authid=$authid]-->"><!--[pnml name="_WL_CHECKALLLINKS"]--></a> ]
+        [ <a href="<!--[pnmodurl modname=Weblinks type=admin func=validate authid=$authid]-->"><!--[pnml name="_WL_CHECKALLLINKS"]--></a> ]
       </div>
     </fieldset>
   </form>
@@ -34,9 +34,9 @@
   <h3><!--[pnml name="_WL_LINKSWAITINGVAL"]--></h3>
 
   <!--[foreach from=$newlinks item=newlinks]-->
-  <form class="pn-adminform" action="<!--[pnmodurl modname=WebLinks type=admin func=addlink]-->" method="post" enctype="application/x-www-form-urlencoded">
+  <form class="pn-adminform" action="<!--[pnmodurl modname=Weblinks type=admin func=addlink]-->" method="post" enctype="application/x-www-form-urlencoded">
     <fieldset>
-      <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="WebLinks"]-->" />
+      <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
       <input type="hidden" name="link[new]" value="1" />
       <input type="hidden" name="link[lid]" value="<!--[$newlinks.lid|pnvarprepfordisplay]-->" />
       <input type="hidden" name="link[submitter]" value="<!--[$newlinks.submitter|pnvarprepfordisplay]-->" />
@@ -71,7 +71,7 @@
       </div>
       <div class="pn-adminformrow pn-clearfix pn-adminformbuttons">
         <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_ADDCATEGORY" title="_WL_ADDLINK"]-->
-        <a href="<!--[pnmodurl modname=WebLinks type=admin func=delnewlink lid=$newlinks.lid authid=$authid]-->"><!--[pnimg modname=core src=editdelete.gif set=icons/small altml=true titleml=true alt="_WL_DELLINK" title="_WL_DELLINK"]--></a>
+        <a href="<!--[pnmodurl modname=Weblinks type=admin func=delnewlink lid=$newlinks.lid authid=$authid]-->"><!--[pnimg modname=core src=editdelete.gif set=icons/small altml=true titleml=true alt="_WL_DELLINK" title="_WL_DELLINK"]--></a>
       </div>
     </fieldset>
   </form>

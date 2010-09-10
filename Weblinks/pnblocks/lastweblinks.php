@@ -50,6 +50,14 @@ function Weblinks_lastweblinksblock_display($blockinfo)
         return;
     }
 
+    // Break out options from our content field
+    $vars = pnBlockVarsFromContent($blockinfo['content']);
+
+    // Defaults
+    if (!isset($vars['limit'])) {
+        $vars['limit'] = 5;
+    }
+    
     // Create output object
     $pnRender = pnRender::getInstance('Weblinks', false);
 
@@ -59,7 +67,7 @@ function Weblinks_lastweblinksblock_display($blockinfo)
         return pnBlockThemeBlock($blockinfo);
     }
 
-    $pnRender->assign('weblinks', pnModAPIFunc('Weblinks', 'user', 'lastweblinks'));
+    $pnRender->assign('weblinks', pnModAPIFunc('Weblinks', 'user', 'lastweblinks', array('lastlinks' => $vars['limit'])));
     $pnRender->assign('tb', pnModGetVar('Weblinks', 'targetblank'));
 
     // Populate block info and pass to theme
@@ -73,22 +81,22 @@ function Weblinks_lastweblinksblock_display($blockinfo)
  */
 function Weblinks_lastweblinksblock_modify($blockinfo)
 {
-    // Create output object
-    $pnRender = pnRender::getInstance('Weblinks', false);
-
     // Get current content
     $vars = pnBlockVarsFromContent($blockinfo['content']);
 
     // Defaults
-    if (empty($vars['items'])) {
-        $vars['items'] = 10;
+    if (empty($vars['limit'])) {
+        $vars['limit'] = 5;
     }
+    
+    // Create output object
+    $pnRender = & pnRender::getInstance('Weblinks', false);
 
     // assign the block vars
     $pnRender->assign($vars);
 
     // Return output
-//    return $pnRender->fetch('weblinks_block_displayfeed_modify.htm');
+    return $pnRender->fetch('weblinks_block_weblinks_modify.html');
 }
 
 /**
@@ -96,9 +104,23 @@ function Weblinks_lastweblinksblock_modify($blockinfo)
  */
 function Weblinks_lastweblinksblock_update($blockinfo)
 {
-    $vars['items'] = FormUtil::getPassedValue('numitems', 10, 'POST');
+    // Get current content
+    $vars = pnBlockVarsFromContent($blockinfo['content']);
+    
+    // alter the corresponding variable
+    $vars['limit'] = (int)FormUtil::getPassedValue('limit', 5, 'POST');
 
+    // Security check
+    if (!SecurityUtil::checkPermission('WeblinksBlock::', "$blockinfo[title]::", ACCESS_ADMIN)) {
+        return false;
+    }
+    
+    // write back the new contents
     $blockinfo['content'] = pnBlockVarsToContent($vars);
+
+    // clear the block cache
+    $render = & pnRender::getInstance('Weblinks');
+    $render->clear_cache('weblinks_block_lastweblinks.html');
 
     return $blockinfo;
 }
