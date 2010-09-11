@@ -42,26 +42,26 @@ function Weblinks_init()
         
         // rename hook
         $pntables = pnDBGetTables();
-        $hookstable  = $pntables['hooks'];
         $hookscolumn = $pntables['hooks_column'];
-        $sql = "UPDATE $hookstable SET $hookscolumn[smodule]= 'Weblinks' WHERE $hookscolumn[smodule] ='Web_Links'";
-        $res = DBUtil::executeSQL($sql);
+        $object = array('smodule' => 'Weblinks');
+        $where = "WHERE $hookscolumn[smodule] = 'Web_Links'";
+        DBUtil::updateObject($object, 'hooks', $where, 'id');  
         
         // rename hooks entries
         if (pnModAvailable('EZComments')) {
             $pntables = pnDBGetTables();
-            $ezctable = $pntables['EZComments'];
             $ezccolumn = $pntables['EZComments_column'];
-            $sql = "UPDATE $ezctable SET $ezccolumn[modname]= 'Weblinks' WHERE $ezccolumn[modname] ='Web_Links'";
-            $res = DBUtil::executeSQL($sql);            
+            $object = array('modname' => 'Weblinks');
+            $where = "WHERE $ezccolumn[modname] = 'Web_Links'";
+            DBUtil::updateObject($object, 'ezcomments', $where, 'id');            
         }
         
         if (pnModAvailable('Ratings')) {
             $pntables = pnDBGetTables();
-            $rattable = $pntables['ratings'];
             $ratcolumn = $pntables['ratings_column'];
-            $sql = "UPDATE $rattable SET $ratcolumn[module]= 'Weblinks' WHERE $ratcolumn[module] ='Web_Links'";
-            $res = DBUtil::executeSQL($sql);              
+            $object = array('module' => 'Weblinks');
+            $where = "WHERE $ratcolumn[module] = 'Web_Links'";
+            DBUtil::updateObject($object, 'ratings', $where, 'rid'); 
         }
     } else {
     
