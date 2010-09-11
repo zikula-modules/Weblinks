@@ -52,7 +52,10 @@ function Weblinks_init()
             $ezccolumn = $pntable['EZComments_column'];
             $object = array('modname' => 'Weblinks');
             $where = "WHERE $ezccolumn[modname] = 'Web_Links'";
-            DBUtil::updateObject($object, 'EZComments', $where, 'id');            
+            prayer($object);
+            prayer($where);
+            $res = DBUtil::updateObject($object, 'EZComments', $where, 'id');
+            prayer($res);         
         }
         
         if (pnModAvailable('Ratings')) {
