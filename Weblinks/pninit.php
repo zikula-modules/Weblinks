@@ -47,46 +47,21 @@ function Weblinks_init()
         $sql = "UPDATE $hookstable SET $hookscolumn[smodule]= 'Weblinks' WHERE $hookscolumn[smodule] ='Web_Links'";
         $res = DBUtil::executeSQL($sql);
         
-        // rename permissions
-        $pntables = pnDBGetTables();
-        $permcolumn = $pntables['group_perms_column'];
-        $where = "WHERE LEFT($permcolumn[component], 10) ='Web_Links'";
-        $orderby = "ORDER BY $permcolumn[sequence]";
-        $permarray = DBUtil::selectObjectArray('group_perms', $where, $orderby, -1, -1, false);
-        $permcount = count($permarray);
-        
-        for ($cnt=0; $cnt<$permcount; $cnt++) {
-            $permarray[$cnt]['component'] = str_replace('Web_Links', 'Weblinks', $permarray[$cnt]['component']);
-        }
-        DBUtil::updateObjectArray($permarray, 'group_perms', 'pid');
-        
         // rename hooks entries
         if (pnModAvailable('EZComments')) {
-//            pnModDBInfoLoad('EZComments');
             $pntables = pnDBGetTables();
+            $ezctable = $pntables['EZComments'];
             $ezccolumn = $pntables['EZComments_column'];
-            $where = "WHERE $ezccolumn[modname] = Web_Links";
-            $ezcarray = DBUtil::selectObjectArray('ezcomments', $where, '', -1, -1, false);
-            $ezccount = count($ezcarray);
-            
-            for ($cnt=0; $cnt<$ezccount; $cnt++) {
-                $ezcarray[$cnt]['modname'] = str_replace('Web_Links', 'Weblinks', $ezcarray[$cnt]['modname']);
-            }
-            DBUtil::updateObjectArray($ezcarray, 'ezcomments');
+            $sql = "UPDATE $ezctable SET $ezccolumn[modname]= 'Weblinks' WHERE $ezccolumn[modname] ='Web_Links'";
+            $res = DBUtil::executeSQL($sql);            
         }
         
         if (pnModAvailable('Ratings')) {
-//            pnModDBInfoLoad('Ratings');
             $pntables = pnDBGetTables();
+            $rattable = $pntables['ratings'];
             $ratcolumn = $pntables['ratings_column'];
-            $where = "WHERE $ratcolumn[module] = Web_Links";
-            $ratarray = DBUtil::selectObjectArray('ratings', $where, '', -1, -1, false);
-            $ratcount = count($ratarray);
-            
-            for ($cnt=0; $cnt<$ratcount; $cnt++) {
-                $ratarray[$cnt]['module'] = str_replace('Web_Links', 'Weblinks', $ratarray[$cnt]['module']);
-            }
-            DBUtil::updateObjectArray($ratarray, 'ratings');
+            $sql = "UPDATE $rattable SET $ratcolumn[module]= 'Weblinks' WHERE $ratcolumn[module] ='Web_Links'";
+            $res = DBUtil::executeSQL($sql);              
         }
     } else {
     
