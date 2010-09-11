@@ -45,24 +45,33 @@ function Weblinks_init()
         $hookscolumn = $pntable['hooks_column'];
         $object = array('smodule' => 'Weblinks');
         $where = "WHERE $hookscolumn[smodule] = 'Web_Links'";
-        DBUtil::updateObject($object, 'hooks', $where, 'id');  
+        DBUtil::updateObject($object, 'hooks', $where, 'id');
         
         // rename hooks entries
         if (pnModAvailable('EZComments')) {
-            $ezccolumn = $pntable['EZComments_column'];
-            $object = array('modname' => 'Weblinks');
-            $where = "WHERE $ezccolumn[modname] = 'Web_Links'";
-            prayer($object);
-            prayer($where);
-            $res = DBUtil::updateObject($object, 'EZComments', $where, 'id');
-            prayer($res);         
+            pnModDBInfoLoad('EZComments'); 
+	        $pntable = pnDBGetTables(); 
+	        $ezccolumn = $pntable['EZComments_column']; 
+	        $where = "WHERE $ezccolumn[modname] = 'Web_Links'"; 
+	        $ezcarray = DBUtil::selectObjectArray('EZComments', $where, '', -1, -1, false); 
+	        $ezccount = count($ezcarray);     
+	        for ($cnt=0; $cnt<$ezccount; $cnt++) { 
+	            $ezcarray[$cnt]['modname'] = str_replace('Web_Links', 'Weblinks', $ezcarray[$cnt]['modname']); 
+	        } 
+ 	        DBUtil::updateObjectArray($ezcarray, 'EZComments');
         }
         
         if (pnModAvailable('Ratings')) {
-            $ratcolumn = $pntable['ratings_column'];
-            $object = array('module' => 'Weblinks');
+            pnModDBInfoLoad('Ratings');
+            $pntable = pnDBGetTables();
+	        $ratcolumn = $pntable['ratings_column'];
             $where = "WHERE $ratcolumn[module] = 'Web_Links'";
-            DBUtil::updateObject($object, 'ratings', $where, 'rid'); 
+	        $ratarray = DBUtil::selectObjectArray('ratings', $where, '', -1, -1, false); 
+	        $ratcount = count($ratarray);     
+	        for ($cnt=0; $cnt<$ratcount; $cnt++) { 
+	            $ratarray[$cnt]['module'] = str_replace('Web_Links', 'Weblinks', $ratarray[$cnt]['module']); 
+	        } 
+ 	        DBUtil::updateObjectArray($ratarray, 'ratings');
         }
     } else {
     
@@ -90,22 +99,20 @@ function Weblinks_init()
     
         // Weblinks settings
         // set up config variables
-        $modvars = array(
-            'perpage' => 25,
-            'toplinkspercentrigger' => 0,
-            'toplinks' => 25,
-            'mostpoplinkspercentrigger' => 0,
-            'mostpoplinks' => 25,
-            'featurebox' => 1,
-            'blockunregmodify' => 0,
-            'popular' => 500,
-            'newlinks' => 10,
-            'bestlinks' => 10,
-            'linksresults' => 10,
-            'links_anonaddlinklock' => 1,
-            'targetblank' => 0,
-            'linksinblock' => 10
-        );
+        $modvars = array('perpage' => 25,
+                         'toplinkspercentrigger' => 0,
+                         'toplinks' => 25,
+                         'mostpoplinkspercentrigger' => 0,
+                         'mostpoplinks' => 25,
+                         'featurebox' => 1,
+                         'blockunregmodify' => 0,
+                         'popular' => 500,
+                         'newlinks' => 10,
+                         'bestlinks' => 10,
+                         'linksresults' => 10,
+                         'links_anonaddlinklock' => 1,
+                         'targetblank' => 0,
+                         'linksinblock' => 10);
         
         // set up module variables
         pnModSetVars('Weblinks', $modvars);
@@ -129,22 +136,20 @@ function Weblinks_upgrade($oldversion)
 
     // Weblinks settings
     // set up config variables
-    $modvars = array(
-        'perpage' => 25,
-        'toplinkspercentrigger' => 0,
-        'toplinks' => 25,
-        'mostpoplinkspercentrigger' => 0,
-        'mostpoplinks' => 25,
-        'featurebox' => 1,
-        'blockunregmodify' => 0,
-        'popular' => 500,
-        'newlinks' => 10,
-        'bestlinks' => 10,
-        'linksresults' => 10,
-        'links_anonaddlinklock' => 1,
-        'targetblank' => 0,
-        'linksinblock' => 10
-    );
+    $modvars = array('perpage' => 25,
+                     'toplinkspercentrigger' => 0,
+                     'toplinks' => 25,
+                     'mostpoplinkspercentrigger' => 0,
+                     'mostpoplinks' => 25,
+                     'featurebox' => 1,
+                     'blockunregmodify' => 0,
+                     'popular' => 500,
+                     'newlinks' => 10,
+                     'bestlinks' => 10,
+                     'linksresults' => 10,
+                     'links_anonaddlinklock' => 1,
+                     'targetblank' => 0,
+                     'linksinblock' => 10);
     
     // set up module variables
     pnModSetVars('Weblinks', $modvars);
