@@ -826,9 +826,9 @@ function Weblinks_admin_importratings() // ready
 
     pnModDBInfoLoad('Ratings');
     $pntable = pnDBGetTables();
-    $links_linksdatacolumn = $pntable['links_links_column'];
-    $where = "WHERE $links_linksdatacolumn[totalvotes] != '0'";
-    $votes = DBUtil::SelectObjectArray('links_links', $where);
+    $weblinks_linksdatacolumn = $pntable['weblinks_links_column'];
+    $where = "WHERE $weblinks_linksdatacolumn[totalvotes] != '0'";
+    $votes = DBUtil::SelectObjectArray('weblinks_links', $where);
     $counter=0;
     $ratingtype = pnModGetVar('Ratings', 'defaultstyle');
     foreach ($votes as $v) {
@@ -873,15 +873,15 @@ function Weblinks_admin_importezcomments() // ready
 
     pnModDBInfoLoad('EZComments');
     $pntable = pnDBGetTables();
-    $links_votedatacolumn = $pntable['links_votedata_column'];
-    $where = "WHERE $links_votedatacolumn[ratingcomments] != ''";
-    $comments = DBUtil::SelectObjectArray('links_votedata', $where);
+    $weblinks_votedatacolumn = $pntable['weblinks_votedata_column'];
+    $where = "WHERE $weblinks_votedatacolumn[ratingcomments] != ''";
+    $comments = DBUtil::SelectObjectArray('weblinks_votedata', $where);
     $counter=0;
 
     foreach ($comments as $c) {
-        $links_linksdatacolumn = $pntable['links_links_column'];
-        $where = "WHERE $links_linksdatacolumn[lid] = ".$c['ratinglid'];
-        $user = DBUtil::SelectObject('links_links', $where);
+        $weblinks_linksdatacolumn = $pntable['weblinks_links_column'];
+        $where = "WHERE $weblinks_linksdatacolumn[lid] = ".$c['ratinglid'];
+        $user = DBUtil::SelectObject('weblinks_links', $where);
         if ($c['ratinguser'] == "Anonymous") {
             $c['ratinguser'] = _GUEST;
         }

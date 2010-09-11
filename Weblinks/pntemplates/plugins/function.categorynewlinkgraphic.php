@@ -16,7 +16,7 @@ function smarty_function_categorynewlinkgraphic($params, &$smarty)
         return LogUtil::registerArgsError();
     }
 
-    $time = DBUtil::selectObjectByID('links_links', $params['cat'], 'cat_id');
+    $time = DBUtil::selectObjectByID('weblinks_links', $params['cat'], 'cat_id');
 
     if (!$time['date']) {
         return;

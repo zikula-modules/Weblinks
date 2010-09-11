@@ -111,7 +111,7 @@ define('_WL_OK', 'OK');
 define('_WL_ORIGINAL','Original');
 define('_WL_OUTSIDEWAITDAYS', 'Tagesanzahl bis externe Benutzer Stimmen abgeben können');
 define('_WL_OUTSIDEWEIGHT', 'Wieviele externe Stimmen pro 1 Stimme registrierter Benutzer?');
-define('_WL_OVERVIEW', 'übersicht');
+define('_WL_OVERVIEW', 'Übersicht');
 define('_WL_OWNER','Eigentümer');
 define('_WL_PAGETITLE', 'Seitentitel');
 define('_WL_PAGEURL', 'URL');

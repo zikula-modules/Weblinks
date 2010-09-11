@@ -22,10 +22,10 @@ function smarty_function_newlinksbyday($params, &$smarty)
         $newlinkview = date(_WL_DATEBRIEF, $newlinkdayraw);
         $newlinkdb = date("Y-m-d", $newlinkdayraw);
         $pntable =& pnDBGetTables();
-        $column = &$pntable['links_links_column'];
-        $column2 = &$pntable['links_categories_column'];
+        $column = &$pntable['weblinks_links_column'];
+        $column2 = &$pntable['weblinks_categories_column'];
         $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
-        $totallinks = DBUtil::selectObjectCount('links_links', $where);
+        $totallinks = DBUtil::selectObjectCount('weblinks_links', $where);
         $allweeklinks = $allweeklinks + $totallinks;
         $counter++;
         echo "<a href=\"".pnVarPrepForDisplay(pnModURL('Weblinks', 'user', 'newlinksdate', array('selectdate' => $newlinkdayraw)))."\">".pnVarPrepForDisplay($newlinkview)."</a>&nbsp;(".pnVarPrepForDisplay($totallinks).")<br />";
