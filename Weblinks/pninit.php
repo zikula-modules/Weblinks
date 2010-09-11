@@ -58,7 +58,7 @@ function Weblinks_init()
 	        for ($cnt=0; $cnt<$ezccount; $cnt++) { 
 	            $ezcarray[$cnt]['modname'] = str_replace('Web_Links', 'Weblinks', $ezcarray[$cnt]['modname']); 
 	        } 
- 	        DBUtil::updateObjectArray($ezcarray, 'EZComments');
+ 	        DBUtil::updateObjectArray($ezcarray, 'EZComments', 'id');
         }
         
         if (pnModAvailable('Ratings')) {
@@ -71,7 +71,7 @@ function Weblinks_init()
 	        for ($cnt=0; $cnt<$ratcount; $cnt++) { 
 	            $ratarray[$cnt]['module'] = str_replace('Web_Links', 'Weblinks', $ratarray[$cnt]['module']); 
 	        } 
- 	        DBUtil::updateObjectArray($ratarray, 'ratings');
+ 	        DBUtil::updateObjectArray($ratarray, 'ratings', 'rid');
         }
     } else {
     
