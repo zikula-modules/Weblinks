@@ -41,24 +41,22 @@ function Weblinks_init()
         }
         
         // rename hook
-        $pntables = pnDBGetTables();
-        $hookscolumn = $pntables['hooks_column'];
+        $pntable = pnDBGetTables();
+        $hookscolumn = $pntable['hooks_column'];
         $object = array('smodule' => 'Weblinks');
         $where = "WHERE $hookscolumn[smodule] = 'Web_Links'";
         DBUtil::updateObject($object, 'hooks', $where, 'id');  
         
         // rename hooks entries
         if (pnModAvailable('EZComments')) {
-            $pntables = pnDBGetTables();
-            $ezccolumn = $pntables['EZComments_column'];
+            $ezccolumn = $pntable['EZComments_column'];
             $object = array('modname' => 'Weblinks');
             $where = "WHERE $ezccolumn[modname] = 'Web_Links'";
-            DBUtil::updateObject($object, 'ezcomments', $where, 'id');            
+            DBUtil::updateObject($object, 'EZComments', $where, 'id');            
         }
         
         if (pnModAvailable('Ratings')) {
-            $pntables = pnDBGetTables();
-            $ratcolumn = $pntables['ratings_column'];
+            $ratcolumn = $pntable['ratings_column'];
             $object = array('module' => 'Weblinks');
             $where = "WHERE $ratcolumn[module] = 'Web_Links'";
             DBUtil::updateObject($object, 'ratings', $where, 'rid'); 
