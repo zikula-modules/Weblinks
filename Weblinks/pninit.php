@@ -44,12 +44,12 @@ function Weblinks_init()
         $pntables = pnDBGetTables();
         $hookstable  = $pntables['hooks'];
         $hookscolumn = $pntables['hooks_column'];
-        $sql = 'UPDATE ' . $hookstable . ' SET ' . $hookscolumn['smodule'] . '=\'Weblinks' WHERE ' . $hookscolumn['smodule'] . '=\'Web_Links\'';
+        $sql = "UPDATE $hookstable SET $hookscolumn[smodule]= 'Weblinks' WHERE $hookscolumn[smodule] ='Web_Links'";
         $res = DBUtil::executeSQL($sql);
         
         // rename permissions
-        $pntable = pnDBGetTables();
-        $permcolumn = $pntable['group_perms_column'];
+        $pntables = pnDBGetTables();
+        $permcolumn = $pntables['group_perms_column'];
         $where = "WHERE LEFT($permcolumn[component], 10) ='Web_Links'";
         $orderby = "ORDER BY $permcolumn[sequence]";
         $permarray = DBUtil::selectObjectArray('group_perms', $where, $orderby, -1, -1, false);
@@ -60,10 +60,10 @@ function Weblinks_init()
         }
         DBUtil::updateObjectArray($permarray, 'group_perms', 'pid');
         
-        // rename Hooks entries
+        // rename hooks entries
         if (pnModAvailable('EZComments')) {
 //            pnModDBInfoLoad('EZComments');
-            $pntable = pnDBGetTables();
+            $pntables = pnDBGetTables();
             $ezccolumn = $pntables['EZComments_column'];
             $where = "WHERE $ezccolumn[modname] = Web_Links";
             $ezcarray = DBUtil::selectObjectArray('ezcomments', $where, '', -1, -1, false);
@@ -77,7 +77,7 @@ function Weblinks_init()
         
         if (pnModAvailable('Ratings')) {
 //            pnModDBInfoLoad('Ratings');
-            $pntable = pnDBGetTables();
+            $pntables = pnDBGetTables();
             $ratcolumn = $pntables['ratings_column'];
             $where = "WHERE $ratcolumn[module] = Web_Links";
             $ratarray = DBUtil::selectObjectArray('ratings', $where, '', -1, -1, false);

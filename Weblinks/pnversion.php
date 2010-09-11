@@ -16,7 +16,7 @@
 
 $modversion['name']             = 'Weblinks';
 $modversion['displayname']      = 'Weblinks';
-$modversion['description']      = 'Web Links Module';
+$modversion['description']      = 'Weblinks Module';
 $modversion['version']          = '2.0.1';
 $modversion['credits']          = 'pndocs/credits.txt';
 $modversion['help']             = 'pndocs/install.txt';
