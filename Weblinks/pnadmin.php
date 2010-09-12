@@ -828,7 +828,7 @@ function Weblinks_admin_importratings() // ready
     $pntable = pnDBGetTables();
     $weblinks_linksdatacolumn = $pntable['weblinks_links_column'];
     $where = "WHERE $weblinks_linksdatacolumn[totalvotes] != '0'";
-    $votes = DBUtil::SelectObjectArray('weblinks_links', $where);
+    $votes = DBUtil::SelectObjectArray('links_links', $where);
     $counter=0;
     $ratingtype = pnModGetVar('Ratings', 'defaultstyle');
     foreach ($votes as $v) {
@@ -875,13 +875,13 @@ function Weblinks_admin_importezcomments() // ready
     $pntable = pnDBGetTables();
     $weblinks_votedatacolumn = $pntable['weblinks_votedata_column'];
     $where = "WHERE $weblinks_votedatacolumn[ratingcomments] != ''";
-    $comments = DBUtil::SelectObjectArray('weblinks_votedata', $where);
+    $comments = DBUtil::SelectObjectArray('links_votedata', $where);
     $counter=0;
 
     foreach ($comments as $c) {
         $weblinks_linksdatacolumn = $pntable['weblinks_links_column'];
         $where = "WHERE $weblinks_linksdatacolumn[lid] = ".$c['ratinglid'];
-        $user = DBUtil::SelectObject('weblinks_links', $where);
+        $user = DBUtil::SelectObject('links_links', $where);
         if ($c['ratinguser'] == "Anonymous") {
             $c['ratinguser'] = _GUEST;
         }

@@ -16,7 +16,7 @@ function smarty_function_catpath($params, &$smarty)
         return LogUtil::registerArgsError();
     }
 
-    $cat = DBUtil::selectObjectByID('weblinks_categories', $params['cid'], 'cat_id');
+    $cat = DBUtil::selectObjectByID('links_categories', $params['cid'], 'cat_id');
 
     if ($params['linkmyself']) {
         $cpath = "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'category', array('cid' => $params['cid'])))."\"> ".DataUtil::formatForDisplay($cat['title'])." </a>";
@@ -25,7 +25,7 @@ function smarty_function_catpath($params, &$smarty)
     }
 
     for ($v = $cat['parent_id']; $v != 0; $v = $scat['parent_id']) {
-        $scat = DBUtil::selectObjectByID('weblinks_categories', $v, 'cat_id');
+        $scat = DBUtil::selectObjectByID('links_categories', $v, 'cat_id');
 
         if ($params['links']) {
             $cpath = "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'category', array('cid' => $scat['cat_id'])))."\"> ".DataUtil::formatForDisplay($scat['title'])."</a> / $cpath";

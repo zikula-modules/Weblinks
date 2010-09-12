@@ -15,8 +15,7 @@
  **/
 function Weblinks_searchapi_info()
 {
-    return array('title' => 'Weblinks',
-                 'functions' => array('Weblinks' => 'search'));
+    return array('title' => 'Weblinks', 'functions' => array('Weblinks' => 'search'));
 }
 
 /**
@@ -24,7 +23,7 @@ function Weblinks_searchapi_info()
  **/
 function Weblinks_searchapi_options($args)
 {
-    if (SecurityUtil::checkPermission( 'Weblinks::', '::', ACCESS_READ)) {
+    if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ)) {
         // Create output object - this object will store all of our output so that
         // we can return it easily when required
         $pnRender = & pnRender::getInstance('Weblinks', false);
@@ -46,8 +45,8 @@ function Weblinks_searchapi_search($args)
 
     pnModDBInfoLoad('Search');
     $pntable = pnDBGetTables();
-    $linkstable = $pntable['weblinks_links'];
-    $linkscolumn = $pntable['weblinks_links_column'];
+    $linkstable = $pntable['links_links'];
+    $linkscolumn = $pntable['links_links_column'];
     $searchTable = $pntable['search_result'];
     $searchColumn = $pntable['search_result_column'];
 
@@ -70,7 +69,7 @@ function Weblinks_searchapi_search($args)
                           'level'            => ACCESS_READ);
 
     // get the result set
-    $links = DBUtil::selectObjectArray('weblinks_links', $where, 'lid', 1, -1, '', $permFilter);
+    $links = DBUtil::selectObjectArray('links_links', $where, 'lid', 1, -1, '', $permFilter);
     if ($links === false) {
         return LogUtil::registerError (_GETFAILED);
     }

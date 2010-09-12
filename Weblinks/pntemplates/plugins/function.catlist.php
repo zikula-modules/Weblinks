@@ -18,9 +18,9 @@ function smarty_function_catlist($params, &$smarty)
     
     $pntable =& pnDBGetTables();
     $s = "";
-    $column = &$pntable['weblinks_categories_column'];
+    $column = &$pntable['links_categories_column'];
     $where = "WHERE $column[parent_id]='".(int)DataUtil::formatForStore($params['scat'])."'";
-    $objArray = DBUtil::selectObjectArray('weblinks_categories', $where, 'title');
+    $objArray = DBUtil::selectObjectArray('links_categories', $where, 'title');
 
     require_once $smarty->_get_plugin_filepath('function', 'catpath');
 
@@ -46,9 +46,9 @@ function catlist($scat, $sel)
 
     $pntable =& pnDBGetTables();
     $s = "";
-    $column = &$pntable['weblinks_categories_column'];
+    $column = &$pntable['links_categories_column'];
     $where = "WHERE $column[parent_id]='".(int)DataUtil::formatForStore($scat)."'";
-    $objArray = DBUtil::selectObjectArray('weblinks_categories', $where, 'title');
+    $objArray = DBUtil::selectObjectArray('links_categories', $where, 'title');
 
     foreach ($objArray as $request) {
         if ($sel == $request['cat_id']) {

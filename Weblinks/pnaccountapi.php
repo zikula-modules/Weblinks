@@ -29,7 +29,7 @@ function Weblinks_accountapi_getall($args)
 
     $uname = (isset($args['uname'])) ? $args['uname'] : pnUserGetVar('uname');
     // does this user exist?
-    if(pnUserGetIDFromName($uname)==false) {
+    if(pnUserGetIDFromName($uname) == false) {
         // user does not exist
         return $items;
     }
@@ -37,11 +37,11 @@ function Weblinks_accountapi_getall($args)
     // Create an array of links to return
     if(SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_ADD)) {
         pnModLangLoad('Weblinks', 'user');
-        $items = array(array('url'     => pnModURL('Weblinks', 'user', 'addlink'),
+        $items = array(array('url'    => pnModURL('Weblinks', 'user', 'addlink'),
                              'module' => 'core',
-                             'set' => 'icons/large',
-                             'title'   => _WL_ADD,
-                             'icon'    => 'folder_html.gif'));
+                             'set'    => 'icons/large',
+                             'title'  => _WL_ADD,
+                             'icon'   => 'folder_html.gif'));
     }
 
     // Return the items

@@ -33,14 +33,14 @@ http://code.zikula.org/pendingcontent
 
 Name: New Links
 URL:  index.php?module=Web_Links&type=admin
-SQL:  select count(*) from zk_weblinks_newlink
+SQL:  select count(*) from zk_links_newlink
 
 Name: Broken Links
 URL:  index.php?module=Web_Links&type=admin&func=listbrokenlinks
-SQL:  select count(*) from zk_weblinks_modrequest WHERE zk_weblinks_modrequest.pn_brokenlink = 1
+SQL:  select count(*) from zk_links_modrequest WHERE zk_links_modrequest.pn_brokenlink = 1
 
 Name: Modify Links
 URL:  index.php?module=Web_Links&type=admin&func=listmodrequests
-SQL:  select count(*) from zk_weblinks_modrequest WHERE zk_weblinks_modrequest.pn_brokenlink = 0
+SQL:  select count(*) from zk_links_modrequest WHERE zk_links_modrequest.pn_brokenlink = 0
 
 // zk_ if this is your table prefix

@@ -18,14 +18,14 @@ function smarty_function_countsublinks($params, &$smarty)
 
     $count = 0;
     $pntable =& pnDBGetTables();
-    $column = &$pntable['weblinks_links_column'];
+    $column = &$pntable['links_links_column'];
     $where = "WHERE $column[cat_id]='".(int)DataUtil::formatForStore($params['cid'])."'";
-    $count = DBUtil::selectObjectCount('weblinks_links', $where);
+    $count = DBUtil::selectObjectCount('links_links', $where);
 
     // Now get all child nodes
-    $column = &$pntable['weblinks_categories_column'];
+    $column = &$pntable['links_categories_column'];
     $where = "WHERE $column[parent_id]='".(int)DataUtil::formatForStore($params['cid'])."'";
-    $cat = DBUtil::selectObjectArray('weblinks_categories', $where);
+    $cat = DBUtil::selectObjectArray('links_categories', $where);
 
 
     foreach ($cat as $result) {
@@ -38,14 +38,14 @@ function CountSubLinks($sid)
 {
     $count = 0;
     $pntable =& pnDBGetTables();
-    $column = &$pntable['weblinks_links_column'];
+    $column = &$pntable['links_links_column'];
     $where = "WHERE $column[cat_id]='".(int)DataUtil::formatForStore($sid)."'";
-    $count = DBUtil::selectObjectCount('weblinks_links', $where);
+    $count = DBUtil::selectObjectCount('links_links', $where);
 
     // Now get all child nodes
-    $column = &$pntable['weblinks_categories_column'];
+    $column = &$pntable['links_categories_column'];
     $where = "WHERE $column[parent_id]='".(int)DataUtil::formatForStore($sid)."'";
-    $cat = DBUtil::selectObjectArray('weblinks_categories', $where);
+    $cat = DBUtil::selectObjectArray('links_categories', $where);
 
 
     foreach ($cat as $result) {

@@ -15,6 +15,7 @@
 */
 
 $modversion['name']             = 'Weblinks';
+$modversion['oldnames']         = array('Web_Links');
 $modversion['displayname']      = 'Weblinks';
 $modversion['description']      = 'Weblinks Module';
 $modversion['version']          = '2.0.1';

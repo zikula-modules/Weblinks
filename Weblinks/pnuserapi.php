@@ -27,7 +27,7 @@ function Weblinks_userapi_categories() // ready
                           'level'            => ACCESS_READ);
 
     // get all categories from db
-    $categories = DBUtil::selectObjectArray('weblinks_categories', '', 'title', '-1', '-1', '', $permFilter);
+    $categories = DBUtil::selectObjectArray('links_categories', '', 'title', '-1', '-1', '', $permFilter);
 
     // check for db error
     if ($categories === false) {
@@ -44,7 +44,7 @@ function Weblinks_userapi_categories() // ready
 function Weblinks_userapi_numrows() // ready
 {
     // count links in db
-    return DBUtil::selectObjectCount('weblinks_links');
+    return DBUtil::selectObjectCount('links_links');
 }
 
 /**
@@ -53,7 +53,7 @@ function Weblinks_userapi_numrows() // ready
 function Weblinks_userapi_catnum() // ready
 {
     // count categories in db
-    return DBUtil::selectObjectCount('weblinks_categories');
+    return DBUtil::selectObjectCount('links_categories');
 }
 
 /**
@@ -78,7 +78,7 @@ function Weblinks_userapi_category($args) // ready
                           'level'            => ACCESS_READ);
 
     // get the category vars from the db
-    $category = DBUtil::selectObjectById('weblinks_categories', $args['cid'], 'cat_id', '', $permFilter);
+    $category = DBUtil::selectObjectById('links_categories', $args['cid'], 'cat_id', '', $permFilter);
 
     // check for db error
     if ($category === false) {
@@ -100,7 +100,7 @@ function Weblinks_userapi_subcategory($args) // ready
     }
 
     $pntable = pnDBGetTables();
-    $weblinkscolumn = &$pntable['weblinks_categories_column'];
+    $weblinkscolumn = &$pntable['links_categories_column'];
 
     $where = "WHERE $weblinkscolumn[parent_id] = ".(int)DataUtil::formatForStore($args['cid']);
 
@@ -116,7 +116,7 @@ function Weblinks_userapi_subcategory($args) // ready
                           'level'            => ACCESS_READ);
 
     // get the subcategories vars from the db
-    $subcategories = DBUtil::selectObjectArray('weblinks_categories', $where, 'title', '-1', '-1', '', $permFilter);
+    $subcategories = DBUtil::selectObjectArray('links_categories', $where, 'title', '-1', '-1', '', $permFilter);
 
     // check for db error
     if ($subcategories === false) {
@@ -142,7 +142,7 @@ function Weblinks_userapi_weblinks($args) // ready
     $numlinks = (isset($args['numlinks']) && is_numeric($args['numlinks'])) ? $args['numlinks'] : -1;
 
     $pntable = pnDBGetTables();
-    $weblinkscolumn = &$pntable['weblinks_links_column'];
+    $weblinkscolumn = &$pntable['links_links_column'];
 
     $where = "WHERE $weblinkscolumn[cat_id] = ".(int)DataUtil::formatForStore($args['cid']);
     
@@ -158,7 +158,7 @@ function Weblinks_userapi_weblinks($args) // ready
                           'level'            => ACCESS_READ);
 
     // get the weblinks vars from the db
-    $weblinks = DBUtil::selectObjectArray('weblinks_links', $where, $orderbysql, $startnum-1, $numlinks, '', $permFilter);
+    $weblinks = DBUtil::selectObjectArray('links_links', $where, $orderbysql, $startnum-1, $numlinks, '', $permFilter);
 
     // chack for db error
     if ($weblinks === false) {
@@ -175,7 +175,7 @@ function Weblinks_userapi_weblinks($args) // ready
 function Weblinks_userapi_orderby($args) // ready
 {
     $pntable =& pnDBGetTables();
-    $column = &$pntable['weblinks_links_column'];
+    $column = &$pntable['links_links_column'];
 
     if ($args['orderby'] == "titleA") {
         $orderbysql = "$column[title] ASC";
@@ -200,7 +200,7 @@ function Weblinks_userapi_orderby($args) // ready
  */
 function Weblinks_userapi_countcatlinks($args) // ready
 {
-    return DBUtil::selectObjectCountByID('weblinks_links', $args['cid'], 'cat_id');
+    return DBUtil::selectObjectCountByID('links_links', $args['cid'], 'cat_id');
 }
 
 /**
@@ -225,7 +225,7 @@ function Weblinks_userapi_link($args) // ready
                           'level'            => ACCESS_READ);
 
     // get link array 
-    $link = DBUtil::selectObjectByID('weblinks_links', $args['lid'], 'lid', '', $permFilter);
+    $link = DBUtil::selectObjectByID('links_links', $args['lid'], 'lid', '', $permFilter);
 
     // check for db error
     if ($link === false) {
@@ -250,12 +250,12 @@ function Weblinks_userapi_hitcountinc($args) // ready
     $hits = $args['hits'] + 1;
 
     $pntable =& pnDBGetTables();
-    $weblinkscolumn = &$pntable['weblinks_links_column'];
+    $weblinkscolumn = &$pntable['links_links_column'];
 
     $items = array('hits' => $hits);
     $where = "WHERE $weblinkscolumn[lid] = ".DataUtil::formatForStore($args['lid']);
 
-    return DBUtil::updateObject($items, 'weblinks_links', $where, 'lid');
+    return DBUtil::updateObject($items, 'links_links', $where, 'lid');
 }
 
 /**
@@ -269,7 +269,7 @@ function Weblinks_userapi_searchcats($args) // ready
     }
 
     $pntable =& pnDBGetTables();
-    $weblinkscolumn = &$pntable['weblinks_categories_column'];
+    $weblinkscolumn = &$pntable['links_categories_column'];
 
     $where ="WHERE $weblinkscolumn[title] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
@@ -285,7 +285,7 @@ function Weblinks_userapi_searchcats($args) // ready
                           'level'            => ACCESS_READ);
 
     // get categories from db
-    $searchcats = DBUtil::selectObjectArray('weblinks_categories', $where, 'title', '-1', '-1', '', $permFilter);
+    $searchcats = DBUtil::selectObjectArray('links_categories', $where, 'title', '-1', '-1', '', $permFilter);
 
     // check for db error
     if ($searchcats === false) {
@@ -311,7 +311,7 @@ function Weblinks_userapi_search_weblinks($args) // ready
     $numlinks = (isset($args['numlinks']) && is_numeric($args['numlinks'])) ? $args['numlinks'] : -1;
 
     $pntable =& pnDBGetTables();
-    $column = &$pntable['weblinks_links_column'];
+    $column = &$pntable['links_links_column'];
 
     $where = "$column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
@@ -326,7 +326,7 @@ function Weblinks_userapi_search_weblinks($args) // ready
                           'instance_right'   => 'cat_id',
                           'level'            => ACCESS_READ);
 
-    $result = DBUtil::selectObjectArray('weblinks_links', $where, $args['orderby'], $args['startnum']-1, $args['numlinks'], '', $permFilter);
+    $result = DBUtil::selectObjectArray('links_links', $where, $args['orderby'], $args['startnum']-1, $args['numlinks'], '', $permFilter);
 
     // check for db error
     if ($result === false) {
@@ -348,7 +348,7 @@ function Weblinks_userapi_countsearchlinks($args) // ready
     }
 
     $pntable =& pnDBGetTables();
-    $column = &$pntable['weblinks_links_column'];
+    $column = &$pntable['links_links_column'];
 
     $where = "$column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
@@ -387,12 +387,12 @@ function Weblinks_userapi_totallinks($args) // ready
     $newlinkdb = date("Y-m-d", $args['selectdate']);
 
     $pntable =& pnDBGetTables();
-    $column = &$pntable['weblinks_links_column'];
-    $column2 = &$pntable['weblinks_categories_column'];
+    $column = &$pntable['links_links_column'];
+    $column2 = &$pntable['links_categories_column'];
 
     $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
 
-    return DBUtil::selectObjectCount('weblinks_links', $where);
+    return DBUtil::selectObjectCount('links_links', $where);
 }
 
 /**
@@ -406,7 +406,7 @@ function Weblinks_userapi_weblinksbydate($args) // ready
 
     $pntable =& pnDBGetTables();
     $newlinkdb = date("Y-m-d", $args['selectdate']);
-    $column = &$pntable['weblinks_links_column'];
+    $column = &$pntable['links_links_column'];
     $where = "WHERE $column[date] LIKE '%".DataUtil::formatForStore($newlinkdb)."%'";
 
     // define the permission filter to apply
@@ -421,7 +421,7 @@ function Weblinks_userapi_weblinksbydate($args) // ready
                           'level'            => ACCESS_READ);
 
     // get weblinks from db
-    $weblinks = DBUtil::selectObjectArray('weblinks_links', $where, 'title', '-1', '-1', '', $permFilter);
+    $weblinks = DBUtil::selectObjectArray('links_links', $where, 'title', '-1', '-1', '', $permFilter);
 
     // check for db error
     if ($weblinks === false) {
@@ -447,7 +447,7 @@ function Weblinks_userapi_addbrockenlink($args) // ready
     }
 
     $items = array('lid' => $args['lid'], 'modifysubmitter' => $args['submitter'], 'brokenlink' => 1);
-    if (!DBUtil::insertObject($items, 'weblinks_modrequest', 'requestid')) {
+    if (!DBUtil::insertObject($items, 'links_modrequest', 'requestid')) {
         return LogUtil::registerError(_GETFAILED);
     }
 
@@ -470,7 +470,7 @@ function Weblinks_userapi_modifylinkrequest($args) // ready
     }
 
     $items = array('lid' => $args['lid'], 'cat_id' => $args['cid'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'modifysubmitter' => $args['submitter'], 'brokenlink' => 0);
-    if (!DBUtil::insertObject($items, 'weblinks_modrequest', 'requestid')) {
+    if (!DBUtil::insertObject($items, 'links_modrequest', 'requestid')) {
         return LogUtil::registerError(_GETFAILED);
     }
 
@@ -516,7 +516,7 @@ function Weblinks_userapi_add($args) // ready
         }
         
         $items = array('cat_id' => $args['cid'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'name' => $args['submitter'], 'email' => $args['submitteremail'], 'submitter' => $args['submitter']);
-        if (!DBUtil::insertObject($items, 'weblinks_newlink', 'lid')) {
+        if (!DBUtil::insertObject($items, 'links_newlink', 'lid')) {
             return LogUtil::registerError(_GETFAILED);
         }
     
@@ -535,7 +535,7 @@ function Weblinks_userapi_add($args) // ready
  */
 function Weblinks_userapi_checkurl($args) // ready
 {
-    return DBUtil::selectObjectCountByID('weblinks_links', $args['url'], 'url', 'lower');
+    return DBUtil::selectObjectCountByID('links_links', $args['url'], 'url', 'lower');
 }
 
 /**
@@ -549,7 +549,7 @@ function Weblinks_userapi_lastweblinks($args) // ready
     }
 
     $pntable = pnDBGetTables();
-    $weblinkscolumn = &$pntable['weblinks_links_column'];
+    $weblinkscolumn = &$pntable['links_links_column'];
 
     $orderby = "ORDER BY $weblinkscolumn[date] DESC";
 
@@ -565,7 +565,7 @@ function Weblinks_userapi_lastweblinks($args) // ready
                           'level'            => ACCESS_READ);
 
     // get last weblinks from db
-    $lastweblinks = DBUtil::selectObjectArray('weblinks_links', '', $orderby, '-1', $args['lastlinks'], '', $permFilter);
+    $lastweblinks = DBUtil::selectObjectArray('links_links', '', $orderby, '-1', $args['lastlinks'], '', $permFilter);
 
     // check for db error
     if ($lasweblinks === false) {
@@ -587,7 +587,7 @@ function Weblinks_userapi_mostpopularweblinks($args) // ready
     }
     
     $pntable = pnDBGetTables();
-    $weblinkscolumn = &$pntable['weblinks_links_column'];
+    $weblinkscolumn = &$pntable['links_links_column'];
 
     $orderby = "ORDER BY $weblinkscolumn[hits] DESC";
 
@@ -603,7 +603,7 @@ function Weblinks_userapi_mostpopularweblinks($args) // ready
                           'level'            => ACCESS_READ);
 
     // get most popular weblinks from db
-    $mostpopularweblinks = DBUtil::selectObjectArray('weblinks_links', '', $orderby, '-1', $args['mostpoplinks'], '', $permFilter);
+    $mostpopularweblinks = DBUtil::selectObjectArray('links_links', '', $orderby, '-1', $args['mostpoplinks'], '', $permFilter);
 
     // check for db error
     if ($mostpopularweblinks === false) {
