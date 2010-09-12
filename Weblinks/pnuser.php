@@ -264,7 +264,7 @@ function Weblinks_user_newlinksdate() // ready
     $pnRender = & pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
-    $pnRender->assign('dateview', (ml_ftime(__('%b %d, %Y'), $selectdate)));
+    $pnRender->assign('dateview', (ml_ftime(('%d. %B %Y'), $selectdate)));
     $pnRender->assign('totallinks', $totallinks);
     $pnRender->assign('weblinks', $weblinks);
     $pnRender->assign('tb', pnModGetVar('Weblinks', 'targetblank'));
@@ -303,7 +303,7 @@ function Weblinks_user_mostpopular() // ready
             $mostpoplinkspercentrigger = 1;
         }
     }
-    
+
     if ($mostpoplinkspercentrigger == 1) {
         $toplinkspercent = $mostpoplinks;
         $totalmostpoplinks = pnModAPIFunc('Weblinks', 'user', 'numrows');
@@ -399,7 +399,7 @@ function Weblinks_user_modifylinkrequest() // ready
     $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 0 && 
+    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 0 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
@@ -436,7 +436,7 @@ function Weblinks_user_modifylinkrequests() // ready
     $modlink = FormUtil::getPassedValue('modlink', array(), 'POST');
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 0 && 
+    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 0 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
@@ -445,7 +445,7 @@ function Weblinks_user_modifylinkrequests() // ready
     if (!SecurityUtil::confirmAuthKey()) {
         return LogUtil::registerAuthidError (pnModURL('Weblinks', 'user', 'view'));
     }
-    
+
     // add link request
     pnModAPIFunc('Weblinks', 'user', 'modifylinkrequest', array('lid' => $modlink['lid'],
                                                                 'cid' => $modlink['cid'],
@@ -466,7 +466,7 @@ function Weblinks_user_modifylinkrequests() // ready
 function Weblinks_user_addlink() // ready
 {
     // Security check
-    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 0 && 
+    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 0 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
             $addlink = false;
     } else {
@@ -497,7 +497,7 @@ function Weblinks_user_add() // ready
     $newlink = FormUtil::getPassedValue('newlink', array(), 'POST');
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 0 && 
+    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 0 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
