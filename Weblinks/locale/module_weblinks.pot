@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-14 19:51+0000\n"
+"POT-Creation-Date: 2010-09-14 21:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,9 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
-#: pnadmin.php:312
+#: pnadmin.php:312 pntemplates/weblinks_admin_view.html:61
+#: pntemplates/weblinks_admin_listmodrequests.html:33
+#: pntemplates/weblinks_admin_modcategory.html:15
 msgid "Description"
 msgstr ""
 
@@ -474,14 +476,6 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: pntemplates/weblinks_admin_view.html:61
-#: pntemplates/weblinks_admin_listmodrequests.html:33
-#: pntemplates/weblinks_admin_modcategory.html:15
-#: pntemplates/weblinks_admin_catview.html:23
-#: pntemplates/weblinks_admin_modlink.html:20
-msgid "Description:"
-msgstr ""
-
 #: pntemplates/weblinks_admin_view.html:65
 #: pntemplates/weblinks_admin_linkview.html:34
 #: pntemplates/weblinks_admin_modcategory.html:11
@@ -710,6 +704,11 @@ msgstr ""
 #: pntemplates/weblinks_admin_catview.html:19
 #: pntemplates/weblinks_admin_validate.html:32
 msgid "None"
+msgstr ""
+
+#: pntemplates/weblinks_admin_catview.html:23
+#: pntemplates/weblinks_admin_modlink.html:20
+msgid "Description:"
 msgstr ""
 
 #: pntemplates/weblinks_admin_catview.html:28
