@@ -24,10 +24,12 @@ function Weblinks_mostpopularweblinksblock_init()
  */
 function Weblinks_mostpopularweblinksblock_info()
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Values
     return array('text_type' => 'mostpopularweblinks',
-                 'module' => 'Weblinks',
-                 'text_type_long' => 'Most Popular Web Links',
+                 'module' => __('Weblinks', $dom),
+                 'text_type_long' => __('Most Popular Weblinks', $dom),
                  'allow_multiple' => true,
                  'form_content' => false,
                  'form_refresh' => false,

@@ -24,10 +24,12 @@ function Weblinks_lastweblinksblock_init()
  */
 function Weblinks_lastweblinksblock_info()
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Values
     return array('text_type' => 'lastweblinks',
-                 'module' => 'Weblinks',
-                 'text_type_long' => 'Latest Web Links',
+                 'module' => __('Weblinks', $dom),
+                 'text_type_long' => __('Latest Weblinks', $dom),
                  'allow_multiple' => true,
                  'form_content' => false,
                  'form_refresh' => false,
@@ -57,7 +59,7 @@ function Weblinks_lastweblinksblock_display($blockinfo)
     if (!isset($vars['limit'])) {
         $vars['limit'] = 5;
     }
-    
+
     // Create output object
     $render = pnRender::getInstance('Weblinks', false);
 
@@ -88,7 +90,7 @@ function Weblinks_lastweblinksblock_modify($blockinfo)
     if (empty($vars['limit'])) {
         $vars['limit'] = 5;
     }
-    
+
     // Create output object
     $render = & pnRender::getInstance('Weblinks', false);
 
@@ -106,7 +108,7 @@ function Weblinks_lastweblinksblock_update($blockinfo)
 {
     // Get current content
     $vars = pnBlockVarsFromContent($blockinfo['content']);
-    
+
     // alter the corresponding variable
     $vars['limit'] = (int)FormUtil::getPassedValue('limit', 5, 'POST');
 
@@ -114,7 +116,7 @@ function Weblinks_lastweblinksblock_update($blockinfo)
     if (!SecurityUtil::checkPermission('WeblinksBlock::', "$blockinfo[title]::", ACCESS_ADMIN)) {
         return false;
     }
-    
+
     // write back the new contents
     $blockinfo['content'] = pnBlockVarsToContent($vars);
 
