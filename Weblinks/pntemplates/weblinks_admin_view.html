@@ -1,37 +1,37 @@
 <!--[include file="weblinks_admin_header.html"]-->
 <div class="pn-admincontainer">
-  <div class="pn-adminpageicon"><!--[pnimg modname=core src=info.gif set=icons/large alt='_WL_OVERVIEW' altml=true]--></div>
-  <h2><!--[pnml name="_WL_OVERVIEW"]--></h2>
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=info.gif set=icons/large __alt="Overview" __title="Overview"]--></div>
+  <h2><!--[gt text="Overview"]--></h2>
 
-  <h3><!--[pnml name="_WL_DBSTATUS"]--></h3>
-  <p><!--[pnml name="_WL_THEREARE"]--> <strong><!--[$numrows]--></strong> <!--[pnml name="_WL_LINKS"]--> <!--[pnml name="_WL_AND"]--> <strong><!--[$catnum]--></strong> <!--[pnml name="_WL_CATEGORIES"]--> <!--[pnml name="_WL_INDB"]--></p>
+  <h3><!--[gt text="Status"]--></h3>
+  <p><!--[gt text="There are"]--> <strong><!--[$numrows]--></strong> <!--[gt text="link" plural="links" count=$numrows]--> <!--[gt text="and"]--> <strong><!--[$catnum]--></strong> <!--[gt text="category" plural="categories" count=$catnum]--> <!--[gt text="in the database"]--></p>
 
   <!--[if $totalbrokenlinks gt 0 || $totalmodrequests gt 0]-->
   <div class="pn-informationmsg">
-      <a href="<!--[pnmodurl modname=Weblinks type=admin func=listbrokenlinks]-->"><!--[pnml name="_WL_BROKENLINKSREP"]--> (<!--[$totalbrokenlinks|pnvarprepfordisplay]-->)</a><br />
-      <a href="<!--[pnmodurl modname=Weblinks type=admin func=listmodrequests]-->"><!--[pnml name="_WL_LINKMODREQUEST"]--> (<!--[$totalmodrequests|pnvarprepfordisplay]-->)</a>
+      <a href="<!--[pnmodurl modname=Weblinks type=admin func=listbrokenlinks]-->"><!--[gt text="Broken link reports"]--> (<!--[$totalbrokenlinks|pnvarprepfordisplay]-->)</a><br />
+      <a href="<!--[pnmodurl modname=Weblinks type=admin func=listmodrequests]-->"><!--[gt text="Link modification requests"]--> (<!--[$totalmodrequests|pnvarprepfordisplay]-->)</a>
   </div>
   <!--[/if]-->
 
   <form class="pn-adminform" action="<!--[pnmodurl modname=Weblinks type=admin func=validate]-->" method="post" enctype="application/x-www-form-urlencoded">
     <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
     <fieldset>
-      <legend><!--[pnml name="_WL_LINKVALIDATION"]--></legend>
+      <legend><!--[gt text="Link validation"]--></legend>
       <div class="pn-adminformrow pn-clearfix">
-        <!--[pnml name="_WL_CHECKCATEGORIES"]-->
+        <!--[gt text="Check category"]-->
         <select id="cid" name="cid"><!--[catlist scat=0 sel=0]--></select>
-        <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_CHECKCATEGORIES" title="_WL_CHECKCATEGORIES"]-->
+        <!--[pnbutton src=button_ok.gif set=icons/small __alt="Check category" __title="Check category"]-->
       </div>
 
       <div class="pn-adminformrow pn-clearfix">
-        [ <a href="<!--[pnmodurl modname=Weblinks type=admin func=validate authid=$authid]-->"><!--[pnml name="_WL_CHECKALLLINKS"]--></a> ]
+        [ <a href="<!--[pnmodurl modname=Weblinks type=admin func=validate authid=$authid]-->"><!--[gt text="Check ALL links"]--></a> ]
       </div>
     </fieldset>
   </form>
 
   <!--[if $newlinks]-->
 
-  <h3><!--[pnml name="_WL_LINKSWAITINGVAL"]--></h3>
+  <h3><!--[gt text="Links awaiting validation"]--></h3>
 
   <!--[foreach from=$newlinks item=newlinks]-->
   <form class="pn-adminform" action="<!--[pnmodurl modname=Weblinks type=admin func=addlink]-->" method="post" enctype="application/x-www-form-urlencoded">
@@ -40,38 +40,38 @@
       <input type="hidden" name="link[new]" value="1" />
       <input type="hidden" name="link[lid]" value="<!--[$newlinks.lid|pnvarprepfordisplay]-->" />
       <input type="hidden" name="link[submitter]" value="<!--[$newlinks.submitter|pnvarprepfordisplay]-->" />
-      <legend><!--[pnml name="_WL_LINKID"]-->: <strong><!--[$newlinks.lid]--></strong></legend>
+      <legend><!--[gt text="Link ID"]-->: <strong><!--[$newlinks.lid]--></strong></legend>
       <div class="pn-adminformrow pn-clearfix">
-        <label><!--[pnml name="_WL_SUBMITTER"]--></label>
+        <label><!--[gt text="Submitter"]--></label>
         <span><!--[$newlinks.submitter|pnvarprepfordisplay]--></span>
       </div>
       <div class="pn-adminformrow pn-clearfix">
-        <label><!--[pnml name="_WL_PAGETITLE"]--></label>
+        <label><!--[gt text="Pagetitle"]--></label>
         <input type="text" name="link[title]" value="<!--[$newlinks.title|pnvarprepfordisplay]-->" size="50" maxlength="100" />
       </div>
       <div class="pn-adminformrow pn-clearfix">
-        <label><!--[pnml name="_WL_PAGEURL"]--> [ <a target="_blank" href="<!--[$newlinks.url|pnvarprepfordisplay]-->"><!--[pnml name="_WL_VISIT"]--></a> ]</label>
+        <label><!--[gt text="URL"]--> [ <a target="_blank" href="<!--[$newlinks.url|pnvarprepfordisplay]-->"><!--[gt text="Visit"]--></a> ]</label>
         <input type="text" name="link[url]" value="<!--[$newlinks.url|pnvarprepfordisplay]-->" size="65" maxlength="254" />
       </div>
       <div class="pn-adminformrow pn-clearfix">
-        <label><!--[pnml name="_WL_CATEGORY"]--></label>
+        <label><!--[gt text="Category"]--></label>
         <select name="link[cat]"><!--[catlist scat=0 sel=$newlinks.cid]--></select>
       </div>
       <div class="pn-adminformrow pn-clearfix">
-        <label><!--[pnml name="_WL_DESCRIPTION"]--></label>
+        <label><!--[gt text="Description:"]--></label>
         <textarea name="link[description]" cols="65" rows="10"><!--[$newlinks.description|pnvarprephtmldisplay]--></textarea>
       </div>
       <div class="pn-adminformrow pn-clearfix">
-        <label><!--[pnml name="_WL_NAME"]--></label>
+        <label><!--[gt text="Name"]--></label>
         <input type="text" name="link[name]" size="20" maxlength="100" value="<!--[$newlinks.name|pnvarprepfordisplay]-->" />
       </div>
       <div class="pn-adminformrow pn-clearfix">
-        <label><!--[pnml name="_WL_EMAIL"]--></label>
+        <label><!--[gt text="E-mail address"]--></label>
         <input type="text" name="link[email]" size="20" maxlength="100" value="<!--[$newlinks.email|pnvarprepfordisplay]-->" />
       </div>
       <div class="pn-adminformrow pn-clearfix pn-adminformbuttons">
-        <!--[pnbutton src=button_ok.gif set=icons/small alt="_WL_ADDCATEGORY" title="_WL_ADDLINK"]-->
-        <a href="<!--[pnmodurl modname=Weblinks type=admin func=delnewlink lid=$newlinks.lid authid=$authid]-->"><!--[pnimg modname=core src=editdelete.gif set=icons/small altml=true titleml=true alt="_WL_DELLINK" title="_WL_DELLINK"]--></a>
+        <!--[pnbutton src=button_ok.gif set=icons/small __alt="Add link" __title="Add link"]-->
+        <a href="<!--[pnmodurl modname=Weblinks type=admin func=delnewlink lid=$newlinks.lid authid=$authid]-->"><!--[pnimg modname=core src=editdelete.gif set=icons/small __alt="Delete link" __title="Delete link"]--></a>
       </div>
     </fieldset>
   </form>

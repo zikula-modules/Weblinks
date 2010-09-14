@@ -4,10 +4,10 @@
 
   <div class="wl-center">
     <!--[if $query]-->
-    <h3><!--[pnml name="_WL_SEARCHRESULTS4"]-->: <!--[$query|pnvarprepfordisplay]--></h3>
+    <h3><!--[gt text="Search results for"]-->: <!--[$query|pnvarprepfordisplay]--></h3>
 
     <!--[if $categories]-->
-    <h4><!--[pnml name="_WL_USUBCATEGORIES"]--></h4>
+    <h4><!--[gt text="Sub-categories"]--></h4>
     <ul>
       <!--[foreach from=$categories item=categories]-->
       <li><a href="<!--[pnmodurl modname=Weblinks type=user func=category cid=$categories.cat_id]-->" class="wl-catsub" /><!--[catpath cid=$categories.cat_id start=0 links=1 linkmyself=1]--></li>
@@ -15,26 +15,26 @@
     </ul>
     <!--[/if]-->
 
-    <h4><!--[pnml name="_WL_LINKS"]--></h4>
+    <h4><!--[gt text="Links"]--></h4>
   </div>
 
   <!--[if $weblinks]-->
   <dl class="wl-sortlinks wl-center">
-    <dt><strong><!--[pnml name="_WL_SITESSORTED"]-->: <!--[orderbyTrans orderby=$orderby]--></strong></dt>
-    <dd><!--[pnml name="_WL_SORTLINKSBY"]-->:
-      <!--[pnml name="_WL_TITLE"]--> ( <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=titleA query=$query]-->" title="<!--[pnml name="_WL_TITLEAZ"]-->">+</a> | <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=titleD query=$query]-->" title="<!--[pnml name="_WL_TITLEZA"]-->">-</a> )
-      <!--[pnml name="_WL_DATE"]--> ( <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=dateA query=$query]-->" title="<!--[pnml name="_WL_DATE1"]-->">+</a> | <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=dateD query=$query]-->" title="<!--[pnml name="_WL_DATE2"]-->">-</a> )
-      <!--[pnml name="_WL_POPULARITY"]--> ( <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=hitsA query=$query]-->" title="<!--[pnml name="_WL_POPULARITY1"]-->">+</a> | <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=hitsD query=$query]-->" title="<!--[pnml name="_WL_POPULARITY2"]-->">-</a> )
+    <dt><strong><!--[gt text="Sites currently sorted by"]-->: <!--[orderbyTrans orderby=$orderby]--></strong></dt>
+    <dd><!--[gt text="Sort links by"]-->:
+      <!--[gt text="Title"]--> ( <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=titleA query=$query]-->" title="<!--[gt text="Title (A to Z)"]-->">+</a> | <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=titleD query=$query]-->" title="<!--[gt text="Title (Z to A)"]-->">-</a> )
+      <!--[gt text="Date"]--> ( <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=dateA query=$query]-->" title="<!--[gt text="Date (oldest links listed first)"]-->">+</a> | <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=dateD query=$query]-->" title="<!--[gt text="Date (newest links listed first)"]-->">-</a> )
+      <!--[gt text="Popularity"]--> ( <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=hitsA query=$query]-->" title="<!--[gt text="Popularity (from fewest hits to most hits)"]-->">+</a> | <a href="<!--[pnmodurl modname=Weblinks type=user func=search orderby=hitsD query=$query]-->" title="<!--[gt text="Popularity (from most hits to fewest hits)"]-->">-</a> )
     </dd>
   </dl>
   <!--[foreach from=$weblinks item=weblinks]-->
   <dl class="wl-linkbox">
     <dt><strong><a href="<!--[pnmodurl modname=Weblinks type=user func=visit lid=$weblinks.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></strong></dt>
-    <dd><!--[pnml name="_WL_CATEGORY"]-->: <!--[catpath cid=$weblinks.cat_id start=1 links=1 linkmyself=1]--></dd>
+    <dd><!--[gt text="Category"]-->: <!--[catpath cid=$weblinks.cat_id start=1 links=1 linkmyself=1]--></dd>
     <!--[if $weblinks.description]-->
     <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Weblinks"]--></p></dd>
     <!--[/if]-->
-    <dd><!--[pnml name="_WL_ADDEDON"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[pnml name="_WL_HITS"]-->: <!--[$weblinks.hits]--></dd>
+    <dd><!--[gt text="Added on"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[gt text="Hits"]-->: <!--[$weblinks.hits]--></dd>
     <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks returnurl=$returnurl implode=false]-->
     <!--[if $hooks.Ratings]-->
     <dd><!--[ $hooks.Ratings ]--></dd>
@@ -47,11 +47,11 @@
   <!--[pager show="page" rowcount=$wlpager.numlinks limit=$wlpager.itemsperpage posvar=startnum shift=1]-->
 
   <!--[else]-->
-  <p class="wl-center"><em><!--[pnml name="_WL_NOMATCHES"]--> [ <a href="<!--[pnmodurl modname=Weblinks type=user func=view]-->"><!--[pnml name="_WL_GOBACK"]--></a> ]</em></p>
+  <p class="wl-center"><em><!--[gt text="No matches found to your query"]--> [ <a href="<!--[pnmodurl modname=Weblinks type=user func=view]-->"><!--[gt text="Back"]--></a> ]</em></p>
   <!--[/if]-->
 
   <p class="wl-center">
-    <!--[pnml name="_WL_TRY2SEARCH"]--> "<!--[$query|pnvarprepfordisplay]-->" <!--[pnml name="_WL_INOTHERSENGINES"]--><br />
+    <!--[gt text="Try to search"]--> "<!--[$query|pnvarprepfordisplay]-->" <!--[gt text="'on other search engines"]--><br />
     <a href="http://www.google.com/search?q=<!--[$query|pnvarprepfordisplay]-->">Google</a> -
     <a href="http://www.altavista.com/cgi-bin/query?pg=q&amp;sc=on&amp;hl=on&amp;act=2006&amp;par=0&amp;q=<!--[$query|pnvarprepfordisplay]-->&amp;kl=XX&amp;stype=stext">Alta Vista</a> -
     <a href="http://www.hotbot.com/?MT=<!--[$query|pnvarprepfordisplay]-->&amp;DU=days&amp;SW=web">HotBot</a> -
@@ -60,7 +60,7 @@
     <a href="http://web.ask.com/web?q=<!--[$query|pnvarprepfordisplay]-->&amp;o=0&amp;qsrc=0">Ask Jeeves</a>
   </p>
   <!--[else]-->
-  <p class="wl-center"><strong><!--[pnml name="_WL_NOMATCHES"]--></strong></p>
+  <p class="wl-center"><strong><!--[gt text="No matches found to your query"]--></strong></p>
   <!--[/if]-->
 </div>
 <!--[include file="weblinks_user_footer.html"]-->

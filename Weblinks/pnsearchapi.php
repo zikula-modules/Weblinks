@@ -26,9 +26,9 @@ function Weblinks_searchapi_options($args)
     if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ)) {
         // Create output object - this object will store all of our output so that
         // we can return it easily when required
-        $pnRender = & pnRender::getInstance('Weblinks', false);
-        $pnRender->assign('active',(isset($args['active'])&&isset($args['active']['Weblinks']))||(!isset($args['active'])));
-        return $pnRender->fetch('weblinks_search_options.htm');
+        $render = & pnRender::getInstance('Weblinks', false);
+        $render->assign('active',(isset($args['active'])&&isset($args['active']['Weblinks']))||(!isset($args['active'])));
+        return $render->fetch('weblinks_search_options.htm');
     }
 
     return '';
@@ -39,6 +39,8 @@ function Weblinks_searchapi_options($args)
  **/
 function Weblinks_searchapi_search($args)
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     if (!SecurityUtil::checkPermission( 'Weblinks::', '::', ACCESS_READ)) {
         return true;
     }

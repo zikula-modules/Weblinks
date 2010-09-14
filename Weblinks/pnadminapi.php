@@ -15,25 +15,25 @@
  */
 function Weblinks_adminapi_getlinks() // ready
 {
-    pnModLangLoad('Weblinks', 'admin');
+    $dom = ZLanguage::getModuleDomain('Weblinks');
 
     $links = array();
-    
+
     if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT)) {
-        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'view'), 'text' => _WL_OVERVIEW);
+        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'view'), 'text' => __('Overview', $dom));
     }
     if (SecurityUtil::checkPermission('Weblinks::Category', '::', ACCESS_EDIT)) {
-        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'catview'), 'text' => _WL_CATVIEW);
+        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'catview'), 'text' => __('Categories administer', $dom));
     }
     if (SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_EDIT)) {
-        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'linkview'), 'text' => _WL_LINKVIEW);
+        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'linkview'), 'text' => __('Links administer', $dom));
     }
     if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN)) {
-        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'getconfig'), 'text' => _WL_MODCONF);
-        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'import'), 'text' => _WL_IMPORT);
+        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'getconfig'), 'text' => __('Modify configuration', $dom));
+        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'import'), 'text' => __('Import', $dom));
     }
     if (SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_EDIT)) {
-        $links[] = array('url' => pnModURL('Weblinks', 'user', 'view'), 'text' => _WL_INDEX);
+        $links[] = array('url' => pnModURL('Weblinks', 'user', 'view'), 'text' => __('Link-Index', $dom));
     }
     return $links;
 }
@@ -53,7 +53,7 @@ function Weblinks_adminapi_countmodrequests() // ready
 {
     $pntable =& pnDBGetTables();
     $column = &$pntable['links_modrequest_column'];
-    $where = "WHERE $column[brokenlink]='0'";
+    $where = "WHERE $column[brokenlink] = '0'";
     return DBUtil::selectObjectCount('links_modrequest', $where);
 }
 
@@ -62,6 +62,8 @@ function Weblinks_adminapi_countmodrequests() // ready
  */
 function Weblinks_adminapi_newlinks() // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // define the permission filter to apply
     $permFilter = array();
     $permFilter[] = array('realm'            => 0,
@@ -78,7 +80,7 @@ function Weblinks_adminapi_newlinks() // ready
 
     // check for a db error
     if ($newlinks === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // return the newlinks array
@@ -90,6 +92,8 @@ function Weblinks_adminapi_newlinks() // ready
  */
 function Weblinks_adminapi_addcategory($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['pid']) || !is_numeric($args['pid']) || !isset($args['title'])) {
         return LogUtil::registerArgsError();
@@ -103,14 +107,14 @@ function Weblinks_adminapi_addcategory($args) // ready
     $checkcat = DBUtil::selectObjectCountByID('links_categories', $args['pid'], 'parent_id', 'lower');
     $checktitle = DBUtil::selectObjectCountByID('links_categories', $args['title'], 'title', 'lower');
     if ($checkcat && $checktitle) {
-        return LogUtil::registerError(_WL_ERRORTHECATEGORY);
+        return LogUtil::registerError(__('ERROR: The category', $dom));
     }
 
     $items = array('parent_id' => $args['pid'], 'title' => $args['title'], 'cdescription' => $args['cdescription']);
     if (!DBUtil::insertObject($items, 'links_categories', 'cat_id')) {
-        return LogUtil::registerError(_WL_ERRORTHECATEGORY);
+        return LogUtil::registerError(__('ERROR: The category', $dom));
     }
-      
+
     return true;
 }
 
@@ -119,9 +123,11 @@ function Weblinks_adminapi_addcategory($args) // ready
  */
 function Weblinks_adminapi_getcategory($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if ((!isset($args['cid']) || !is_numeric($args['cid']))) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerArgsError();
     }
 
     // Security check
@@ -145,7 +151,7 @@ function Weblinks_adminapi_getcategory($args) // ready
 
     // check for a db error
     if ($category === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // return the category array
@@ -157,6 +163,8 @@ function Weblinks_adminapi_getcategory($args) // ready
  */
 function Weblinks_adminapi_updatecategory($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['cid']) || !is_numeric($args['cid']) || !isset($args['title'])) {
         return LogUtil::registerArgsError();
@@ -172,9 +180,9 @@ function Weblinks_adminapi_updatecategory($args) // ready
     $items = array('title' => $args['title'], 'cdescription' => $args['cdescription']);
     $where = "WHERE $column[cat_id]='".(int)DataUtil::formatForStore($args['cid'])."'";
     if (!DBUtil::updateObject($items, 'links_categories', $where, 'cat_id')) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     return true;
 }
 
@@ -183,6 +191,8 @@ function Weblinks_adminapi_updatecategory($args) // ready
  */
 function Weblinks_adminapi_delcategory($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['cid']) || !is_numeric($args['cid'])) {
         return LogUtil::registerArgsError();
@@ -208,13 +218,13 @@ function Weblinks_adminapi_delcategory($args) // ready
     if (!DBUtil::deleteWhere('links_categories', $where)) {
         return false;
     }
-    
-    // delete category 
+
+    // delete category
     $where = "WHERE $catcolumn[cat_id] = '".(int)DataUtil::formatForStore($args['cid'])."'";
     if (!DBUtil::deleteWhere('links_categories', $where)) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     return true;
 }
 
@@ -223,6 +233,8 @@ function Weblinks_adminapi_delcategory($args) // ready
  */
 function Weblinks_adminapi_addlink($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['cid']) || !isset($args['title']) || !isset($args['url']) || !isset($args['date'])) {
         return LogUtil::registerArgsError();
@@ -235,12 +247,12 @@ function Weblinks_adminapi_addlink($args) // ready
 
     $items = array('cat_id' => $args['cid'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'date' => $args['date'], 'name' => $args['name'], 'email' => $args['email'], 'submitter' => $args['submitter']);
     if (!DBUtil::insertObject($items, 'links_links', 'lid')) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     // get lid from the new link
     $lid = DBUtil::getInsertID('links_links', 'lid');
-    
+
     // Let any hooks know that we have created a new link.
     pnModCallHooks('item', 'display', $lid, array('module' => 'Weblinks'));
 
@@ -252,6 +264,8 @@ function Weblinks_adminapi_addlink($args) // ready
  */
 function Weblinks_adminapi_delnewlink($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['lid']) || !is_numeric($args['lid'])) {
         return LogUtil::registerArgsError();
@@ -261,12 +275,12 @@ function Weblinks_adminapi_delnewlink($args) // ready
     if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
         return LogUtil::registerPermissionError ();
     }
-    
+
     // delete link from the newlink table
     if (!DBUtil::deleteObjectByID('links_newlink', $args['lid'], 'lid')) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     return true;
 }
 
@@ -275,6 +289,8 @@ function Weblinks_adminapi_delnewlink($args) // ready
  */
 function Weblinks_adminapi_getlink($args) //ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if ((!isset($args['lid']) || !is_numeric($args['lid']))) {
         return LogUtil::registerArgsError();
@@ -294,14 +310,14 @@ function Weblinks_adminapi_getlink($args) //ready
                           'instance_left'    => 'title',
                           'instance_middle'  => '',
                           'instance_right'   => 'lid',
-                          'level'            => ACCESS_EDIT);    
+                          'level'            => ACCESS_EDIT);
 
     // get the object from the db
     $link = DBUtil::selectObjectById('links_links', $args['lid'], 'lid', '', $permFilter);
 
     // check for a db error
     if ($link === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     return $link;
@@ -312,6 +328,8 @@ function Weblinks_adminapi_getlink($args) //ready
  */
 function Weblinks_adminapi_updatelink($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['lid']) || !is_numeric($args['lid']) ||
         !isset($args['cid']) || !is_numeric($args['cid']) ||
@@ -329,12 +347,12 @@ function Weblinks_adminapi_updatelink($args) // ready
     $items = array('cat_id' => $args['cid'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'name' => $args['name'], 'email' => $args['email'], 'hits' => $args['hits']);
     $where = "WHERE $column[lid]='".(int)DataUtil::formatForStore($args['lid'])."'";
     if (!DBUtil::updateObject($items, 'links_links', $where, 'lid')) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     // Let any other modules know we have updated an item
     pnModCallHooks('item', 'update', $args['lid'], array('module' => 'Weblinks'));
-    
+
     return true;
 }
 
@@ -343,6 +361,8 @@ function Weblinks_adminapi_updatelink($args) // ready
  */
 function Weblinks_adminapi_dellink($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['lid']) || !is_numeric($args['lid'])) {
         return LogUtil::registerArgsError();
@@ -354,12 +374,12 @@ function Weblinks_adminapi_dellink($args) // ready
     }
 
     if (!DBUtil::deleteObjectByID('links_links', $args['lid'], 'lid')) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     // Let any hooks know that we have deleted a link.
     pnModCallHooks('item', 'delete', $args['lid'], array('module' => 'Weblinks'));
-    
+
     return true;
 }
 
@@ -368,16 +388,18 @@ function Weblinks_adminapi_dellink($args) // ready
  */
 function Weblinks_adminapi_checklinks($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['cid']) || !is_numeric($args['cid'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerArgsError();
     }
-    
+
     // Check ALL Links
     if ($args['cid'] == 0) {
         $where = "";
     }
-    
+
     // Check Categories
     if ($args['cid'] != 0) {
         $pntable =& pnDBGetTables();
@@ -401,7 +423,7 @@ function Weblinks_adminapi_checklinks($args) // ready
 
     // check for a db error
     if ($checkcatlinks === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // put items into result array.
@@ -419,16 +441,18 @@ function Weblinks_adminapi_checklinks($args) // ready
                          'url'   => $link['url'],
                          'fp'    => $fp);
     }
-  
+
     // return array
     return $links;
-}    
+}
 
 /**
  * get broken links
  */
 function Weblinks_adminapi_brokenlinks() // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     $pntable =& pnDBGetTables();
     $column = &$pntable['links_modrequest_column'];
     $where = "WHERE $column[brokenlink]='1'";
@@ -449,14 +473,14 @@ function Weblinks_adminapi_brokenlinks() // ready
 
     // check for a db error
     if ($objArray === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // put items into result array.
     $brokenlinks = array();
     foreach ($objArray as $request) {
         $link = pnModAPIFunc('Weblinks', 'admin', 'getlink', array('lid' => $request['lid']));
-        
+
         if ($request['modifysubmitter'] != pnConfigGetVar('anonymous')) {
             $email = DBUtil::selectObjectByID('users', $request['modifysubmitter'], 'uname');
         }
@@ -470,7 +494,7 @@ function Weblinks_adminapi_brokenlinks() // ready
                                'owner'          => $link['name'],
                                'owneremail'     => $link['email']);
     }
-  
+
     // return array
     return $brokenlinks;
 }
@@ -480,6 +504,8 @@ function Weblinks_adminapi_brokenlinks() // ready
  */
 function Weblinks_adminapi_delrequest($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['rid']) || !is_numeric($args['rid'])) {
         return LogUtil::registerArgsError();
@@ -489,11 +515,11 @@ function Weblinks_adminapi_delrequest($args) // ready
     if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
         return LogUtil::registerPermissionError ();
     }
-    
+
     if (!DBUtil::deleteObjectByID('links_modrequest', $args['rid'], 'requestid')) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     return true;
 }
 
@@ -502,6 +528,8 @@ function Weblinks_adminapi_delrequest($args) // ready
  */
 function Weblinks_adminapi_modrequests() // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     $pntable =& pnDBGetTables();
     $column = &$pntable['links_modrequest_column'];
     $where = "WHERE $column[brokenlink]='0'";
@@ -522,7 +550,7 @@ function Weblinks_adminapi_modrequests() // ready
 
     // check for a db error
     if ($objArray === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // put items into result array.
@@ -531,7 +559,7 @@ function Weblinks_adminapi_modrequests() // ready
         $link = pnModAPIFunc('Weblinks', 'admin', 'getlink', array('lid' => $request['lid']));
         $category = pnModAPIFunc('Weblinks', 'admin', 'getcategory', array('cid' => $request['cat_id']));
         $origcategory = pnModAPIFunc('Weblinks', 'admin', 'getcategory', array('cid' => $link['cat_id']));
-        
+
         if ($request['modifysubmitter'] != pnConfigGetVar('anonymous')) {
             $email = DBUtil::selectObjectByID('users', $request['modifysubmitter'], 'uname');
         }
@@ -553,7 +581,7 @@ function Weblinks_adminapi_modrequests() // ready
                                'owner'           => $link['name'],
                                'owneremail'      => $link['email']);
     }
-  
+
     // return array
     return $modrequests;
 }
@@ -563,11 +591,13 @@ function Weblinks_adminapi_modrequests() // ready
  */
 function Weblinks_adminapi_linkmodrequest($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if ((!isset($args['rid']) || !is_numeric($args['rid']))) {
         return LogUtil::registerArgsError();
     }
-    
+
     // define the permission filter to apply
     $permFilter = array();
     $permFilter[] = array('realm'            => 0,
@@ -577,16 +607,16 @@ function Weblinks_adminapi_linkmodrequest($args) // ready
                           'instance_left'    => 'title',
                           'instance_middle'  => '',
                           'instance_right'   => 'lid',
-                          'level'            => ACCESS_EDIT);   
+                          'level'            => ACCESS_EDIT);
 
     // get the object from the db
     $requestlink = DBUtil::selectObjectById('links_modrequest', $args['rid'], 'requestid', '', $permFilter);
 
     // check for a db error
     if ($requestlink === false) {
-        return LogUtil::registerError (_GETFAILED);
-    }    
- 
+       return LogUtil::registerError(__('Error! Could not load items.', $dom));
+    }
+
     return $requestlink;
 }
 
@@ -595,7 +625,9 @@ function Weblinks_adminapi_linkmodrequest($args) // ready
  */
 function Weblinks_adminapi_updatemodlink($args) // ready
 {
-    // Argument check
+     $dom = ZLanguage::getModuleDomain('Weblinks');
+
+   // Argument check
     if (!isset($args['lid']) || !is_numeric($args['lid']) ||
         !isset($args['cid']) || !is_numeric($args['cid']) ||
         !isset($args['title']) || !isset($args['url'])) {
@@ -612,11 +644,11 @@ function Weblinks_adminapi_updatemodlink($args) // ready
     $items = array('cat_id' => $args['cid'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description']);
     $where = "WHERE $column[lid]='".(int)DataUtil::formatForStore($args['lid'])."'";
     if (!DBUtil::updateObject($items, 'links_links', $where, 'lid')) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     // Let any other modules know we have updated an item
     pnModCallHooks('item', 'update', $args['lid'], array('module' => 'Weblinks'));
-    
+
     return true;
 }

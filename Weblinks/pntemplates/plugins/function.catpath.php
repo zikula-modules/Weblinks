@@ -9,9 +9,11 @@
  * @link http://www.petzi-juist.de
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
- 
+
 function smarty_function_catpath($params, &$smarty)
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     if (!isset($params['cid']) || !is_numeric($params['cid'])){
         return LogUtil::registerArgsError();
     }
@@ -35,7 +37,7 @@ function smarty_function_catpath($params, &$smarty)
     }
 
     if ($params['start']) {
-      $cpath = "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'main'))."\">"._WL_START."</a> / $cpath";
+      $cpath = "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'main'))."\">".DataUtil::formatForDisplay(__('Start', $dom))."</a> / $cpath";
     }
 
     return $cpath;

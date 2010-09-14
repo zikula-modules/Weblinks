@@ -1,27 +1,27 @@
 <!--[include file="weblinks_admin_header.html"]-->
 <div class="pn-admincontainer">
-  <div class="pn-adminpageicon"><!--[pnimg modname=core src=info.gif set=icons/large alt='_WL_OVERVIEW' altml=true]--></div>
-  <h2><!--[pnml name="_WL_USERREPBROKEN"]--> (<!--[$totalbrokenlinks|pnvarprepfordisplay]-->)</h2>
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=info.gif set=icons/large __alt="Overview" __title="Overview"]--></div>
+  <h2><!--[gt text="User-reported broken links"]--> (<!--[$totalbrokenlinks|pnvarprepfordisplay]-->)</h2>
 
   <div class="pn-informationmsg">
-    <!--[pnml name="_WL_IGNOREINFO" html=true]--><br />
-    <!--[pnml name="_WL_DELETEINFO" html=true]-->
+    <!--[gt text="Ignore (deletes all <strong><em>requests</em></strong> for a given link)"]--><br />
+    <!--[gt text="Delete (deletes <strong><em>broken link</em></strong> and <strong><em>requests</em></strong> for a given link)"]-->
   </div>
 
   <!--[if $totalbrokenlinks == 0]-->
   <div class="pn-warningmsg">
-    <!--[pnml name="_WL_NOREPORTEDBROKEN"]-->
+    <!--[gt text="No broken links found"]-->
   </div>
   <!--[else]-->
 
   <table class="pn-admintable">
     <thead>
       <tr>
-        <th><!--[pnml name="_WL_LINK"]--></th>
-        <th><!--[pnml name="_WL_SUBMITTER"]--></th>
-        <th><!--[pnml name="_WL_LINKOWNER"]--></th>
-        <th><!--[pnml name="_WL_IGNORE"]--></th>
-        <th><!--[pnml name="_WL_DELETE"]--></th>
+        <th><!--[gt text="Link"]--></th>
+        <th><!--[gt text="Submitter"]--></th>
+        <th><!--[gt text="Link owner"]--></th>
+        <th><!--[gt text="Ignore"]--></th>
+        <th><!--[gt text="Delete"]--></th>
       </tr>
     </thead>
     <tbody>
@@ -43,12 +43,12 @@
 
         <td>
           <a href="<!--[pnmodurl modname=Weblinks type=admin func=ignorebrokenlinks rid=$brokenlinks.rid authid=$authid]-->">
-            <!--[pnimg modname=core src='ok.gif' set=icons/extrasmall ]-->
+            <!--[pnimg modname=core src='ok.gif' set=icons/extrasmall __alt="Ignore" __title="Ignore"]-->
           </a>
         </td>
         <td>
           <a href="<!--[pnmodurl modname=Weblinks type=admin func=delbrokenlinks rid=$brokenlinks.rid lid=$brokenlinks.lid authid=$authid]-->">
-            <!--[pnimg modname=core src='14_layer_deletelayer.gif' set=icons/extrasmall ]-->
+            <!--[pnimg modname=core src='14_layer_deletelayer.gif' set=icons/extrasmall __alt="Delete" __title="Delete"]-->
           </a>
         </td>
 

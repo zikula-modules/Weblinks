@@ -12,26 +12,28 @@
 
 function smarty_function_linkbottommenu($params, &$smarty)
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     if (empty($params['cid']) || empty($params['lid'])) {
         return LogUtil::registerArgsError();
     }
-    
+
     $linkbottommenu = "";
 
     if (SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_EDIT)) {
-        $linkbottommenu = "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'admin', 'modlink', array('lid' => (int)$params['lid'])))."\"><img src=\"images/icons/extrasmall/editpaste.gif\" width=\"16\" height=\"16\" alt=\""._WL_EDITTHISLINK."\" title=\""._WL_EDITTHISLINK."\" />&nbsp;</a>";
+        $linkbottommenu = "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'admin', 'modlink', array('lid' => (int)$params['lid'])))."\"><img src=\"images/icons/extrasmall/editpaste.gif\" width=\"16\" height=\"16\" alt=\"".DataUtil::formatForDisplay(__('Edit this link', $dom))."\" title=\"".DataUtil::formatForDisplay(__('Edit this link', $dom))."\" />&nbsp;</a>";
     }
 
     if (pnModGetVar('Weblinks', 'blockunregmodify') == 0 || SecurityUtil::checkPermission('Weblinks::Category', "::$params[cid]", ACCESS_COMMENT)) {
-        $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'modifylinkrequest', array('lid' => (int)$params['lid'])))."\">".pnML("_WL_MODIFY")."</a>&nbsp;|&nbsp;";
+        $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'modifylinkrequest', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Modify', $dom))."</a>&nbsp;|&nbsp;";
     }
 
     if (SecurityUtil::checkPermission('Weblinks::Category', "::$params[cid]", ACCESS_COMMENT)) {
-        $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'brokenlink', array('lid' => (int)$params['lid'])))."\">".pnML("_WL_REPORTBROKEN")."</a>&nbsp;|&nbsp;";
+        $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'brokenlink', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Report broken link', $dom))."</a>&nbsp;|&nbsp;";
     }
 
     if (empty($params['details'])) {
-        $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'viewlinkdetails', array('lid' => (int)$params['lid'])))."\">".pnML("_WL_DETAILS")."</a>&nbsp;";
+        $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'viewlinkdetails', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Details', $dom))."</a>&nbsp;";
 
         // set default
         $ezcommentscounter = "";
@@ -41,9 +43,9 @@ function smarty_function_linkbottommenu($params, &$smarty)
             $ezcommentscounter = count($items);
 
             $linkbottommenu .= "|&nbsp;<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'viewlinkdetails', array('lid' => (int)$params['lid'])))."\">";
-            if ($ezcommentscounter=="0") $linkbottommenu .= pnML("_WL_FEELFREE2ADD")."</a>";
-            elseif ($ezcommentscounter=="1") $linkbottommenu .= "1 ".pnML("_WL_COMMENT")."</a>";
-            else $linkbottommenu .= "$ezcommentscounter ".pnML("_WL_COMMENTS")."</a>";
+            if ($ezcommentscounter=="0") $linkbottommenu .= DataUtil::formatForDisplay(__('Add a comment', $dom))."</a>";
+            elseif ($ezcommentscounter=="1") $linkbottommenu .= "1 ".DataUtil::formatForDisplay(__('Comment', $dom))."</a>";
+            else $linkbottommenu .= "$ezcommentscounter ".DataUtil::formatForDisplay(__('Comments', $dom))."</a>";
         }
     }
 

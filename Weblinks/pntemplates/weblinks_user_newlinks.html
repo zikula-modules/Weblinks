@@ -1,15 +1,15 @@
 <!--[*  $Id$  *]-->
 <!--[include file="weblinks_user_header.html"]-->
 <div class="wl-borderbox wl-center">
-  <h3><!--[pnml name="_WL_NEWLINKS"]--></h3>
-  <p><!--[pnml name="_WL_TOTALNEWLINKS"]-->: <!--[pnml name="_WL_LASTWEEK"]-->: <!--[countlinks days=7]--> | <!--[pnml name="_WL_LAST30DAYS"]-->: <!--[countlinks days=30]-->
+  <h3><!--[gt text="New links"]--></h3>
+  <p><!--[gt text="Total new links"]-->: <!--[gt text="Last week"]-->: <!--[countlinks days=7]--> | <!--[gt text="Last 30 days"]-->: <!--[countlinks days=30]-->
     <br />
-    <!--[pnml name="_WL_SHOW"]-->:
-    <a href="<!--[pnmodurl modname=Weblinks type=user func=newlinks newlinkshowdays=7]-->"> <!--[pnml name="_WL_1WEEK"]--></a> |
-    <a href="<!--[pnmodurl modname=Weblinks type=user func=newlinks newlinkshowdays=14]-->"> <!--[pnml name="_WL_2WEEKS"]--></a> |
-    <a href="<!--[pnmodurl modname=Weblinks type=user func=newlinks newlinkshowdays=30]-->"> <!--[pnml name="_WL_30DAYS"]--></a>
+    <!--[gt text="Show"]-->:
+    <a href="<!--[pnmodurl modname=Weblinks type=user func=newlinks newlinkshowdays=7]-->"> <!--[gt text="1 week"]--></a> |
+    <a href="<!--[pnmodurl modname=Weblinks type=user func=newlinks newlinkshowdays=14]-->"> <!--[gt text="2 weeks"]--></a> |
+    <a href="<!--[pnmodurl modname=Weblinks type=user func=newlinks newlinkshowdays=30]-->"> <!--[gt text="30 days"]--></a>
   </p>
-  <p><strong><!--[pnml name="_WL_TOTALFORLAST"]--> <!--[$newlinkshowdays|pnvarprepfordisplay]--> <!--[pnml name="_WL_DAYS"]--> :</strong></p>
+  <p><strong><!--[gt text="Total new links over the last"]--> <!--[$newlinkshowdays|pnvarprepfordisplay]--> <!--[gt text="days"]--> :</strong></p>
   <!--[newlinksbyday newlinkshowdays=$newlinkshowdays]-->
 </div>
 <!--[include file="weblinks_user_footer.html"]-->

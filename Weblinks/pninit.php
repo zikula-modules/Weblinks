@@ -15,6 +15,13 @@
  */
 function Weblinks_init()
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
+    if (version_compare(PN_VERSION_NUM, '1.2.0', '<')) {
+        SessionUtil::setVar('errormsg', __('Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met.', $dom));
+        return false;
+    }
+    
     // Create tables
 
     // creating categories table
@@ -67,6 +74,8 @@ function Weblinks_init()
  */
 function Weblinks_upgrade($oldversion)
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Get database information
     $pntable = pnDBGetTables();
 
@@ -96,20 +105,6 @@ function Weblinks_upgrade($oldversion)
         case '2.0':
 
         // rename Web_Links to Weblinks
-/*      // rename tables
-        $tables = array('links_categories' => 'weblinks_categories',
-                        'links_links'      => 'weblinks_links',
-                        'links_modrequest' => 'weblinks_modrequest',
-                        'links_newlink'    => 'weblinks_newlink',
-                        'links_editorials' => 'weblinks_editorials',
-                        'links_votedata'   => 'weblinks_votedata');
-        $dbconn = DBConnectionStack::getConnection();
-        $dict   = NewDataDictionary($dbconn);
-        $prefix = pnConfigGetVar('prefix');
-        foreach ($tables as $oldtable => $newtable) {
-            $sqlarray = $dict->RenameTableSQL($prefix.'_'.$oldtable, $prefix.'_'.$newtable);
-            $result   = $dict->ExecuteSQLArray($sqlarray);
-        }*/
 
         // rename modvars
         $oldvars = pnModGetVar('Web_Links');
@@ -153,6 +148,13 @@ function Weblinks_upgrade($oldversion)
         }
 
         case '2.0.1':
+
+        if (version_compare(PN_VERSION_NUM, '1.2.0', '<')) {
+            SessionUtil::setVar('errormsg', __('Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met.', $dom));
+            return false;
+        }
+        
+        case '2.1.0':
 
            break;
     }

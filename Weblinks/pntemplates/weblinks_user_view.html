@@ -2,7 +2,7 @@
 <!--[assign var="main" value=1]-->
 <!--[include file="weblinks_user_header.html"]-->
 <div class="wl-borderbox">
-  <h3><!--[pnml name="_WL_MAINCAT"]--></h3>
+  <h3><!--[gt text="Main-Categories"]--></h3>
 
   <div class="pn-clearfix">
     <div class="wl-catrow pn-clearfix">
@@ -32,13 +32,13 @@
     </div>
   </div>
 
-  <div class="wl-center wl-stats"><!--[pnml name="_WL_THEREARE"]--> <strong><!--[$numrows]--></strong> <!--[pnml name="_WL_LINKS"]--> <!--[pnml name="_WL_AND"]--> <strong><!--[$catnum]--></strong> <!--[pnml name="_WL_CATEGORIES"]--> <!--[pnml name="_WL_INDB"]--></div>
+  <div class="wl-center wl-stats"><!--[gt text="There are"]--> <strong><!--[$numrows]--></strong> <!--[gt text="link" plural="links" count=$numrows]--> <!--[gt text="and"]--> <strong><!--[$catnum]--></strong> <!--[gt text="category" plural="categories" count=$catnum]--> <!--[gt text="in the database"]--></div>
 </div>
 
 <!--[if $linkbox eq 1]-->
 <div class="wl-borderbox pn-clearfix">
   <div class="blocklast">
-    <h4><!--[pnml name="_WL_LASTWEBLINKS"]--></h4>
+    <h4><!--[gt text="Last links"]--></h4>
     <!--[if $blocklast]-->
     <ol class="lastweblinks">
       <!--[foreach from=$blocklast item=weblinks name=loop]-->
@@ -50,7 +50,7 @@
     <!--[/if]-->
   </div>
   <div class="blockmostpopular">
-    <h4><!--[pnml name="_WL_MOSTPOPULARWEBLINKS"]--></h4>
+    <h4><!--[gt text="Most-popular links"]--></h4>
     <!--[if $blockmostpop]-->
     <ol class="mostpopularweblinks">
       <!--[foreach from=$blockmostpop item=weblinks name=loop]-->

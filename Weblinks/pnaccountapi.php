@@ -18,6 +18,8 @@
  */
 function Weblinks_accountapi_getall($args)
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // the array that will hold the options
     $items = null;
 
@@ -36,11 +38,10 @@ function Weblinks_accountapi_getall($args)
 
     // Create an array of links to return
     if(SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_ADD)) {
-        pnModLangLoad('Weblinks', 'user');
         $items = array(array('url'    => pnModURL('Weblinks', 'user', 'addlink'),
                              'module' => 'core',
                              'set'    => 'icons/large',
-                             'title'  => _WL_ADD,
+                             'title'  => __('Add link', $dom),
                              'icon'   => 'folder_html.gif'));
     }
 

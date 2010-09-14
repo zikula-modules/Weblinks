@@ -59,19 +59,19 @@ function Weblinks_mostpopularweblinksblock_display($blockinfo)
     }
 
     // Create output object
-    $pnRender = pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     //  Check if the block is cached
-    if ($pnRender->is_cached('weblinks_block_mostpopularweblinks.html')) {
-        $blockinfo['content'] = $pnRender->fetch('weblinks_block_mostpopularweblinks.html');
+    if ($render->is_cached('weblinks_block_mostpopularweblinks.html')) {
+        $blockinfo['content'] = $render->fetch('weblinks_block_mostpopularweblinks.html');
         return pnBlockThemeBlock($blockinfo);
     }
 
-    $pnRender->assign('weblinks', pnModAPIFunc('Weblinks', 'user', 'mostpopularweblinks', array('lastlinks' => $vars['limit'])));
-    $pnRender->assign('tb', pnModGetVar('Weblinks', 'targetblank'));
+    $render->assign('weblinks', pnModAPIFunc('Weblinks', 'user', 'mostpopularweblinks', array('lastlinks' => $vars['limit'])));
+    $render->assign('tb', pnModGetVar('Weblinks', 'targetblank'));
 
     // Populate block info and pass to theme
-    $blockinfo['content'] = $pnRender->fetch('weblinks_block_mostpopularweblinks.html');
+    $blockinfo['content'] = $render->fetch('weblinks_block_mostpopularweblinks.html');
 
     return pnBlockThemeBlock($blockinfo);
 }
@@ -90,13 +90,13 @@ function Weblinks_mostpopularweblinksblock_modify($blockinfo)
     }
 
     // Create output object
-    $pnRender = & pnRender::getInstance('Weblinks', false);
+    $render = & pnRender::getInstance('Weblinks', false);
 
     // assign the block vars
-    $pnRender->assign($vars);
+    $render->assign($vars);
 
     // Return output
-    return $pnRender->fetch('weblinks_block_weblinks_modify.html');
+    return $render->fetch('weblinks_block_weblinks_modify.html');
 }
 
 /**

@@ -15,7 +15,7 @@ function smarty_function_countlinks($params, &$smarty)
     $allmonthlinks = 0;
     while ($counter < $params['days']) {
         $newlinkdayraw = (time()-(86400 * $counter));
-        $newlinkdb = Date("Y-m-d", $newlinkdayraw);
+        $newlinkdb = date("Y-m-d", $newlinkdayraw);
         $pntable =& pnDBGetTables();
         $column = &$pntable['links_links_column'];
         $column2 = &$pntable['links_categories_column'];

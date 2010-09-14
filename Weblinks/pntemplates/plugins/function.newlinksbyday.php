@@ -12,6 +12,8 @@
 
 function smarty_function_newlinksbyday($params, &$smarty)
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     if ( ($params['newlinkshowdays'] != "7" && $params['newlinkshowdays'] != "14" && $params['newlinkshowdays'] != "30") ||
         (!is_numeric($params['newlinkshowdays'])) || (!isset($params['newlinkshowdays'])) ) {
         $params['newlinkshowdays'] = "7";
@@ -19,7 +21,7 @@ function smarty_function_newlinksbyday($params, &$smarty)
 
     while ($counter < $params['newlinkshowdays']) {
         $newlinkdayraw = (time()-(86400 * $counter));
-        $newlinkview = date(_WL_DATEBRIEF, $newlinkdayraw);
+        $newlinkview = date(__('M d, Y', $dom), $newlinkdayraw);
         $newlinkdb = date("Y-m-d", $newlinkdayraw);
         $pntable =& pnDBGetTables();
         $column = &$pntable['links_links_column'];

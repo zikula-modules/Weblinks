@@ -12,23 +12,25 @@
 
 function smarty_function_orderbyTrans($params, &$smarty)
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     if ($params['orderby'] == "hitsA") {
-        $orderbyTrans = ""._WL_POPULARITY1."";
+        $orderbyTrans = DataUtil::formatForDisplay(__('Popularity (from fewest hits to most hits)', $dom));
     }
     if ($params['orderby'] == "hitsD") {
-        $orderbyTrans = ""._WL_POPULARITY2."";
+        $orderbyTrans = DataUtil::formatForDisplay(__('Popularity (from most hits to fewest hits)', $dom));
     }
     if ($params['orderby'] == "titleA") {
-        $orderbyTrans = ""._WL_TITLEAZ."";
+        $orderbyTrans = DataUtil::formatForDisplay(__('Title (A to Z)', $dom));
     }
     if ($params['orderby'] == "titleD") {
-        $orderbyTrans = ""._WL_TITLEZA."";
+        $orderbyTrans = DataUtil::formatForDisplay(__('Title (Z to A)', $dom));
     }
     if ($params['orderby'] == "dateA") {
-        $orderbyTrans = ""._WL_DATE1."";
+        $orderbyTrans = DataUtil::formatForDisplay(__('Date (oldest links listed first)', $dom));
     }
     if ($params['orderby'] == "dateD") {
-        $orderbyTrans = ""._WL_DATE2."";
+        $orderbyTrans = DataUtil::formatForDisplay(__('Date (newest links listed first)', $dom));
     }
 
     return $orderbyTrans;

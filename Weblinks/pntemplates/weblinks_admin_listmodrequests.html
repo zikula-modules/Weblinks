@@ -1,36 +1,36 @@
 <!--[*  $Id$  *]-->
 <!--[include file="weblinks_admin_header.html"]-->
 <div class="pn-admincontainer">
-  <div class="pn-adminpageicon"><!--[pnimg modname=core src=agt_internet.gif set=icons/large alt='_WL_LINKVIEW' altml=true]--></div>
-  <h2><!--[pnml name="_WL_USERMODREQUEST"]--> (<!--[$totalmodrequests|pnvarprepfordisplay]-->)</h2>
+  <div class="pn-adminpageicon"><!--[pnimg modname=core src=agt_internet.gif set=icons/large __alt="Links administer" __title="Links administer"]--></div>
+  <h2><!--[gt text="User link modification requests"]--> (<!--[$totalmodrequests|pnvarprepfordisplay]-->)</h2>
 
   <!--[foreach from=$modrequests item=modrequests]-->
   <table class="pn-admintable">
     <thead>
       <tr>
         <th>&nbsp;</th>
-        <th><!--[pnml name="_WL_ORIGINAL"]--></th>
-        <th><!--[pnml name="_WL_PROPOSED"]--></th>
+        <th><!--[gt text="Original"]--></th>
+        <th><!--[gt text="Proposed"]--></th>
       </tr>
     </thead>
     <tbody>
       <tr class="<!--[cycle values="pn-odd,pn-even" name=abacs]-->">
-        <td><!--[pnml name="_WL_LINKTITLE"]--></td>
+        <td><!--[gt text="Link title"]--></td>
         <td><!--[$modrequests.origtitle|pnvarprepfordisplay]--></td>
         <td><!--[$modrequests.title|pnvarprepfordisplay]--></td>
       </tr>
       <tr class="<!--[cycle values="pn-odd,pn-even" name=abacs]-->">
-        <td><!--[pnml name="_WL_URL"]--></td>
+        <td><!--[gt text="URL"]--></td>
         <td><a href="<!--[$modrequests.origurl|pnvarprepfordisplay]-->"><!--[$modrequests.origurl|pnvarprepfordisplay]--></a></td>
         <td><a href="<!--[$modrequests.url|pnvarprepfordisplay]-->"><!--[$modrequests.url|pnvarprepfordisplay]--></a></td>
       </tr>
       <tr class="<!--[cycle values="pn-odd,pn-even" name=abacs]-->">
-        <td><!--[pnml name="_WL_CATEGORY"]--></td>
+        <td><!--[gt text="Category"]--></td>
         <td><!--[$modrequests.origcidtitle|pnvarprepfordisplay]--></td>
         <td><!--[$modrequests.cidtitle|pnvarprepfordisplay]--></td>
       </tr>
       <tr class="<!--[cycle values="pn-odd,pn-even" name=abacs]-->">
-        <td><!--[pnml name="_WL_DESCRIPTION"]--></td>
+        <td><!--[gt text="Description:"]--></td>
         <td><!--[$modrequests.origdescription|pnvarprepfordisplay]--></td>
         <td><!--[$modrequests.description|pnvarprepfordisplay]--></td>
       </tr>
@@ -38,26 +38,26 @@
       <tr style="border-top: 1px solid #999;">
         <td colspan="3">
           <!--[if $modrequests.submitteremail == ""]-->
-          <!--[pnml name="_WL_SUBMITTER"]-->: <!--[$modrequests.submitter|pnvarprepfordisplay]-->
+          <!--[gt text="Submitter"]-->: <!--[$modrequests.submitter|pnvarprepfordisplay]-->
           <!--[else]-->
-          <!--[pnml name="_WL_SUBMITTER"]-->: <a href="mailto:<!--[$modrequests.submitteremail|pnvarprepfordisplay]-->"><!--[$modrequests.submitter|pnvarprepfordisplay]--></a>
+          <!--[gt text="Submitter"]-->: <a href="mailto:<!--[$modrequests.submitteremail|pnvarprepfordisplay]-->"><!--[$modrequests.submitter|pnvarprepfordisplay]--></a>
           <!--[/if]-->
         </td>
       </tr>
       <tr>
         <td colspan="3">
           <!--[if $modrequests.owneremail == ""]-->
-          <!--[pnml name="_WL_OWNER"]-->: <!--[$modrequests.owner|pnvarprepfordisplay]-->
+          <!--[gt text="Owner"]-->: <!--[$modrequests.owner|pnvarprepfordisplay]-->
           <!--[else]-->
-          <!--[pnml name="_WL_OWNER"]-->: <a href="mailto:<!--[$modrequests.owneremail|pnvarprepfordisplay]-->"><!--[$modrequests.owner|pnvarprepfordisplay]--></a>
+          <!--[gt text="Owner"]-->: <a href="mailto:<!--[$modrequests.owneremail|pnvarprepfordisplay]-->"><!--[$modrequests.owner|pnvarprepfordisplay]--></a>
           <!--[/if]-->
         </td>
       </tr>
       <tr>
         <td colspan="3">
           <div class="pn-adminformrow pn-clearfix pn-adminformbuttons">
-            <a href="<!--[pnmodurl modname=Weblinks type=admin func=changemodrequests rid=$modrequests.rid authid=$authid]-->"><!--[pnimg modname=core src=button_ok.gif set=icons/small altml=true titleml=true alt="_WL_ACCEPT" title="_WL_ACCEPT"]--></a>
-            <a href="<!--[pnmodurl modname=Weblinks type=admin func=delmodrequests rid=$modrequests.rid authid=$authid]-->"><!--[pnimg modname=core src=editdelete.gif set=icons/small altml=true titleml=true alt="_WL_IGNORE" title="_WL_IGNORE"]--></a>
+            <a href="<!--[pnmodurl modname=Weblinks type=admin func=changemodrequests rid=$modrequests.rid authid=$authid]-->"><!--[pnimg modname=core src=button_ok.gif set=icons/small __alt="Accept" __title="Accept"]--></a>
+            <a href="<!--[pnmodurl modname=Weblinks type=admin func=delmodrequests rid=$modrequests.rid authid=$authid]-->"><!--[pnimg modname=core src=editdelete.gif set=icons/small __alt="Ignore" __title="Ignore"]--></a>
           </div>
         </td>
       </tr>
@@ -67,7 +67,7 @@
   <!--[/foreach]-->
 
   <!--[if $totalmodrequests == 0]-->
-  <p class="wl-center"><!--[pnml name="_WL_NOMODREQUESTS"]--></p>
+  <p class="wl-center"><!--[gt text="No link modification requests"]--></p>
   <!--[/if]-->
 
 </div>

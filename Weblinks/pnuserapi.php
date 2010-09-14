@@ -15,6 +15,8 @@
  */
 function Weblinks_userapi_categories() // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // define the permission filter to apply
     $permFilter = array();
     $permFilter[] = array('realm'            => 0,
@@ -31,7 +33,7 @@ function Weblinks_userapi_categories() // ready
 
     // check for db error
     if ($categories === false) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // return the categories array
@@ -61,6 +63,8 @@ function Weblinks_userapi_catnum() // ready
  */
 function Weblinks_userapi_category($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if ((!isset($args['cid']) || !is_numeric($args['cid']))) {
         return LogUtil::registerArgsError();
@@ -82,7 +86,7 @@ function Weblinks_userapi_category($args) // ready
 
     // check for db error
     if ($category === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // return the category array
@@ -94,6 +98,8 @@ function Weblinks_userapi_category($args) // ready
  */
 function Weblinks_userapi_subcategory($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if ((!isset($args['cid']) || !is_numeric($args['cid']))) {
         return LogUtil::registerArgsError();
@@ -120,7 +126,7 @@ function Weblinks_userapi_subcategory($args) // ready
 
     // check for db error
     if ($subcategories === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // return the subcategories array
@@ -132,6 +138,8 @@ function Weblinks_userapi_subcategory($args) // ready
  */
 function Weblinks_userapi_weblinks($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if ((!isset($args['cid']) || !is_numeric($args['cid']))) {
         return LogUtil::registerArgsError();
@@ -145,7 +153,7 @@ function Weblinks_userapi_weblinks($args) // ready
     $weblinkscolumn = &$pntable['links_links_column'];
 
     $where = "WHERE $weblinkscolumn[cat_id] = ".(int)DataUtil::formatForStore($args['cid']);
-    
+
     // define the permission filter to apply
     $permFilter = array();
     $permFilter[] = array('realm'            => 0,
@@ -162,7 +170,7 @@ function Weblinks_userapi_weblinks($args) // ready
 
     // chack for db error
     if ($weblinks === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // return the weblinks array
@@ -208,6 +216,8 @@ function Weblinks_userapi_countcatlinks($args) // ready
  */
 function Weblinks_userapi_link($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if ((!isset($args['lid']) || !is_numeric($args['lid']))) {
         return LogUtil::registerArgsError();
@@ -224,12 +234,12 @@ function Weblinks_userapi_link($args) // ready
                           'instance_right'   => 'cat_id',
                           'level'            => ACCESS_READ);
 
-    // get link array 
+    // get link array
     $link = DBUtil::selectObjectByID('links_links', $args['lid'], 'lid', '', $permFilter);
 
     // check for db error
     if ($link === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // return link array
@@ -263,6 +273,8 @@ function Weblinks_userapi_hitcountinc($args) // ready
  */
 function Weblinks_userapi_searchcats($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['query'])) {
         return LogUtil::registerArgsError();
@@ -289,9 +301,9 @@ function Weblinks_userapi_searchcats($args) // ready
 
     // check for db error
     if ($searchcats === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     // Return the subcategories array
     return $searchcats;
 }
@@ -301,6 +313,8 @@ function Weblinks_userapi_searchcats($args) // ready
  */
 function Weblinks_userapi_search_weblinks($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['query'])) {
         return LogUtil::registerArgsError();
@@ -330,9 +344,9 @@ function Weblinks_userapi_search_weblinks($args) // ready
 
     // check for db error
     if ($result === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
-    
+
     // Return the array
     return $result;
 }
@@ -359,10 +373,12 @@ function Weblinks_userapi_countsearchlinks($args) // ready
  */
 function Weblinks_userapi_random() // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     $numrows = pnModAPIFunc('Weblinks', 'user', 'numrows');
 
     if ($numrows < 1 ) { // if no data
-        return pnVarPrepHTMLDisplay(_WEBLINKS_NOLINKS);
+        return pnVarPrepHTMLDisplay(__('Sorry! There is no such link', $dom));
     }
     if ($numrows == 1) {
         $lid = 1;
@@ -400,6 +416,8 @@ function Weblinks_userapi_totallinks($args) // ready
  */
 function Weblinks_userapi_weblinksbydate($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     if (!isset($args['selectdate']) || !is_numeric($args['selectdate'])) {
         return LogUtil::registerArgsError();
     }
@@ -425,7 +443,7 @@ function Weblinks_userapi_weblinksbydate($args) // ready
 
     // check for db error
     if ($weblinks === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     return $weblinks;
@@ -436,6 +454,8 @@ function Weblinks_userapi_weblinksbydate($args) // ready
  */
 function Weblinks_userapi_addbrockenlink($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['lid']) || !is_numeric($args['lid'])) {
         return LogUtil::registerArgsError();
@@ -448,7 +468,7 @@ function Weblinks_userapi_addbrockenlink($args) // ready
 
     $items = array('lid' => $args['lid'], 'modifysubmitter' => $args['submitter'], 'brokenlink' => 1);
     if (!DBUtil::insertObject($items, 'links_modrequest', 'requestid')) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     return true;
@@ -459,6 +479,8 @@ function Weblinks_userapi_addbrockenlink($args) // ready
  */
 function Weblinks_userapi_modifylinkrequest($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['lid']) || !is_numeric($args['lid'])) {
         return LogUtil::registerArgsError();
@@ -471,7 +493,7 @@ function Weblinks_userapi_modifylinkrequest($args) // ready
 
     $items = array('lid' => $args['lid'], 'cat_id' => $args['cid'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'modifysubmitter' => $args['submitter'], 'brokenlink' => 0);
     if (!DBUtil::insertObject($items, 'links_modrequest', 'requestid')) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     return true;
@@ -482,6 +504,8 @@ function Weblinks_userapi_modifylinkrequest($args) // ready
  */
 function Weblinks_userapi_add($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Security check
     if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_ADD)) {
         return LogUtil::registerPermissionError();
@@ -491,39 +515,39 @@ function Weblinks_userapi_add($args) // ready
     $valid = pnVarValidate($args['url'], 'url');
 
     if ($checkurl > 0) {
-        $link['text'] = _WL_LINKALREADYEXT;
+        $link['text'] = __('Sorry! This URL is already listed in the database!', $dom);
         $link['submit'] = 0;
         return $link;
     } else if ($valid == false) {
-        $link['text'] = _WL_LINKNOURL;
+        $link['text'] = __('Sorry! Error! You must type a URL for the web link!', $dom);
         $link['submit'] = 0;
         return $link;
     } else if (empty($args['title'])) {
-        $link['text'] = _WL_LINKNOTITLE;
+        $link['text'] = __('Sorry! Error! You must type a title for the URL!', $dom);
         $link['submit'] = 0;
         return $link;
     } else if (empty($args['cid']) || !is_numeric($args['cid'])) {
-        $link['text'] =_WL_LINKNOCAT;
+        $link['text'] =__('Sorry! Error! No category!', $dom);
         $link['submit'] = 0;
         return $link;
     } else if (empty($args['description'])) {
-        $link['text'] =_WL_LINKNODESC;
+        $link['text'] =__('Sorry! Error! You must type a description for the URL!', $dom);
         $link['submit'] = 0;
         return $link;
     } else {
         if (empty($args['submitter'])) {
             $link['submitter'] = pnConfigGetVar("anonymous");
         }
-        
+
         $items = array('cat_id' => $args['cid'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'name' => $args['submitter'], 'email' => $args['submitteremail'], 'submitter' => $args['submitter']);
         if (!DBUtil::insertObject($items, 'links_newlink', 'lid')) {
-            return LogUtil::registerError(_GETFAILED);
+            return LogUtil::registerError(__('Error! Could not load items.', $dom));
         }
-    
+
         if (empty($args['submitteremail'])) {
-            $link['text'] = _WL_CHECKFORIT;
+            $link['text'] = __('You didn\'t enter an e-mail address. However, your link will still be checked.', $dom);
         } else {
-            $link['text'] = _WL_EMAILWHENADD;
+            $link['text'] = __('Thank you! You\'ll receive an e-mail message when it\'s approved.', $dom);
         }
         $link['submit'] = 1;
         return $link;
@@ -543,6 +567,8 @@ function Weblinks_userapi_checkurl($args) // ready
  */
 function Weblinks_userapi_lastweblinks($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['lastlinks']) || !is_numeric($args['lastlinks'])) {
         $args['lastlinks'] = pnModGetVar('Weblinks', 'linksinblock');
@@ -569,7 +595,7 @@ function Weblinks_userapi_lastweblinks($args) // ready
 
     // check for db error
     if ($lasweblinks === false) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // return the last weblinks
@@ -581,11 +607,13 @@ function Weblinks_userapi_lastweblinks($args) // ready
  */
 function Weblinks_userapi_mostpopularweblinks($args) // ready
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     // Argument check
     if (!isset($args['mostpoplinks']) || !is_numeric($args['mostpoplinks'])) {
         $args['mostpoplinks'] = pnModGetVar('Weblinks', 'linksinblock');
     }
-    
+
     $pntable = pnDBGetTables();
     $weblinkscolumn = &$pntable['links_links_column'];
 
@@ -607,7 +635,7 @@ function Weblinks_userapi_mostpopularweblinks($args) // ready
 
     // check for db error
     if ($mostpopularweblinks === false) {
-        return LogUtil::registerError(_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
     // return the most popular weblinks

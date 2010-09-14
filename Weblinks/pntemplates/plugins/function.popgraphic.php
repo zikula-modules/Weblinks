@@ -12,8 +12,10 @@
 
 function smarty_function_popgraphic($params, &$smarty)
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+
     if ($params['hits'] >= pnModGetVar('Weblinks', 'popular')) {
-        echo "&nbsp;<img src=\"images/icons/extrasmall/flag.gif\" alt=\""._WL_POPULAR."\" title=\""._WL_POPULAR."\" />";
+        echo "&nbsp;<img src=\"images/icons/extrasmall/flag.gif\" alt=\"".DataUtil::formatForDisplay(__('Popular', $dom))."\" title=\"".DataUtil::formatForDisplay(__('Popular', $dom))."\" />";
     }
 
     return;
