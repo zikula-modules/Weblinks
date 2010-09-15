@@ -21,10 +21,8 @@ function smarty_function_linkbottommenu($params, &$smarty)
     $linkbottommenu = "";
 
     if (SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_EDIT)) {
-        $linkbottommenu = "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'admin', 'modlink', array('lid' => (int)$params['lid'])))."\"><img src=\"images/icons/extrasmall/editpaste.gif\" width=\"16\" height=\"16\" alt=\"".DataUtil::formatForDisplay(__('Edit this link', $dom))."\" title=\"".DataUtil::formatForDisplay(__('Edit this link', $dom))."\" />&nbsp;</a>";
-    }
-
-    if (pnModGetVar('Weblinks', 'blockunregmodify') == 0 || SecurityUtil::checkPermission('Weblinks::Category', "::$params[cid]", ACCESS_COMMENT)) {
+        $linkbottommenu = "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'admin', 'modlink', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Edit this link', $dom))."</a>&nbsp;|&nbsp;";
+    } else if (pnModGetVar('Weblinks', 'blockunregmodify') == 0 || SecurityUtil::checkPermission('Weblinks::Category', "::$params[cid]", ACCESS_COMMENT)) {
         $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'modifylinkrequest', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Modify', $dom))."</a>&nbsp;|&nbsp;";
     }
 
