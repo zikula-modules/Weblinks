@@ -137,6 +137,7 @@ function Weblinks_admin_savemodcategory() // ready
     // get parameters we need
     $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
     $title = FormUtil::getPassedValue('title', null, 'POST');
+    $pid = (int)FormUtil::getPassedValue('pid', null, 'POST');
     $cdescription = FormUtil::getPassedValue('cdescription', null, 'POST');
 
     // Security check
@@ -151,8 +152,9 @@ function Weblinks_admin_savemodcategory() // ready
 
     // update the category with new vars
     if (pnModAPIFunc('Weblinks', 'admin', 'updatecategory', array('cid' => $cid,
-                                                                   'title' => $title,
-                                                                   'cdescription' => $cdescription))) {
+                                                                  'title' => $title,
+                                                                  'pid' => $pid,
+                                                                  'cdescription' => $cdescription))) {
 
         // Success
         LogUtil::registerStatus(__('Category successfully modified', $dom));

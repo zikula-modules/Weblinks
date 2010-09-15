@@ -12,6 +12,10 @@
         <input type="text" name="title" value="<!--[$category.title|pnvarprepfordisplay]-->" size="51" maxlength="50" />
       </div>
       <div class="pn-adminformrow pn-clearfix">
+        <label><!--[gt text="Parent category"]--></label>
+        <select name="pid"><option value="0"><!--[gt text="None"]--></option><!--[catlist scat=0 sel=$category.parent_id]--></select>
+      </div>
+      <div class="pn-adminformrow pn-clearfix">
         <label><!--[gt text="Description"]--></label>
         <textarea name="cdescription" cols="50" rows="10"><!--[$category.cdescription|pnvarprepfordisplay]--></textarea>
       </div>

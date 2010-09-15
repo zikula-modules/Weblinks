@@ -166,7 +166,9 @@ function Weblinks_adminapi_updatecategory($args) // ready
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
     // Argument check
-    if (!isset($args['cid']) || !is_numeric($args['cid']) || !isset($args['title'])) {
+    if (!isset($args['cid']) || !is_numeric($args['cid']) ||
+        !isset($args['pid']) || !is_numeric($args['pid']) ||
+        !isset($args['title'])) {
         return LogUtil::registerArgsError();
     }
 
@@ -177,7 +179,7 @@ function Weblinks_adminapi_updatecategory($args) // ready
 
     $pntable =& pnDBGetTables();
     $column = &$pntable['links_categories_column'];
-    $items = array('title' => $args['title'], 'cdescription' => $args['cdescription']);
+    $items = array('title' => $args['title'], 'parent_id' => $args['pid'], 'cdescription' => $args['cdescription']);
     $where = "WHERE $column[cat_id]='".(int)DataUtil::formatForStore($args['cid'])."'";
     if (!DBUtil::updateObject($items, 'links_categories', $where, 'cat_id')) {
         return LogUtil::registerError(__('Error! Could not load items.', $dom));
