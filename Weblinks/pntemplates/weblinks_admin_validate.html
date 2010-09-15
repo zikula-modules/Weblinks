@@ -1,7 +1,7 @@
 <!--[*  $Id$  *]-->
 <!--[include file="weblinks_admin_header.html"]-->
-<div class="pn-admincontainer">
-  <div class="pn-adminpageicon"><!--[pnimg modname=core src=agt_internet.gif set=icons/large __alt="Links administer" __title="Links administer"]--></div>
+<div class="z-admincontainer">
+  <div class="z-adminpageicon"><!--[pnimg modname=core src=agt_internet.gif set=icons/large __alt="Links administer" __title="Links administer"]--></div>
   <!--[if $cid == 0]-->
   <h2><!--[gt text="Check ALL links"]--></h2>
   <!--[/if]-->
@@ -9,7 +9,7 @@
   <h2><!--[gt text="Check category"]--></h2>
   <!--[/if]-->
 
-  <table class="pn-admintable">
+  <table class="z-admintable">
     <thead>
       <tr>
         <th><!--[gt text="Status"]--></th>
@@ -19,7 +19,7 @@
     </thead>
     <tbody>
       <!--[foreach from=$links item=links]-->
-      <tr class="<!--[cycle values="pn-odd,pn-even" name=abacs]-->">
+      <tr class="<!--[cycle values="z-odd,z-even" name=abacs]-->">
         <!--[if !$links.fp]-->
         <td><!--[pnimg modname=core src=editdelete.gif set=icons/extrasmall __alt="Failed!" __title="Failed!"]--></td>
         <td><a href="<!--[$links.url|pnvarprepfordisplay]-->" target="new"><!--[$links.title|pnvarprepfordisplay]--></a></td>

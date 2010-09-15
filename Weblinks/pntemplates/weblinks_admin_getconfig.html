@@ -1,14 +1,14 @@
 <!--[*  $Id$  *]-->
 <!--[include file="weblinks_admin_header.html"]-->
-<div class="pn-admincontainer">
-  <div class="pn-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large __alt="Modify configuration" __title="Modify configuration"]--></div>
+<div class="z-admincontainer">
+  <div class="z-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large __alt="Modify configuration" __title="Modify configuration"]--></div>
   <h2><!--[gt text="Configuration"]--></h2>
 
-  <form class="pn-adminform" action="<!--[pnmodurl modname="Weblinks" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
+  <form class="z-form" action="<!--[pnmodurl modname="Weblinks" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
     <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
     <fieldset>
       <legend><!--[gt text="Number of links"]--></legend>
-      <div class="pn-adminformrow pn-clearfix">
+      <div class="z-formrow">
         <label><!--[gt text="Links per page"]--></label>
         <select name="config[perpage]" size="1">
           <option value="10"<!--[if $config.perpage eq '10']--> selected="selected"<!--[/if]-->>10</option>
@@ -19,7 +19,7 @@
           <option value="50"<!--[if $config.perpage eq '50']--> selected="selected"<!--[/if]-->>50</option>
         </select>
       </div>
-      <div class="pn-adminformrow pn-clearfix">
+      <div class="z-formrow">
         <label><!--[gt text="Number of links as new"]--></label>
         <select name="config[newlinks]" size="1">
           <option value="10"<!--[if $config.newlinks eq '10']--> selected="selected"<!--[/if]-->>10</option>
@@ -30,7 +30,7 @@
           <option value="50"<!--[if $config.newlinks eq '50']--> selected="selected"<!--[/if]-->>50</option>
         </select>
       </div>
-      <div class="pn-adminformrow pn-clearfix">
+      <div class="z-formrow">
         <label><!--[gt text="Number of links required to qualify as best"]--></label>
         <select name="config[bestlinks]" size="1">
           <option value="10"<!--[if $config.bestlinks eq '10']--> selected="selected"<!--[/if]-->>10</option>
@@ -41,7 +41,7 @@
           <option value="50"<!--[if $config.bestlinks eq '50']--> selected="selected"<!--[/if]-->>50</option>
         </select>
       </div>
-      <div class="pn-adminformrow pn-clearfix">
+      <div class="z-formrow">
         <label><!--[gt text="Links in search results"]--></label>
         <select name="config[linksresults]">
           <option value="10"<!--[if $config.linksresults eq '10']--> selected="selected"<!--[/if]-->>10</option>
@@ -52,7 +52,7 @@
           <option value="50"<!--[if $config.linksresults eq '50']--> selected="selected"<!--[/if]-->>50</option>
         </select>
       </div>
-      <div class="pn-adminformrow pn-clearfix">
+      <div class="z-formrow">
         <label><!--[gt text="Number of links in the block"]--></label>
         <input type="text" name="config[linksinblock]" value="<!--[$config.linksinblock]-->" size="4" />
       </div>
@@ -60,7 +60,7 @@
 
     <fieldset>
       <legend><!--[gt text="Popular"]--></legend>
-      <div class="pn-adminformrow pn-clearfix">
+      <div class="z-formrow">
         <label><!--[gt text="Number of hits required to qualify as popular"]--></label>
         <select name="config[popular]" size="1">
           <option value="100"<!--[if $config.popular eq '100']--> selected="selected"<!--[/if]-->>100</option>
@@ -71,15 +71,15 @@
           <option value="2000"<!--[if $config.popular eq '2000']--> selected="selected"<!--[/if]-->>2000</option>
         </select>
       </div>
-      <div class="pn-adminformrow pn-clearfix">
+      <div class="z-formrow">
         <label><!--[gt text="Enter 1 to show most-popular links as a percentage (otherwise, enter the number of links to show)"]--></label>
         <input type="text" name="config[mostpoplinkspercentrigger]" value="<!--[$config.mostpoplinkspercentrigger]-->" size="4" />
       </div>
-      <div class="pn-adminformrow pn-clearfix">
+      <div class="z-formrow">
         <label><!--[gt text="Most-popular links: either a number of links or the percentage to display (percentage as whole number, such as 25/100)"]--></label>
         <input type="text" name="config[mostpoplinks]" value="<!--[$config.mostpoplinks]-->" size="4" />
       </div>
-      <div class="pn-adminformrow pn-clearfix">
+      <div class="z-formrow">
         <label><!--[gt text="Leading links: either number of links or the  percentage of links to show (percentage as whole number, such as 25/100)"]--></label>
         <input type="text" name="config[toplinks]" value="<!--[$config.toplinks]-->" size="4" />
       </div>
@@ -87,29 +87,45 @@
 
     <fieldset>
       <legend><!--[gt text="Settings"]--></legend>
-      <div class="pn-adminformrow pn-clearfix">
-        <label><!--[gt text="Show featured link box on web links main page?"]--></label>
-        <input type="radio" name="config[featurebox]" value="1"<!--[if $config.featurebox eq '1']--> checked="checked"<!--[/if]--> /><!--[gt text="yes"]-->&nbsp;
-        <input type="radio" name="config[featurebox]" value="0"<!--[if $config.featurebox eq '0']--> checked="checked"<!--[/if]--> /><!--[gt text="no"]-->
+      <div class="z-formrow">
+        <label for="weblinks_settings_featurebox"><!--[gt text="Show featured link box on web links main page?"]--></label>
+        <div id="weblinks_settings_featurebox">            
+          <input id="weblinks_settings_featurebox_yes" type="radio" name="config[featurebox]" value="1"<!--[if $config.featurebox eq '1']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_featurebox_yes"><!--[gt text="yes"]--></label>
+          <input id="weblinks_settings_featurebox_no" type="radio" name="config[featurebox]" value="0"<!--[if $config.featurebox eq '0']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_featurebox_no"><!--[gt text="no"]--></label>
+        </div>
       </div>
-      <div class="pn-adminformrow pn-clearfix">
-        <label><!--[gt text="Open link in a new window"]--></label>
-        <input type="radio" name="config[targetblank]" value="1"<!--[if $config.targetblank eq '1']--> checked="checked"<!--[/if]--> /><!--[gt text="yes"]-->&nbsp;
-        <input type="radio" name="config[targetblank]" value="0"<!--[if $config.targetblank eq '0']--> checked="checked"<!--[/if]--> /><!--[gt text="no"]-->
+      <div class="z-formrow">
+        <label for="weblinks_settings_targetblank"><!--[gt text="Open link in a new window"]--></label>
+        <div id="weblinks_settings_targetblank">
+          <input id="weblinks_settings_targetblank_yes" type="radio" name="config[targetblank]" value="1"<!--[if $config.targetblank eq '1']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_targetblank_yes"><!--[gt text="yes"]--></label>
+          <input id="weblinks_settings_targetblank_no" type="radio" name="config[targetblank]" value="0"<!--[if $config.targetblank eq '0']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_targetblank_no"><!--[gt text="no"]--></label>
+        </div>
       </div>
-      <div class="pn-adminformrow pn-clearfix">
-        <label><!--[gt text="Disable unregistered users from suggesting link changes?"]--></label>
-        <input type="radio" name="config[blockunregmodify]" value="1"<!--[if $config.blockunregmodify eq '1']--> checked="checked"<!--[/if]--> /><!--[gt text="yes"]-->&nbsp;
-        <input type="radio" name="config[blockunregmodify]" value="0"<!--[if $config.blockunregmodify eq '0']--> checked="checked"<!--[/if]--> /><!--[gt text="no"]-->
+      <div class="z-formrow">
+        <label for="weblinks_settings_blockunregmodify"><!--[gt text="Disable unregistered users from suggesting link changes?"]--></label>
+        <div id="weblinks_settings_blockunregmodify">
+          <input id="weblinks_settings_blockunregmodify_yes" type="radio" name="config[blockunregmodify]" value="1"<!--[if $config.blockunregmodify eq '1']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_blockunregmodify_yes"><!--[gt text="yes"]--></label>
+          <input id="weblinks_settings_blockunregmodify_no" type="radio" name="config[blockunregmodify]" value="0"<!--[if $config.blockunregmodify eq '0']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_blockunregmodify_no"><!--[gt text="no"]--></label>
+        </div>
       </div>
-      <div class="pn-adminformrow pn-clearfix">
-        <label><!--[gt text="Disable unregistered users to post new links?"]--></label>
-        <input type="radio" name="config[links_anonaddlinklock]" value="1"<!--[if $config.links_anonaddlinklock eq '1']--> checked="checked"<!--[/if]--> /><!--[gt text="yes"]-->&nbsp;
-        <input type="radio" name="config[links_anonaddlinklock]" value="0"<!--[if $config.links_anonaddlinklock eq '0']--> checked="checked"<!--[/if]--> /><!--[gt text="no"]-->
+      <div class="z-formrow">
+        <label for="weblinks_settings_anonaddlinklock"><!--[gt text="Disable unregistered users to post new links?"]--></label>
+        <div id="weblinks_settings_anonaddlinklock">
+          <input id="weblinks_settings_anonaddlinklock_yes" type="radio" name="config[links_anonaddlinklock]" value="1"<!--[if $config.links_anonaddlinklock eq '1']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_anonaddlinklock_yes"><!--[gt text="yes"]--></label>
+          <input id="weblinks_settings_anonaddlinklock_no" type="radio" name="config[links_anonaddlinklock]" value="0"<!--[if $config.links_anonaddlinklock eq '0']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_anonaddlinklock_no"><!--[gt text="no"]--></label>
+        </div>
       </div>
     </fieldset>
 
-    <div class="pn-adminformrow pn-clearfix pn-adminformbuttons">
+    <div class="z-formbuttons">
       <!--[pnbutton src=button_ok.gif set=icons/small __alt="Modify configuration" __title="Modify configuration"]-->
       <a href="<!--[pnmodurl modname=Weblinks type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"]--></a>
     </div>

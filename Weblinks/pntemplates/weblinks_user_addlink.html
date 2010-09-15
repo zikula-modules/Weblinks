@@ -9,12 +9,12 @@
     <dd><!--[gt text="Your user name and IP are recorded, so please don't abuse the system."]--></dd>
   </dl>
 
-  <form class="pn-form wl-form" action="<!--[pnmodurl modname="Weblinks" type="user" func="add"]-->" method="post" enctype="application/x-www-form-urlencoded">
+  <form class="wl-form" action="<!--[pnmodurl modname="Weblinks" type="user" func="add"]-->" method="post" enctype="application/x-www-form-urlencoded">
     <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
-    <fieldset class="pn-form-fieldset">
+    <fieldset>
       <legend><!--[gt text="Add a new link"]--></legend>
 
-      <dl class="pn-clearfix">
+      <dl class="z-clearfix">
         <dt><label for="title"><!--[gt text="Sitetitle"]-->:</label></dt>
         <dd><input id="title" type="text" name="newlink[title]" size="50" maxlength="100" /></dd>
 
@@ -35,14 +35,14 @@
       </dl>
 
     </fieldset>
-    <div class="pn-formrow pn-formbuttons">
+    <div class="z-formbuttons">
       <!--[pnbutton src=button_ok.gif set=icons/small __alt="Add this URL" __title="Add this URL"]-->
       <a href="<!--[pnmodurl modname=Weblinks type=user func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"]--></a>
     </div>
   </form>
 
   <!--[else]-->
-  <div class="pn-informationmsg">
+  <div class="z-informationmsg">
     <!--[gt text="Sorry! You are not a registered user or you have not logged-in."]--><br />
     <!--[gt text="If you were registered, you could contribute links to this web site."]--><br />
     <!--[gt text="Becoming a registered user is a quick and easy process."]--><br />

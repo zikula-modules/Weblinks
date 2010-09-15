@@ -11,7 +11,7 @@
 
     <!--[if $subcategory]-->
     <dl class="wl-sublist">
-      <dt><!--[gt text="links also available in"]--> <!--[$category.title|pnvarprepfordisplay]--> <!--[gt text="sub-categories"]-->:</dt>
+      <dt><!--[gt text="Links also available in"]--> <!--[$category.title|pnvarprepfordisplay]--> <!--[gt text="sub-categories"]-->:</dt>
       <!--[foreach from=$subcategory item=subcategory]-->
       <dd><a href="<!--[pnmodurl modname=Weblinks type=user func=category cid=$subcategory.cat_id]-->" class="wl-catsub"><!--[$subcategory.title|pnvarprepfordisplay]--></a> (<!--[countsublinks cid=$subcategory.cat_id]-->)&nbsp;<!--[categorynewlinkgraphic cat=$subcategory.cat_id]--></dd>
       <!--[/foreach]-->
@@ -27,7 +27,7 @@
     <!--[if $weblinks.description]-->
     <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Weblinks"]--></p></dd>
     <!--[/if]-->
-    <dd><!--[gt text="Added on"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[gt text="Hits"]-->: <!--[$weblinks.hits]--></dd>
+    <dd><!--[gt text="Added on"]-->: <!--[$weblinks.date|pndate_format:"datebrief"]--> | <!--[gt text="Hits"]-->: <!--[$weblinks.hits]--></dd>
     <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks returnurl=$returnurl implode=false]-->
     <!--[if $hooks.Ratings]-->
     <dd><!--[ $hooks.Ratings ]--></dd>

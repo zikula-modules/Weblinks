@@ -26,7 +26,7 @@
     <!--[if $weblinks.description]-->
     <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Weblinks"]--></p></dd>
     <!--[/if]-->
-    <dd><!--[gt text="Added on"]-->: <!--[$weblinks.date|pndate_format:"%d.%m.%Y"]--> | <!--[gt text="Hits"]-->: <!--[$weblinks.hits]--></dd>
+    <dd><!--[gt text="Added on"]-->: <!--[$weblinks.date|pndate_format:"datebrief"]--> | <!--[gt text="Hits"]-->: <!--[$weblinks.hits]--></dd>
     <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks returnurl=$returnurl implode=false]-->
     <!--[if $hooks.Ratings]-->
     <dd><!--[ $hooks.Ratings ]--></dd>
