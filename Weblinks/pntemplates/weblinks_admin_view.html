@@ -18,13 +18,11 @@
     <fieldset>
       <legend><!--[gt text="Link validation"]--></legend>
       <div class="z-formrow">
-        <!--[gt text="Check category"]-->
-        <select id="cid" name="cid"><!--[catlist scat=0 sel=0]--></select>
-        <!--[pnbutton src=button_ok.gif set=icons/small __alt="Check category" __title="Check category"]-->
+        <label><!--[gt text="Check category"]--></label>
+        <select id="cid" name="cid"><option value="0"><!--[gt text="Check ALL categories"]--></option><!--[catlist scat=0 sel=0]--></select>
       </div>
-
-      <div class="z-formrow">
-        [ <a href="<!--[pnmodurl modname=Weblinks type=admin func=validate authid=$authid]-->"><!--[gt text="Check ALL links"]--></a> ]
+      <div class="z-formbuttons">
+      <!--[pnbutton src=button_ok.gif set=icons/small __alt="Check category" __title="Check category"]-->
       </div>
     </fieldset>
   </form>

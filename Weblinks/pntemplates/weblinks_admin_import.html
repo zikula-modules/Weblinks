@@ -40,5 +40,27 @@
       <!--[/if]-->
     </fieldset>
     </form>
+    <form class="z-form" action="<!--[pnmodurl modname=Weblinks type=admin func=importcmodsweblinks]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <fieldset>
+      <legend><!--[gt text="CmodsWebLinks"]--></legend>
+      <!--[if $cmodsweblinks eq 1]-->
+      <div class="z-informationmsg">
+      <!--[gt text="With this function <strong>CmodsWebLinks</strong> will be imported to the <strong>Weblinks</strong> module.<br /><strong>!Attention!</strong> - this function add the CmodsWebLinks categories and links to the Weblinks module and don't replace it."]-->
+      </div>
+      <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
+      <div class="z-formbuttons">
+        <!--[pnbutton src=button_ok.gif set=icons/small alt="OK" title="OK"]-->
+      </div>
+      <!--[else]-->
+      <div class="z-informationmsg">
+      <!--[gt text="CmodsWebLinks isn't activated! Try to import?<br /><strong>!Attention!</strong> - this function add the CmodsWebLinks categories and links to the Weblinks module and don't replace it."]-->
+      </div>
+      <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
+      <div class="z-formbuttons">
+        <!--[pnbutton src=button_ok.gif set=icons/small alt="OK" title="OK"]-->
+      </div>
+      <!--[/if]-->
+    </fieldset>
+    </form>    
 </div>
 <!--[include file="weblinks_admin_footer.html"]-->
