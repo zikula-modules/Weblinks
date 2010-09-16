@@ -53,7 +53,7 @@
         </select>
       </div>
       <div class="z-formrow">
-        <label><!--[gt text="Number of links in the block"]--></label>
+        <label><!--[gt text="Number of links in the feature link box"]--></label>
         <input type="text" name="config[linksinblock]" value="<!--[$config.linksinblock]-->" size="4" />
       </div>
     </fieldset>
@@ -97,12 +97,21 @@
         </div>
       </div>
       <div class="z-formrow">
-        <label for="weblinks_settings_targetblank"><!--[gt text="Open link in a new window"]--></label>
+        <label for="weblinks_settings_targetblank"><!--[gt text="Open link in a new window?"]--></label>
         <div id="weblinks_settings_targetblank">
           <input id="weblinks_settings_targetblank_yes" type="radio" name="config[targetblank]" value="1"<!--[if $config.targetblank eq '1']--> checked="checked"<!--[/if]--> />
           <label for="weblinks_settings_targetblank_yes"><!--[gt text="yes"]--></label>
           <input id="weblinks_settings_targetblank_no" type="radio" name="config[targetblank]" value="0"<!--[if $config.targetblank eq '0']--> checked="checked"<!--[/if]--> />
           <label for="weblinks_settings_targetblank_no"><!--[gt text="no"]--></label>
+        </div>
+      </div>
+      <div class="z-formrow">
+        <label for="weblinks_settings_doubleurl"><!--[gt text="Allow multiple use of an URL?"]--></label>
+        <div id="weblinks_settings_doubleurl">
+          <input id="weblinks_settings_doubleurl_yes" type="radio" name="config[doubleurl]" value="1"<!--[if $config.targetblank eq '1']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_doubleurl_yes"><!--[gt text="yes"]--></label>
+          <input id="weblinks_settings_doubleurl_no" type="radio" name="config[doubleurl]" value="0"<!--[if $config.targetblank eq '0']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_doubleurl_no"><!--[gt text="no"]--></label>
         </div>
       </div>
       <div class="z-formrow">

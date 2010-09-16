@@ -15,12 +15,11 @@ $dom = ZLanguage::getModuleDomain('Weblinks');
 /**
 * set modversion info
 */
-
 $modversion['name']             = 'Weblinks';
 $modversion['oldnames']         = array('Web_Links');
 $modversion['displayname']      = __('Weblinks', $dom);
 $modversion['description']      = __('Weblinks Module', $dom);
-$modversion['version']          = '2.0.1';
+$modversion['version']          = '2.1.0';
 $modversion['credits']          = 'pndocs/credits.txt';
 $modversion['help']             = 'pndocs/install.txt';
 $modversion['changelog']        = 'pndocs/changelog.txt';

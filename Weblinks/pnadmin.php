@@ -269,8 +269,10 @@ function Weblinks_admin_addlink() // ready
         return LogUtil::registerAuthidError();
     }
 
-    // check if URL exist
-    $checkurl = pnModAPIFunc('Weblinks', 'user', 'checkurl', array('url' => $link['url']));
+    if (pnModGetVar('Weblinks', 'doubleurl') == 0) {
+        // check if URL exist
+        $checkurl = pnModAPIFunc('Weblinks', 'user', 'checkurl', array('url' => $link['url']));
+    }
 
     if ($checkurl > 0) {
         LogUtil::registerError(__('Sorry! Please try again: this link is already listed in the database!', $dom));
@@ -749,21 +751,6 @@ function Weblinks_admin_updateconfig() // ready
     }
     pnModSetVar('Weblinks', 'mostpoplinks', $config['mostpoplinks']);
 
-    if ( !isset($config['featurebox']) || !is_numeric($config['featurebox']) ) {
-        $config['featurebox'] = 1;
-    }
-    pnModSetVar('Weblinks', 'featurebox', $config['featurebox']);
-
-    if ( !isset($config['targetblank']) || !is_numeric($config['targetblank']) ) {
-        $config['targetblank'] = 0;
-    }
-    pnModSetVar('Weblinks', 'targetblank', $config['targetblank']);
-
-    if ( !isset($config['blockunregmodify']) || !is_numeric($config['blockunregmodify']) ) {
-        $config['blockunregmodify'] = 0;
-    }
-    pnModSetVar('Weblinks', 'blockunregmodify', $config['blockunregmodify']);
-
     if ( !isset($config['popular']) || !is_numeric($config['popular']) ) {
         $config['popular'] = 500;
     }
@@ -784,6 +771,26 @@ function Weblinks_admin_updateconfig() // ready
     }
     pnModSetVar('Weblinks', 'linksresults', $config['linksresults']);
 
+    if ( !isset($config['featurebox']) || !is_numeric($config['featurebox']) ) {
+        $config['featurebox'] = 1;
+    }
+    pnModSetVar('Weblinks', 'featurebox', $config['featurebox']);
+
+    if ( !isset($config['targetblank']) || !is_numeric($config['targetblank']) ) {
+        $config['targetblank'] = 0;
+    }
+    pnModSetVar('Weblinks', 'targetblank', $config['targetblank']);
+
+    if ( !isset($config['doubleurl']) || !is_numeric($config['doubleurl']) ) {
+        $config['doubleurl'] = 0;
+    }
+    pnModSetVar('Weblinks', 'doubleurl', $config['doubleurl']);
+    
+    if ( !isset($config['blockunregmodify']) || !is_numeric($config['blockunregmodify']) ) {
+        $config['blockunregmodify'] = 0;
+    }
+    pnModSetVar('Weblinks', 'blockunregmodify', $config['blockunregmodify']);
+        
     if ( !isset($config['links_anonaddlinklock']) || !is_numeric($config['links_anonaddlinklock']) ) {
         $config['links_anonaddlinklock'] = 1;
     }

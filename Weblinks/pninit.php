@@ -154,6 +154,8 @@ function Weblinks_upgrade($oldversion)
             return false;
         }
         
+        pnModSetVar('Weblinks', 'doubleurl', 0);
+        
         case '2.1.0':
 
            break;

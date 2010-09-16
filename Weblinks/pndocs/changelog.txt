@@ -1,3 +1,11 @@
+Version 2.1.0
+- converted to Gettext
+- css has changed to Zikula 1.2 style
+- little bugfixes
+- now it is possible to change the parent of a category
+- import function for CmodsWebLinks
+- allow multiple use of an URL
+
 Version 2.0.1
 - all db calls changed to DBUtil
 - Permissions should work now (see install.txt for more informations)
