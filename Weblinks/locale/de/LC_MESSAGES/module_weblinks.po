@@ -3,504 +3,542 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-16 19:14+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2010-09-18 14:00+0100\n"
+"Last-Translator: Petzi-Juist <mail@petzi-juist.de>\n"
+"Language-Team: Petzi_Juist <mail@petzi-juist.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
 
 #: pnadmin.php:94
 msgid "Category successfully added"
-msgstr ""
+msgstr "Kategorie erfolgreich hinzugefügt"
 
 #: pnadmin.php:160
 msgid "Category successfully modified"
-msgstr ""
+msgstr "Kategorie erfolgreich modifiziert"
 
 #: pnadmin.php:219
 msgid "Category successfully deleted"
-msgstr ""
+msgstr "Kategorie erfolgreich gelöscht"
 
 #: pnadmin.php:278
 msgid "Sorry! Please try again: this link is already listed in the database!"
-msgstr ""
+msgstr "FEHLER: Die URL existiert bereits in der Datenbank!"
 
 #: pnadmin.php:283
 msgid "Sorry! Please try again: you need to specify a TITLE for your link!"
-msgstr ""
+msgstr "FEHLER: Titel für den Link angeben!"
 
 #: pnadmin.php:288
 msgid "Sorry! Please try again: you need to specify a URL for your link!"
-msgstr ""
+msgstr "FEHLER: URL für den Link angeben!"
 
 #: pnadmin.php:314
 msgid "Your link at"
-msgstr ""
+msgstr "Link bei"
 
 #: pnadmin.php:315
 msgid "Hello"
-msgstr ""
+msgstr "Hallo"
 
 #: pnadmin.php:315
 msgid "your link submission has been approved for the site's search engine."
-msgstr ""
+msgstr "der folgende Eintrag wurde in die Weblinks aufgenommen: "
 
-#: pnadmin.php:315 pntemplates/weblinks_admin_listmodrequests.html:18
+#: pnadmin.php:315
+#: pntemplates/weblinks_admin_listmodrequests.html:18
 #: pntemplates/weblinks_admin_validate.html:16
 #: pntemplates/weblinks_user_modifylinkrequest.html:16
 msgid "Link title"
-msgstr ""
+msgstr "Link Titel"
 
-#: pnadmin.php:316 pntemplates/weblinks_admin_view.html:51
+#: pnadmin.php:316
+#: pntemplates/weblinks_admin_view.html:51
 #: pntemplates/weblinks_admin_listmodrequests.html:23
 #: pntemplates/weblinks_admin_linkview.html:22
 #: pntemplates/weblinks_admin_modlink.html:16
 #: pntemplates/weblinks_user_modifylinkrequest.html:19
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
-#: pnadmin.php:316 pntemplates/weblinks_admin_view.html:59
+#: pnadmin.php:316
+#: pntemplates/weblinks_admin_view.html:59
 #: pntemplates/weblinks_admin_listmodrequests.html:33
 #: pntemplates/weblinks_admin_modcategory.html:19
 #: pntemplates/weblinks_admin_catview.html:23
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: pnadmin.php:317
 msgid "The site's search engine is available at:"
-msgstr ""
+msgstr "Unsere Weblinks online: "
 
 #: pnadmin.php:318
 msgid "Thank you for your submission!"
-msgstr ""
+msgstr "Wir haben die Meldung erhalten - Vielen Dank!"
 
 #: pnadmin.php:318
 msgid "Team."
-msgstr ""
+msgstr "Team."
 
-#: pnadmin.php:323 pnadmin.php:327
+#: pnadmin.php:323
+#: pnadmin.php:327
 msgid "New link added to the database"
-msgstr ""
+msgstr "neuer Link in die Datenbank aufgenommen"
 
-#: pnadmin.php:330 pnuserapi.php:36 pnuserapi.php:89 pnuserapi.php:129
-#: pnuserapi.php:173 pnuserapi.php:242 pnuserapi.php:304 pnuserapi.php:347
-#: pnuserapi.php:446 pnuserapi.php:471 pnuserapi.php:496 pnuserapi.php:544
-#: pnuserapi.php:598 pnuserapi.php:638 pnadminapi.php:83 pnadminapi.php:154
-#: pnadminapi.php:185 pnadminapi.php:227 pnadminapi.php:252 pnadminapi.php:283
-#: pnadminapi.php:322 pnadminapi.php:352 pnadminapi.php:379 pnadminapi.php:428
-#: pnadminapi.php:478 pnadminapi.php:522 pnadminapi.php:555 pnadminapi.php:619
+#: pnadmin.php:330
+#: pnuserapi.php:36
+#: pnuserapi.php:89
+#: pnuserapi.php:129
+#: pnuserapi.php:173
+#: pnuserapi.php:242
+#: pnuserapi.php:304
+#: pnuserapi.php:347
+#: pnuserapi.php:446
+#: pnuserapi.php:471
+#: pnuserapi.php:496
+#: pnuserapi.php:544
+#: pnuserapi.php:598
+#: pnuserapi.php:638
+#: pnadminapi.php:83
+#: pnadminapi.php:154
+#: pnadminapi.php:185
+#: pnadminapi.php:227
+#: pnadminapi.php:252
+#: pnadminapi.php:283
+#: pnadminapi.php:322
+#: pnadminapi.php:352
+#: pnadminapi.php:379
+#: pnadminapi.php:428
+#: pnadminapi.php:478
+#: pnadminapi.php:522
+#: pnadminapi.php:555
+#: pnadminapi.php:619
 #: pnadminapi.php:649
 msgid "Error! Could not load items."
-msgstr ""
+msgstr "Fehler! Einträge konnte nicht geladen werden."
 
-#: pnadmin.php:356 pntemplates/weblinks_admin_linkview.html:64
+#: pnadmin.php:356
+#: pntemplates/weblinks_admin_linkview.html:64
 #: pntemplates/weblinks_admin_validate.html:37
 msgid "No link found"
-msgstr ""
+msgstr "Kein Link gefunden."
 
 #: pnadmin.php:401
 msgid "Link successfully modified"
-msgstr ""
+msgstr "Link erfolgreich modifiziert"
 
-#: pnadmin.php:431 pnadmin.php:550
+#: pnadmin.php:431
+#: pnadmin.php:550
 msgid "Link removed from the database"
-msgstr ""
+msgstr "Link aus der Datenbank entfernt"
 
 #: pnadmin.php:461
 msgid "New link removed from the database"
-msgstr ""
+msgstr "neuer Link wurde gelöscht"
 
 #: pnadmin.php:580
 msgid "Ignore requests"
-msgstr ""
+msgstr "Meldung ignoriert"
 
 #: pnadmin.php:644
 msgid "Link was changed successfuly"
-msgstr ""
+msgstr "Link erfolgreich geändert"
 
 #: pnadmin.php:675
 msgid "User link modification requests was ignored"
-msgstr ""
+msgstr "Link-Änderungswunsch wurde ignoriert"
 
 #: pnadmin.php:800
 msgid "Configuration updated"
-msgstr ""
+msgstr "Konfiguration aktualisiert"
 
-#: pnadmin.php:863 pnadmin.php:912
+#: pnadmin.php:863
+#: pnadmin.php:912
 msgid "Weblinks migration: Not Admin"
-msgstr ""
+msgstr "Keine Adminrechte für diesen Vorgang vorhanden"
 
 #: pnadmin.php:867
 msgid "Ratings not available"
-msgstr ""
+msgstr "Rating-Hook ist nicht für das Weblinks Modul aktiviert!"
 
 #: pnadmin.php:884
 msgid "Error inserting votes in ratings table."
-msgstr ""
+msgstr "Fehler beim Übertragen der Bewertungen in die 'Ratings' Tabelle."
 
 #: pnadmin.php:887
 #, php-format
 msgid "migrated: %s votes from Weblinks to Ratings"
-msgstr ""
+msgstr "migriert: %s Bewertungen von Weblinks zu Ratings"
 
 #: pnadmin.php:916
 msgid "EZComments not available"
-msgstr ""
+msgstr "EZComments nicht verfügbar"
 
 #: pnadmin.php:931
 msgid "anonymous user"
-msgstr ""
+msgstr "anonymous"
 
 #: pnadmin.php:943
 msgid "Error inserting comments in ezcomments table."
-msgstr ""
+msgstr "Fehler beim Übertragen der Kommentare von Weblinks zu EZComments"
 
 #: pnadmin.php:946
 #, php-format
 msgid "migrated: %s comments from Weblinks to EZComments"
-msgstr ""
+msgstr "migriert: %s Kommentare von Weblinks zu EZComments"
 
 #: pnadmin.php:982
 msgid "Error inserting CmodsWebLinks categories in Weblinks categories table."
-msgstr ""
+msgstr "Fehler beim Hinzufügen der CmodsWebLinks Kategorien zu den Weblinks Kategorien."
 
 #: pnadmin.php:987
 #, php-format
 msgid "migrated: %s categories from CmodsWebLinks to Weblinks"
-msgstr ""
+msgstr "migriert: %s Kategorien von CmodsWebLinks zu Weblinks"
 
 #: pnadmin.php:1008
 msgid "Error inserting CmodsWebLinks links in Weblinks links table."
-msgstr ""
+msgstr "Fehler beim Hinzufügen der CmodsWebLinks Links zu den Weblinks Links."
 
 #: pnadmin.php:1013
 #, php-format
 msgid "migrated: %s links from CmodsWebLinks to Weblinks"
-msgstr ""
+msgstr "migriert: %s Links von CmodsWebLinks zu Weblinks"
 
 #: pnadmin.php:1030
-msgid ""
-"Error inserting CmodsWebLinks modrequests in Weblinks modrequests table."
-msgstr ""
+msgid "Error inserting CmodsWebLinks modrequests in Weblinks modrequests table."
+msgstr "Fehler beim Hinzufügen der CmodsWebLinks Änderungsvorschläge zu den Weblinks Änderungsvorschlägen."
 
 #: pnadmin.php:1033
 #, php-format
 msgid "migrated: %s modrequests from CmodsWebLinks to Weblinks"
-msgstr ""
+msgstr "migriert: %s Änderungsvorschläge von CmodsWebLinks zu Weblinks"
 
 #: pnadmin.php:1049
 msgid "Error inserting CmodsWebLinks newlinks in Weblinks newlinks table."
-msgstr ""
+msgstr "Fehler beim Hinzufügen der CmodsWebLinks auf Freischaltung wartenden Links zu den Weblinks auf Freischaltung wartenden Links."
 
 #: pnadmin.php:1052
 #, php-format
 msgid "migrated: %s newlinks from CmodsWebLinks to Weblinks"
-msgstr ""
+msgstr "migriert: %s auf Freischaltung wartende Links von CmodsWebLinks zu Weblinks"
 
-#: pnversion.php:20 pnblocks/lastweblinks.php:31
-#: pnblocks/mostpopularweblinks.php:31 pntemplates/weblinks_user_header.html:6
+#: pnversion.php:20
+#: pnblocks/lastweblinks.php:31
+#: pnblocks/mostpopularweblinks.php:31
+#: pntemplates/weblinks_user_header.html:6
 #: pntemplates/weblinks_user_search.html:2
 #: pntemplates/weblinks_user_search.html:3
 #: pntemplates/weblinks_admin_header.html:4
 msgid "Weblinks"
-msgstr ""
+msgstr "Weblinks"
 
 #: pnversion.php:21
 msgid "Weblinks Module"
-msgstr ""
+msgstr "Weblinks Modul"
 
 #: pntemplates/plugins/function.popgraphic.php:18
 #: pntemplates/weblinks_user_links.html:8
 #: pntemplates/weblinks_admin_getconfig.html:62
 msgid "Popular"
-msgstr ""
+msgstr "Beliebtheit"
 
 #: pntemplates/plugins/function.newlinkgraphic.php:28
 #: pntemplates/plugins/function.categorynewlinkgraphic.php:42
 msgid "New today"
-msgstr ""
+msgstr "Heute neu"
 
 #: pntemplates/plugins/function.newlinkgraphic.php:31
 #: pntemplates/plugins/function.categorynewlinkgraphic.php:45
 msgid "New during last 3 days"
-msgstr ""
+msgstr "neu in den letzten 3 Tagen"
 
 #: pntemplates/plugins/function.newlinkgraphic.php:34
 #: pntemplates/plugins/function.categorynewlinkgraphic.php:48
 msgid "New this week"
-msgstr ""
+msgstr "neu in dieser Woche"
 
-#: pntemplates/plugins/function.newlinksbyday.php:24 pnuser.php:273
+#: pntemplates/plugins/function.newlinksbyday.php:24
+#: pnuser.php:273
 msgid "M d, Y"
-msgstr ""
+msgstr "d. M Y"
 
 #: pntemplates/plugins/function.orderbyTrans.php:18
 #: pntemplates/weblinks_user_sortlinksbymenu.html:7
 #: pntemplates/weblinks_user_searchresults.html:27
 msgid "Popularity (from fewest hits to most hits)"
-msgstr ""
+msgstr "Beliebtheit (nach Hits aufsteigend)"
 
 #: pntemplates/plugins/function.orderbyTrans.php:21
 #: pntemplates/weblinks_user_sortlinksbymenu.html:7
 #: pntemplates/weblinks_user_searchresults.html:27
 msgid "Popularity (from most hits to fewest hits)"
-msgstr ""
+msgstr "Beliebtheit (nach Hits absteigend)"
 
 #: pntemplates/plugins/function.orderbyTrans.php:24
 #: pntemplates/weblinks_user_sortlinksbymenu.html:5
 #: pntemplates/weblinks_user_searchresults.html:25
 msgid "Title (A to Z)"
-msgstr ""
+msgstr "Titel (A bis Z)"
 
 #: pntemplates/plugins/function.orderbyTrans.php:27
 #: pntemplates/weblinks_user_sortlinksbymenu.html:5
 #: pntemplates/weblinks_user_searchresults.html:25
 msgid "Title (Z to A)"
-msgstr ""
+msgstr "Titel (Z bis A)"
 
 #: pntemplates/plugins/function.orderbyTrans.php:30
 #: pntemplates/weblinks_user_sortlinksbymenu.html:6
 #: pntemplates/weblinks_user_searchresults.html:26
 msgid "Date (oldest links listed first)"
-msgstr ""
+msgstr "Datum (älteste Einträge zuerst)"
 
 #: pntemplates/plugins/function.orderbyTrans.php:33
 #: pntemplates/weblinks_user_sortlinksbymenu.html:6
 #: pntemplates/weblinks_user_searchresults.html:26
 msgid "Date (newest links listed first)"
-msgstr ""
+msgstr "Datum (neuste Einträge zuerst)"
 
 #: pntemplates/plugins/function.catpath.php:40
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: pntemplates/plugins/function.linkbottommenu.php:24
 msgid "Edit this link"
-msgstr ""
+msgstr "Link editieren"
 
 #: pntemplates/plugins/function.linkbottommenu.php:26
 msgid "Modify"
-msgstr ""
+msgstr "Modifizieren"
 
 #: pntemplates/plugins/function.linkbottommenu.php:30
 #: pntemplates/weblinks_user_brokenlink.html:11
 #: pntemplates/weblinks_user_brokenlink.html:19
 msgid "Report broken link"
-msgstr ""
+msgstr "Defekten Link melden"
 
 #: pntemplates/plugins/function.linkbottommenu.php:34
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: pntemplates/plugins/function.linkbottommenu.php:44
 msgid "Add a comment"
-msgstr ""
+msgstr "Kommentar hinzufügen"
 
 #: pntemplates/plugins/function.linkbottommenu.php:45
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
 #: pntemplates/plugins/function.linkbottommenu.php:46
 msgid "Comments"
-msgstr ""
+msgstr "Kommentare"
 
 #: pnuserapi.php:381
 msgid "Sorry! There is no such link"
-msgstr ""
+msgstr "Link existiert nicht..."
 
 #: pnuserapi.php:518
 msgid "Sorry! This URL is already listed in the database!"
-msgstr ""
+msgstr "FEHLER: Die URL ist bereits in der Datenbank!"
 
 #: pnuserapi.php:522
 msgid "Sorry! Error! You must type a URL for the web link!"
-msgstr ""
+msgstr "FEHLER: keine URL für den Link!"
 
 #: pnuserapi.php:526
 msgid "Sorry! Error! You must type a title for the URL!"
-msgstr ""
+msgstr "FEHLER: kein Titel für den Link!"
 
 #: pnuserapi.php:530
 msgid "Sorry! Error! No category!"
-msgstr ""
+msgstr "FEHLER: keine Kategorie!"
 
 #: pnuserapi.php:534
 msgid "Sorry! Error! You must type a description for the URL!"
-msgstr ""
+msgstr "FEHLER: keine Beschreibung für den Link!"
 
 #: pnuserapi.php:548
-msgid ""
-"You didn't enter an e-mail address. However, your link will still be checked."
-msgstr ""
+msgid "You didn't enter an e-mail address. However, your link will still be checked."
+msgstr "Keine E-Mail-Adresse angegeben - der Link wird trotzdem geprüft."
 
 #: pnuserapi.php:550
 msgid "Thank you! You'll receive an e-mail message when it's approved."
-msgstr ""
+msgstr "Vielen Dank! Sie erhalten eine E-Mail Nachricht, wenn der Link aufgenommen wurde."
 
 #: pnblocks/lastweblinks.php:32
 msgid "Latest Weblinks"
-msgstr ""
+msgstr "Neuste Weblinks"
 
 #: pnblocks/mostpopularweblinks.php:32
 msgid "Most Popular Weblinks"
-msgstr ""
+msgstr "Beliebteste Weblinks"
 
 #: pnuser.php:38
 msgid "No existing categories"
-msgstr ""
+msgstr "Es existieren keine Kategorien"
 
 #: pnuser.php:117
 msgid "Link don't exist!"
-msgstr ""
+msgstr "Link existiert nicht!"
 
-#: pnaccountapi.php:44 pntemplates/weblinks_admin_view.html:71
+#: pnaccountapi.php:44
+#: pntemplates/weblinks_admin_view.html:71
 #: pntemplates/weblinks_admin_linkview.html:11
 #: pntemplates/weblinks_admin_linkview.html:43
 #: pntemplates/weblinks_user_links.html:6
 msgid "Add link"
-msgstr ""
+msgstr "Link hinzufügen"
 
-#: pnadminapi.php:23 pntemplates/weblinks_admin_view.html:3
+#: pnadminapi.php:23
+#: pntemplates/weblinks_admin_view.html:3
 #: pntemplates/weblinks_admin_view.html:4
 #: pntemplates/weblinks_admin_listbrokenlinks.html:3
 msgid "Overview"
-msgstr ""
+msgstr "Übersicht"
 
-#: pnadminapi.php:26 pntemplates/weblinks_admin_catview.html:4
+#: pnadminapi.php:26
+#: pntemplates/weblinks_admin_catview.html:4
 #: pntemplates/weblinks_admin_catview.html:5
 msgid "Categories administer"
-msgstr ""
+msgstr "Kategorien verwalten"
 
-#: pnadminapi.php:29 pntemplates/weblinks_admin_listmodrequests.html:4
+#: pnadminapi.php:29
+#: pntemplates/weblinks_admin_listmodrequests.html:4
 #: pntemplates/weblinks_admin_linkview.html:4
 #: pntemplates/weblinks_admin_linkview.html:5
 #: pntemplates/weblinks_admin_validate.html:4
 #: pntemplates/weblinks_admin_modlink.html:3
 #: pntemplates/weblinks_admin_modlink.html:4
 msgid "Links administer"
-msgstr ""
+msgstr "Links verwalten"
 
-#: pnadminapi.php:32 pntemplates/weblinks_admin_getconfig.html:4
+#: pnadminapi.php:32
+#: pntemplates/weblinks_admin_getconfig.html:4
 #: pntemplates/weblinks_admin_getconfig.html:138
 msgid "Modify configuration"
-msgstr ""
+msgstr "Konfiguration"
 
-#: pnadminapi.php:33 pntemplates/weblinks_admin_import.html:5
+#: pnadminapi.php:33
+#: pntemplates/weblinks_admin_import.html:5
 #: pntemplates/weblinks_admin_import.html:6
 msgid "Import"
-msgstr ""
+msgstr "Importieren"
 
-#: pnadminapi.php:36 pntemplates/weblinks_user_links.html:4
+#: pnadminapi.php:36
+#: pntemplates/weblinks_user_links.html:4
 msgid "Link-Index"
-msgstr ""
+msgstr "Link-Index"
 
-#: pnadminapi.php:110 pnadminapi.php:115
+#: pnadminapi.php:110
+#: pnadminapi.php:115
 msgid "ERROR: The category"
-msgstr ""
+msgstr "FEHLER: Die Kategorie konnte nicht angelegt werden."
 
-#: pninit.php:21 pninit.php:153
-msgid ""
-"Error! This version of the Weblinks module requires Zikula 1.2.0 or later. "
-"Installation has been stopped because this requirement is not met."
-msgstr ""
+#: pninit.php:21
+#: pninit.php:153
+msgid "Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met."
+msgstr "Fehler: Diese Weblinks Version hat eine Mindestanforderung von Zikula 1.2.0 oder weiter. Die Installation stoppet hier, da die Mindestanforderung nicht erfüllt ist."
 
 #: pntemplates/weblinks_search_options.htm:4
 #: pntemplates/weblinks_user_mostpopular.html:7
 #: pntemplates/weblinks_user_searchresults.html:18
 msgid "Links"
-msgstr ""
+msgstr "Links"
 
 #: pntemplates/weblinks_admin_view.html:6
 #: pntemplates/weblinks_admin_validate.html:15
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: pntemplates/weblinks_admin_view.html:7
 #: pntemplates/weblinks_user_view.html:35
 msgid "There are"
-msgstr ""
+msgstr "Aktuell sind"
 
 #: pntemplates/weblinks_admin_view.html:7
 #: pntemplates/weblinks_user_view.html:35
 msgid "link"
 msgid_plural "links"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Link"
+msgstr[1] "Links"
 
 #: pntemplates/weblinks_admin_view.html:7
 #: pntemplates/weblinks_user_view.html:35
 msgid "and"
-msgstr ""
+msgstr "und"
 
 #: pntemplates/weblinks_admin_view.html:7
 #: pntemplates/weblinks_user_view.html:35
 msgid "category"
 msgid_plural "categories"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Kategorie"
+msgstr[1] "Kategorien"
 
 #: pntemplates/weblinks_admin_view.html:7
 #: pntemplates/weblinks_user_view.html:35
 msgid "in the database"
-msgstr ""
+msgstr "in der Datenbank"
 
 #: pntemplates/weblinks_admin_view.html:11
 msgid "Broken link reports"
-msgstr ""
+msgstr "als defekt gemeldete Links"
 
 #: pntemplates/weblinks_admin_view.html:12
 msgid "Link modification requests"
-msgstr ""
+msgstr "Link Änderungswünsche"
 
 #: pntemplates/weblinks_admin_view.html:19
 msgid "Link validation"
-msgstr ""
+msgstr "Links prüfen"
 
 #: pntemplates/weblinks_admin_view.html:21
 #: pntemplates/weblinks_admin_view.html:25
 #: pntemplates/weblinks_admin_validate.html:9
 msgid "Check category"
-msgstr ""
+msgstr "Kategorien prüfen"
 
 #: pntemplates/weblinks_admin_view.html:22
 msgid "Check ALL categories"
-msgstr ""
+msgstr "Alle Kategorien überprüfen"
 
 #: pntemplates/weblinks_admin_view.html:32
 msgid "Links awaiting validation"
-msgstr ""
+msgstr "auf Freischaltung wartenden Links"
 
 #: pntemplates/weblinks_admin_view.html:41
 #: pntemplates/weblinks_admin_linkview.html:54
 #: pntemplates/weblinks_admin_modlink.html:8
 #: pntemplates/weblinks_user_modifylinkrequest.html:13
 msgid "Link ID"
-msgstr ""
+msgstr "Link ID"
 
 #: pntemplates/weblinks_admin_view.html:43
 #: pntemplates/weblinks_admin_listmodrequests.html:41
 #: pntemplates/weblinks_admin_listmodrequests.html:43
 #: pntemplates/weblinks_admin_listbrokenlinks.html:21
 msgid "Submitter"
-msgstr ""
+msgstr "eingereicht von"
 
 #: pntemplates/weblinks_admin_view.html:47
 #: pntemplates/weblinks_admin_linkview.html:18
 #: pntemplates/weblinks_admin_modlink.html:12
 msgid "Pagetitle"
-msgstr ""
+msgstr "Seitentitel"
 
 #: pntemplates/weblinks_admin_view.html:51
 #: pntemplates/weblinks_admin_modlink.html:16
 msgid "Visit"
-msgstr ""
+msgstr "Besuche"
 
 #: pntemplates/weblinks_admin_view.html:55
 #: pntemplates/weblinks_user_mostpopular.html:25
@@ -516,7 +554,7 @@ msgstr ""
 #: pntemplates/weblinks_user_modifylinkrequest.html:22
 #: pntemplates/weblinks_user_searchresults.html:33
 msgid "Category"
-msgstr ""
+msgstr "Kategorie"
 
 #: pntemplates/weblinks_admin_view.html:63
 #: pntemplates/weblinks_admin_linkview.html:34
@@ -524,30 +562,30 @@ msgstr ""
 #: pntemplates/weblinks_admin_catview.html:13
 #: pntemplates/weblinks_admin_modlink.html:24
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: pntemplates/weblinks_admin_view.html:67
 #: pntemplates/weblinks_admin_linkview.html:38
 msgid "E-mail address"
-msgstr ""
+msgstr "E-Mailadresse"
 
 #: pntemplates/weblinks_admin_view.html:72
 #: pntemplates/weblinks_admin_modlink.html:43
 msgid "Delete link"
-msgstr ""
+msgstr "Link löschen"
 
 #: pntemplates/weblinks_user_mostpopular.html:7
 #: pntemplates/weblinks_user_mostpopular.html:9
 msgid "Most-popular - leading"
-msgstr ""
+msgstr "Beliebtheit Top"
 
 #: pntemplates/weblinks_user_mostpopular.html:7
 msgid "of all"
-msgstr ""
+msgstr "von"
 
 #: pntemplates/weblinks_user_mostpopular.html:12
 msgid "Show leading"
-msgstr ""
+msgstr "Zeige führende"
 
 #: pntemplates/weblinks_user_mostpopular.html:29
 #: pntemplates/weblinks_user_category.html:30
@@ -555,7 +593,7 @@ msgstr ""
 #: pntemplates/weblinks_user_newlinksdate.html:14
 #: pntemplates/weblinks_user_searchresults.html:37
 msgid "Added on"
-msgstr ""
+msgstr "Hinzugefügt am"
 
 #: pntemplates/weblinks_user_mostpopular.html:29
 #: pntemplates/weblinks_user_category.html:30
@@ -564,17 +602,15 @@ msgstr ""
 #: pntemplates/weblinks_admin_modlink.html:32
 #: pntemplates/weblinks_user_searchresults.html:37
 msgid "Hits"
-msgstr ""
+msgstr "Hits"
 
 #: pntemplates/weblinks_user_brokenlink.html:13
 msgid "Thank you for helping maintain this directory's integrity."
-msgstr ""
+msgstr "Vielen Dank für die Information."
 
 #: pntemplates/weblinks_user_brokenlink.html:14
-msgid ""
-"For security reasons, your user name and IP address will also be recorded "
-"temporarily."
-msgstr ""
+msgid "For security reasons, your user name and IP address will also be recorded temporarily."
+msgstr "Aus Sicherheitsgründen wird Benutzername und IP-Adresse gespeichert."
 
 #: pntemplates/weblinks_user_brokenlink.html:20
 #: pntemplates/weblinks_admin_suredelcategory.html:19
@@ -585,247 +621,239 @@ msgstr ""
 #: pntemplates/weblinks_user_searchresults.html:50
 #: pntemplates/weblinks_user_add.html:5
 msgid "Back"
-msgstr ""
+msgstr "Zurück"
 
 #: pntemplates/weblinks_user_brokenlinks.html:4
 #: pntemplates/weblinks_user_modifylinkrequests.html:4
 msgid "Thank you for the information."
-msgstr ""
+msgstr "Vielen Dank für die Information."
 
 #: pntemplates/weblinks_user_brokenlinks.html:4
 msgid "Thank you! Your request has been submitted for examination."
-msgstr ""
+msgstr "Der Beitrag wurde zur weiteren Prüfung übertragen."
 
 #: pntemplates/weblinks_admin_listmodrequests.html:5
 msgid "User link modification requests"
-msgstr ""
+msgstr "Link-Änderungswünsche"
 
 #: pntemplates/weblinks_admin_listmodrequests.html:12
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: pntemplates/weblinks_admin_listmodrequests.html:13
 msgid "Proposed"
-msgstr ""
+msgstr "vorgeschlagene Änderung"
 
 #: pntemplates/weblinks_admin_listmodrequests.html:50
 #: pntemplates/weblinks_admin_listmodrequests.html:52
 msgid "Owner"
-msgstr ""
+msgstr "Besitzer"
 
 #: pntemplates/weblinks_admin_listmodrequests.html:59
 msgid "Accept"
-msgstr ""
+msgstr "Akzeptieren"
 
 #: pntemplates/weblinks_admin_listmodrequests.html:60
 #: pntemplates/weblinks_admin_listbrokenlinks.html:23
 #: pntemplates/weblinks_admin_listbrokenlinks.html:46
 msgid "Ignore"
-msgstr ""
+msgstr "Ignorieren"
 
 #: pntemplates/weblinks_admin_listmodrequests.html:70
 msgid "No link modification requests"
-msgstr ""
+msgstr "keine Änderungswünsche vorhanden"
 
 #: pntemplates/weblinks_admin_linkview.html:30
 #: pntemplates/weblinks_user_addlink.html:27
 #: pntemplates/weblinks_user_modifylinkrequest.html:25
 msgid "Description (255 characters max)"
-msgstr ""
+msgstr "Beschreibung (255 Zeichen max)"
 
 #: pntemplates/weblinks_admin_linkview.html:51
 #: pntemplates/weblinks_admin_modlink.html:8
 msgid "Modify/Delete a link"
-msgstr ""
+msgstr "Link modifizieren/löschen"
 
 #: pntemplates/weblinks_admin_linkview.html:58
 #: pntemplates/weblinks_admin_modlink.html:42
 msgid "Modify link"
-msgstr ""
+msgstr "Link modifizieren"
 
 #: pntemplates/weblinks_admin_suredelcategory.html:4
 #: pntemplates/weblinks_admin_suredelcategory.html:8
 #: pntemplates/weblinks_admin_suredelcategory.html:18
 msgid "Delete Category"
-msgstr ""
+msgstr "Kategorie löschen"
 
 #: pntemplates/weblinks_admin_suredelcategory.html:13
-msgid ""
-"Confirmation prompt: are you sure you want to delete this category and ALL "
-"its links?"
-msgstr ""
+msgid "Confirmation prompt: are you sure you want to delete this category and ALL its links?"
+msgstr "WARNUNG: Wirklich die Kategorie und alle darin befindlichen Links löschen?"
 
 #: pntemplates/weblinks_admin_modcategory.html:4
 #: pntemplates/weblinks_admin_modcategory.html:7
 #: pntemplates/weblinks_admin_catview.html:37
 #: pntemplates/weblinks_admin_catview.html:46
 msgid "Modify a category"
-msgstr ""
+msgstr "Kategorie modifizieren"
 
 #: pntemplates/weblinks_admin_modcategory.html:15
 msgid "Parent category"
-msgstr ""
+msgstr "Übergeordnete Kategorie"
 
 #: pntemplates/weblinks_admin_modcategory.html:16
 #: pntemplates/weblinks_admin_catview.html:19
 #: pntemplates/weblinks_admin_validate.html:32
 msgid "None"
-msgstr ""
+msgstr "keine"
 
 #: pntemplates/weblinks_admin_modcategory.html:24
 msgid "Modify category"
-msgstr ""
+msgstr "Kategorie bearbeiten"
 
 #: pntemplates/weblinks_user_category.html:14
 msgid "Links also available in"
-msgstr ""
+msgstr "Links auch verfügbar in"
 
 #: pntemplates/weblinks_user_category.html:14
 msgid "sub-categories"
-msgstr ""
+msgstr "Unterkategorien"
 
 #: pntemplates/weblinks_user_view.html:5
 msgid "Main-Categories"
-msgstr ""
+msgstr "Link-Kategorien"
 
 #: pntemplates/weblinks_user_view.html:41
 msgid "Last links"
-msgstr ""
+msgstr "Die neusten Weblinks"
 
 #: pntemplates/weblinks_user_view.html:53
 msgid "Most-popular links"
-msgstr ""
+msgstr "Die beliebtesten Weblinks"
 
 #: pntemplates/weblinks_user_sortlinksbymenu.html:3
 #: pntemplates/weblinks_user_searchresults.html:23
 msgid "Sites currently sorted by"
-msgstr ""
+msgstr "Links sortiert nach"
 
 #: pntemplates/weblinks_user_sortlinksbymenu.html:4
 #: pntemplates/weblinks_user_searchresults.html:24
 msgid "Sort links by"
-msgstr ""
+msgstr "sortieren nach"
 
 #: pntemplates/weblinks_user_sortlinksbymenu.html:5
 #: pntemplates/weblinks_user_searchresults.html:25
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: pntemplates/weblinks_user_sortlinksbymenu.html:6
 #: pntemplates/weblinks_user_searchresults.html:26
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: pntemplates/weblinks_user_sortlinksbymenu.html:7
 #: pntemplates/weblinks_user_searchresults.html:27
 msgid "Popularity"
-msgstr ""
+msgstr "Beliebtheit"
 
 #: pntemplates/weblinks_user_modifylinkrequests.html:4
 msgid "Your request has been submitted for examination."
-msgstr ""
+msgstr "Der Beitrag wurde zur weiteren Prüfung übertragen."
 
 #: pntemplates/weblinks_user_details.html:5
 msgid "Link profile"
-msgstr ""
+msgstr "Link-Profil"
 
 #: pntemplates/weblinks_user_details.html:21
 msgid "Visit this web site"
-msgstr ""
+msgstr "diese Webseite besuchen"
 
 #: pntemplates/weblinks_user_links.html:7
 msgid "New"
-msgstr ""
+msgstr "Neu"
 
 #: pntemplates/weblinks_user_links.html:9
 msgid "Random"
-msgstr ""
+msgstr "Zufällig"
 
 #: pntemplates/weblinks_user_newlinksdate.html:5
 msgid "new link"
 msgid_plural "new links"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "neuer Link"
+msgstr[1] "neue Links"
 
 #: pntemplates/weblinks_admin_catview.html:9
 msgid "Add a category"
-msgstr ""
+msgstr "Kategorie hinzufügen"
 
 #: pntemplates/weblinks_admin_catview.html:18
 msgid "in category"
-msgstr ""
+msgstr "in Kategorie"
 
 #: pntemplates/weblinks_admin_catview.html:28
 msgid "Add category"
-msgstr ""
+msgstr "Kategorie hinzufügen"
 
 #: pntemplates/weblinks_admin_catview.html:28
 msgid "Add Category"
-msgstr ""
+msgstr "Kategorie hinzufügen"
 
 #: pntemplates/weblinks_admin_catview.html:54
 #: pntemplates/weblinks_admin_catview.html:63
 msgid "Delete category"
-msgstr ""
+msgstr "Kategorie löschen"
 
 #: pntemplates/weblinks_admin_getconfig.html:5
 msgid "Configuration"
-msgstr ""
+msgstr "Konfiguration"
 
 #: pntemplates/weblinks_admin_getconfig.html:10
 #: pntemplates/weblinks_block_weblinks_modify.html:3
 msgid "Number of links"
-msgstr ""
+msgstr "Anzahl der Links pro Seite"
 
 #: pntemplates/weblinks_admin_getconfig.html:12
 msgid "Links per page"
-msgstr ""
+msgstr "Links pro Seite"
 
 #: pntemplates/weblinks_admin_getconfig.html:23
 msgid "Number of links as new"
-msgstr ""
+msgstr "Anzahl der neuen Links"
 
 #: pntemplates/weblinks_admin_getconfig.html:34
 msgid "Number of links required to qualify as best"
-msgstr ""
+msgstr "Anzahl der besten Links"
 
 #: pntemplates/weblinks_admin_getconfig.html:45
 msgid "Links in search results"
-msgstr ""
+msgstr "Anzahl der Links im Suchergebnis"
 
 #: pntemplates/weblinks_admin_getconfig.html:56
 msgid "Number of links in the feature link box"
-msgstr ""
+msgstr "Anzahl der Links im Block"
 
 #: pntemplates/weblinks_admin_getconfig.html:64
 msgid "Number of hits required to qualify as popular"
-msgstr ""
+msgstr "Hits für Beliebtheit"
 
 #: pntemplates/weblinks_admin_getconfig.html:75
-msgid ""
-"Enter 1 to show most-popular links as a percentage (otherwise, enter the "
-"number of links to show)"
-msgstr ""
+msgid "Enter 1 to show most-popular links as a percentage (otherwise, enter the number of links to show)"
+msgstr "1 für Prozentsatz (ansonsten Anzahl)  "
 
 #: pntemplates/weblinks_admin_getconfig.html:79
-msgid ""
-"Most-popular links: either a number of links or the percentage to display "
-"(percentage as whole number, such as 25/100)"
-msgstr ""
+msgid "Most-popular links: either a number of links or the percentage to display (percentage as whole number, such as 25/100)"
+msgstr "beliebteste Links: Anzahl oder Prozentsatz zur Anzeige"
 
 #: pntemplates/weblinks_admin_getconfig.html:83
-msgid ""
-"Leading links: either number of links or the  percentage of links to show "
-"(percentage as whole number, such as 25/100)"
-msgstr ""
+msgid "Leading links: either number of links or the  percentage of links to show (percentage as whole number, such as 25/100)"
+msgstr " Top Links: Anzahl oder Prozentsatz zur Anzeige   "
 
 #: pntemplates/weblinks_admin_getconfig.html:89
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: pntemplates/weblinks_admin_getconfig.html:91
 msgid "Show featured link box on web links main page?"
-msgstr ""
+msgstr "Featured Link-Box auf der Hauptseite anzeigen?"
 
 #: pntemplates/weblinks_admin_getconfig.html:94
 #: pntemplates/weblinks_admin_getconfig.html:103
@@ -833,7 +861,7 @@ msgstr ""
 #: pntemplates/weblinks_admin_getconfig.html:121
 #: pntemplates/weblinks_admin_getconfig.html:130
 msgid "yes"
-msgstr ""
+msgstr "Ja"
 
 #: pntemplates/weblinks_admin_getconfig.html:96
 #: pntemplates/weblinks_admin_getconfig.html:105
@@ -841,294 +869,278 @@ msgstr ""
 #: pntemplates/weblinks_admin_getconfig.html:123
 #: pntemplates/weblinks_admin_getconfig.html:132
 msgid "no"
-msgstr ""
+msgstr "Nein"
 
 #: pntemplates/weblinks_admin_getconfig.html:100
 msgid "Open link in a new window?"
-msgstr ""
+msgstr "Link in einem neuen Fenster öffnen?"
 
 #: pntemplates/weblinks_admin_getconfig.html:109
 msgid "Allow multiple use of an URL?"
-msgstr ""
+msgstr "Mehrfache Verwendung einer URL zulassen?"
 
 #: pntemplates/weblinks_admin_getconfig.html:118
 msgid "Disable unregistered users from suggesting link changes?"
-msgstr ""
+msgstr "Unregistrierte Benutzer für das Vorschlagen von Änderungen sperren?"
 
 #: pntemplates/weblinks_admin_getconfig.html:127
 msgid "Disable unregistered users to post new links?"
-msgstr ""
+msgstr "Unregistrierte Benutzer für das Vorschlagen von neuen Links sperren?"
 
 #: pntemplates/weblinks_admin_validate.html:6
 msgid "Check ALL links"
-msgstr ""
+msgstr "ALLE Links überprüfen"
 
 #: pntemplates/weblinks_admin_validate.html:17
 msgid "Functions"
-msgstr ""
+msgstr "Funktionen"
 
 #: pntemplates/weblinks_admin_validate.html:24
 msgid "Failed!"
-msgstr ""
+msgstr "fehlgeschlagen!"
 
 #: pntemplates/weblinks_admin_validate.html:26
 msgid "Edit"
-msgstr ""
+msgstr "Ändern"
 
 #: pntemplates/weblinks_admin_validate.html:26
 #: pntemplates/weblinks_admin_listbrokenlinks.html:24
 #: pntemplates/weblinks_admin_listbrokenlinks.html:51
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: pntemplates/weblinks_admin_validate.html:30
 #: pntemplates/weblinks_admin_import.html:16
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: pntemplates/weblinks_user_addlink.html:6
 msgid "Instructions"
-msgstr ""
+msgstr "Instruktionen"
 
 #: pntemplates/weblinks_user_addlink.html:7
 msgid "Please submit each link only once."
-msgstr ""
+msgstr "Links nur einmal einreichen"
 
 #: pntemplates/weblinks_user_addlink.html:8
 msgid "All links are reviewed before being posted online."
-msgstr ""
+msgstr "alle Links werden vor der Freischaltung überprüft"
 
 #: pntemplates/weblinks_user_addlink.html:9
 msgid "Your user name and IP are recorded, so please don't abuse the system."
-msgstr ""
+msgstr "Benutzername und IP werden aufgezeichnet um Missbrauch zu verhindern."
 
 #: pntemplates/weblinks_user_addlink.html:15
 msgid "Add a new link"
-msgstr ""
+msgstr "neuen Link hinzufügen"
 
 #: pntemplates/weblinks_user_addlink.html:18
 msgid "Sitetitle"
-msgstr ""
+msgstr "Seitentitel"
 
 #: pntemplates/weblinks_user_addlink.html:21
 msgid "Page URL"
-msgstr ""
+msgstr "URL"
 
 #: pntemplates/weblinks_user_addlink.html:30
 msgid "Your name"
-msgstr ""
+msgstr "Name"
 
 #: pntemplates/weblinks_user_addlink.html:33
 msgid "Your e-mail address"
-msgstr ""
+msgstr "E-Mailadresse"
 
 #: pntemplates/weblinks_user_addlink.html:39
 msgid "Add this URL"
-msgstr ""
+msgstr "URL hinzufügen"
 
 #: pntemplates/weblinks_user_addlink.html:46
 msgid "Sorry! You are not a registered user or you have not logged-in."
-msgstr ""
+msgstr "Derzeit nicht angemeldet"
 
 #: pntemplates/weblinks_user_addlink.html:47
 msgid "If you were registered, you could contribute links to this web site."
-msgstr ""
+msgstr "Registrierte Benutzer können Links hinzufügen"
 
 #: pntemplates/weblinks_user_addlink.html:48
 msgid "Becoming a registered user is a quick and easy process."
-msgstr ""
+msgstr "Die Registrierung ist einfach, kostenfrei und schnell erledigt."
 
 #: pntemplates/weblinks_user_addlink.html:49
 msgid "Why is registration required for access to certain features?"
-msgstr ""
+msgstr "Warum eine Registrierung für einige Funktionen notwendig ist?"
 
 #: pntemplates/weblinks_user_addlink.html:50
 msgid "So that you are offered only the highest-quality content,"
-msgstr ""
+msgstr "Nur so können wir auch sicherstellen, bei Rückfragen"
 
 #: pntemplates/weblinks_user_addlink.html:51
 msgid "each item is individually reviewed and approved."
-msgstr ""
+msgstr "Kontakt aufnehmen zu können."
 
 #: pntemplates/weblinks_user_addlink.html:52
 msgid "The site editor aims to offer useful information only."
-msgstr ""
+msgstr "Wir möchten bestmögliche und abgeprüfte Inhalte bieten."
 
 #: pntemplates/weblinks_user_addlink.html:53
-msgid ""
-"<a href=\"index.php?module=Users&func=register\">Register for a new user "
-"account</a>"
-msgstr ""
+msgid "<a href=\"index.php?module=Users&func=register\">Register for a new user account</a>"
+msgstr "<a href=\"index.php?module=Users&func=register\">Registrierung</a>"
 
 #: pntemplates/weblinks_admin_modlink.html:20
 msgid "Description:"
-msgstr ""
+msgstr "Beschreibung:"
 
 #: pntemplates/weblinks_admin_modlink.html:28
 msgid "E-mail adress"
-msgstr ""
+msgstr "E-Mailadresse"
 
 #: pntemplates/weblinks_user_newlinks.html:4
 msgid "New links"
-msgstr ""
+msgstr "neue Links"
 
 #: pntemplates/weblinks_user_newlinks.html:5
 msgid "Total new links"
-msgstr ""
+msgstr "neue Links insgesamt"
 
 #: pntemplates/weblinks_user_newlinks.html:5
 msgid "Last week"
-msgstr ""
+msgstr "letzte Woche"
 
 #: pntemplates/weblinks_user_newlinks.html:5
 msgid "Last 30 days"
-msgstr ""
+msgstr "vergangene 30 Tage"
 
 #: pntemplates/weblinks_user_newlinks.html:7
 msgid "Show"
-msgstr ""
+msgstr "anzeigen"
 
 #: pntemplates/weblinks_user_newlinks.html:8
 msgid "1 week"
-msgstr ""
+msgstr "1 Woche"
 
 #: pntemplates/weblinks_user_newlinks.html:9
 msgid "2 weeks"
-msgstr ""
+msgstr "2 Wochen"
 
 #: pntemplates/weblinks_user_newlinks.html:10
 msgid "30 days"
-msgstr ""
+msgstr "30 Tage"
 
 #: pntemplates/weblinks_user_newlinks.html:12
 msgid "Total new links over the last"
-msgstr ""
+msgstr "neue Links vergangene"
 
 #: pntemplates/weblinks_user_newlinks.html:12
 msgid "days"
-msgstr ""
+msgstr "Tage"
 
 #: pntemplates/weblinks_admin_import.html:9
 msgid "Ratings"
-msgstr ""
+msgstr "Ratings"
 
 #: pntemplates/weblinks_admin_import.html:12
-msgid ""
-"With this function <strong>Weblinks-Votes</strong> will be imported to the "
-"<strong>Rating</strong> module.<br /><strong>!Attention!</strong> - befor "
-"you use this function you should set the style of the Ratings."
-msgstr ""
+msgid "With this function <strong>Weblinks-Votes</strong> will be imported to the <strong>Rating</strong> module.<br /><strong>!Attention!</strong> - befor you use this function you should set the style of the Ratings."
+msgstr "<strong>Weblinks-Bewertungen</strong> werden mit diese Funktion in das <strong>Rating-Modul</strong> importiert.<br /><strong>!Achtung!</strong> - vor Ausführung der Funktion sollte im Bewertungsmodul der Stil der Bewertung festgelegt sein."
 
 #: pntemplates/weblinks_admin_import.html:20
 msgid "Rating-Hook isn't activated for the Weblinks module!"
-msgstr ""
+msgstr "Rating-Hook ist nicht für das Weblinks Modul aktiviert!"
 
 #: pntemplates/weblinks_admin_import.html:20
 #: pntemplates/weblinks_admin_import.html:38
 msgid "to the hooks of Weblinks module"
-msgstr ""
+msgstr "zu den Hooks vom Weblinks Modul"
 
 #: pntemplates/weblinks_admin_import.html:27
 msgid "EZComments"
-msgstr ""
+msgstr "EZComments"
 
 #: pntemplates/weblinks_admin_import.html:30
-msgid ""
-"With this function <strong>Weblinks-Comments</strong> will be imported to "
-"the <strong>EZComments</strong> module."
-msgstr ""
+msgid "With this function <strong>Weblinks-Comments</strong> will be imported to the <strong>EZComments</strong> module."
+msgstr "<strong>Weblinks-Kommentare</strong> werden mit diese Funktion in das <strong>EZComments-Modul</strong> importiert."
 
 #: pntemplates/weblinks_admin_import.html:38
 msgid "EZComments-Hook isn't activated for the Weblinks module!"
-msgstr ""
+msgstr "EZComments-Hook ist nicht für das Weblinks Modul aktiviert!"
 
 #: pntemplates/weblinks_admin_import.html:45
 msgid "CmodsWebLinks"
-msgstr ""
+msgstr "CmodsWebLinks"
 
 #: pntemplates/weblinks_admin_import.html:48
-msgid ""
-"With this function <strong>CmodsWebLinks</strong> will be imported to the "
-"<strong>Weblinks</strong> module.<br /><strong>!Attention!</strong> - this "
-"function add the CmodsWebLinks categories and links to the Weblinks module "
-"and don't replace it."
-msgstr ""
+msgid "With this function <strong>CmodsWebLinks</strong> will be imported to the <strong>Weblinks</strong> module.<br /><strong>!Attention!</strong> - this function add the CmodsWebLinks categories and links to the Weblinks module and don't replace it."
+msgstr "Mit dieser Funktion werden die Inhalte vom <strong>CmodsWebLinks Modul</strong> in das <strong>Weblinks</strong> Modul importiert. <br /><strong>!Achtung!</strong> - diese Funktion fügt die Kategorie und Links hinzu, die Tabellen werden nicht überschrieben."
 
 #: pntemplates/weblinks_admin_import.html:56
-msgid ""
-"CmodsWebLinks isn't activated! Try to import?<br /><strong>!Attention!</"
-"strong> - this function add the CmodsWebLinks categories and links to the "
-"Weblinks module and don't replace it."
-msgstr ""
+msgid "CmodsWebLinks isn't activated! Try to import?<br /><strong>!Attention!</strong> - this function add the CmodsWebLinks categories and links to the Weblinks module and don't replace it."
+msgstr "CmodsWebLinks ist nicht aktiviert! Trotzdem versuchen zu importieren?<br /><strong>!Achtung!</strong> - diese Funktion fügt die Kategorie und Links hinzu, die Tabellen werden nicht überschrieben."
 
 #: pntemplates/weblinks_user_modifylinkrequest.html:5
 msgid "Sorry! Only registered users can suggest link modifications."
-msgstr ""
+msgstr "Sorry! Nur registrierte Benutzer können Linkänderungen vorschlagen."
 
 #: pntemplates/weblinks_user_modifylinkrequest.html:13
 msgid "Request link modification"
-msgstr ""
+msgstr "Änderung vorschlagen"
 
 #: pntemplates/weblinks_user_modifylinkrequest.html:31
 msgid "Send request"
-msgstr ""
+msgstr "Anfrage senden"
 
 #: pntemplates/weblinks_user_searchresults.html:7
 msgid "Search results for"
-msgstr ""
+msgstr "Suchergebnisse für"
 
 #: pntemplates/weblinks_user_searchresults.html:10
 msgid "Sub-categories"
-msgstr ""
+msgstr "Unterkategorien"
 
 #: pntemplates/weblinks_user_searchresults.html:50
 #: pntemplates/weblinks_user_searchresults.html:63
 msgid "No matches found to your query"
-msgstr ""
+msgstr "Keine Treffer für die Suchanfrage"
 
 #: pntemplates/weblinks_user_searchresults.html:54
 msgid "Try to search"
-msgstr ""
+msgstr "Suche für den Begriff"
 
 #: pntemplates/weblinks_user_searchresults.html:54
 msgid "on other search engines"
-msgstr ""
+msgstr "in anderen Suchmaschinen"
 
 #: pntemplates/weblinks_user_search.html:4
 msgid "search keywords"
-msgstr ""
+msgstr "Suchbegriffe"
 
 #: pntemplates/weblinks_user_search.html:5
 msgid "Search"
-msgstr ""
+msgstr "Suche"
 
 #: pntemplates/weblinks_user_add.html:7
 msgid "Thank you! Your link submission has been received."
-msgstr ""
+msgstr "Wir haben die Meldung erhalten - Vielen Dank!"
 
 #: pntemplates/weblinks_admin_listbrokenlinks.html:4
 msgid "User-reported broken links"
-msgstr ""
+msgstr "als defekt gemeldete Links"
 
 #: pntemplates/weblinks_admin_listbrokenlinks.html:7
-msgid ""
-"Ignore (deletes all <strong><em>requests</em></strong> for a given link)"
-msgstr ""
+msgid "Ignore (deletes all <strong><em>requests</em></strong> for a given link)"
+msgstr "ignorieren (löscht alle <strong><em>Meldungen</em></strong> für einen Link)"
 
 #: pntemplates/weblinks_admin_listbrokenlinks.html:8
-msgid ""
-"Delete (deletes <strong><em>broken link</em></strong> and "
-"<strong><em>requests</em></strong> for a given link)"
-msgstr ""
+msgid "Delete (deletes <strong><em>broken link</em></strong> and <strong><em>requests</em></strong> for a given link)"
+msgstr "löschen (entfernt <strong><em>defekte Links</em></strong> und <strong><em>Meldungen</em></strong> für einen Link)"
 
 #: pntemplates/weblinks_admin_listbrokenlinks.html:13
 msgid "No broken links found"
-msgstr ""
+msgstr "Keine defekten Links gefunden"
 
 #: pntemplates/weblinks_admin_listbrokenlinks.html:20
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #: pntemplates/weblinks_admin_listbrokenlinks.html:22
 msgid "Link owner"
-msgstr ""
+msgstr "Besitzer"
+
