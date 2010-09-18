@@ -16,27 +16,27 @@
 
       <div class="z-formrow">
         <label><!--[gt text="Pagetitle"]--></label>
-        <input type="text" name="link[title]" size="50" maxlength="100" />
+        <input id="title" type="text" name="link[title]" size="50" maxlength="100" />
       </div>
       <div class="z-formrow">
         <label><!--[gt text="URL"]--></label>
-        <input type="text" name="link[url]" size="65" maxlength="254" value="http://" />
+        <input id="url" type="text" name="link[url]" size="65" maxlength="254" value="http://" />
       </div>
       <div class="z-formrow">
         <label><!--[gt text="Category"]--></label>
-        <select name="link[cat]"><!--[catlist scat=0 sel=0]--></select>
+        <select id="cat" name="link[cat]"><!--[catlist scat=0 sel=0]--></select>
       </div>
       <div class="z-formrow">
         <label><!--[gt text="Description (255 characters max)"]--></label>
-        <textarea name="link[description]" id="description" cols="65" rows="10"></textarea>
+        <textarea id="description" name="link[description]" cols="65" rows="10"></textarea>
       </div>
       <div class="z-formrow">
         <label><!--[gt text="Name"]--></label>
-        <input type="text" name="link[name]" size="30" maxlength="60" value="<!--[$submitter]-->" />
+        <input id="name" type="text" name="link[name]" size="30" maxlength="60" value="<!--[$submitter]-->" />
       </div>
       <div class="z-formrow">
         <label><!--[gt text="E-mail address"]--></label>
-        <input type="text" name="link[email]" size="30" maxlength="60" value="<!--[$submitteremail]-->" />
+        <input id="email" type="text" name="link[email]" size="30" maxlength="60" value="<!--[$submitteremail]-->" />
       </div>
 
       <div class="z-formbuttons">

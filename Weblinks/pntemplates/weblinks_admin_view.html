@@ -45,27 +45,27 @@
       </div>
       <div class="z-formrow">
         <label><!--[gt text="Pagetitle"]--></label>
-        <input type="text" name="link[title]" value="<!--[$newlinks.title|pnvarprepfordisplay]-->" size="50" maxlength="100" />
+        <input id="title" type="text" name="link[title]" value="<!--[$newlinks.title|pnvarprepfordisplay]-->" size="50" maxlength="100" />
       </div>
       <div class="z-formrow">
         <label><!--[gt text="URL"]--> [ <a target="_blank" href="<!--[$newlinks.url|pnvarprepfordisplay]-->"><!--[gt text="Visit"]--></a> ]</label>
-        <input type="text" name="link[url]" value="<!--[$newlinks.url|pnvarprepfordisplay]-->" size="65" maxlength="254" />
+        <input id="url" type="text" name="link[url]" value="<!--[$newlinks.url|pnvarprepfordisplay]-->" size="65" maxlength="254" />
       </div>
       <div class="z-formrow">
         <label><!--[gt text="Category"]--></label>
-        <select name="link[cat]"><!--[catlist scat=0 sel=$newlinks.cid]--></select>
+        <select id="cat" name="link[cat]"><!--[catlist scat=0 sel=$newlinks.cid]--></select>
       </div>
       <div class="z-formrow">
         <label><!--[gt text="Description"]--></label>
-        <textarea name="link[description]" cols="65" rows="10"><!--[$newlinks.description|pnvarprephtmldisplay]--></textarea>
+        <textarea id="description" name="link[description]" cols="65" rows="10"><!--[$newlinks.description|pnvarprephtmldisplay]--></textarea>
       </div>
       <div class="z-formrow">
         <label><!--[gt text="Name"]--></label>
-        <input type="text" name="link[name]" size="20" maxlength="100" value="<!--[$newlinks.name|pnvarprepfordisplay]-->" />
+        <input id="name" type="text" name="link[name]" size="20" maxlength="100" value="<!--[$newlinks.name|pnvarprepfordisplay]-->" />
       </div>
       <div class="z-formrow">
         <label><!--[gt text="E-mail address"]--></label>
-        <input type="text" name="link[email]" size="20" maxlength="100" value="<!--[$newlinks.email|pnvarprepfordisplay]-->" />
+        <input id="email" type="text" name="link[email]" size="20" maxlength="100" value="<!--[$newlinks.email|pnvarprepfordisplay]-->" />
       </div>
       <div class="z-formbuttons">
         <!--[pnbutton src=button_ok.gif set=icons/small __alt="Add link" __title="Add link"]-->

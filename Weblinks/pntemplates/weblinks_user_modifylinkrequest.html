@@ -14,16 +14,16 @@
 
       <dl class="z-clearfix">
         <dt><label for="title"><!--[gt text="Link title"]-->:</label></dt>
-        <dd><input type="text" id="title" name="modlink[title]" value="<!--[$link.title|pnvarprepfordisplay]-->" size="50" maxlength="100" /></dd>
+        <dd><input id="title" type="text" name="modlink[title]" value="<!--[$link.title|pnvarprepfordisplay]-->" size="50" maxlength="100" /></dd>
 
         <dt><label for="url"><!--[gt text="URL"]-->:</label></dt>
-        <dd><input type="text" id="url" name="modlink[url]" value="<!--[$link.url|pnvarprepfordisplay]-->" size="75" maxlength="254" /></dd>
+        <dd><input id="url" type="text" name="modlink[url]" value="<!--[$link.url|pnvarprepfordisplay]-->" size="75" maxlength="254" /></dd>
 
         <dt><label for="cat"><!--[gt text="Category"]-->:</label></dt>
         <dd><select id="cat" name="modlink[cid]"><!--[catlist scat=0 sel=$link.cat_id]--></select></dd>
 
         <dt><label for="description"><!--[gt text="Description (255 characters max)"]-->:</label></dt>
-        <dd><textarea name="modlink[description]" id="description" cols="65" rows="10"><!--[$link.description|pnvarprephtmldisplay]--></textarea></dd>
+        <dd><textarea id="description" name="modlink[description]" cols="65" rows="10"><!--[$link.description|pnvarprephtmldisplay]--></textarea></dd>
       </dl>
 
     </fieldset>

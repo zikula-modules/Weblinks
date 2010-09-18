@@ -12,6 +12,8 @@
 
 function smarty_function_newlinkgraphic($params, &$smarty)
 {
+    $dom = ZLanguage::getModuleDomain('Weblinks');
+    
     echo "&nbsp;";
     ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $params['time'], $datetime);
 
