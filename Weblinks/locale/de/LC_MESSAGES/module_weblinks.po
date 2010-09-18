@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-16 19:14+0000\n"
-"PO-Revision-Date: 2010-09-18 14:00+0100\n"
+"POT-Creation-Date: 2010-09-18 15:11+0000\n"
+"PO-Revision-Date: 2010-09-18 16:26+0100\n"
 "Last-Translator: Petzi-Juist <mail@petzi-juist.de>\n"
 "Language-Team: Petzi_Juist <mail@petzi-juist.de>\n"
 "MIME-Version: 1.0\n"
@@ -158,77 +158,77 @@ msgstr "Link erfolgreich geändert"
 msgid "User link modification requests was ignored"
 msgstr "Link-Änderungswunsch wurde ignoriert"
 
-#: pnadmin.php:800
+#: pnadmin.php:790
 msgid "Configuration updated"
 msgstr "Konfiguration aktualisiert"
 
-#: pnadmin.php:863
-#: pnadmin.php:912
+#: pnadmin.php:853
+#: pnadmin.php:902
 msgid "Weblinks migration: Not Admin"
 msgstr "Keine Adminrechte für diesen Vorgang vorhanden"
 
-#: pnadmin.php:867
+#: pnadmin.php:857
 msgid "Ratings not available"
 msgstr "Rating-Hook ist nicht für das Weblinks Modul aktiviert!"
 
-#: pnadmin.php:884
+#: pnadmin.php:874
 msgid "Error inserting votes in ratings table."
 msgstr "Fehler beim Übertragen der Bewertungen in die 'Ratings' Tabelle."
 
-#: pnadmin.php:887
+#: pnadmin.php:877
 #, php-format
 msgid "migrated: %s votes from Weblinks to Ratings"
 msgstr "migriert: %s Bewertungen von Weblinks zu Ratings"
 
-#: pnadmin.php:916
+#: pnadmin.php:906
 msgid "EZComments not available"
 msgstr "EZComments nicht verfügbar"
 
-#: pnadmin.php:931
+#: pnadmin.php:921
 msgid "anonymous user"
 msgstr "anonymous"
 
-#: pnadmin.php:943
+#: pnadmin.php:933
 msgid "Error inserting comments in ezcomments table."
 msgstr "Fehler beim Übertragen der Kommentare von Weblinks zu EZComments"
 
-#: pnadmin.php:946
+#: pnadmin.php:936
 #, php-format
 msgid "migrated: %s comments from Weblinks to EZComments"
 msgstr "migriert: %s Kommentare von Weblinks zu EZComments"
 
-#: pnadmin.php:982
+#: pnadmin.php:972
 msgid "Error inserting CmodsWebLinks categories in Weblinks categories table."
 msgstr "Fehler beim Hinzufügen der CmodsWebLinks Kategorien zu den Weblinks Kategorien."
 
-#: pnadmin.php:987
+#: pnadmin.php:977
 #, php-format
 msgid "migrated: %s categories from CmodsWebLinks to Weblinks"
 msgstr "migriert: %s Kategorien von CmodsWebLinks zu Weblinks"
 
-#: pnadmin.php:1008
+#: pnadmin.php:998
 msgid "Error inserting CmodsWebLinks links in Weblinks links table."
 msgstr "Fehler beim Hinzufügen der CmodsWebLinks Links zu den Weblinks Links."
 
-#: pnadmin.php:1013
+#: pnadmin.php:1003
 #, php-format
 msgid "migrated: %s links from CmodsWebLinks to Weblinks"
 msgstr "migriert: %s Links von CmodsWebLinks zu Weblinks"
 
-#: pnadmin.php:1030
+#: pnadmin.php:1020
 msgid "Error inserting CmodsWebLinks modrequests in Weblinks modrequests table."
 msgstr "Fehler beim Hinzufügen der CmodsWebLinks Änderungsvorschläge zu den Weblinks Änderungsvorschlägen."
 
-#: pnadmin.php:1033
+#: pnadmin.php:1023
 #, php-format
 msgid "migrated: %s modrequests from CmodsWebLinks to Weblinks"
 msgstr "migriert: %s Änderungsvorschläge von CmodsWebLinks zu Weblinks"
 
-#: pnadmin.php:1049
+#: pnadmin.php:1039
 msgid "Error inserting CmodsWebLinks newlinks in Weblinks newlinks table."
 msgstr "Fehler beim Hinzufügen der CmodsWebLinks auf Freischaltung wartenden Links zu den Weblinks auf Freischaltung wartenden Links."
 
-#: pnadmin.php:1052
+#: pnadmin.php:1042
 #, php-format
 msgid "migrated: %s newlinks from CmodsWebLinks to Weblinks"
 msgstr "migriert: %s auf Freischaltung wartende Links von CmodsWebLinks zu Weblinks"
@@ -253,17 +253,17 @@ msgstr "Weblinks Modul"
 msgid "Popular"
 msgstr "Beliebtheit"
 
-#: pntemplates/plugins/function.newlinkgraphic.php:28
+#: pntemplates/plugins/function.newlinkgraphic.php:30
 #: pntemplates/plugins/function.categorynewlinkgraphic.php:42
 msgid "New today"
 msgstr "Heute neu"
 
-#: pntemplates/plugins/function.newlinkgraphic.php:31
+#: pntemplates/plugins/function.newlinkgraphic.php:33
 #: pntemplates/plugins/function.categorynewlinkgraphic.php:45
 msgid "New during last 3 days"
 msgstr "neu in den letzten 3 Tagen"
 
-#: pntemplates/plugins/function.newlinkgraphic.php:34
+#: pntemplates/plugins/function.newlinkgraphic.php:36
 #: pntemplates/plugins/function.categorynewlinkgraphic.php:48
 msgid "New this week"
 msgstr "neu in dieser Woche"
@@ -424,9 +424,9 @@ msgstr "Links verwalten"
 
 #: pnadminapi.php:32
 #: pntemplates/weblinks_admin_getconfig.html:4
-#: pntemplates/weblinks_admin_getconfig.html:138
+#: pntemplates/weblinks_admin_getconfig.html:139
 msgid "Modify configuration"
-msgstr "Konfiguration"
+msgstr "Konfiguration aktualisieren"
 
 #: pnadminapi.php:33
 #: pntemplates/weblinks_admin_import.html:5
@@ -445,7 +445,7 @@ msgid "ERROR: The category"
 msgstr "FEHLER: Die Kategorie konnte nicht angelegt werden."
 
 #: pninit.php:21
-#: pninit.php:153
+#: pninit.php:150
 msgid "Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met."
 msgstr "Fehler: Diese Weblinks Version hat eine Mindestanforderung von Zikula 1.2.0 oder weiter. Die Installation stoppet hier, da die Mindestanforderung nicht erfüllt ist."
 
@@ -615,7 +615,7 @@ msgstr "Aus Sicherheitsgründen wird Benutzername und IP-Adresse gespeichert."
 #: pntemplates/weblinks_user_brokenlink.html:20
 #: pntemplates/weblinks_admin_suredelcategory.html:19
 #: pntemplates/weblinks_admin_modcategory.html:25
-#: pntemplates/weblinks_admin_getconfig.html:139
+#: pntemplates/weblinks_admin_getconfig.html:140
 #: pntemplates/weblinks_user_addlink.html:40
 #: pntemplates/weblinks_user_modifylinkrequest.html:32
 #: pntemplates/weblinks_user_searchresults.html:50
@@ -836,54 +836,52 @@ msgid "Number of hits required to qualify as popular"
 msgstr "Hits für Beliebtheit"
 
 #: pntemplates/weblinks_admin_getconfig.html:75
-msgid "Enter 1 to show most-popular links as a percentage (otherwise, enter the number of links to show)"
-msgstr "1 für Prozentsatz (ansonsten Anzahl)  "
+msgid "Want to show most-popular links as a percentage?<br />(If 'no', enter the number of links to show)"
+msgstr "Beliebteste Links in Prozent anzeigen?<br /> (wenn 'nein', Anzahl der Links eintragen)  "
 
-#: pntemplates/weblinks_admin_getconfig.html:79
-msgid "Most-popular links: either a number of links or the percentage to display (percentage as whole number, such as 25/100)"
-msgstr "beliebteste Links: Anzahl oder Prozentsatz zur Anzeige"
-
-#: pntemplates/weblinks_admin_getconfig.html:83
-msgid "Leading links: either number of links or the  percentage of links to show (percentage as whole number, such as 25/100)"
-msgstr " Top Links: Anzahl oder Prozentsatz zur Anzeige   "
-
-#: pntemplates/weblinks_admin_getconfig.html:89
-msgid "Settings"
-msgstr "Einstellungen"
-
-#: pntemplates/weblinks_admin_getconfig.html:91
-msgid "Show featured link box on web links main page?"
-msgstr "Featured Link-Box auf der Hauptseite anzeigen?"
-
-#: pntemplates/weblinks_admin_getconfig.html:94
-#: pntemplates/weblinks_admin_getconfig.html:103
-#: pntemplates/weblinks_admin_getconfig.html:112
-#: pntemplates/weblinks_admin_getconfig.html:121
-#: pntemplates/weblinks_admin_getconfig.html:130
+#: pntemplates/weblinks_admin_getconfig.html:78
+#: pntemplates/weblinks_admin_getconfig.html:95
+#: pntemplates/weblinks_admin_getconfig.html:104
+#: pntemplates/weblinks_admin_getconfig.html:113
+#: pntemplates/weblinks_admin_getconfig.html:122
+#: pntemplates/weblinks_admin_getconfig.html:131
 msgid "yes"
 msgstr "Ja"
 
-#: pntemplates/weblinks_admin_getconfig.html:96
-#: pntemplates/weblinks_admin_getconfig.html:105
-#: pntemplates/weblinks_admin_getconfig.html:114
-#: pntemplates/weblinks_admin_getconfig.html:123
-#: pntemplates/weblinks_admin_getconfig.html:132
+#: pntemplates/weblinks_admin_getconfig.html:80
+#: pntemplates/weblinks_admin_getconfig.html:97
+#: pntemplates/weblinks_admin_getconfig.html:106
+#: pntemplates/weblinks_admin_getconfig.html:115
+#: pntemplates/weblinks_admin_getconfig.html:124
+#: pntemplates/weblinks_admin_getconfig.html:133
 msgid "no"
 msgstr "Nein"
 
-#: pntemplates/weblinks_admin_getconfig.html:100
+#: pntemplates/weblinks_admin_getconfig.html:84
+msgid "Most-popular links: either a number of links or the percentage to display (percentage as whole number, such as 25/100)"
+msgstr "beliebteste Links: Anzahl oder Prozentsatz zur Anzeige"
+
+#: pntemplates/weblinks_admin_getconfig.html:90
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: pntemplates/weblinks_admin_getconfig.html:92
+msgid "Show featured link box on web links main page?"
+msgstr "Featured Link-Box auf der Hauptseite anzeigen?"
+
+#: pntemplates/weblinks_admin_getconfig.html:101
 msgid "Open link in a new window?"
 msgstr "Link in einem neuen Fenster öffnen?"
 
-#: pntemplates/weblinks_admin_getconfig.html:109
+#: pntemplates/weblinks_admin_getconfig.html:110
 msgid "Allow multiple use of an URL?"
 msgstr "Mehrfache Verwendung einer URL zulassen?"
 
-#: pntemplates/weblinks_admin_getconfig.html:118
+#: pntemplates/weblinks_admin_getconfig.html:119
 msgid "Disable unregistered users from suggesting link changes?"
 msgstr "Unregistrierte Benutzer für das Vorschlagen von Änderungen sperren?"
 
-#: pntemplates/weblinks_admin_getconfig.html:127
+#: pntemplates/weblinks_admin_getconfig.html:128
 msgid "Disable unregistered users to post new links?"
 msgstr "Unregistrierte Benutzer für das Vorschlagen von neuen Links sperren?"
 
@@ -1144,3 +1142,7 @@ msgstr "Link"
 msgid "Link owner"
 msgstr "Besitzer"
 
+#~ msgid ""
+#~ "Leading links: either number of links or the  percentage of links to show "
+#~ "(percentage as whole number, such as 25/100)"
+#~ msgstr " Top Links: Anzahl oder Prozentsatz zur Anzeige   "
