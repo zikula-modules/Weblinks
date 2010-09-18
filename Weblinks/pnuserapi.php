@@ -507,7 +507,8 @@ function Weblinks_userapi_add($args) // ready
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
     // Security check
-    if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_ADD)) {
+    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 0 &&
+        !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
 
