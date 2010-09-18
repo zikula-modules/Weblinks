@@ -726,36 +726,6 @@ function Weblinks_admin_updateconfig() // ready
     }
     pnModSetVar('Weblinks', 'perpage', $config['perpage']);
 
-    if ( !isset($config['toplinkspercentrigger']) || !is_numeric($config['toplinkspercentrigger']) ) {
-        $config['toplinkspercentrigger'] = 0;
-    }
-    pnModSetVar('Weblinks', 'toplinkspercentrigger', $config['toplinkspercentrigger']);
-
-    if ( !isset($config['linksinblock']) || !is_numeric($config['linksinblock']) ) {
-        $config['linksinblock'] = 10;
-    }
-    pnModSetVar('Weblinks', 'linksinblock', $config['linksinblock']);
-
-    if ( !isset($config['toplinks']) || !is_numeric($config['toplinks']) ) {
-        $config['toplinks'] = 25;
-    }
-    pnModSetVar('Weblinks', 'toplinks', $config['toplinks']);
-
-    if ( !isset($config['mostpoplinkspercentrigger']) || !is_numeric($config['mostpoplinkspercentrigger']) ) {
-        $config['mostpoplinkspercentrigger'] = 0;
-    }
-    pnModSetVar('Weblinks', 'mostpoplinkspercentrigger', $config['mostpoplinkspercentrigger']);
-
-    if ( !isset($config['mostpoplinks']) || !is_numeric($config['mostpoplinks']) ) {
-        $config['mostpoplinks'] = 25;
-    }
-    pnModSetVar('Weblinks', 'mostpoplinks', $config['mostpoplinks']);
-
-    if ( !isset($config['popular']) || !is_numeric($config['popular']) ) {
-        $config['popular'] = 500;
-    }
-    pnModSetVar('Weblinks', 'popular', $config['popular']);
-
     if ( !isset($config['newlinks']) || !is_numeric($config['newlinks']) ) {
         $config['newlinks'] = 10;
     }
@@ -770,6 +740,26 @@ function Weblinks_admin_updateconfig() // ready
         $config['linksresults'] = 10;
     }
     pnModSetVar('Weblinks', 'linksresults', $config['linksresults']);
+
+    if ( !isset($config['linksinblock']) || !is_numeric($config['linksinblock']) ) {
+        $config['linksinblock'] = 10;
+    }
+    pnModSetVar('Weblinks', 'linksinblock', $config['linksinblock']);
+
+    if ( !isset($config['popular']) || !is_numeric($config['popular']) ) {
+        $config['popular'] = 500;
+    }
+    pnModSetVar('Weblinks', 'popular', $config['popular']);
+
+    if ( !isset($config['mostpoplinkspercentrigger']) || !is_numeric($config['mostpoplinkspercentrigger']) ) {
+        $config['mostpoplinkspercentrigger'] = 0;
+    }
+    pnModSetVar('Weblinks', 'mostpoplinkspercentrigger', $config['mostpoplinkspercentrigger']);
+
+    if ( !isset($config['mostpoplinks']) || !is_numeric($config['mostpoplinks']) ) {
+        $config['mostpoplinks'] = 25;
+    }
+    pnModSetVar('Weblinks', 'mostpoplinks', $config['mostpoplinks']);
 
     if ( !isset($config['featurebox']) || !is_numeric($config['featurebox']) ) {
         $config['featurebox'] = 1;

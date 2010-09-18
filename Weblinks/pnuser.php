@@ -295,11 +295,10 @@ function Weblinks_user_mostpopular() // ready
 
     $mostpoplinkspercentrigger = pnModGetVar('Weblinks', 'mostpoplinkspercentrigger');
     $mostpoplinks = pnModGetVar('Weblinks', 'mostpoplinks');
-    $mainvotedecimal = pnModGetVar('Weblinks', 'mainvotedecimal');
 
     if ($ratenum != "" && $ratetype != "") {
         if (!is_numeric($ratenum)) {
-            $ratenum=5;
+            $ratenum = 5;
         }
         if ($ratetype != "percent") {
             $ratetype = "num";

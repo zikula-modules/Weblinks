@@ -47,19 +47,18 @@ function Weblinks_init()
     // Weblinks settings
     // set up config variables
     $modvars = array('perpage' => 25,
-                     'toplinkspercentrigger' => 0,
-                     'toplinks' => 25,
-                     'mostpoplinkspercentrigger' => 0,
-                     'mostpoplinks' => 25,
-                     'featurebox' => 1,
-                     'blockunregmodify' => 0,
-                     'popular' => 500,
                      'newlinks' => 10,
                      'bestlinks' => 10,
                      'linksresults' => 10,
-                     'links_anonaddlinklock' => 1,
+                     'linksinblock' => 10,
+                     'popular' => 500,
+                     'mostpoplinkspercentrigger' => 0,
+                     'mostpoplinks' => 25,
+                     'featurebox' => 1,
                      'targetblank' => 0,
-                     'linksinblock' => 10);
+                     'doubleurl' => 0,
+                     'blockunregmodify' => 0,
+                     'links_anonaddlinklock' => 1);
 
     // set up module variables
     pnModSetVars('Weblinks', $modvars);
@@ -85,19 +84,17 @@ function Weblinks_upgrade($oldversion)
         // Weblinks settings
         // set up config variables
         $modvars = array('perpage' => 25,
-                         'toplinkspercentrigger' => 0,
-                         'toplinks' => 25,
-                         'mostpoplinkspercentrigger' => 0,
-                         'mostpoplinks' => 25,
-                         'featurebox' => 1,
-                         'blockunregmodify' => 0,
-                         'popular' => 500,
-                         'newlinks' => 10,
-                         'bestlinks' => 10,
-                         'linksresults' => 10,
-                         'links_anonaddlinklock' => 1,
-                         'targetblank' => 0,
-                         'linksinblock' => 10);
+                     'newlinks' => 10,
+                     'bestlinks' => 10,
+                     'linksresults' => 10,
+                     'linksinblock' => 10,
+                     'popular' => 500,
+                     'mostpoplinkspercentrigger' => 0,
+                     'mostpoplinks' => 25,
+                     'featurebox' => 1,
+                     'targetblank' => 0,
+                     'blockunregmodify' => 0,
+                     'links_anonaddlinklock' => 1);
 
         // set up module variables
         pnModSetVars('Weblinks', $modvars);
@@ -155,6 +152,10 @@ function Weblinks_upgrade($oldversion)
         }
         
         pnModSetVar('Weblinks', 'doubleurl', 0);
+        
+        // remove obsolete module vars
+        pnModDelVar('Weblinks', 'toplinks');
+        pnModDelVar('Weblinks', 'toplinkspercentrigger');
         
         case '2.1.0':
 

@@ -72,16 +72,17 @@
         </select>
       </div>
       <div class="z-formrow">
-        <label><!--[gt text="Enter 1 to show most-popular links as a percentage (otherwise, enter the number of links to show)"]--></label>
-        <input type="text" name="config[mostpoplinkspercentrigger]" value="<!--[$config.mostpoplinkspercentrigger]-->" size="4" />
+        <label for="weblinks_popular_mostpoplinkspercentrigger"><!--[gt text="Want to show most-popular links as a percentage?<br />(If 'no', enter the number of links to show)"]--></label>
+        <div id="weblinks_popular_mostpoplinkspercentrigger">            
+          <input id="weblinks_popular_mostpoplinkspercentrigger_yes" type="radio" name="config[mostpoplinkspercentrigger]" value="1"<!--[if $config.mostpoplinkspercentrigger eq '1']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_popular_mostpoplinkspercentrigger_yes"><!--[gt text="yes"]--></label>
+          <input id="weblinks_popular_mostpoplinkspercentrigger_no" type="radio" name="config[mostpoplinkspercentrigger]" value="0"<!--[if $config.mostpoplinkspercentrigger eq '0']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_popular_mostpoplinkspercentrigger_no"><!--[gt text="no"]--></label>
+        </div>
       </div>
       <div class="z-formrow">
         <label><!--[gt text="Most-popular links: either a number of links or the percentage to display (percentage as whole number, such as 25/100)"]--></label>
         <input type="text" name="config[mostpoplinks]" value="<!--[$config.mostpoplinks]-->" size="4" />
-      </div>
-      <div class="z-formrow">
-        <label><!--[gt text="Leading links: either number of links or the  percentage of links to show (percentage as whole number, such as 25/100)"]--></label>
-        <input type="text" name="config[toplinks]" value="<!--[$config.toplinks]-->" size="4" />
       </div>
     </fieldset>
 
