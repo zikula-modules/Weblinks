@@ -104,15 +104,19 @@ function Weblinks_adminapi_addcategory($args) // ready
         return LogUtil::registerPermissionError();
     }
 
-    $checkcat = DBUtil::selectObjectCountByID('links_categories', $args['pid'], 'parent_id', 'lower');
     $checktitle = DBUtil::selectObjectCountByID('links_categories', $args['title'], 'title', 'lower');
-    if ($checkcat && $checktitle) {
-        return LogUtil::registerError(__('ERROR: The category', $dom));
+    if ($checktitle) {
+        $pntable =& pnDBGetTables();
+        $column = &$pntable['links_categories_column'];
+        $where = "WHERE $column[parent_id] = '".(int)DataUtil::formatForStore($args['pid'])."' AND $column[title] = '".DataUtil::formatForStore($args['title'])."'";
+        if (DBUtil::selectObjectCount('links_categories', $where)) {
+            return LogUtil::registerError(__('ERROR: The category title exists on this level.', $dom));
+        }
     }
 
     $items = array('parent_id' => $args['pid'], 'title' => $args['title'], 'cdescription' => $args['cdescription']);
     if (!DBUtil::insertObject($items, 'links_categories', 'cat_id')) {
-        return LogUtil::registerError(__('ERROR: The category', $dom));
+        return LogUtil::registerError(__('ERROR: The category isn\'t added.', $dom));
     }
 
     return true;

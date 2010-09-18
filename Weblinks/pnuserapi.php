@@ -327,7 +327,7 @@ function Weblinks_userapi_search_weblinks($args) // ready
     $pntable =& pnDBGetTables();
     $column = &$pntable['links_links_column'];
 
-    $where = "$column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
+    $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
     // define the permission filter to apply
     $permFilter = array();
@@ -364,7 +364,7 @@ function Weblinks_userapi_countsearchlinks($args) // ready
     $pntable =& pnDBGetTables();
     $column = &$pntable['links_links_column'];
 
-    $where = "$column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
+    $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
     return DBUtil::selectObjectCount('links_links', $where);
 }
