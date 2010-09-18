@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-18 15:11+0000\n"
+"POT-Creation-Date: 2010-09-18 17:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,11 +92,11 @@ msgstr ""
 #: pnadmin.php:330 pnuserapi.php:36 pnuserapi.php:89 pnuserapi.php:129
 #: pnuserapi.php:173 pnuserapi.php:242 pnuserapi.php:304 pnuserapi.php:347
 #: pnuserapi.php:446 pnuserapi.php:471 pnuserapi.php:496 pnuserapi.php:544
-#: pnuserapi.php:598 pnuserapi.php:638 pnadminapi.php:83 pnadminapi.php:154
-#: pnadminapi.php:185 pnadminapi.php:227 pnadminapi.php:252 pnadminapi.php:283
-#: pnadminapi.php:322 pnadminapi.php:352 pnadminapi.php:379 pnadminapi.php:428
-#: pnadminapi.php:478 pnadminapi.php:522 pnadminapi.php:555 pnadminapi.php:619
-#: pnadminapi.php:649
+#: pnuserapi.php:598 pnuserapi.php:638 pnadminapi.php:83 pnadminapi.php:158
+#: pnadminapi.php:189 pnadminapi.php:231 pnadminapi.php:256 pnadminapi.php:287
+#: pnadminapi.php:326 pnadminapi.php:356 pnadminapi.php:383 pnadminapi.php:432
+#: pnadminapi.php:482 pnadminapi.php:526 pnadminapi.php:559 pnadminapi.php:623
+#: pnadminapi.php:653
 msgid "Error! Could not load items."
 msgstr ""
 
@@ -401,8 +401,12 @@ msgstr ""
 msgid "Link-Index"
 msgstr ""
 
-#: pnadminapi.php:110 pnadminapi.php:115
-msgid "ERROR: The category"
+#: pnadminapi.php:113
+msgid "ERROR: The category title exists on this level."
+msgstr ""
+
+#: pnadminapi.php:119
+msgid "ERROR: The category isn't added."
 msgstr ""
 
 #: pninit.php:21 pninit.php:150
