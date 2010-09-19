@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-18 17:52+0000\n"
+"POT-Creation-Date: 2010-09-19 13:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,8 +91,8 @@ msgstr ""
 
 #: pnadmin.php:330 pnuserapi.php:36 pnuserapi.php:89 pnuserapi.php:129
 #: pnuserapi.php:173 pnuserapi.php:242 pnuserapi.php:304 pnuserapi.php:347
-#: pnuserapi.php:446 pnuserapi.php:471 pnuserapi.php:496 pnuserapi.php:544
-#: pnuserapi.php:598 pnuserapi.php:638 pnadminapi.php:83 pnadminapi.php:158
+#: pnuserapi.php:446 pnuserapi.php:471 pnuserapi.php:497 pnuserapi.php:546
+#: pnuserapi.php:600 pnuserapi.php:640 pnadminapi.php:83 pnadminapi.php:158
 #: pnadminapi.php:189 pnadminapi.php:231 pnadminapi.php:256 pnadminapi.php:287
 #: pnadminapi.php:326 pnadminapi.php:356 pnadminapi.php:383 pnadminapi.php:432
 #: pnadminapi.php:482 pnadminapi.php:526 pnadminapi.php:559 pnadminapi.php:623
@@ -315,32 +315,32 @@ msgstr ""
 msgid "Sorry! There is no such link"
 msgstr ""
 
-#: pnuserapi.php:518
+#: pnuserapi.php:520
 msgid "Sorry! This URL is already listed in the database!"
 msgstr ""
 
-#: pnuserapi.php:522
+#: pnuserapi.php:524
 msgid "Sorry! Error! You must type a URL for the web link!"
 msgstr ""
 
-#: pnuserapi.php:526
+#: pnuserapi.php:528
 msgid "Sorry! Error! You must type a title for the URL!"
 msgstr ""
 
-#: pnuserapi.php:530
+#: pnuserapi.php:532
 msgid "Sorry! Error! No category!"
 msgstr ""
 
-#: pnuserapi.php:534
+#: pnuserapi.php:536
 msgid "Sorry! Error! You must type a description for the URL!"
 msgstr ""
 
-#: pnuserapi.php:548
+#: pnuserapi.php:550
 msgid ""
 "You didn't enter an e-mail address. However, your link will still be checked."
 msgstr ""
 
-#: pnuserapi.php:550
+#: pnuserapi.php:552
 msgid "Thank you! You'll receive an e-mail message when it's approved."
 msgstr ""
 
@@ -852,11 +852,11 @@ msgid "Allow multiple use of an URL?"
 msgstr ""
 
 #: pntemplates/weblinks_admin_getconfig.html:119
-msgid "Disable unregistered users from suggesting link changes?"
+msgid "Allow unregistered users to suggest link changes?"
 msgstr ""
 
 #: pntemplates/weblinks_admin_getconfig.html:128
-msgid "Disable unregistered users to post new links?"
+msgid "Allow unregistered users to post new links?"
 msgstr ""
 
 #: pntemplates/weblinks_admin_validate.html:6

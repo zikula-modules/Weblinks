@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-18 17:52+0000\n"
-"PO-Revision-Date: 2010-09-18 19:07+0100\n"
+"POT-Creation-Date: 2010-09-19 13:38+0000\n"
+"PO-Revision-Date: 2010-09-19 14:52+0100\n"
 "Last-Translator: Petzi-Juist <mail@petzi-juist.de>\n"
 "Language-Team: Petzi_Juist <mail@petzi-juist.de>\n"
 "MIME-Version: 1.0\n"
@@ -105,10 +105,10 @@ msgstr "neuer Link in die Datenbank aufgenommen"
 #: pnuserapi.php:347
 #: pnuserapi.php:446
 #: pnuserapi.php:471
-#: pnuserapi.php:496
-#: pnuserapi.php:544
-#: pnuserapi.php:598
-#: pnuserapi.php:638
+#: pnuserapi.php:497
+#: pnuserapi.php:546
+#: pnuserapi.php:600
+#: pnuserapi.php:640
 #: pnadminapi.php:83
 #: pnadminapi.php:158
 #: pnadminapi.php:189
@@ -347,31 +347,31 @@ msgstr "Kommentare"
 msgid "Sorry! There is no such link"
 msgstr "Link existiert nicht..."
 
-#: pnuserapi.php:518
+#: pnuserapi.php:520
 msgid "Sorry! This URL is already listed in the database!"
 msgstr "FEHLER: Die URL ist bereits in der Datenbank!"
 
-#: pnuserapi.php:522
+#: pnuserapi.php:524
 msgid "Sorry! Error! You must type a URL for the web link!"
 msgstr "FEHLER: keine URL für den Link!"
 
-#: pnuserapi.php:526
+#: pnuserapi.php:528
 msgid "Sorry! Error! You must type a title for the URL!"
 msgstr "FEHLER: kein Titel für den Link!"
 
-#: pnuserapi.php:530
+#: pnuserapi.php:532
 msgid "Sorry! Error! No category!"
 msgstr "FEHLER: keine Kategorie!"
 
-#: pnuserapi.php:534
+#: pnuserapi.php:536
 msgid "Sorry! Error! You must type a description for the URL!"
 msgstr "FEHLER: keine Beschreibung für den Link!"
 
-#: pnuserapi.php:548
+#: pnuserapi.php:550
 msgid "You didn't enter an e-mail address. However, your link will still be checked."
 msgstr "Keine E-Mail-Adresse angegeben - der Link wird trotzdem geprüft."
 
-#: pnuserapi.php:550
+#: pnuserapi.php:552
 msgid "Thank you! You'll receive an e-mail message when it's approved."
 msgstr "Vielen Dank! Sie erhalten eine E-Mail Nachricht, wenn der Link aufgenommen wurde."
 
@@ -881,12 +881,12 @@ msgid "Allow multiple use of an URL?"
 msgstr "Mehrfache Verwendung einer URL zulassen?"
 
 #: pntemplates/weblinks_admin_getconfig.html:119
-msgid "Disable unregistered users from suggesting link changes?"
-msgstr "Unregistrierte Benutzer für das Vorschlagen von Änderungen sperren?"
+msgid "Allow unregistered users to suggest link changes?"
+msgstr "Unregistrierte Benutzer für das Vorschlagen von Änderungen zulassen?"
 
 #: pntemplates/weblinks_admin_getconfig.html:128
-msgid "Disable unregistered users to post new links?"
-msgstr "Unregistrierte Benutzer für das Vorschlagen von neuen Links sperren?"
+msgid "Allow unregistered users to post new links?"
+msgstr "Unregistrierte Benutzer für das Vorschlagen von neuen Links zulassen?"
 
 #: pntemplates/weblinks_admin_validate.html:6
 msgid "Check ALL links"
