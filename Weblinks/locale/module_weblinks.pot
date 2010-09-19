@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-19 13:38+0000\n"
+"POT-Creation-Date: 2010-09-19 13:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,8 +91,8 @@ msgstr ""
 
 #: pnadmin.php:330 pnuserapi.php:36 pnuserapi.php:89 pnuserapi.php:129
 #: pnuserapi.php:173 pnuserapi.php:242 pnuserapi.php:304 pnuserapi.php:347
-#: pnuserapi.php:446 pnuserapi.php:471 pnuserapi.php:497 pnuserapi.php:546
-#: pnuserapi.php:600 pnuserapi.php:640 pnadminapi.php:83 pnadminapi.php:158
+#: pnuserapi.php:446 pnuserapi.php:472 pnuserapi.php:498 pnuserapi.php:547
+#: pnuserapi.php:601 pnuserapi.php:641 pnadminapi.php:83 pnadminapi.php:158
 #: pnadminapi.php:189 pnadminapi.php:231 pnadminapi.php:256 pnadminapi.php:287
 #: pnadminapi.php:326 pnadminapi.php:356 pnadminapi.php:383 pnadminapi.php:432
 #: pnadminapi.php:482 pnadminapi.php:526 pnadminapi.php:559 pnadminapi.php:623
@@ -129,77 +129,77 @@ msgstr ""
 msgid "User link modification requests was ignored"
 msgstr ""
 
-#: pnadmin.php:790
+#: pnadmin.php:795
 msgid "Configuration updated"
 msgstr ""
 
-#: pnadmin.php:853 pnadmin.php:902
+#: pnadmin.php:858 pnadmin.php:907
 msgid "Weblinks migration: Not Admin"
 msgstr ""
 
-#: pnadmin.php:857
+#: pnadmin.php:862
 msgid "Ratings not available"
 msgstr ""
 
-#: pnadmin.php:874
+#: pnadmin.php:879
 msgid "Error inserting votes in ratings table."
 msgstr ""
 
-#: pnadmin.php:877
+#: pnadmin.php:882
 #, php-format
 msgid "migrated: %s votes from Weblinks to Ratings"
 msgstr ""
 
-#: pnadmin.php:906
+#: pnadmin.php:911
 msgid "EZComments not available"
 msgstr ""
 
-#: pnadmin.php:921
+#: pnadmin.php:926
 msgid "anonymous user"
 msgstr ""
 
-#: pnadmin.php:933
+#: pnadmin.php:938
 msgid "Error inserting comments in ezcomments table."
 msgstr ""
 
-#: pnadmin.php:936
+#: pnadmin.php:941
 #, php-format
 msgid "migrated: %s comments from Weblinks to EZComments"
 msgstr ""
 
-#: pnadmin.php:972
+#: pnadmin.php:977
 msgid "Error inserting CmodsWebLinks categories in Weblinks categories table."
 msgstr ""
 
-#: pnadmin.php:977
+#: pnadmin.php:982
 #, php-format
 msgid "migrated: %s categories from CmodsWebLinks to Weblinks"
 msgstr ""
 
-#: pnadmin.php:998
+#: pnadmin.php:1003
 msgid "Error inserting CmodsWebLinks links in Weblinks links table."
 msgstr ""
 
-#: pnadmin.php:1003
+#: pnadmin.php:1008
 #, php-format
 msgid "migrated: %s links from CmodsWebLinks to Weblinks"
 msgstr ""
 
-#: pnadmin.php:1020
+#: pnadmin.php:1025
 msgid ""
 "Error inserting CmodsWebLinks modrequests in Weblinks modrequests table."
 msgstr ""
 
-#: pnadmin.php:1023
+#: pnadmin.php:1028
 #, php-format
 msgid "migrated: %s modrequests from CmodsWebLinks to Weblinks"
 msgstr ""
 
-#: pnadmin.php:1039
+#: pnadmin.php:1044
 msgid "Error inserting CmodsWebLinks newlinks in Weblinks newlinks table."
 msgstr ""
 
-#: pnadmin.php:1042
+#: pnadmin.php:1047
 #, php-format
 msgid "migrated: %s newlinks from CmodsWebLinks to Weblinks"
 msgstr ""
@@ -315,32 +315,32 @@ msgstr ""
 msgid "Sorry! There is no such link"
 msgstr ""
 
-#: pnuserapi.php:520
+#: pnuserapi.php:521
 msgid "Sorry! This URL is already listed in the database!"
 msgstr ""
 
-#: pnuserapi.php:524
+#: pnuserapi.php:525
 msgid "Sorry! Error! You must type a URL for the web link!"
 msgstr ""
 
-#: pnuserapi.php:528
+#: pnuserapi.php:529
 msgid "Sorry! Error! You must type a title for the URL!"
 msgstr ""
 
-#: pnuserapi.php:532
+#: pnuserapi.php:533
 msgid "Sorry! Error! No category!"
 msgstr ""
 
-#: pnuserapi.php:536
+#: pnuserapi.php:537
 msgid "Sorry! Error! You must type a description for the URL!"
 msgstr ""
 
-#: pnuserapi.php:550
+#: pnuserapi.php:551
 msgid ""
 "You didn't enter an e-mail address. However, your link will still be checked."
 msgstr ""
 
-#: pnuserapi.php:552
+#: pnuserapi.php:553
 msgid "Thank you! You'll receive an e-mail message when it's approved."
 msgstr ""
 
@@ -388,7 +388,7 @@ msgid "Links administer"
 msgstr ""
 
 #: pnadminapi.php:32 pntemplates/weblinks_admin_getconfig.html:4
-#: pntemplates/weblinks_admin_getconfig.html:139
+#: pntemplates/weblinks_admin_getconfig.html:148
 msgid "Modify configuration"
 msgstr ""
 
@@ -409,7 +409,7 @@ msgstr ""
 msgid "ERROR: The category isn't added."
 msgstr ""
 
-#: pninit.php:21 pninit.php:150
+#: pninit.php:21 pninit.php:151
 msgid ""
 "Error! This version of the Weblinks module requires Zikula 1.2.0 or later. "
 "Installation has been stopped because this requirement is not met."
@@ -583,7 +583,7 @@ msgstr ""
 #: pntemplates/weblinks_user_brokenlink.html:20
 #: pntemplates/weblinks_admin_suredelcategory.html:19
 #: pntemplates/weblinks_admin_modcategory.html:25
-#: pntemplates/weblinks_admin_getconfig.html:140
+#: pntemplates/weblinks_admin_getconfig.html:149
 #: pntemplates/weblinks_user_addlink.html:40
 #: pntemplates/weblinks_user_modifylinkrequest.html:32
 #: pntemplates/weblinks_user_searchresults.html:50
@@ -817,6 +817,7 @@ msgstr ""
 #: pntemplates/weblinks_admin_getconfig.html:113
 #: pntemplates/weblinks_admin_getconfig.html:122
 #: pntemplates/weblinks_admin_getconfig.html:131
+#: pntemplates/weblinks_admin_getconfig.html:140
 msgid "yes"
 msgstr ""
 
@@ -826,6 +827,7 @@ msgstr ""
 #: pntemplates/weblinks_admin_getconfig.html:115
 #: pntemplates/weblinks_admin_getconfig.html:124
 #: pntemplates/weblinks_admin_getconfig.html:133
+#: pntemplates/weblinks_admin_getconfig.html:142
 msgid "no"
 msgstr ""
 
@@ -852,10 +854,14 @@ msgid "Allow multiple use of an URL?"
 msgstr ""
 
 #: pntemplates/weblinks_admin_getconfig.html:119
-msgid "Allow unregistered users to suggest link changes?"
+msgid "Allow unregistered users to suggest broken links?"
 msgstr ""
 
 #: pntemplates/weblinks_admin_getconfig.html:128
+msgid "Allow unregistered users to suggest link changes?"
+msgstr ""
+
+#: pntemplates/weblinks_admin_getconfig.html:137
 msgid "Allow unregistered users to post new links?"
 msgstr ""
 
