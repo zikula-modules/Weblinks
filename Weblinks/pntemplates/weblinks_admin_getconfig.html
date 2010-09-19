@@ -116,6 +116,15 @@
         </div>
       </div>
       <div class="z-formrow">
+        <label for="weblinks_settings_unregbroken"><!--[gt text="Allow unregistered users to suggest broken links?"]--></label>
+        <div id="weblinks_settings_unregbroken">
+          <input id="weblinks_settings_unregbroken_yes" type="radio" name="config[unregbroken]" value="1"<!--[if $config.unregbroken eq '1']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_unregbroken_yes"><!--[gt text="yes"]--></label>
+          <input id="weblinks_settings_unregbroken_no" type="radio" name="config[unregbroken]" value="0"<!--[if $config.unregbroken eq '0']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_settings_unregbroken_no"><!--[gt text="no"]--></label>
+        </div>
+      </div>
+      <div class="z-formrow">
         <label for="weblinks_settings_blockunregmodify"><!--[gt text="Allow unregistered users to suggest link changes?"]--></label>
         <div id="weblinks_settings_blockunregmodify">
           <input id="weblinks_settings_blockunregmodify_yes" type="radio" name="config[blockunregmodify]" value="1"<!--[if $config.blockunregmodify eq '1']--> checked="checked"<!--[/if]--> />

@@ -344,7 +344,8 @@ function Weblinks_user_brokenlink() // ready
     $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
 
     // Security check
-    if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
+    if (!pnModGetVar('Weblinks', 'unregbroken') == 1 &&
+        !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
 
@@ -376,10 +377,11 @@ function Weblinks_user_brokenlinks() // ready
     $submitter = FormUtil::getPassedValue('submitter', null, 'POST');
 
     // Security check
-    if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
+    if (!pnModGetVar('Weblinks', 'unregbroken') == 1 &&
+        !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
-
+    
     // Confirm authorisation code
     if (!SecurityUtil::confirmAuthKey()) {
         return LogUtil::registerAuthidError (pnModURL('Weblinks', 'user', 'view'));
@@ -408,7 +410,6 @@ function Weblinks_user_modifylinkrequest() // ready
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
-
 
     // get link vars
     $link = pnModAPIFunc('Weblinks', 'user', 'link', array('lid' => $lid));

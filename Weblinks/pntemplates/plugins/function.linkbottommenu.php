@@ -26,7 +26,7 @@ function smarty_function_linkbottommenu($params, &$smarty)
         $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'modifylinkrequest', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Modify', $dom))."</a>&nbsp;|&nbsp;";
     }
 
-    if (SecurityUtil::checkPermission('Weblinks::Category', "::$params[cid]", ACCESS_COMMENT)) {
+    if (pnModGetVar('Weblinks', 'unregbroken') == 1 || SecurityUtil::checkPermission('Weblinks::Category', "::$params[cid]", ACCESS_COMMENT)) {
         $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'brokenlink', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Report broken link', $dom))."</a>&nbsp;|&nbsp;";
     }
 

@@ -462,7 +462,8 @@ function Weblinks_userapi_addbrockenlink($args) // ready
     }
 
     // Security check
-    if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
+    if (!pnModGetVar('Weblinks', 'unregbroken') == 1 &&
+        !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
 

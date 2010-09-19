@@ -57,6 +57,7 @@ function Weblinks_init()
                      'featurebox' => 1,
                      'targetblank' => 0,
                      'doubleurl' => 0,
+                     'unregbroken' => 0,
                      'blockunregmodify' => 0,
                      'links_anonaddlinklock' => 0);
 
@@ -152,6 +153,7 @@ function Weblinks_upgrade($oldversion)
         }
         
         pnModSetVar('Weblinks', 'doubleurl', 0);
+        pnModSetVar('Weblinks', 'unregbroken', 0);
         
         // remove obsolete module vars
         pnModDelVar('Weblinks', 'toplinks');

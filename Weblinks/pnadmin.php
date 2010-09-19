@@ -775,7 +775,12 @@ function Weblinks_admin_updateconfig() // ready
         $config['doubleurl'] = 0;
     }
     pnModSetVar('Weblinks', 'doubleurl', $config['doubleurl']);
-    
+        
+    if ( !isset($config['unregbroken']) || !is_numeric($config['unregbroken']) ) {
+        $config['unregbroken'] = 0;
+    }
+    pnModSetVar('Weblinks', 'unregbroken', $config['unregbroken']);
+        
     if ( !isset($config['blockunregmodify']) || !is_numeric($config['blockunregmodify']) ) {
         $config['blockunregmodify'] = 0;
     }
