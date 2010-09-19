@@ -404,7 +404,7 @@ function Weblinks_user_modifylinkrequest() // ready
     $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 0 &&
+    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 1 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
@@ -441,7 +441,7 @@ function Weblinks_user_modifylinkrequests() // ready
     $modlink = FormUtil::getPassedValue('modlink', array(), 'POST');
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 0 &&
+    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 1 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
@@ -471,7 +471,7 @@ function Weblinks_user_modifylinkrequests() // ready
 function Weblinks_user_addlink() // ready
 {
     // Security check
-    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 0 &&
+    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 1 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
             $addlink = false;
     } else {
@@ -502,7 +502,7 @@ function Weblinks_user_add() // ready
     $newlink = FormUtil::getPassedValue('newlink', array(), 'POST');
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 0 &&
+    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 1 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }

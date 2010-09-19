@@ -782,7 +782,7 @@ function Weblinks_admin_updateconfig() // ready
     pnModSetVar('Weblinks', 'blockunregmodify', $config['blockunregmodify']);
         
     if ( !isset($config['links_anonaddlinklock']) || !is_numeric($config['links_anonaddlinklock']) ) {
-        $config['links_anonaddlinklock'] = 1;
+        $config['links_anonaddlinklock'] = 0;
     }
     pnModSetVar('Weblinks', 'links_anonaddlinklock', $config['links_anonaddlinklock']);
 

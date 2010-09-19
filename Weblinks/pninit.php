@@ -58,7 +58,7 @@ function Weblinks_init()
                      'targetblank' => 0,
                      'doubleurl' => 0,
                      'blockunregmodify' => 0,
-                     'links_anonaddlinklock' => 1);
+                     'links_anonaddlinklock' => 0);
 
     // set up module variables
     pnModSetVars('Weblinks', $modvars);
@@ -94,7 +94,7 @@ function Weblinks_upgrade($oldversion)
                      'featurebox' => 1,
                      'targetblank' => 0,
                      'blockunregmodify' => 0,
-                     'links_anonaddlinklock' => 1);
+                     'links_anonaddlinklock' => 0);
 
         // set up module variables
         pnModSetVars('Weblinks', $modvars);

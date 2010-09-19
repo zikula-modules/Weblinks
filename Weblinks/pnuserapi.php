@@ -487,7 +487,8 @@ function Weblinks_userapi_modifylinkrequest($args) // ready
     }
 
     // Security check
-    if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
+    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 1 &&
+        !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
 
@@ -507,7 +508,7 @@ function Weblinks_userapi_add($args) // ready
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 0 &&
+    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 1 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
