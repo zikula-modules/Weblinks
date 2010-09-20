@@ -23,7 +23,7 @@ function smarty_function_newlinkgraphic($params, &$smarty)
     $count = 0;
 
     while ($count <= 7) {
-        $daysold = ml_ftime('%d-%m-%Y', $startdate);
+        $daysold = DateUtil::getDatetime($startdate, '%d-%m-%Y');
 
         if ("$daysold" == "$datenow") {
             if ($count<=1) {

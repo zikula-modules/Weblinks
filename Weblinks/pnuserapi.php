@@ -376,7 +376,7 @@ function Weblinks_userapi_random($args) // ready
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
     $num = (isset($args['num']) && is_numeric($args['num'])) ? $args['num'] : 1;
-    
+
     // define the permission filter to apply
     $permFilter = array();
     $permFilter[] = array('realm'            => 0,
@@ -398,7 +398,7 @@ function Weblinks_userapi_random($args) // ready
     }
 
     $links = array_rand($lidarray, $num);
-   
+
     if ($num > 1) {
         $lid = array();
         foreach ($links as $link) {
@@ -618,7 +618,7 @@ function Weblinks_userapi_lastweblinks($args) // ready
     $lastweblinks = DBUtil::selectObjectArray('links_links', '', $orderby, '-1', $args['lastlinks'], '', $permFilter);
 
     // check for db error
-    if ($lasweblinks === false) {
+    if ($lastweblinks === false) {
         return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
 
