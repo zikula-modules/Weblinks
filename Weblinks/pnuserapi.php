@@ -550,7 +550,7 @@ function Weblinks_userapi_add($args) // ready
         $link['text'] = __('Sorry! Error! You must type a title for the URL!', $dom);
         $link['submit'] = 0;
         return $link;
-    } else if (empty($args['cid']) || !is_numeric($args['cid'])) {
+    } else if (empty($args['cat']) || !is_numeric($args['cat'])) {
         $link['text'] =__('Sorry! Error! No category!', $dom);
         $link['submit'] = 0;
         return $link;
@@ -563,7 +563,7 @@ function Weblinks_userapi_add($args) // ready
             $link['submitter'] = pnConfigGetVar("anonymous");
         }
 
-        $items = array('cat_id' => $args['cid'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'name' => $args['submitter'], 'email' => $args['submitteremail'], 'submitter' => $args['submitter']);
+        $items = array('cat_id' => $args['cat'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'name' => $args['submitter'], 'email' => $args['submitteremail'], 'submitter' => $args['submitter']);
         if (!DBUtil::insertObject($items, 'links_newlink', 'lid')) {
             return LogUtil::registerError(__('Error! Could not load items.', $dom));
         }

@@ -516,7 +516,7 @@ function Weblinks_user_add() // ready
     // write the link to db and get a status message back
     $link = pnModAPIFunc('Weblinks', 'user', 'add', array('title' => $newlink['title'],
                                                           'url' => $newlink['url'],
-                                                          'cid' => $newlink['cid'],
+                                                          'cat' => $newlink['cat'],
                                                           'description' => $newlink['description'],
                                                           'submitter' => $newlink['submitter'],
                                                           'submitteremail' => $newlink['submitteremail']));

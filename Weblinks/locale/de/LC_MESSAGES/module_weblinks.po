@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-20 19:12+0000\n"
-"PO-Revision-Date: 2010-09-20 20:29+0100\n"
+"PO-Revision-Date: 2010-09-20 21:48+0100\n"
 "Last-Translator: Petzi-Juist <mail@petzi-juist.de>\n"
 "Language-Team: Petzi_Juist <mail@petzi-juist.de>\n"
 "MIME-Version: 1.0\n"
@@ -374,7 +374,7 @@ msgstr "Keine E-Mail-Adresse angegeben - der Link wird trotzdem geprüft."
 
 #: pnuserapi.php:574
 msgid "Thank you! You'll receive an e-mail message when it's approved."
-msgstr "Vielen Dank! Sie erhalten eine E-Mail Nachricht, wenn der Link aufgenommen wurde."
+msgstr "Sie erhalten eine E-Mail Nachricht, wenn der Link aufgenommen wurde."
 
 #: pnblocks/lastweblinks.php:32
 msgid "Latest Weblinks"

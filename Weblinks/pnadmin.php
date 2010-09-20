@@ -295,14 +295,14 @@ function Weblinks_admin_addlink() // ready
         }
 */
         // add link to db
-        $addlink = pnModAPIFunc('Weblinks', 'admin', 'addlink', array('cid' => $link['cat'],
-                                                                       'title' => $link['title'],
-                                                                       'url' => $link['url'],
-                                                                       'description' => $link['description'],
-                                                                       'date' => DateUtil::getDatetime(),
-                                                                       'name' => $link['name'],
-                                                                       'email' => $link['email'],
-                                                                       'submitter' => $link['submitter']));
+        $addlink = pnModAPIFunc('Weblinks', 'admin', 'addlink', array('cat' => $link['cat'],
+                                                                      'title' => $link['title'],
+                                                                      'url' => $link['url'],
+                                                                      'description' => $link['description'],
+                                                                      'date' => DateUtil::getDatetime(),
+                                                                      'name' => $link['name'],
+                                                                      'email' => $link['email'],
+                                                                      'submitter' => $link['submitter']));
 
         // Statusmessage if true or false
         if ($addlink == true) {

@@ -242,7 +242,7 @@ function Weblinks_adminapi_addlink($args) // ready
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
     // Argument check
-    if (!isset($args['cid']) || !isset($args['title']) || !isset($args['url']) || !isset($args['date'])) {
+    if (!isset($args['cat']) || !isset($args['title']) || !isset($args['url']) || !isset($args['date'])) {
         return LogUtil::registerArgsError();
     }
 
@@ -251,7 +251,7 @@ function Weblinks_adminapi_addlink($args) // ready
         return LogUtil::registerPermissionError();
     }
 
-    $items = array('cat_id' => $args['cid'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'date' => $args['date'], 'name' => $args['name'], 'email' => $args['email'], 'submitter' => $args['submitter']);
+    $items = array('cat_id' => $args['cat'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'date' => $args['date'], 'name' => $args['name'], 'email' => $args['email'], 'submitter' => $args['submitter']);
     if (!DBUtil::insertObject($items, 'links_links', 'lid')) {
         return LogUtil::registerError(__('Error! Could not load items.', $dom));
     }
