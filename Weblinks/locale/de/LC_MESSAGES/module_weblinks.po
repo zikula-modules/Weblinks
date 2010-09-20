@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-19 13:56+0000\n"
-"PO-Revision-Date: 2010-09-19 15:10+0100\n"
+"POT-Creation-Date: 2010-09-20 19:12+0000\n"
+"PO-Revision-Date: 2010-09-20 20:29+0100\n"
 "Last-Translator: Petzi-Juist <mail@petzi-juist.de>\n"
 "Language-Team: Petzi_Juist <mail@petzi-juist.de>\n"
 "MIME-Version: 1.0\n"
@@ -103,12 +103,12 @@ msgstr "neuer Link in die Datenbank aufgenommen"
 #: pnuserapi.php:242
 #: pnuserapi.php:304
 #: pnuserapi.php:347
-#: pnuserapi.php:446
-#: pnuserapi.php:472
-#: pnuserapi.php:498
-#: pnuserapi.php:547
-#: pnuserapi.php:601
-#: pnuserapi.php:641
+#: pnuserapi.php:467
+#: pnuserapi.php:493
+#: pnuserapi.php:519
+#: pnuserapi.php:568
+#: pnuserapi.php:622
+#: pnuserapi.php:662
 #: pnadminapi.php:83
 #: pnadminapi.php:158
 #: pnadminapi.php:189
@@ -236,6 +236,7 @@ msgstr "migriert: %s auf Freischaltung wartende Links von CmodsWebLinks zu Webli
 #: pnversion.php:20
 #: pnblocks/lastweblinks.php:31
 #: pnblocks/mostpopularweblinks.php:31
+#: pnblocks/randomweblinks.php:31
 #: pntemplates/weblinks_user_header.html:6
 #: pntemplates/weblinks_user_search.html:2
 #: pntemplates/weblinks_user_search.html:3
@@ -343,35 +344,35 @@ msgstr "Kommentar"
 msgid "Comments"
 msgstr "Kommentare"
 
-#: pnuserapi.php:381
+#: pnuserapi.php:397
 msgid "Sorry! There is no such link"
 msgstr "Link existiert nicht..."
 
-#: pnuserapi.php:521
+#: pnuserapi.php:542
 msgid "Sorry! This URL is already listed in the database!"
 msgstr "FEHLER: Die URL ist bereits in der Datenbank!"
 
-#: pnuserapi.php:525
+#: pnuserapi.php:546
 msgid "Sorry! Error! You must type a URL for the web link!"
 msgstr "FEHLER: keine URL für den Link!"
 
-#: pnuserapi.php:529
+#: pnuserapi.php:550
 msgid "Sorry! Error! You must type a title for the URL!"
 msgstr "FEHLER: kein Titel für den Link!"
 
-#: pnuserapi.php:533
+#: pnuserapi.php:554
 msgid "Sorry! Error! No category!"
 msgstr "FEHLER: keine Kategorie!"
 
-#: pnuserapi.php:537
+#: pnuserapi.php:558
 msgid "Sorry! Error! You must type a description for the URL!"
 msgstr "FEHLER: keine Beschreibung für den Link!"
 
-#: pnuserapi.php:551
+#: pnuserapi.php:572
 msgid "You didn't enter an e-mail address. However, your link will still be checked."
 msgstr "Keine E-Mail-Adresse angegeben - der Link wird trotzdem geprüft."
 
-#: pnuserapi.php:553
+#: pnuserapi.php:574
 msgid "Thank you! You'll receive an e-mail message when it's approved."
 msgstr "Vielen Dank! Sie erhalten eine E-Mail Nachricht, wenn der Link aufgenommen wurde."
 
@@ -382,6 +383,10 @@ msgstr "Neuste Weblinks"
 #: pnblocks/mostpopularweblinks.php:32
 msgid "Most Popular Weblinks"
 msgstr "Beliebteste Weblinks"
+
+#: pnblocks/randomweblinks.php:32
+msgid "Random Weblinks"
+msgstr "Zufällige Weblinks"
 
 #: pnuser.php:38
 msgid "No existing categories"
@@ -423,10 +428,9 @@ msgid "Links administer"
 msgstr "Links verwalten"
 
 #: pnadminapi.php:32
-#: pntemplates/weblinks_admin_getconfig.html:4
-#: pntemplates/weblinks_admin_getconfig.html:148
-msgid "Modify configuration"
-msgstr "Konfiguration aktualisieren"
+#: pntemplates/weblinks_admin_getconfig.html:5
+msgid "Configuration"
+msgstr "Konfiguration"
 
 #: pnadminapi.php:33
 #: pntemplates/weblinks_admin_import.html:5
@@ -805,9 +809,10 @@ msgstr "Kategorie hinzufügen"
 msgid "Delete category"
 msgstr "Kategorie löschen"
 
-#: pntemplates/weblinks_admin_getconfig.html:5
-msgid "Configuration"
-msgstr "Konfiguration"
+#: pntemplates/weblinks_admin_getconfig.html:4
+#: pntemplates/weblinks_admin_getconfig.html:148
+msgid "Modify configuration"
+msgstr "Konfiguration aktualisieren"
 
 #: pntemplates/weblinks_admin_getconfig.html:10
 #: pntemplates/weblinks_block_weblinks_modify.html:3
