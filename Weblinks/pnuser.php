@@ -270,7 +270,7 @@ function Weblinks_user_newlinksdate() // ready
     $render = & pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
-    $render->assign('dateview', (date(__('M d, Y', $dom), $selectdate)));
+    $render->assign('dateview', DateUtil::getDatetime($selectdate, 'datebrief'));
     $render->assign('totallinks', $totallinks);
     $render->assign('weblinks', $weblinks);
     $render->assign('tb', pnModGetVar('Weblinks', 'targetblank'));
