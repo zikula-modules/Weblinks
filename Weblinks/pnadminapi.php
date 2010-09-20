@@ -29,7 +29,7 @@ function Weblinks_adminapi_getlinks() // ready
         $links[] = array('url' => pnModURL('Weblinks', 'admin', 'linkview'), 'text' => __('Links administer', $dom));
     }
     if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN)) {
-        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'getconfig'), 'text' => __('Modify configuration', $dom));
+        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'getconfig'), 'text' => __('Configuration', $dom));
         $links[] = array('url' => pnModURL('Weblinks', 'admin', 'import'), 'text' => __('Import', $dom));
     }
     if (SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_EDIT)) {

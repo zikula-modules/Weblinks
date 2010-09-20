@@ -58,6 +58,11 @@ Group | Weblinks::Link | .* | edit / add / delete
 Group | Weblinks:: | .* | admin
 // the group can administrate the Weblinks module with all functions
 
+
+scribite
+Group | scribite:: | Weblinks:: | comment
+// the group can use scribite in Weblinks textareas if they have no comment permissions (ungeristered Users)
+
 // if a group has add permissions and higher, they can see an icon in their user profil to add links
 
 #######################################

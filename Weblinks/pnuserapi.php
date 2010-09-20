@@ -369,22 +369,43 @@ function Weblinks_userapi_countsearchlinks($args) // ready
     return DBUtil::selectObjectCount('links_links', $where);
 }
 /**
- * get a random link
+ * get random links
  */
-function Weblinks_userapi_random() // ready
+function Weblinks_userapi_random($args) // ready
 {
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
-    $numrows = pnModAPIFunc('Weblinks', 'user', 'numrows');
+    $num = (isset($args['num']) && is_numeric($args['num'])) ? $args['num'] : 1;
+    
+    // define the permission filter to apply
+    $permFilter = array();
+    $permFilter[] = array('realm'            => 0,
+                          'component_left'   => 'Weblinks',
+                          'component_middle' => '',
+                          'component_right'  => 'Category',
+                          'instance_left'    => 'title',
+                          'instance_middle'  => '',
+                          'instance_right'   => 'cat_id',
+                          'level'            => ACCESS_READ);
 
-    if ($numrows < 1 ) { // if no data
+    $objArray = DBUtil::selectObjectArray('links_links', '', '', '-1', '-1', '', $permFilter);
+    foreach ($objArray as $link) {
+        $lidarray[] = $link['lid'];
+    }
+
+    if ($lidarray < 1) { // if no link
         return pnVarPrepHTMLDisplay(__('Sorry! There is no such link', $dom));
     }
-    if ($numrows == 1) {
-        $lid = 1;
+
+    $links = array_rand($lidarray, $num);
+   
+    if ($num > 1) {
+        $lid = array();
+        foreach ($links as $link) {
+            $lid[] = array('lid' => $link, 'title' => DBUtil::selectFieldByID('links_links', 'title', $link, 'lid'));
+        }
     } else {
-        srand((double)microtime()*1000000);
-        $lid = rand(1,$numrows);
+        $lid = $links;
     }
 
     return $lid;
