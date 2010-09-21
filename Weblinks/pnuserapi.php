@@ -140,19 +140,17 @@ function Weblinks_userapi_weblinks($args) // ready
 {
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
-    // Argument check
-    if ((!isset($args['cid']) || !is_numeric($args['cid']))) {
-        return LogUtil::registerArgsError();
-    }
-
     $orderbysql = (isset($args['orderbysql'])) ? $args['orderbysql'] : 'titleA';
     $startnum = (isset($args['startnum']) && is_numeric($args['startnum'])) ? $args['startnum'] : 1;
     $numlinks = (isset($args['numlinks']) && is_numeric($args['numlinks'])) ? $args['numlinks'] : -1;
 
-    $pntable = pnDBGetTables();
-    $weblinkscolumn = &$pntable['links_links_column'];
-
-    $where = "WHERE $weblinkscolumn[cat_id] = ".(int)DataUtil::formatForStore($args['cid']);
+    // by rgasch to solve http://code.zikula.org/weblinks/ticket/37
+    $where = "";
+    if (isset($args['cid']) && is_numeric($args['cid']) && $args['cid']) {
+        $pntable = pnDBGetTables();
+        $weblinkscolumn = &$pntable['links_links_column'];
+        $where = "WHERE $weblinkscolumn[cat_id] = ".(int)DataUtil::formatForStore($args['cid']);
+    }
 
     // define the permission filter to apply
     $permFilter = array();
