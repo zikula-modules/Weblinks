@@ -180,8 +180,8 @@ function Weblinks_userapi_weblinks($args) // ready
  */
 function Weblinks_userapi_orderby($args) // ready
 {
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_links_column'];
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_links_column'];
 
     if ($args['orderby'] == "titleA") {
         $orderbysql = "$column[title] ASC";
@@ -257,8 +257,8 @@ function Weblinks_userapi_hitcountinc($args) // ready
 
     $hits = $args['hits'] + 1;
 
-    $pntable =& pnDBGetTables();
-    $weblinkscolumn = &$pntable['links_links_column'];
+    $pntable = pnDBGetTables();
+    $weblinkscolumn = $pntable['links_links_column'];
 
     $items = array('hits' => $hits);
     $where = "WHERE $weblinkscolumn[lid] = ".DataUtil::formatForStore($args['lid']);
@@ -278,8 +278,8 @@ function Weblinks_userapi_searchcats($args) // ready
         return LogUtil::registerArgsError();
     }
 
-    $pntable =& pnDBGetTables();
-    $weblinkscolumn = &$pntable['links_categories_column'];
+    $pntable = pnDBGetTables();
+    $weblinkscolumn = $pntable['links_categories_column'];
 
     $where ="WHERE $weblinkscolumn[title] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
@@ -322,8 +322,8 @@ function Weblinks_userapi_search_weblinks($args) // ready
     $startnum = (isset($args['startnum']) && is_numeric($args['startnum'])) ? $args['startnum'] : 1;
     $numlinks = (isset($args['numlinks']) && is_numeric($args['numlinks'])) ? $args['numlinks'] : -1;
 
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_links_column'];
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_links_column'];
 
     $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
@@ -359,8 +359,8 @@ function Weblinks_userapi_countsearchlinks($args) // ready
         return LogUtil::registerArgsError();
     }
 
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_links_column'];
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_links_column'];
 
     $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
@@ -421,9 +421,9 @@ function Weblinks_userapi_totallinks($args) // ready
 
     $newlinkdb = date("Y-m-d", $args['selectdate']);
 
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_links_column'];
-    $column2 = &$pntable['links_categories_column'];
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_links_column'];
+    $column2 = $pntable['links_categories_column'];
 
     $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
 
@@ -441,9 +441,9 @@ function Weblinks_userapi_weblinksbydate($args) // ready
         return LogUtil::registerArgsError();
     }
 
-    $pntable =& pnDBGetTables();
+    $pntable = pnDBGetTables();
     $newlinkdb = date("Y-m-d", $args['selectdate']);
-    $column = &$pntable['links_links_column'];
+    $column = $pntable['links_links_column'];
     $where = "WHERE $column[date] LIKE '%".DataUtil::formatForStore($newlinkdb)."%'";
 
     // define the permission filter to apply
@@ -597,7 +597,7 @@ function Weblinks_userapi_lastweblinks($args) // ready
     }
 
     $pntable = pnDBGetTables();
-    $weblinkscolumn = &$pntable['links_links_column'];
+    $weblinkscolumn = $pntable['links_links_column'];
 
     $orderby = "ORDER BY $weblinkscolumn[date] DESC";
 
@@ -637,7 +637,7 @@ function Weblinks_userapi_mostpopularweblinks($args) // ready
     }
 
     $pntable = pnDBGetTables();
-    $weblinkscolumn = &$pntable['links_links_column'];
+    $weblinkscolumn = $pntable['links_links_column'];
 
     $orderby = "ORDER BY $weblinkscolumn[hits] DESC";
 

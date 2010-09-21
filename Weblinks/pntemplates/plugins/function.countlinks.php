@@ -15,10 +15,10 @@ function smarty_function_countlinks($params, &$smarty)
     $allmonthlinks = 0;
     while ($counter < $params['days']) {
         $newlinkdayraw = (time()-(86400 * $counter));
-        $newlinkdb = date("Y-m-d", $newlinkdayraw);
-        $pntable =& pnDBGetTables();
-        $column = &$pntable['links_links_column'];
-        $column2 = &$pntable['links_categories_column'];
+        $newlinkdb = DateUtil::transformInternalDate($newlinkdayraw);
+        $pntable = pnDBGetTables();
+        $column = $pntable['links_links_column'];
+        $column2 = $pntable['links_categories_column'];
         $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
         $totallinks = DBUtil::selectObjectCount('links_links', $where);
         if ($totallinks) {

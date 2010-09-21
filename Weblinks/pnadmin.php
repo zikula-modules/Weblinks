@@ -29,7 +29,7 @@ function Weblinks_admin_view() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -54,7 +54,7 @@ function Weblinks_admin_catview() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -117,7 +117,7 @@ function Weblinks_admin_modcategory() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -183,7 +183,7 @@ function Weblinks_admin_suredelcategory() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -234,7 +234,7 @@ function Weblinks_admin_linkview() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -358,7 +358,7 @@ function Weblinks_admin_modlink() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -487,7 +487,7 @@ function Weblinks_admin_validate() // ready
     $links = pnModAPIFunc('Weblinks', 'admin', 'checklinks', array('cid' => $cid));
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -509,7 +509,7 @@ function Weblinks_admin_listbrokenlinks() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -559,9 +559,9 @@ function Weblinks_admin_delbrokenlinks() // ready
  */
 function Weblinks_admin_ignorebrokenlinks() // ready
 {
-     $dom = ZLanguage::getModuleDomain('Weblinks');
+    $dom = ZLanguage::getModuleDomain('Weblinks');
 
-   // get parameters we need
+    // get parameters we need
     $rid = (int)FormUtil::getPassedValue('rid', null, 'REQUEST');
 
     // Security check
@@ -595,7 +595,7 @@ function Weblinks_admin_listmodrequests() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -690,7 +690,7 @@ function Weblinks_admin_getconfig() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -809,7 +809,7 @@ function Weblinks_admin_import() // ready
     }
 
     // create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign various useful template variables
     $render->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
@@ -867,14 +867,14 @@ function Weblinks_admin_importratings() // ready
     $linkscolumn = $pntable['links_links_column'];
     $where = "WHERE $linkscolumn[totalvotes] != '0'";
     $votes = DBUtil::selectObjectArray('links_links', $where);
-    $counter=0;
+    $counter = 0;
     $ratingtype = pnModGetVar('Ratings', 'defaultstyle');
     foreach ($votes as $v) {
-        $obj = array ('module'    =>    'Weblinks',
-                      'itemid'     =>    $v['lid'],
-                      'ratingtype' =>    $ratingtype,
-                      'rating'     =>    ceil($v['linkratingsummary']*10),
-                      'numratings' =>    $v['totalvotes']);
+        $obj = array ('module'     =>  'Weblinks',
+                      'itemid'     =>  $v['lid'],
+                      'ratingtype' =>  $ratingtype,
+                      'rating'     =>  ceil($v['linkratingsummary']*10),
+                      'numratings' =>  $v['totalvotes']);
 
         if (!DBUtil::insertObject($obj, 'ratings')) return LogUtil::registerError(__('Error inserting votes in ratings table.', $dom));
         $counter++;
@@ -916,7 +916,7 @@ function Weblinks_admin_importezcomments() // ready
     $linkscolumn = $pntable['links_votedata_column'];
     $where = "WHERE $linkscolumn[ratingcomments] != ''";
     $comments = DBUtil::selectObjectArray('links_votedata', $where);
-    $counter=0;
+    $counter = 0;
 
     foreach ($comments as $c) {
         $linkscolumn = $pntable['links_links_column'];
@@ -965,7 +965,7 @@ function Weblinks_admin_importcmodsweblinks() // ready
     $pntable = pnDBGetTables();
 
     // import categories
-    $table = &$pntable['cmodsweblinks_categories'];
+    $table = $pntable['cmodsweblinks_categories'];
     $sql = "SELECT * FROM $table";
     $categories = DBUtil::selectObjectArraySQL($sql, 'cmodsweblinks_categories');
 //     $categories = DBUtil::selectObjectArray('cmodsweblinks_categories', '', 'cat_id', '-1', '-1');
@@ -982,7 +982,7 @@ function Weblinks_admin_importcmodsweblinks() // ready
     LogUtil::registerStatus(__f('migrated: %s categories from CmodsWebLinks to Weblinks', $counter, $dom));    
 
     // import links
-    $table = &$pntable['cmodsweblinks_links'];
+    $table = $pntable['cmodsweblinks_links'];
     $sql = "SELECT * FROM $table";
     $links = DBUtil::selectObjectArraySQL($sql, 'cmodsweblinks_links');
 //    $links = DBUtil::selectObjectArray('cmodsweblinks_links', '', 'lid', '-1', '-1');
@@ -1028,7 +1028,7 @@ function Weblinks_admin_importcmodsweblinks() // ready
     LogUtil::registerStatus(__f('migrated: %s modrequests from CmodsWebLinks to Weblinks', $counter, $dom)); 
 
     // import newlinks
-    $table = &$pntable['cmodsweblinks_newlink'];
+    $table = $pntable['cmodsweblinks_newlink'];
     $sql = "SELECT * FROM $table";
     $newlinks = DBUtil::selectObjectArraySQL($sql, 'cmodsweblinks_newlink');
 //    $newlinks = DBUtil::selectObjectArray('cmodsweblinks_newlink', '', 'lid', '-1', '-1');

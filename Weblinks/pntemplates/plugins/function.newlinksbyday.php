@@ -21,11 +21,11 @@ function smarty_function_newlinksbyday($params, &$smarty)
 
     while ($counter < $params['newlinkshowdays']) {
         $newlinkdayraw = (time()-(86400 * $counter));
-        $newlinkview = date(__('M d, Y', $dom), $newlinkdayraw);
-        $newlinkdb = date("Y-m-d", $newlinkdayraw);
-        $pntable =& pnDBGetTables();
-        $column = &$pntable['links_links_column'];
-        $column2 = &$pntable['links_categories_column'];
+        $newlinkview = DateUtil::getDatetime($newlinkdayraw, 'datebrief');
+        $newlinkdb = DateUtil::transformInternalDate($newlinkdayraw);
+        $pntable = pnDBGetTables();
+        $column = $pntable['links_links_column'];
+        $column2 = $pntable['links_categories_column'];
         $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
         $totallinks = DBUtil::selectObjectCount('links_links', $where);
         $allweeklinks = $allweeklinks + $totallinks;

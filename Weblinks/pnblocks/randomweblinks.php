@@ -92,7 +92,7 @@ function Weblinks_randomweblinksblock_modify($blockinfo)
     }
 
     // Create output object
-    $render = & pnRender::getInstance('Weblinks', false);
+    $render = pnRender::getInstance('Weblinks', false);
 
     // assign the block vars
     $render->assign($vars);
@@ -121,7 +121,7 @@ function Weblinks_randomweblinksblock_update($blockinfo)
     $blockinfo['content'] = pnBlockVarsToContent($vars);
 
     // clear the block cache
-    $render = & pnRender::getInstance('Weblinks');
+    $render = pnRender::getInstance('Weblinks', false);
     $render->clear_cache('weblinks_block_randomweblinks.html');
 
     return $blockinfo;

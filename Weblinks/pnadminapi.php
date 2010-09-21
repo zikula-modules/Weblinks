@@ -51,8 +51,8 @@ function Weblinks_adminapi_countbrokenlinks() // ready
  */
 function Weblinks_adminapi_countmodrequests() // ready
 {
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_modrequest_column'];
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_modrequest_column'];
     $where = "WHERE $column[brokenlink] = '0'";
     return DBUtil::selectObjectCount('links_modrequest', $where);
 }
@@ -106,8 +106,8 @@ function Weblinks_adminapi_addcategory($args) // ready
 
     $checktitle = DBUtil::selectObjectCountByID('links_categories', $args['title'], 'title', 'lower');
     if ($checktitle) {
-        $pntable =& pnDBGetTables();
-        $column = &$pntable['links_categories_column'];
+        $pntable = pnDBGetTables();
+        $column = $pntable['links_categories_column'];
         $where = "WHERE $column[parent_id] = '".(int)DataUtil::formatForStore($args['pid'])."' AND $column[title] = '".DataUtil::formatForStore($args['title'])."'";
         if (DBUtil::selectObjectCount('links_categories', $where)) {
             return LogUtil::registerError(__('ERROR: The category title exists on this level.', $dom));
@@ -181,8 +181,8 @@ function Weblinks_adminapi_updatecategory($args) // ready
         return LogUtil::registerPermissionError();
     }
 
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_categories_column'];
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_categories_column'];
     $items = array('title' => $args['title'], 'parent_id' => $args['pid'], 'cdescription' => $args['cdescription']);
     $where = "WHERE $column[cat_id]='".(int)DataUtil::formatForStore($args['cid'])."'";
     if (!DBUtil::updateObject($items, 'links_categories', $where, 'cat_id')) {
@@ -209,17 +209,17 @@ function Weblinks_adminapi_delcategory($args) // ready
         return LogUtil::registerPermissionError();
     }
 
-    $pntable =& pnDBGetTables();
+    $pntable = pnDBGetTables();
 
     // delete links
-    $linkcolumn = &$pntable['links_links_column'];
+    $linkcolumn = $pntable['links_links_column'];
     $where = "WHERE $linkcolumn[cat_id] = '".(int)DataUtil::formatForStore($args['cid'])."'";
     if (!DBUtil::deleteWhere('links_links', $where)) {
         return false;
     }
 
     // delete subcategories
-    $catcolumn = &$pntable['links_categories_column'];
+    $catcolumn = $pntable['links_categories_column'];
     $where = "WHERE '".(int)DataUtil::formatForStore($args['cid'])."' = $catcolumn[parent_id]";
     if (!DBUtil::deleteWhere('links_categories', $where)) {
         return false;
@@ -348,8 +348,8 @@ function Weblinks_adminapi_updatelink($args) // ready
         return LogUtil::registerPermissionError();
     }
 
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_links_column'];
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_links_column'];
     $items = array('cat_id' => $args['cid'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'name' => $args['name'], 'email' => $args['email'], 'hits' => $args['hits']);
     $where = "WHERE $column[lid]='".(int)DataUtil::formatForStore($args['lid'])."'";
     if (!DBUtil::updateObject($items, 'links_links', $where, 'lid')) {
@@ -408,8 +408,8 @@ function Weblinks_adminapi_checklinks($args) // ready
 
     // Check Categories
     if ($args['cid'] != 0) {
-        $pntable =& pnDBGetTables();
-        $column = &$pntable['links_links_column'];
+        $pntable = pnDBGetTables();
+        $column = $pntable['links_links_column'];
         $where = "WHERE $column[cat_id]='".(int)DataUtil::formatForStore($args['cid'])."'";
     }
 
@@ -459,9 +459,9 @@ function Weblinks_adminapi_brokenlinks() // ready
 {
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_modrequest_column'];
-    $where = "WHERE $column[brokenlink]='1'";
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_modrequest_column'];
+    $where = "WHERE $column[brokenlink] = '1'";
 
     // define the permission filter to apply
     $permFilter = array();
@@ -536,9 +536,9 @@ function Weblinks_adminapi_modrequests() // ready
 {
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_modrequest_column'];
-    $where = "WHERE $column[brokenlink]='0'";
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_modrequest_column'];
+    $where = "WHERE $column[brokenlink] = '0'";
 
     // define the permission filter to apply
     $permFilter = array();
@@ -645,8 +645,8 @@ function Weblinks_adminapi_updatemodlink($args) // ready
         return LogUtil::registerPermissionError();
     }
 
-    $pntable =& pnDBGetTables();
-    $column = &$pntable['links_links_column'];
+    $pntable = pnDBGetTables();
+    $column = $pntable['links_links_column'];
     $items = array('cat_id' => $args['cid'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description']);
     $where = "WHERE $column[lid]='".(int)DataUtil::formatForStore($args['lid'])."'";
     if (!DBUtil::updateObject($items, 'links_links', $where, 'lid')) {

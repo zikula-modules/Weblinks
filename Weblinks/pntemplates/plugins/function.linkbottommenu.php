@@ -41,8 +41,8 @@ function smarty_function_linkbottommenu($params, &$smarty)
             $ezcommentscounter = count($items);
 
             $linkbottommenu .= "|&nbsp;<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'viewlinkdetails', array('lid' => (int)$params['lid'])))."\">";
-            if ($ezcommentscounter=="0") $linkbottommenu .= DataUtil::formatForDisplay(__('Add a comment', $dom))."</a>";
-            elseif ($ezcommentscounter=="1") $linkbottommenu .= "1 ".DataUtil::formatForDisplay(__('Comment', $dom))."</a>";
+            if ($ezcommentscounter == "0") $linkbottommenu .= DataUtil::formatForDisplay(__('Add a comment', $dom))."</a>";
+            elseif ($ezcommentscounter == "1") $linkbottommenu .= "1 ".DataUtil::formatForDisplay(__('Comment', $dom))."</a>";
             else $linkbottommenu .= "$ezcommentscounter ".DataUtil::formatForDisplay(__('Comments', $dom))."</a>";
         }
     }

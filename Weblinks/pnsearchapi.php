@@ -26,8 +26,8 @@ function Weblinks_searchapi_options($args)
     if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ)) {
         // Create output object - this object will store all of our output so that
         // we can return it easily when required
-        $render = & pnRender::getInstance('Weblinks', false);
-        $render->assign('active',(isset($args['active'])&&isset($args['active']['Weblinks']))||(!isset($args['active'])));
+        $render = pnRender::getInstance('Weblinks', false);
+        $render->assign('active',(isset($args['active']) && isset($args['active']['Weblinks'])) || (!isset($args['active'])));
         return $render->fetch('weblinks_search_options.htm');
     }
 
@@ -110,7 +110,7 @@ function Weblinks_searchapi_search($args)
  */
 function Weblinks_searchapi_search_check(&$args)
 {
-    $datarow = &$args['datarow'];
+    $datarow = $args['datarow'];
     $linkId = $datarow['extra'];
 
     $datarow['url'] = pnModUrl('Weblinks', 'user', 'visit', array('lid' => $linkId));
