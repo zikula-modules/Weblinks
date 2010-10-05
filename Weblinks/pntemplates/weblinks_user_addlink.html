@@ -9,31 +9,35 @@
     <dd><!--[gt text="Your user name and IP are recorded, so please don't abuse the system."]--></dd>
   </dl>
 
-  <form class="wl-form" action="<!--[pnmodurl modname="Weblinks" type="user" func="add"]-->" method="post" enctype="application/x-www-form-urlencoded">
+  <form class="z-form" action="<!--[pnmodurl modname="Weblinks" type="user" func="add"]-->" method="post" enctype="application/x-www-form-urlencoded">
     <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
     <fieldset>
       <legend><!--[gt text="Add a new link"]--></legend>
 
-      <dl class="z-clearfix">
-        <dt><label for="title"><!--[gt text="Sitetitle"]-->:</label></dt>
-        <dd><input id="title" type="text" name="newlink[title]" size="50" maxlength="100" /></dd>
-
-        <dt><label for="url"><!--[gt text="Page URL"]-->:</label></dt>
-        <dd><input id="url" type="text" name="newlink[url]" size="75" maxlength="254" value="http://" /></dd>
-
-        <dt><label for="cat"><!--[gt text="Category"]-->:</label></dt>
-        <dd><select id="cat" name="newlink[cat]"><!--[catlist scat=0 sel=0]--></select></dd>
-
-        <dt><label for="description"><!--[gt text="Description (255 characters max)"]-->:</label></dt>
-        <dd><textarea id="description" name="newlink[description]" cols="65" rows="10"></textarea></dd>
-
-        <dt><label for="nname"><!--[gt text="Your name"]-->:</label></dt>
-        <dd><input id="nname" type="text" name="newlink[submitter]" size="30" maxlength="60" value="<!--[$submitter]-->" /></dd>
-
-        <dt><label for="email"><!--[gt text="Your e-mail address"]-->:</label></dt>
-        <dd><input id="email" type="text" name="newlink[submitteremail]" size="30" maxlength="60" value="<!--[$submitteremail]-->" /></dd>
-      </dl>
-
+      <div class="z-formrow">
+      <label for="title"><!--[gt text="Sitetitle"]-->:</label>
+      <input id="title" type="text" name="newlink[title]" size="50" maxlength="100" />
+      </div>
+      <div class="z-formrow">
+      <label for="url"><!--[gt text="Page URL"]-->:</label>
+      <input id="url" type="text" name="newlink[url]" size="75" maxlength="254" value="http://" />
+      </div>
+      <div class="z-formrow">
+      <label for="cat"><!--[gt text="Category"]-->:</label>
+      <select id="cat" name="newlink[cat]"><!--[catlist scat=0 sel=0]--></select>
+      </div>
+      <div class="z-formrow">
+      <label for="description"><!--[gt text="Description (255 characters max)"]-->:</label>
+      <textarea id="description" name="newlink[description]" cols="65" rows="10"></textarea>
+      </div>
+      <div class="z-formrow">
+      <label for="nname"><!--[gt text="Your name"]-->:</label>
+      <input id="nname" type="text" name="newlink[submitter]" size="30" maxlength="60" value="<!--[$submitter]-->" />
+      </div>
+      <div class="z-formrow">
+      <label for="email"><!--[gt text="Your e-mail address"]-->:</label>
+      <input id="email" type="text" name="newlink[submitteremail]" size="30" maxlength="60" value="<!--[$submitteremail]-->" />
+      </div>
     </fieldset>
     <div class="z-formbuttons">
       <!--[pnbutton src=button_ok.gif set=icons/small __alt="Add this URL" __title="Add this URL"]-->

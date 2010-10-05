@@ -59,7 +59,10 @@ function Weblinks_init()
                      'doubleurl' => 0,
                      'unregbroken' => 0,
                      'blockunregmodify' => 0,
-                     'links_anonaddlinklock' => 0);
+                     'links_anonaddlinklock' => 0,
+                     'websnapr' = 0,
+                     'websnaprkey' = '',
+                     'websnaprsize' = 'S');
 
     // set up module variables
     pnModSetVars('Weblinks', $modvars);
@@ -154,6 +157,9 @@ function Weblinks_upgrade($oldversion)
         
         pnModSetVar('Weblinks', 'doubleurl', 0);
         pnModSetVar('Weblinks', 'unregbroken', 0);
+        pnModSetVar('Weblinks', 'websnapr', 0);
+        pnModSetVar('Weblinks', 'websnaprkey', '');
+        pnModSetVar('Weblinks', 'websnaprsize', 'S');
         
         // remove obsolete module vars
         pnModDelVar('Weblinks', 'toplinks');

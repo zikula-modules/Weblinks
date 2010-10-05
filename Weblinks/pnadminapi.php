@@ -33,6 +33,7 @@ function Weblinks_adminapi_getlinks() // ready
         $links[] = array('url' => pnModURL('Weblinks', 'admin', 'import'), 'text' => __('Import', $dom));
     }
     if (SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_EDIT)) {
+        $links[] = array('url' => pnModURL('Weblinks', 'admin', 'help'), 'text' => __('Help', $dom));
         $links[] = array('url' => pnModURL('Weblinks', 'user', 'view'), 'text' => __('Link-Index', $dom));
     }
     return $links;

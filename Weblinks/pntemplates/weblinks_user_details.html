@@ -2,27 +2,11 @@
 <!--[include file="weblinks_user_header.html"]-->
 <!--[pnpagesetvar name=title value=$weblink.title]-->
 <div class="wl-borderbox">
-  <h3><!--[gt text="Link profile"]-->: <!--[$weblink.title|pnvarprepfordisplay]--></h3>
-  <p><!--[gt text="Category"]-->: <!--[catpath cid=$weblink.cat_id start=1 links=1 linkmyself=1]--></p>
-
-  <p>
-    <!--[$weblink.description|pnvarprephtmldisplay|pnmodcallhooks:"Weblinks"]-->
-  </p>
-
-  <p><!--[gt text="Added on"]-->: <!--[$weblink.date|pndate_format:"datebrief"]--> | <!--[gt text="Hits"]-->: <!--[$weblink.hits]--></p>
-
-  <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblink.lid module=Weblinks returnurl=$returnurl implode=false]-->
-  <!--[ $hooks.Ratings ]-->
-
-  <p>
-  <!--[linkbottommenu cid=$weblink.cat_id lid=$weblink.lid details=1]-->
-  </p>
-
-  <p>[ <a href="<!--[pnmodurl modname=Weblinks type=user func=visit lid=$weblink.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[gt text="Visit this web site"]--></a> ]</p>
-
-
-  <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblink.lid module=Weblinks returnurl=$returnurl implode=false]-->
-  <!--[ $hooks.EZComments ]-->
-
+  <div class="wl-linkbox">
+  <!--[include file="weblinks_user_linkbox.html"]-->
+  <p>&nbsp;</p>
+  <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblink.lid module=Weblinks implode=false]-->
+  <!--[ $hooks.EZComments ]-->    
+  </div>
 </div>
 <!--[include file="weblinks_user_footer.html"]-->

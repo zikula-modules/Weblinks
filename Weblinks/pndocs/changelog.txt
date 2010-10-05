@@ -5,6 +5,7 @@ Version 2.1.0
 - now it is possible to change the parent of a category
 - import function for CmodsWebLinks
 - allow multiple use of an URL
+- thumbnails with websnapr
 
 Version 2.0.1
 - all db calls changed to DBUtil

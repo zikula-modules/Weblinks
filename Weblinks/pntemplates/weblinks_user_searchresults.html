@@ -28,22 +28,11 @@
     </dd>
   </dl>
   <!--[foreach from=$weblinks item=weblinks]-->
-  <dl class="wl-linkbox">
-    <dt><strong><a href="<!--[pnmodurl modname=Weblinks type=user func=visit lid=$weblinks.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a><!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]--></strong></dt>
-    <dd><!--[gt text="Category"]-->: <!--[catpath cid=$weblinks.cat_id start=1 links=1 linkmyself=1]--></dd>
-    <!--[if $weblinks.description]-->
-    <dd><p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Weblinks"]--></p></dd>
-    <!--[/if]-->
-    <dd><!--[gt text="Added on"]-->: <!--[$weblinks.date|pndate_format:"datebrief"]--> | <!--[gt text="Hits"]-->: <!--[$weblinks.hits]--></dd>
-    <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks returnurl=$returnurl implode=false]-->
-    <!--[if $hooks.Ratings]-->
-    <dd><!--[ $hooks.Ratings ]--></dd>
-    <!--[/if]-->
-    <dd>
-    <!--[linkbottommenu cid=$weblinks.cat_id lid=$weblinks.lid]-->
-    </dd>
-  </dl>
+  <div class="wl-linkbox">
+  <!--[include file="weblinks_user_linkbox.html"]-->
+  </div>
   <!--[/foreach]-->
+  
   <!--[pager show="page" rowcount=$wlpager.numlinks limit=$wlpager.itemsperpage posvar=startnum shift=1]-->
 
   <!--[else]-->

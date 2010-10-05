@@ -21,10 +21,10 @@ Regenerate;
 Upgrade.
 
 #######################################
-###            Permissons           ###
+###            Permissions          ###
 #######################################
 
-You have some possibilities to set permissons
+You have some possibilities to set permissions
 
 Users
 

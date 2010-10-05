@@ -144,6 +144,36 @@
       </div>
     </fieldset>
 
+    <fieldset>
+      <legend><!--[gt text="Screenshots with websnapr"]--></legend>
+      <div class="z-informationmsg">
+      <!--[gt text="If you want to use the screenshot function with websnapr, you need a key for your website. Register here:"]--> -&gt; <a href="http://www.websnapr.com"><!--[gt text="www.websnapr.com"]--></a><br />
+      <!--[gt text="You can get 100,000 snapshot impressions for free per month"]-->
+      </div>
+      <div class="z-formrow">
+        <label for="weblinks_screenshot_active"><!--[gt text="Show screenshots with websnaper?"]--></label>
+        <div id="weblinks_screenshot_active">            
+          <input id="weblinks_screenshot_active_yes" type="radio" name="config[websnapr]" value="1"<!--[if $config.websnapr eq '1']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_screenshot_active_yes"><!--[gt text="yes"]--></label>
+          <input id="weblinks_screenshot_active_no" type="radio" name="config[websnapr]" value="0"<!--[if $config.websnapr eq '0']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_screenshot_active_no"><!--[gt text="no"]--></label>
+        </div>
+      </div>        
+      <div class="z-formrow">
+      <label><!--[gt text="websnapr-key:"]--></label>
+      <input type="text" name="config[websnaprkey]" value="<!--[$config.websnaprkey]-->" size="20" />
+      </div>
+      <div class="z-formrow">
+        <label for="weblinks_sreenshot_size"><!--[gt text="Select size of thumb:"]--></label>
+        <div id="weblinks_sreenshot_size">            
+          <input id="weblinks_sreenshot_size_yes" type="radio" name="config[websnaprsize]" value="T"<!--[if $config.websnaprsize eq 'T']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_sreenshot_size_yes"><!--[gt text="T (90x70)"]--></label>
+          <input id="weblinks_sreenshot_size_no" type="radio" name="config[websnaprsize]" value="S"<!--[if $config.websnaprsize eq 'S']--> checked="checked"<!--[/if]--> />
+          <label for="weblinks_sreenshot_size_no"><!--[gt text="S (202x152)"]--></label>
+        </div>
+      </div>   
+    </fieldset>
+    
     <div class="z-formbuttons">
       <!--[pnbutton src=button_ok.gif set=icons/small __alt="Modify configuration" __title="Modify configuration"]-->
       <a href="<!--[pnmodurl modname=Weblinks type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"]--></a>

@@ -21,7 +21,7 @@ function smarty_function_linkbottommenu($params, &$smarty)
     $linkbottommenu = "";
 
     if (SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_EDIT)) {
-        $linkbottommenu = "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'admin', 'modlink', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Edit this link', $dom))."</a>&nbsp;|&nbsp;";
+        $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'admin', 'modlink', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Edit this link', $dom))."</a>&nbsp;|&nbsp;";
     } else if (pnModGetVar('Weblinks', 'blockunregmodify') == 1 || SecurityUtil::checkPermission('Weblinks::Category', "::$params[cid]", ACCESS_COMMENT)) {
         $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'modifylinkrequest', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Modify', $dom))."</a>&nbsp;|&nbsp;";
     }
@@ -30,7 +30,7 @@ function smarty_function_linkbottommenu($params, &$smarty)
         $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'brokenlink', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Report broken link', $dom))."</a>&nbsp;|&nbsp;";
     }
 
-    if (empty($params['details'])) {
+    if (!$params['details']) {
         $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'viewlinkdetails', array('lid' => (int)$params['lid'])))."\">".DataUtil::formatForDisplay(__('Details', $dom))."</a>&nbsp;";
 
         // set default
@@ -47,5 +47,12 @@ function smarty_function_linkbottommenu($params, &$smarty)
         }
     }
 
+    if ($params['details']) {
+        if (pnModGetVar('Weblinks', 'targetblank') == 1) {
+            $target = " target=\"_blank\"";
+        }
+        $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'visit', array('lid' => (int)$params['lid'])))."\" ".$target." title=\"".DataUtil::formatForDisplay(__('Visit this web site', $dom))."\">".DataUtil::formatForDisplay(__('Visit this web site', $dom))."</a>";
+    }
+    
     return $linkbottommenu;
 }
