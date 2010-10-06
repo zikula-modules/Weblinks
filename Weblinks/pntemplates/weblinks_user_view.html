@@ -42,7 +42,7 @@
     <ol class="lastweblinks">
       <!--[foreach from=$blocklast item=weblinks name=loop]-->
       <li>
-        <a href="<!--[pnmodurl modname=Weblinks type=user func=visit lid=$weblinks.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a>
+        <a href="<!--[pnmodurl modname=Weblinks type=user func=visit lid=$weblinks.lid]-->"<!--[if $helper.tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a>
       </li>
       <!--[/foreach]-->
     </ol>
@@ -54,7 +54,7 @@
     <ol class="mostpopularweblinks">
       <!--[foreach from=$blockmostpop item=weblinks name=loop]-->
       <li>
-        <a href="<!--[pnmodurl modname=Weblinks type=user func=visit lid=$weblinks.lid]-->"<!--[if $tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a>
+        <a href="<!--[pnmodurl modname=Weblinks type=user func=visit lid=$weblinks.lid]-->"<!--[if $helper.tb eq 1]--> target="_blank"<!--[/if]-->><!--[$weblinks.title|pnvarprepfordisplay]--></a>
         <em>(<!--[$weblinks.hits|pnvarprepfordisplay]-->)</em>
       </li>
       <!--[/foreach]-->
