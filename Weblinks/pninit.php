@@ -60,9 +60,9 @@ function Weblinks_init()
                      'unregbroken' => 0,
                      'blockunregmodify' => 0,
                      'links_anonaddlinklock' => 0,
-                     'websnapr' = 0,
-                     'websnaprkey' = '',
-                     'websnaprsize' = 'S');
+                     'websnapr' => 0,
+                     'websnaprkey' => '',
+                     'websnaprsize' => 'S');
 
     // set up module variables
     pnModSetVars('Weblinks', $modvars);
