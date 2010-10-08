@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-05 23:18+0000\n"
-"PO-Revision-Date: 2010-10-06 00:50+0100\n"
+"POT-Creation-Date: 2010-10-08 14:06+0000\n"
+"PO-Revision-Date: 2010-10-08 15:22+0100\n"
 "Last-Translator: Petzi-Juist <mail@petzi-juist.de>\n"
 "Language-Team: Petzi-Juist <mail@petzi-juist.de>\n"
 "MIME-Version: 1.0\n"
@@ -66,7 +66,7 @@ msgstr "Link Titel"
 #: pntemplates/weblinks_admin_listmodrequests.html:23
 #: pntemplates/weblinks_admin_linkview.html:22
 #: pntemplates/weblinks_admin_modlink.html:16
-#: pntemplates/weblinks_user_modifylinkrequest.html:19
+#: pntemplates/weblinks_user_modifylinkrequest.html:20
 msgid "URL"
 msgstr "URL"
 
@@ -391,7 +391,7 @@ msgstr "Zufällige Weblinks"
 msgid "No existing categories"
 msgstr "Es existieren keine Kategorien"
 
-#: pnuser.php:124
+#: pnuser.php:122
 msgid "Link don't exist!"
 msgstr "Link existiert nicht!"
 
@@ -561,7 +561,7 @@ msgstr "Besuche"
 #: pntemplates/weblinks_admin_catview.html:58
 #: pntemplates/weblinks_user_addlink.html:26
 #: pntemplates/weblinks_admin_modlink.html:36
-#: pntemplates/weblinks_user_modifylinkrequest.html:22
+#: pntemplates/weblinks_user_modifylinkrequest.html:24
 msgid "Category"
 msgstr "Kategorie"
 
@@ -609,7 +609,7 @@ msgstr "Aus Sicherheitsgründen wird Benutzername und IP-Adresse gespeichert."
 #: pntemplates/weblinks_admin_modcategory.html:25
 #: pntemplates/weblinks_admin_getconfig.html:179
 #: pntemplates/weblinks_user_addlink.html:44
-#: pntemplates/weblinks_user_modifylinkrequest.html:32
+#: pntemplates/weblinks_user_modifylinkrequest.html:35
 #: pntemplates/weblinks_user_searchresults.html:39
 #: pntemplates/weblinks_user_add.html:5
 msgid "Back"
@@ -657,7 +657,7 @@ msgstr "keine Änderungswünsche vorhanden"
 
 #: pntemplates/weblinks_admin_linkview.html:30
 #: pntemplates/weblinks_user_addlink.html:30
-#: pntemplates/weblinks_user_modifylinkrequest.html:25
+#: pntemplates/weblinks_user_modifylinkrequest.html:28
 msgid "Description (255 characters max)"
 msgstr "Beschreibung (255 Zeichen max)"
 
@@ -971,7 +971,8 @@ msgid "Add a new link"
 msgstr "neuen Link hinzufügen"
 
 #: pntemplates/weblinks_user_addlink.html:18
-msgid "Sitetitle"
+#, fuzzy
+msgid "Site Title"
 msgstr "Seitentitel"
 
 #: pntemplates/weblinks_user_addlink.html:22
@@ -1119,7 +1120,7 @@ msgstr "Sorry! Nur registrierte Benutzer können Linkänderungen vorschlagen."
 msgid "Request link modification"
 msgstr "Änderung vorschlagen"
 
-#: pntemplates/weblinks_user_modifylinkrequest.html:31
+#: pntemplates/weblinks_user_modifylinkrequest.html:34
 msgid "Send request"
 msgstr "Anfrage senden"
 

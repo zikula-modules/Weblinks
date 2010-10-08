@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-05 23:18+0000\n"
+"POT-Creation-Date: 2010-10-08 14:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,7 +62,7 @@ msgstr ""
 #: pntemplates/weblinks_admin_listmodrequests.html:23
 #: pntemplates/weblinks_admin_linkview.html:22
 #: pntemplates/weblinks_admin_modlink.html:16
-#: pntemplates/weblinks_user_modifylinkrequest.html:19
+#: pntemplates/weblinks_user_modifylinkrequest.html:20
 msgid "URL"
 msgstr ""
 
@@ -361,7 +361,7 @@ msgstr ""
 msgid "No existing categories"
 msgstr ""
 
-#: pnuser.php:124
+#: pnuser.php:122
 msgid "Link don't exist!"
 msgstr ""
 
@@ -524,7 +524,7 @@ msgstr ""
 #: pntemplates/weblinks_admin_catview.html:58
 #: pntemplates/weblinks_user_addlink.html:26
 #: pntemplates/weblinks_admin_modlink.html:36
-#: pntemplates/weblinks_user_modifylinkrequest.html:22
+#: pntemplates/weblinks_user_modifylinkrequest.html:24
 msgid "Category"
 msgstr ""
 
@@ -574,7 +574,7 @@ msgstr ""
 #: pntemplates/weblinks_admin_modcategory.html:25
 #: pntemplates/weblinks_admin_getconfig.html:179
 #: pntemplates/weblinks_user_addlink.html:44
-#: pntemplates/weblinks_user_modifylinkrequest.html:32
+#: pntemplates/weblinks_user_modifylinkrequest.html:35
 #: pntemplates/weblinks_user_searchresults.html:39
 #: pntemplates/weblinks_user_add.html:5
 msgid "Back"
@@ -622,7 +622,7 @@ msgstr ""
 
 #: pntemplates/weblinks_admin_linkview.html:30
 #: pntemplates/weblinks_user_addlink.html:30
-#: pntemplates/weblinks_user_modifylinkrequest.html:25
+#: pntemplates/weblinks_user_modifylinkrequest.html:28
 msgid "Description (255 characters max)"
 msgstr ""
 
@@ -944,7 +944,7 @@ msgid "Add a new link"
 msgstr ""
 
 #: pntemplates/weblinks_user_addlink.html:18
-msgid "Sitetitle"
+msgid "Site Title"
 msgstr ""
 
 #: pntemplates/weblinks_user_addlink.html:22
@@ -1106,7 +1106,7 @@ msgstr ""
 msgid "Request link modification"
 msgstr ""
 
-#: pntemplates/weblinks_user_modifylinkrequest.html:31
+#: pntemplates/weblinks_user_modifylinkrequest.html:34
 msgid "Send request"
 msgstr ""
 
