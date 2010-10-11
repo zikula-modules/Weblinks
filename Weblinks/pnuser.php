@@ -92,7 +92,7 @@ function Weblinks_user_category() // ready
     $render->assign('subcategory', $subcategory);
     $render->assign('weblinks', $weblinks);
     $render->assign('helper', array('main' => 0, 'showcat' => 0, 'details' => 0, 'tb' => pnModGetVar('Weblinks', 'targetblank')));
-    if (pnModGetVar('Weblinks', 'websnaprkey') == 1) {
+    if (pnModGetVar('Weblinks', 'websnapr') == 1) {
         $render->assign('websnapr', pnModGetVar('Weblinks', 'websnapr'));
         $render->assign('websnaprkey', pnModGetVar('Weblinks', 'websnaprkey'));
         $render->assign('websnaprsize', pnModGetVar('Weblinks', 'websnaprsize'));
@@ -179,7 +179,7 @@ function Weblinks_user_search() // ready
     $render->assign('helper', array('main' => 0, 'showcat' => 1, 'details' => 0, 'tb' => pnModGetVar('Weblinks', 'targetblank')));
     $render->assign('wlpager', array('numlinks' => pnModAPIFunc('Weblinks', 'user', 'countsearchlinks', array('query' => $query)),
                                      'itemsperpage' => pnModGetVar('Weblinks', 'linksresults')));
-    if (pnModGetVar('Weblinks', 'websnaprkey') == 1) {
+    if (pnModGetVar('Weblinks', 'websnapr') == 1) {
         $render->assign('websnapr', pnModGetVar('Weblinks', 'websnapr'));
         $render->assign('websnaprkey', pnModGetVar('Weblinks', 'websnaprkey'));
         $render->assign('websnaprsize', pnModGetVar('Weblinks', 'websnaprsize'));
@@ -227,7 +227,7 @@ function Weblinks_user_viewlinkdetails() // ready
     // assign various useful template variables
     $render->assign('weblinks', $weblink);
     $render->assign('helper', array('main' => 0, 'showcat' => 1, 'details' => 1, 'tb' => pnModGetVar('Weblinks', 'targetblank')));
-    if (pnModGetVar('Weblinks', 'websnaprkey') == 1) {
+    if (pnModGetVar('Weblinks', 'websnapr') == 1) {
         $render->assign('websnapr', pnModGetVar('Weblinks', 'websnapr'));
         $render->assign('websnaprkey', pnModGetVar('Weblinks', 'websnaprkey'));
         $render->assign('websnaprsize', pnModGetVar('Weblinks', 'websnaprsize'));
@@ -290,7 +290,7 @@ function Weblinks_user_newlinksdate() // ready
     $render->assign('totallinks', $totallinks);
     $render->assign('weblinks', $weblinks);
     $render->assign('helper', array('main' => 0, 'showcat' => 1, 'details' => 0, 'tb' => pnModGetVar('Weblinks', 'targetblank')));
-    if (pnModGetVar('Weblinks', 'websnaprkey') == 1) {
+    if (pnModGetVar('Weblinks', 'websnapr') == 1) {
         $render->assign('websnapr', pnModGetVar('Weblinks', 'websnapr'));
         $render->assign('websnaprkey', pnModGetVar('Weblinks', 'websnaprkey'));
         $render->assign('websnaprsize', pnModGetVar('Weblinks', 'websnaprsize'));
@@ -352,7 +352,7 @@ function Weblinks_user_mostpopular() // ready
     $render->assign('mostpoplinks', $mostpoplinks);
     $render->assign('weblinks', $weblinks);
     $render->assign('helper', array('main' => 0, 'showcat' => 1, 'details' => 0, 'tb' => pnModGetVar('Weblinks', 'targetblank')));
-    if (pnModGetVar('Weblinks', 'websnaprkey') == 1) {
+    if (pnModGetVar('Weblinks', 'websnapr') == 1) {
         $render->assign('websnapr', pnModGetVar('Weblinks', 'websnapr'));
         $render->assign('websnaprkey', pnModGetVar('Weblinks', 'websnaprkey'));
         $render->assign('websnaprsize', pnModGetVar('Weblinks', 'websnaprsize'));
