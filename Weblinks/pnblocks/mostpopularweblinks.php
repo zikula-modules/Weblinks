@@ -16,7 +16,7 @@
 function Weblinks_mostpopularweblinksblock_init()
 {
     // Security
-    pnSecAddSchema('WeblinksBlock::', 'Block title::');
+    SecurityUtil::registerPermissionSchema('WeblinksBlock::', 'Block title::');
 }
 
 /**
