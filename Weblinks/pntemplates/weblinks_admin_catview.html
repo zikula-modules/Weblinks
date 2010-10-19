@@ -1,70 +1,74 @@
 <!--[*  $Id$  *]-->
 <!--[include file="weblinks_admin_header.html"]-->
 <div class="z-admincontainer">
-  <div class="z-adminpageicon"><!--[pnimg modname=core src=folder.gif set=icons/large __alt="Categories administer" __title="Categories administer"]--></div>
-  <h2><!--[gt text="Categories administer"]--></h2>
+    <div class="z-adminpageicon"><!--[pnimg modname=core src=folder.gif set=icons/large __alt="Categories administer" __title="Categories administer"]--></div>
+    <h2><!--[gt text="Categories administer"]--></h2>
 
-  <form class="z-form" action="<!--[pnmodurl modname=Weblinks type=admin func=addcategory]-->" method="post" enctype="application/x-www-form-urlencoded">
-    <fieldset>
-      <legend><!--[gt text="Add a category"]--></legend>
-      <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
+    <form class="z-form" action="<!--[pnmodurl modname=Weblinks type=admin func=addcategory]-->" method="post" enctype="application/x-www-form-urlencoded">
+        <div>
+            <fieldset>
+                <legend><!--[gt text="Add a category"]--></legend>
+                <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
 
-      <div class="z-formrow">
-        <label><!--[gt text="Name"]--></label>
-        <input id="title" type="text" name="title" size="30" maxlength="100" />
-      </div>
+                <div class="z-formrow">
+                    <label for="addcat_title"><!--[gt text="Name"]--></label>
+                    <input id="addcat_title" type="text" name="title" size="30" maxlength="100" />
+                </div>
 
-      <div class="z-formrow">
-        <label><!--[gt text="in category"]--></label>
-        <select id="pid" name="pid"><option value="0"><!--[gt text="None"]--></option><!--[catlist scat=0 sel=0]--></select>
-      </div>
+                <div class="z-formrow">
+                    <label for="addcat_pid"><!--[gt text="in category"]--></label>
+                    <select id="addcat_pid" name="pid"><option value="0"><!--[gt text="None"]--></option><!--[catlist scat=0 sel=0]--></select>
+                </div>
 
-      <div class="z-formrow">
-        <label><!--[gt text="Description"]--></label>
-        <textarea id="description" name="cdescription" cols="65" rows="10"></textarea>
-      </div>
+                <div class="z-formrow">
+                    <label for="addcat_description"><!--[gt text="Description"]--></label>
+                    <textarea id="addcat_description" name="cdescription" cols="65" rows="10"></textarea>
+                </div>
 
-      <div class="z-formbuttons">
-        <!--[pnbutton src=button_ok.gif set=icons/small __alt="Add category" __title="Add Category"]-->
-      </div>
-    </fieldset>
-  </form>
+                <div class="z-formbuttons">
+                    <!--[pnbutton src=button_ok.gif set=icons/small __alt="Add category" __title="Add Category"]-->
+                </div>
+            </fieldset>
+        </div>
+    </form>
 
+    <!--[if $catnum>0]-->
+    <form class="z-form" action="<!--[pnmodurl modname=Weblinks type=admin func=modcategory]-->" method="post" enctype="application/x-www-form-urlencoded">
+        <div>
+            <fieldset>
+                <legend><!--[gt text="Modify a category"]--></legend>
+                <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
 
-  <!--[if $catnum>0]-->
-  <form class="z-form" action="<!--[pnmodurl modname=Weblinks type=admin func=modcategory]-->" method="post" enctype="application/x-www-form-urlencoded">
-    <fieldset>
-      <legend><!--[gt text="Modify a category"]--></legend>
-      <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
+                <div class="z-formrow">
+                    <label for="modcat_cat"><!--[gt text="Category"]--></label>
+                    <select id="modcat_cat" name="cid"><!--[catlist scat=0 sel=0]--></select>
+                </div>
 
-      <div class="z-formrow">
-        <label><!--[gt text="Category"]--></label>
-        <select name="cid"><!--[catlist scat=0 sel=0]--></select>
-      </div>
+                <div class="z-formbuttons">
+                    <!--[pnbutton src=button_ok.gif set=icons/small __alt="Modify a category" __title="Modify a category"]-->
+                </div>
+            </fieldset>
+        </div>
+    </form>
 
-      <div class="z-formbuttons">
-        <!--[pnbutton src=button_ok.gif set=icons/small __alt="Modify a category" __title="Modify a category"]-->
-      </div>
-    </fieldset>
-  </form>
+    <form class="z-form" action="<!--[pnmodurl modname=Weblinks type=admin func=suredelcategory]-->" method="post" enctype="application/x-www-form-urlencoded">
+        <div>
+            <fieldset>
+                <legend><!--[gt text="Delete category"]--></legend>
+                <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
 
+                <div class="z-formrow">
+                    <label for="suredel_cat"><!--[gt text="Category"]--></label>
+                    <select id="suredel_cat" name="cid"><!--[catlist scat=0 sel=0]--></select>
+                </div>
 
-  <form class="z-form" action="<!--[pnmodurl modname=Weblinks type=admin func=suredelcategory]-->" method="post" enctype="application/x-www-form-urlencoded">
-    <fieldset>
-      <legend><!--[gt text="Delete category"]--></legend>
-      <input type="hidden" name="authid" value="<!--[insert name="generateauthkey" module="Weblinks"]-->" />
+                <div class="z-formbuttons">
+                    <!--[pnbutton src=button_ok.gif set=icons/small __alt="Delete category" __title="Delete category"]-->
+                </div>
+            </fieldset>
+        </div>
+    </form>
+    <!--[/if]-->
 
-      <div class="z-formrow">
-        <label><!--[gt text="Category"]--></label>
-        <select name="cid"><!--[catlist scat=0 sel=0]--></select>
-      </div>
-
-      <div class="z-formbuttons">
-        <!--[pnbutton src=button_ok.gif set=icons/small __alt="Delete category" __title="Delete category"]-->
-      </div>
-    </fieldset>
-  </form>
-
-  <!--[/if]-->
 </div>
 <!--[include file="weblinks_admin_footer.html"]-->
