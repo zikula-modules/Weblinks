@@ -17,6 +17,18 @@ function smarty_function_catpath($params, &$smarty)
     if (!isset($params['cid']) || !is_numeric($params['cid'])){
         return LogUtil::registerArgsError();
     }
+    
+    if (!isset($params['linkmyself']) || !is_numeric($params['linkmyself'])){
+        $params['linkmyself'] = 0;
+    }
+
+    if (!isset($params['links']) || !is_numeric($params['links'])){
+        $params['links'] = 0;
+    }
+    
+    if (!isset($params['start']) || !is_numeric($params['start'])){
+        $params['start'] = 0;
+    }
 
     $cat = DBUtil::selectObjectByID('links_categories', $params['cid'], 'cat_id');
 
