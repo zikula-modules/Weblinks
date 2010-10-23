@@ -49,10 +49,12 @@ function smarty_function_linkbottommenu($params, &$smarty)
 
     if ($params['details']) {
         if (pnModGetVar('Weblinks', 'targetblank') == 1) {
-            $target = " target=\"_blank\"";
+            $target = ' target=\"_blank\"';
+        } else {
+            $target = '';
         }
         $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(pnModURL('Weblinks', 'user', 'visit', array('lid' => (int)$params['lid'])))."\" ".$target." title=\"".DataUtil::formatForDisplay(__('Visit this web site', $dom))."\">".DataUtil::formatForDisplay(__('Visit this web site', $dom))."</a>";
     }
-    
+
     return $linkbottommenu;
 }
