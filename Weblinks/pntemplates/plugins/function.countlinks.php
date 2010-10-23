@@ -12,7 +12,9 @@
 
 function smarty_function_countlinks($params, &$smarty)
 {
-    $allmonthlinks = 0;
+    $totallinks = 0;
+    $counter = 0;
+    
     while ($counter < $params['days']) {
         $newlinkdayraw = (time()-(86400 * $counter));
         $newlinkdb = DateUtil::transformInternalDate($newlinkdayraw);
@@ -20,12 +22,12 @@ function smarty_function_countlinks($params, &$smarty)
         $column = $pntable['links_links_column'];
         $column2 = $pntable['links_categories_column'];
         $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
-        $totallinks = DBUtil::selectObjectCount('links_links', $where);
-        if ($totallinks) {
-            $allmonthlinks = $allmonthlinks + $totallinks;
+        $countlinks = DBUtil::selectObjectCount('links_links', $where);
+        if ($countlinks) {
+            $totallinks = $totallinks + $countlinks;
         }
         $counter++;
     }
 
-    return $allmonthlinks;
+    return $totallinks;
 }

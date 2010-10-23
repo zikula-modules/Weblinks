@@ -19,6 +19,9 @@ function smarty_function_newlinksbyday($params, &$smarty)
         $params['newlinkshowdays'] = "7";
     }
 
+    $counter = 0;
+    $totallinks = 0;
+
     while ($counter < $params['newlinkshowdays']) {
         $newlinkdayraw = (time()-(86400 * $counter));
         $newlinkview = DateUtil::getDatetime($newlinkdayraw, 'datebrief');
@@ -27,9 +30,9 @@ function smarty_function_newlinksbyday($params, &$smarty)
         $column = $pntable['links_links_column'];
         $column2 = $pntable['links_categories_column'];
         $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
-        $totallinks = DBUtil::selectObjectCount('links_links', $where);
-        $allweeklinks = $allweeklinks + $totallinks;
+        $countlinks = DBUtil::selectObjectCount('links_links', $where);
+        $totallinks = $totallinks + $countlinks;
         $counter++;
-        echo "<a href=\"".pnVarPrepForDisplay(pnModURL('Weblinks', 'user', 'newlinksdate', array('selectdate' => $newlinkdayraw)))."\">".pnVarPrepForDisplay($newlinkview)."</a>&nbsp;(".pnVarPrepForDisplay($totallinks).")<br />";
+        echo "<a href=\"".pnVarPrepForDisplay(pnModURL('Weblinks', 'user', 'newlinksdate', array('selectdate' => $newlinkdayraw)))."\">".pnVarPrepForDisplay($newlinkview)."</a>&nbsp;(".pnVarPrepForDisplay($countlinks).")<br />";
     }
 }
