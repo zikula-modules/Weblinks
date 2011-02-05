@@ -73,7 +73,7 @@ function Weblinks_searchapi_search($args)
     // get the result set
     $links = DBUtil::selectObjectArray('links_links', $where, 'lid', 1, -1, '', $permFilter);
     if ($links === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError(__('Error! Could not load any link.', $dom));
     }
 
     $insertSql = "INSERT INTO $searchTable ($searchColumn[title],
@@ -94,7 +94,7 @@ function Weblinks_searchapi_search($args)
                  . '\'' . DataUtil::formatForStore($sessionId) . '\')';
           $insertResult = DBUtil::executeSQL($sql);
           if (!$insertResult) {
-              return LogUtil::registerError (_GETFAILED);
+             return LogUtil::registerError(__('Error! Could not load any link.', $dom));
           }
     }
 
