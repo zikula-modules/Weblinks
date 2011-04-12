@@ -146,31 +146,36 @@
             </fieldset>
 
             <fieldset>
-                <legend><!--[gt text="Screenshots with websnapr"]--></legend>
+                <legend><!--[gt text="Screenshots"]--></legend>
                 <div class="z-informationmsg">
-                    <!--[gt text="If you want to use the screenshot function with websnapr, you need a key for your website. Register here:"]--> -&gt; <a href="http://www.websnapr.com"><!--[gt text="www.websnapr.com"]--></a><br />
-                    <!--[gt text="You can get 100,000 snapshot impressions for free per month"]-->
+                    <!--[gt text="If you want to use the screenshot function with thumber.de, register here:"]--> -&gt; <a href="http://www.thumber.de"><!--[gt text="www.thumber.de"]--></a><br />
                 </div>
                 <div class="z-formrow">
-                    <label for="weblinks_screenshot_active"><!--[gt text="Show screenshots with websnaper?"]--></label>
+                    <label for="weblinks_screenshot_active"><!--[gt text="Show screenshots with thumber.de?"]--></label>
                     <div id="weblinks_screenshot_active">
-                        <input id="weblinks_screenshot_active_yes" type="radio" name="config[websnapr]" value="1"<!--[if $config.websnapr eq '1']--> checked="checked"<!--[/if]--> />
+                        <input id="weblinks_screenshot_active_yes" type="radio" name="config[thumber]" value="1"<!--[if $config.thumber eq '1']--> checked="checked"<!--[/if]--> />
                         <label for="weblinks_screenshot_active_yes"><!--[gt text="yes"]--></label>
-                        <input id="weblinks_screenshot_active_no" type="radio" name="config[websnapr]" value="0"<!--[if $config.websnapr eq '0']--> checked="checked"<!--[/if]--> />
+                        <input id="weblinks_screenshot_active_no" type="radio" name="config[thumber]" value="0"<!--[if $config.thumber eq '0']--> checked="checked"<!--[/if]--> />
                         <label for="weblinks_screenshot_active_no"><!--[gt text="no"]--></label>
                     </div>
                 </div>
                 <div class="z-formrow">
-                    <label for="config_websnaprkey"><!--[gt text="Websnapr Key"]--></label>
-                    <input type="text" id="config_websnaprkey" name="config[websnaprkey]" value="<!--[$config.websnaprkey]-->" size="20" />
-                </div>
-                <div class="z-formrow">
                     <label for="weblinks_sreenshot_size"><!--[gt text="Select size of thumb"]--></label>
                     <div id="weblinks_sreenshot_size">
-                        <input id="weblinks_sreenshot_size_yes" type="radio" name="config[websnaprsize]" value="T"<!--[if $config.websnaprsize eq 'T']--> checked="checked"<!--[/if]--> />
-                        <label for="weblinks_sreenshot_size_yes"><!--[gt text="T (90x70)"]--></label>
-                        <input id="weblinks_sreenshot_size_no" type="radio" name="config[websnaprsize]" value="S"<!--[if $config.websnaprsize eq 'S']--> checked="checked"<!--[/if]--> />
-                        <label for="weblinks_sreenshot_size_no"><!--[gt text="S (202x152)"]--></label>
+                        <input id="weblinks_sreenshot_size_yes" type="radio" name="config[thumbersize]" value="S"<!--[if $config.thumbersize eq 'S']--> checked="checked"<!--[/if]--> />
+                        <label for="weblinks_sreenshot_size_yes"><!--[gt text="S (100 x 75)"]--></label>
+                        <input id="weblinks_sreenshot_size_no" type="radio" name="config[thumbersize]" value="M"<!--[if $config.thumbersize eq 'M']--> checked="checked"<!--[/if]--> />
+                        <label for="weblinks_sreenshot_size_no"><!--[gt text="M (120 x 90)"]--></label>
+                        <input id="weblinks_sreenshot_size_no" type="radio" name="config[thumbersize]" value="L"<!--[if $config.thumbersize eq 'L']--> checked="checked"<!--[/if]--> />
+                        <label for="weblinks_sreenshot_size_no"><!--[gt text="L (150 x 113)"]--></label>
+                        <input id="weblinks_sreenshot_size_no" type="radio" name="config[thumbersize]" value="XL"<!--[if $config.thumbersize eq 'XL']--> checked="checked"<!--[/if]--> />
+                        <label for="weblinks_sreenshot_size_no"><!--[gt text="XL (200 x 150)"]--></label>
+                        <input id="weblinks_sreenshot_size_no" type="radio" name="config[thumbersize]" value="XXL"<!--[if $config.thumbersize eq 'XXL']--> checked="checked"<!--[/if]--> />
+                        <label for="weblinks_sreenshot_size_no"><!--[gt text="XXL (250 x 188)"]--></label>
+                        <input id="weblinks_sreenshot_size_no" type="radio" name="config[thumbersize]" value="XXXL"<!--[if $config.thumbersize eq 'XXXL']--> checked="checked"<!--[/if]--> />
+                        <label for="weblinks_sreenshot_size_no"><!--[gt text="XXXL (300 x 255)"]--></label>
+                        <input id="weblinks_sreenshot_size_no" type="radio" name="config[thumbersize]" value="SXL"<!--[if $config.thumbersize eq 'SXL']--> checked="checked"<!--[/if]--> />
+                        <label for="weblinks_sreenshot_size_no"><!--[gt text="SXL (400 x 300)"]--></label>
                     </div>
                 </div>
             </fieldset>

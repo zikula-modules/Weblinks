@@ -21,7 +21,7 @@ function Weblinks_init()
         SessionUtil::setVar('errormsg', __('Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met.', $dom));
         return false;
     }
-    
+
     // Create tables
 
     // creating categories table
@@ -60,9 +60,8 @@ function Weblinks_init()
                      'unregbroken' => 0,
                      'blockunregmodify' => 0,
                      'links_anonaddlinklock' => 0,
-                     'websnapr' => 0,
-                     'websnaprkey' => '',
-                     'websnaprsize' => 'S');
+                     'thumber' => 0,
+                     'thumbersize' => 'XL');
 
     // set up module variables
     pnModSetVars('Weblinks', $modvars);
@@ -154,17 +153,16 @@ function Weblinks_upgrade($oldversion)
             SessionUtil::setVar('errormsg', __('Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met.', $dom));
             return false;
         }
-        
+
         pnModSetVar('Weblinks', 'doubleurl', 0);
         pnModSetVar('Weblinks', 'unregbroken', 0);
-        pnModSetVar('Weblinks', 'websnapr', 0);
-        pnModSetVar('Weblinks', 'websnaprkey', '');
-        pnModSetVar('Weblinks', 'websnaprsize', 'S');
-        
+        pnModSetVar('Weblinks', 'thumber', 0);
+        pnModSetVar('Weblinks', 'thumbersize', 'XL');
+
         // remove obsolete module vars
         pnModDelVar('Weblinks', 'toplinks');
         pnModDelVar('Weblinks', 'toplinkspercentrigger');
-        
+
         case '2.1.0':
 
            break;

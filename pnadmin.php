@@ -793,20 +793,15 @@ function Weblinks_admin_updateconfig() // ready
     }
     pnModSetVar('Weblinks', 'links_anonaddlinklock', $config['links_anonaddlinklock']);
 
-    if ( !isset($config['websnapr']) || !is_numeric($config['websnapr']) ) {
-        $config['websnapr'] = 0;
+    if ( !isset($config['thumber']) || !is_numeric($config['thumber']) ) {
+        $config['thumber'] = 0;
     }
-    pnModSetVar('Weblinks', 'websnapr', $config['websnapr']);
+    pnModSetVar('Weblinks', 'thumber', $config['thumber']);
 
-    if ( !isset($config['websnaprkey'])) {
-        $config['websnaprkey'] = '';
+    if ( !isset($config['thumbersize'])) {
+        $config['thumbersize'] = 'XL';
     }
-    pnModSetVar('Weblinks', 'websnaprkey', $config['websnaprkey']);
-
-    if ( !isset($config['websnaprsize'])) {
-        $config['websnaprsiz'] = 'S';
-    }
-    pnModSetVar('Weblinks', 'websnaprsize', $config['websnaprsize']);
+    pnModSetVar('Weblinks', 'thumbersize', $config['thumbersize']);
 
     // the module configuration has been updated successfuly
     LogUtil::registerStatus(__('Configuration updated', $dom));
