@@ -1,36 +1,36 @@
-<!--[*  $Id: weblinks_user_linkbox.html 172 2010-10-23 13:39:45Z Petzi-Juist $  *]-->
+{*  $Id: weblinks_user_linkbox.html 172 2010-10-23 13:39:45Z Petzi-Juist $  *}
 <div class="wl-topbox">
-    <a href="<!--[pnmodurl modname=Weblinks type=user func=visit lid=$weblinks.lid]-->" <!--[if $helper.tb == 1]-->target="_blank"<!--[/if]--> >
-        <!--[$weblinks.title|pnvarprepfordisplay]-->
+    <a href="{modurl modname=Weblinks type=user func=visit lid=$weblinks.lid}" {if $helper.tb == 1}target="_blank"{/if} >
+        {$weblinks.title|safetext}
     </a>
-    <!--[newlinkgraphic time=$weblinks.date]--><!--[popgraphic hits=$weblinks.hits]-->
+    {newlinkgraphic time=$weblinks.date}{popgraphic hits=$weblinks.hits}
 </div>
 
 <div class="wl-centerbox z-clearfix">
-    <!--[if $thumber]-->
+    {if $thumber}
     <div class="wl-thumb">
-        <a href="<!--[pnmodurl modname=Weblinks type=user func=visit lid=$weblinks.lid]-->" <!--[if $helper.tb == 1]-->target="_blank"<!--[/if]--> >
-            <img src="http://image.thumber.de/?size=<!--[$thumbersize]-->&amp;url=<!--[$weblinks.url]-->" />
+        <a href="{modurl modname=Weblinks type=user func=visit lid=$weblinks.lid}" {if $helper.tb == 1}target="_blank"{/if} >
+            <img src="http://image.thumber.de/?size={$thumbersize}&amp;url={$weblinks.url}" />
         </a>
     </div>
-    <!--[/if]-->
+    {/if}
 
-    <!--[if $weblinks.description]-->
-    <p><!--[$weblinks.description|pnvarprephtmldisplay|pnmodcallhooks:"Weblinks"]--></p>
-    <!--[/if]-->
+    {if $weblinks.description}
+    <p>{$weblinks.description|safehtml|modcallhooks:"Weblinks"}</p>
+    {/if}
 
-    <!--[if $helper.showcat == 1]-->
-    <p><!--[gt text="Category"]-->: <!--[catpath cid=$weblinks.cat_id links=1 linkmyself=1]--></p>
-    <!--[/if]-->
+    {if $helper.showcat == 1}
+    <p>{gt text="Category"}: {catpath cid=$weblinks.cat_id links=1 linkmyself=1}</p>
+    {/if}
 
-    <p><!--[gt text="Added on"]-->: <!--[$weblinks.date|pndate_format:"datebrief"]--> | <!--[gt text="Hits"]-->: <!--[$weblinks.hits]--></p>
+    <p>{gt text="Added on"}: {$weblinks.date|dateformat:"datebrief"} | {gt text="Hits"}: {$weblinks.hits}</p>
 
-    <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks implode=false]-->
-    <!--[if $hooks.Ratings]-->
-    <p><!--[ $hooks.Ratings ]--></p>
-    <!--[/if]-->
+    {modcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks implode=false}
+    {if $hooks.Ratings}
+    <p>{ $hooks.Ratings }</p>
+    {/if}
 </div>
 
 <div class="wl-bottombox">
-    <!--[linkbottommenu cid=$weblinks.cat_id lid=$weblinks.lid details=$helper.details]-->
+    {linkbottommenu cid=$weblinks.cat_id lid=$weblinks.lid details=$helper.details}
 </div>

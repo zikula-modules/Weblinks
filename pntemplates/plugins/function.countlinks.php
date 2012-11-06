@@ -18,7 +18,7 @@ function smarty_function_countlinks($params, &$smarty)
     while ($counter < $params['days']) {
         $newlinkdayraw = (time()-(86400 * $counter));
         $newlinkdb = DateUtil::transformInternalDate($newlinkdayraw);
-        $pntable = pnDBGetTables();
+        $pntable = DBUtil::getTables();
         $column = $pntable['links_links_column'];
         $column2 = $pntable['links_categories_column'];
         $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";

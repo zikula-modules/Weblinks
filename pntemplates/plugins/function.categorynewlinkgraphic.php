@@ -17,7 +17,7 @@ function smarty_function_categorynewlinkgraphic($params, &$smarty)
     if (!isset($params['cat']) || !is_numeric($params['cat'])){
         return LogUtil::registerArgsError();
     }
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $column = $pntable['links_links_column'];
     $where = "WHERE $column[cat_id]= '".(int)DataUtil::formatForStore($params['cat'])."'";
     $orderby = "ORDER BY $column[date] DESC";

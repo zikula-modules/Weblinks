@@ -17,7 +17,7 @@ function Weblinks_init()
 {
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
-    if (version_compare(PN_VERSION_NUM, '1.2.0', '<')) {
+    if (version_compare(Zikula_Core::VERSION_NUM, '1.2.0', '<')) {
         SessionUtil::setVar('errormsg', __('Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met.', $dom));
         return false;
     }
@@ -64,7 +64,7 @@ function Weblinks_init()
                      'thumbersize' => 'XL');
 
     // set up module variables
-    pnModSetVars('Weblinks', $modvars);
+    ModUtil::setVars('Weblinks', $modvars);
 
     // Initialisation successful
     return true;
@@ -79,7 +79,7 @@ function Weblinks_upgrade($oldversion)
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
     // Get database information
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
 
     switch($oldversion) {
         case '1.0':
@@ -100,30 +100,30 @@ function Weblinks_upgrade($oldversion)
                      'links_anonaddlinklock' => 0);
 
         // set up module variables
-        pnModSetVars('Weblinks', $modvars);
+        ModUtil::setVars('Weblinks', $modvars);
 
         case '2.0':
 
         // rename Web_Links to Weblinks
 
         // rename modvars
-        $oldvars = pnModGetVar('Web_Links');
+        $oldvars = ModUtil::getVar('Web_Links');
         if ($oldvars) {
-            pnModSetVars('Weblinks', $oldvars);
-            pnModDelVar('Web_Links');
+            ModUtil::setVars('Weblinks', $oldvars);
+            ModUtil::delVar('Web_Links');
         }
 
         // rename hook
-        $pntable = pnDBGetTables();
+        $pntable = DBUtil::getTables();
         $hookscolumn = $pntable['hooks_column'];
         $object = array('smodule' => 'Weblinks');
         $where = "WHERE $hookscolumn[smodule] = 'Web_Links'";
         DBUtil::updateObject($object, 'hooks', $where, 'id');
 
         // rename hooks entries
-        if (pnModAvailable('EZComments')) {
-            pnModDBInfoLoad('EZComments');
-            $pntable = pnDBGetTables();
+        if (ModUtil::available('EZComments')) {
+            ModUtil::dbInfoLoad('EZComments');
+            $pntable = DBUtil::getTables();
             $ezccolumn = $pntable['EZComments_column'];
             $where = "WHERE $ezccolumn[modname] = 'Web_Links'";
             $ezcarray = DBUtil::selectObjectArray('EZComments', $where, '', -1, -1, false);
@@ -134,9 +134,9 @@ function Weblinks_upgrade($oldversion)
              DBUtil::updateObjectArray($ezcarray, 'EZComments', 'id');
         }
 
-        if (pnModAvailable('Ratings')) {
-            pnModDBInfoLoad('Ratings');
-            $pntable = pnDBGetTables();
+        if (ModUtil::available('Ratings')) {
+            ModUtil::dbInfoLoad('Ratings');
+            $pntable = DBUtil::getTables();
             $ratcolumn = $pntable['ratings_column'];
             $where = "WHERE $ratcolumn[module] = 'Web_Links'";
             $ratarray = DBUtil::selectObjectArray('ratings', $where, '', -1, -1, false);
@@ -149,19 +149,19 @@ function Weblinks_upgrade($oldversion)
 
         case '2.0.1':
 
-        if (version_compare(PN_VERSION_NUM, '1.2.0', '<')) {
+        if (version_compare(Zikula_Core::VERSION_NUM, '1.2.0', '<')) {
             SessionUtil::setVar('errormsg', __('Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met.', $dom));
             return false;
         }
 
-        pnModSetVar('Weblinks', 'doubleurl', 0);
-        pnModSetVar('Weblinks', 'unregbroken', 0);
-        pnModSetVar('Weblinks', 'thumber', 0);
-        pnModSetVar('Weblinks', 'thumbersize', 'XL');
+        ModUtil::setVar('Weblinks', 'doubleurl', 0);
+        ModUtil::setVar('Weblinks', 'unregbroken', 0);
+        ModUtil::setVar('Weblinks', 'thumber', 0);
+        ModUtil::setVar('Weblinks', 'thumbersize', 'XL');
 
         // remove obsolete module vars
-        pnModDelVar('Weblinks', 'toplinks');
-        pnModDelVar('Weblinks', 'toplinkspercentrigger');
+        ModUtil::delVar('Weblinks', 'toplinks');
+        ModUtil::delVar('Weblinks', 'toplinkspercentrigger');
 
         case '2.1.0':
 
@@ -195,7 +195,7 @@ function Weblinks_delete()
     }
 
     // remove module vars
-    pnModDelVar('Weblinks');
+    ModUtil::delVar('Weblinks');
 
     // Deletion successful
     return true;

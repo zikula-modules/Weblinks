@@ -13,7 +13,7 @@
 /**
  * Weblinks table information
 */
-function Weblinks_pntables()
+function Weblinks_tables()
 {
     // Initialise table array
     $pntable = array();

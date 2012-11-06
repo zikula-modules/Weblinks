@@ -26,13 +26,13 @@ function smarty_function_newlinksbyday($params, &$smarty)
         $newlinkdayraw = (time()-(86400 * $counter));
         $newlinkview = DateUtil::getDatetime($newlinkdayraw, 'datebrief');
         $newlinkdb = DateUtil::transformInternalDate($newlinkdayraw);
-        $pntable = pnDBGetTables();
+        $pntable = DBUtil::getTables();
         $column = $pntable['links_links_column'];
         $column2 = $pntable['links_categories_column'];
         $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
         $countlinks = DBUtil::selectObjectCount('links_links', $where);
         $totallinks = $totallinks + $countlinks;
         $counter++;
-        echo "<a href=\"".pnVarPrepForDisplay(pnModURL('Weblinks', 'user', 'newlinksdate', array('selectdate' => $newlinkdayraw)))."\">".pnVarPrepForDisplay($newlinkview)."</a>&nbsp;(".pnVarPrepForDisplay($countlinks).")<br />";
+        echo "<a href=\"".DataUtil::formatForDisplay(ModUtil::url('Weblinks', 'user', 'newlinksdate', array('selectdate' => $newlinkdayraw)))."\">".DataUtil::formatForDisplay($newlinkview)."</a>&nbsp;(".DataUtil::formatForDisplay($countlinks).")<br />";
     }
 }

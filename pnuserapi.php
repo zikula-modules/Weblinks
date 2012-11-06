@@ -105,7 +105,7 @@ function Weblinks_userapi_subcategory($args) // ready
         return LogUtil::registerArgsError();
     }
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $weblinkscolumn = &$pntable['links_categories_column'];
 
     $where = "WHERE $weblinkscolumn[parent_id] = ".(int)DataUtil::formatForStore($args['cid']);
@@ -147,7 +147,7 @@ function Weblinks_userapi_weblinks($args) // ready
     // by rgasch to solve http://code.zikula.org/weblinks/ticket/37
     $where = "";
     if (isset($args['cid']) && is_numeric($args['cid']) && $args['cid']) {
-        $pntable = pnDBGetTables();
+        $pntable = DBUtil::getTables();
         $weblinkscolumn = &$pntable['links_links_column'];
         $where = "WHERE $weblinkscolumn[cat_id] = ".(int)DataUtil::formatForStore($args['cid']);
     }
@@ -180,7 +180,7 @@ function Weblinks_userapi_weblinks($args) // ready
  */
 function Weblinks_userapi_orderby($args) // ready
 {
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $column = $pntable['links_links_column'];
 
     if ($args['orderby'] == "titleA") {
@@ -257,7 +257,7 @@ function Weblinks_userapi_hitcountinc($args) // ready
 
     $hits = $args['hits'] + 1;
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $weblinkscolumn = $pntable['links_links_column'];
 
     $items = array('hits' => $hits);
@@ -278,7 +278,7 @@ function Weblinks_userapi_searchcats($args) // ready
         return LogUtil::registerArgsError();
     }
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $weblinkscolumn = $pntable['links_categories_column'];
 
     $where ="WHERE $weblinkscolumn[title] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
@@ -322,7 +322,7 @@ function Weblinks_userapi_search_weblinks($args) // ready
     $startnum = (isset($args['startnum']) && is_numeric($args['startnum'])) ? $args['startnum'] : 1;
     $numlinks = (isset($args['numlinks']) && is_numeric($args['numlinks'])) ? $args['numlinks'] : -1;
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $column = $pntable['links_links_column'];
 
     $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
@@ -359,7 +359,7 @@ function Weblinks_userapi_countsearchlinks($args) // ready
         return LogUtil::registerArgsError();
     }
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $column = $pntable['links_links_column'];
 
     $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
@@ -392,7 +392,7 @@ function Weblinks_userapi_random($args) // ready
     }
 
     if ($lidarray < 1) { // if no link
-        return pnVarPrepHTMLDisplay(__('Sorry! There is no such link', $dom));
+        return DataUtil::formatForDisplayHTML(__('Sorry! There is no such link', $dom));
     }
 
     $links = array_rand($lidarray, $num);
@@ -421,7 +421,7 @@ function Weblinks_userapi_totallinks($args) // ready
 
     $newlinkdb = date("Y-m-d", $args['selectdate']);
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $column = $pntable['links_links_column'];
     $column2 = $pntable['links_categories_column'];
 
@@ -441,7 +441,7 @@ function Weblinks_userapi_weblinksbydate($args) // ready
         return LogUtil::registerArgsError();
     }
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $newlinkdb = date("Y-m-d", $args['selectdate']);
     $column = $pntable['links_links_column'];
     $where = "WHERE $column[date] LIKE '%".DataUtil::formatForStore($newlinkdb)."%'";
@@ -481,7 +481,7 @@ function Weblinks_userapi_addbrockenlink($args) // ready
     }
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'unregbroken') == 1 &&
+    if (!ModUtil::getVar('Weblinks', 'unregbroken') == 1 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
@@ -507,7 +507,7 @@ function Weblinks_userapi_modifylinkrequest($args) // ready
     }
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'blockunregmodify') == 1 &&
+    if (!ModUtil::getVar('Weblinks', 'blockunregmodify') == 1 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
@@ -528,13 +528,13 @@ function Weblinks_userapi_add($args) // ready
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
     // Security check
-    if (!pnModGetVar('Weblinks', 'links_anonaddlinklock') == 1 &&
+    if (!ModUtil::getVar('Weblinks', 'links_anonaddlinklock') == 1 &&
         !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
         return LogUtil::registerPermissionError();
     }
 
-    $checkurl = pnModAPIFunc('Weblinks', 'user', 'checkurl', array('url' => $args['url']));
-    $valid = pnVarValidate($args['url'], 'url');
+    $checkurl = ModUtil::apiFunc('Weblinks', 'user', 'checkurl', array('url' => $args['url']));
+    $valid = System::varValidate($args['url'], 'url');
 
     if ($checkurl > 0) {
         $link['text'] = __('Sorry! This URL is already listed in the database!', $dom);
@@ -558,7 +558,7 @@ function Weblinks_userapi_add($args) // ready
         return $link;
     } else {
         if (empty($args['submitter'])) {
-            $link['submitter'] = pnConfigGetVar("anonymous");
+            $link['submitter'] = System::getVar("anonymous");
         }
 
         $items = array('cat_id' => $args['cat'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'name' => $args['submitter'], 'email' => $args['submitteremail'], 'submitter' => $args['submitter']);
@@ -593,10 +593,10 @@ function Weblinks_userapi_lastweblinks($args) // ready
 
     // Argument check
     if (!isset($args['lastlinks']) || !is_numeric($args['lastlinks'])) {
-        $args['lastlinks'] = pnModGetVar('Weblinks', 'linksinblock');
+        $args['lastlinks'] = ModUtil::getVar('Weblinks', 'linksinblock');
     }
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $weblinkscolumn = $pntable['links_links_column'];
 
     $orderby = "ORDER BY $weblinkscolumn[date] DESC";
@@ -633,10 +633,10 @@ function Weblinks_userapi_mostpopularweblinks($args) // ready
 
     // Argument check
     if (!isset($args['mostpoplinks']) || !is_numeric($args['mostpoplinks'])) {
-        $args['mostpoplinks'] = pnModGetVar('Weblinks', 'linksinblock');
+        $args['mostpoplinks'] = ModUtil::getVar('Weblinks', 'linksinblock');
     }
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $weblinkscolumn = $pntable['links_links_column'];
 
     $orderby = "ORDER BY $weblinkscolumn[hits] DESC";

@@ -48,12 +48,12 @@ function Weblinks_randomweblinksblock_display($blockinfo)
     }
 
     // check if the module is available
-    if (!pnModAvailable('Weblinks')) {
+    if (!ModUtil::available('Weblinks')) {
         return;
     }
 
     // Break out options from our content field
-    $vars = pnBlockVarsFromContent($blockinfo['content']);
+    $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
     // Defaults
     if (!isset($vars['limit'])) {
@@ -61,21 +61,21 @@ function Weblinks_randomweblinksblock_display($blockinfo)
     }
 
     // Create output object
-    $render = pnRender::getInstance('Weblinks', false);
+    $render = Zikula_View::getInstance('Weblinks', false);
 
     //  Check if the block is cached
     if ($render->is_cached('weblinks_block_randomweblinks.html')) {
         $blockinfo['content'] = $render->fetch('weblinks_block_randomweblinks.html');
-        return pnBlockThemeBlock($blockinfo);
+        return BlockUtil::themeBlock($blockinfo);
     }
 
-    $render->assign('links', pnModAPIFunc('Weblinks', 'user', 'random', array('num' => $vars['limit'])));
-    $render->assign('tb', pnModGetVar('Weblinks', 'targetblank'));
+    $render->assign('links', ModUtil::apiFunc('Weblinks', 'user', 'random', array('num' => $vars['limit'])));
+    $render->assign('tb', ModUtil::getVar('Weblinks', 'targetblank'));
 
     // Populate block info and pass to theme
     $blockinfo['content'] = $render->fetch('weblinks_block_randomweblinks.html');
 
-    return pnBlockThemeBlock($blockinfo);
+    return BlockUtil::themeBlock($blockinfo);
 }
 
 /**
@@ -84,7 +84,7 @@ function Weblinks_randomweblinksblock_display($blockinfo)
 function Weblinks_randomweblinksblock_modify($blockinfo)
 {
     // Get current content
-    $vars = pnBlockVarsFromContent($blockinfo['content']);
+    $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
     // Defaults
     if (empty($vars['limit'])) {
@@ -92,7 +92,7 @@ function Weblinks_randomweblinksblock_modify($blockinfo)
     }
 
     // Create output object
-    $render = pnRender::getInstance('Weblinks', false);
+    $render = Zikula_View::getInstance('Weblinks', false);
 
     // assign the block vars
     $render->assign($vars);
@@ -107,7 +107,7 @@ function Weblinks_randomweblinksblock_modify($blockinfo)
 function Weblinks_randomweblinksblock_update($blockinfo)
 {
     // Get current content
-    $vars = pnBlockVarsFromContent($blockinfo['content']);
+    $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
     // alter the corresponding variable
     $vars['limit'] = (int)FormUtil::getPassedValue('limit', 5, 'POST');
@@ -118,10 +118,10 @@ function Weblinks_randomweblinksblock_update($blockinfo)
     }
 
     // write back the new contents
-    $blockinfo['content'] = pnBlockVarsToContent($vars);
+    $blockinfo['content'] = BlockUtil::varsToContent($vars);
 
     // clear the block cache
-    $render = pnRender::getInstance('Weblinks', false);
+    $render = Zikula_View::getInstance('Weblinks', false);
     $render->clear_cache('weblinks_block_randomweblinks.html');
 
     return $blockinfo;

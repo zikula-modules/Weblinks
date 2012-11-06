@@ -24,21 +24,21 @@ function Weblinks_accountapi_getall($args)
     $items = null;
 
     // show link for users only
-    if(!pnUserLoggedIn()) {
+    if(!UserUtil::isLoggedIn()) {
         // not logged in
         return $items;
     }
 
-    $uname = (isset($args['uname'])) ? $args['uname'] : pnUserGetVar('uname');
+    $uname = (isset($args['uname'])) ? $args['uname'] : UserUtil::getVar('uname');
     // does this user exist?
-    if(pnUserGetIDFromName($uname) == false) {
+    if(UserUtil::getIdFromName($uname) == false) {
         // user does not exist
         return $items;
     }
 
     // Create an array of links to return
     if(SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_ADD)) {
-        $items = array(array('url'    => pnModURL('Weblinks', 'user', 'addlink'),
+        $items = array(array('url'    => ModUtil::url('Weblinks', 'user', 'addlink'),
                              'module' => 'core',
                              'set'    => 'icons/large',
                              'title'  => __('Add link', $dom),

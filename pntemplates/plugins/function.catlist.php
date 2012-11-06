@@ -16,7 +16,7 @@ function smarty_function_catlist($params, &$smarty)
         return LogUtil::registerArgsError();
     }
     
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $s = "";
     $column = $pntable['links_categories_column'];
     $where = "WHERE $column[parent_id]='".(int)DataUtil::formatForStore($params['scat'])."'";
@@ -44,7 +44,7 @@ function catlist($scat, $sel)
         return LogUtil::registerArgsError();
     }
 
-    $pntable = pnDBGetTables();
+    $pntable = DBUtil::getTables();
     $s = "";
     $column = $pntable['links_categories_column'];
     $where = "WHERE $column[parent_id]='".(int)DataUtil::formatForStore($scat)."'";
