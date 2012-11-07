@@ -4,125 +4,118 @@
  *
  * Weblinks
  *
- * @version $Id: lastweblinks.php 167 2010-10-19 18:08:01Z Petzi-Juist $
- * @copyright 2010 by Petzi-Juist
- * @link http://www.petzi-juist.de
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
+class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
 
-/**
- * initialise block
- */
-function Weblinks_lastweblinksblock_init()
-{
-    // Security
-    SecurityUtil::registerPermissionSchema('WeblinksBlock::', 'Block title::');
-}
-
-/**
- * get information on block
- */
-function Weblinks_lastweblinksblock_info()
-{
-    $dom = ZLanguage::getModuleDomain('Weblinks');
-
-    // Values
-    return array('text_type' => 'lastweblinks',
-                 'module' => __('Weblinks', $dom),
-                 'text_type_long' => __('Latest Weblinks', $dom),
-                 'allow_multiple' => true,
-                 'form_content' => false,
-                 'form_refresh' => false,
-                 'show_preview' => true,
-                 'admin_tableless' => true);
-}
-
-/**
- * display block
- */
-function Weblinks_lastweblinksblock_display($blockinfo)
-{
-    // Security check
-    if (!SecurityUtil::checkPermission('WeblinksBlock::', "$blockinfo[title]::", ACCESS_READ)) {
-        return;
+    /**
+    * initialise block
+    */
+    public function init()
+    {
+        // Security
+        SecurityUtil::registerPermissionSchema('WeblinksBlock::', 'Block title::');
     }
 
-    // check if the module is available
-    if (!ModUtil::available('Weblinks')) {
-        return;
+    /**
+    * get information on block
+    */
+    public function info()
+    {
+
+
+        // Values
+        return array('text_type' => 'lastweblinks',
+                    'module' => $this->__('Weblinks'),
+                    'text_type_long' => $this->__('Latest Weblinks'),
+                    'allow_multiple' => true,
+                    'form_content' => false,
+                    'form_refresh' => false,
+                    'show_preview' => true,
+                    'admin_tableless' => true);
     }
 
-    // Break out options from our content field
-    $vars = BlockUtil::varsFromContent($blockinfo['content']);
+    /**
+    * display block
+    */
+    public function display($blockinfo)
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('WeblinksBlock::', "$blockinfo[title]::", ACCESS_READ)) {
+            return;
+        }
 
-    // Defaults
-    if (!isset($vars['limit'])) {
-        $vars['limit'] = 5;
-    }
+        // check if the module is available
+        if (!ModUtil::available('Weblinks')) {
+            return;
+        }
 
-    // Create output object
-    $render = Zikula_View::getInstance('Weblinks', false);
+        // Break out options from our content field
+        $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
-    //  Check if the block is cached
-    if ($render->is_cached('weblinks_block_lastweblinks.html')) {
-        $blockinfo['content'] = $render->fetch('weblinks_block_lastweblinks.html');
+        // Defaults
+        if (!isset($vars['limit'])) {
+            $vars['limit'] = 5;
+        }
+
+
+        //  Check if the block is cached
+        if ($this->view->is_cached('weblinks_block_lastweblinks.html')) {
+            $blockinfo['content'] = $this->view->fetch('weblinks_block_lastweblinks.html');
+            return BlockUtil::themeBlock($blockinfo);
+        }
+
+        $this->view->assign('weblinks', ModUtil::apiFunc('Weblinks', 'user', 'lastweblinks', array('lastlinks' => $vars['limit'])));
+        $this->view->assign('tb', ModUtil::getVar('Weblinks', 'targetblank'));
+
+        // Populate block info and pass to theme
+        $blockinfo['content'] = $this->view->fetch('weblinks_block_lastweblinks.html');
+
         return BlockUtil::themeBlock($blockinfo);
     }
 
-    $render->assign('weblinks', ModUtil::apiFunc('Weblinks', 'user', 'lastweblinks', array('lastlinks' => $vars['limit'])));
-    $render->assign('tb', ModUtil::getVar('Weblinks', 'targetblank'));
+    /**
+    * modify block settings
+    */
+    public function modify($blockinfo)
+    {
+        // Get current content
+        $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
-    // Populate block info and pass to theme
-    $blockinfo['content'] = $render->fetch('weblinks_block_lastweblinks.html');
+        // Defaults
+        if (empty($vars['limit'])) {
+            $vars['limit'] = 5;
+        }
 
-    return BlockUtil::themeBlock($blockinfo);
-}
+        // assign the block vars
+        $this->view->assign($vars);
 
-/**
- * modify block settings
- */
-function Weblinks_lastweblinksblock_modify($blockinfo)
-{
-    // Get current content
-    $vars = BlockUtil::varsFromContent($blockinfo['content']);
-
-    // Defaults
-    if (empty($vars['limit'])) {
-        $vars['limit'] = 5;
+        // Return output
+        return $this->view->fetch('weblinks_block_weblinks_modify.html');
     }
 
-    // Create output object
-    $render = Zikula_View::getInstance('Weblinks', false);
+    /**
+    * update block settings
+    */
+    public function update($blockinfo)
+    {
+        // Get current content
+        $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
-    // assign the block vars
-    $render->assign($vars);
+        // alter the corresponding variable
+        $vars['limit'] = (int)FormUtil::getPassedValue('limit', 5, 'POST');
 
-    // Return output
-    return $render->fetch('weblinks_block_weblinks_modify.html');
-}
+        // Security check
+        if (!SecurityUtil::checkPermission('WeblinksBlock::', "$blockinfo[title]::", ACCESS_ADMIN)) {
+            return false;
+        }
 
-/**
- * update block settings
- */
-function Weblinks_lastweblinksblock_update($blockinfo)
-{
-    // Get current content
-    $vars = BlockUtil::varsFromContent($blockinfo['content']);
+        // write back the new contents
+        $blockinfo['content'] = BlockUtil::varsToContent($vars);
 
-    // alter the corresponding variable
-    $vars['limit'] = (int)FormUtil::getPassedValue('limit', 5, 'POST');
+        // clear the block cache
+        $this->view->clear_cache('weblinks_block_lastweblinks.html');
 
-    // Security check
-    if (!SecurityUtil::checkPermission('WeblinksBlock::', "$blockinfo[title]::", ACCESS_ADMIN)) {
-        return false;
+        return $blockinfo;
     }
-
-    // write back the new contents
-    $blockinfo['content'] = BlockUtil::varsToContent($vars);
-
-    // clear the block cache
-    $render = Zikula_View::getInstance('Weblinks', false);
-    $render->clear_cache('weblinks_block_lastweblinks.html');
-
-    return $blockinfo;
 }
