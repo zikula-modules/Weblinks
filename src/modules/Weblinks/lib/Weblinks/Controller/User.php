@@ -23,9 +23,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
 
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_READ)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
 
         // get all categories
         $categories = ModUtil::apiFunc('Weblinks', 'user', 'categories');
@@ -64,9 +63,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
         $startnum = (int)FormUtil::getPassedValue('startnum', 1, 'GET');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::$cid", ACCESS_READ)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
 
         // get category vars
         $category = ModUtil::apiFunc('Weblinks', 'user', 'category', array('cid' => $cid));
@@ -150,9 +148,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
         $startnum = (int)FormUtil::getPassedValue('startnum', 1, 'GETPOST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_READ)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
 
         // get categories with $query inside
         $categories = ModUtil::apiFunc('Weblinks', 'user', 'searchcats', array('query' => $query));
@@ -190,9 +187,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function randomlink()
     {
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_READ)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
 
         // get random link id an redirect to the visit function
         System::redirect(ModUtil::url('Weblinks', 'user', 'visit', array('lid' => ModUtil::apiFunc('Weblinks', 'user', 'random'))));
@@ -209,9 +205,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
         $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_READ)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
 
         // get link details
         $weblink = ModUtil::apiFunc('Weblinks', 'user', 'link', array('lid' => $lid));
@@ -240,9 +235,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
         $newlinkshowdays = (int)FormUtil::getPassedValue('newlinkshowdays', '7', 'GET');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_READ)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
 
 
         // assign various useful template variables
@@ -264,9 +258,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
         $selectdate = (int)FormUtil::getPassedValue('selectdate', null, 'GET');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_READ)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
 
         // count weblinks from the selected day
         $totallinks = ModUtil::apiFunc('Weblinks', 'user', 'totallinks', array('selectdate' => $selectdate));
@@ -301,9 +294,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
         $ratetype = FormUtil::getPassedValue('ratetype', null, 'GET');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_READ)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
 
         $mostpoplinkspercentrigger = ModUtil::getVar('Weblinks', 'mostpoplinkspercentrigger');
         $mostpoplinks = ModUtil::getVar('Weblinks', 'mostpoplinks');

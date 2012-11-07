@@ -21,10 +21,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     */
     public function view()
     {
-        // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
         // assign various useful template variables
         
@@ -43,10 +40,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     */
     public function catview()
     {
-        // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
 
         // assign various useful template variables
@@ -70,9 +65,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $cdescription = FormUtil::getPassedValue('cdescription', null, 'POST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_ADD)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADD), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -98,9 +92,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -128,9 +121,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $cdescription = FormUtil::getPassedValue('cdescription', null, 'POST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -158,9 +150,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -185,9 +176,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -207,10 +197,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     */
     public function linkview()
     {
-        // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
 
         // assign various useful template variables
@@ -237,9 +225,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 //        $adminmail = System::getVar('adminmail');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_ADD)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADD), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -321,9 +308,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $lid = (int)FormUtil::getPassedValue('lid', null, 'GETPOST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
         // get linkarray from db
         $link = ModUtil::apiFunc('Weblinks', 'admin', 'getlink', array('lid' => $lid));
@@ -354,9 +340,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $link = FormUtil::getPassedValue('link', array(), 'POST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -389,9 +374,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
+
 
         // Confirm authorisation code.
         if (!SecurityUtil::confirmAuthKey()) {
@@ -419,9 +403,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $lid = (int)FormUtil::getPassedValue('lid', null, 'GETPOST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -445,9 +428,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -471,9 +453,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     public function listbrokenlinks()
     {
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
 
         // assign various useful template variables
@@ -497,9 +478,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $lid = (int)FormUtil::getPassedValue('lid', null, 'REQUEST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -528,9 +508,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $rid = (int)FormUtil::getPassedValue('rid', null, 'REQUEST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -551,9 +530,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     public function listmodrequests()
     {
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
         // assign various useful template variables
         
@@ -575,9 +553,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $rid = FormUtil::getPassedValue('rid', null, 'REQUEST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -616,9 +593,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $rid = FormUtil::getPassedValue('rid', null, 'REQUEST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -639,9 +615,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     public function getconfig()
     {
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
+
 
 
         // assign various useful template variables
@@ -663,9 +638,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         $config = FormUtil::getPassedValue('config', 'array()', 'POST');
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -764,9 +738,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     public function help()
     {
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+
 
 
         // Return the output that has been generated by this function
@@ -779,9 +752,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     public function import() // ready
     {
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
+
 
 
         // assign various useful template variables
@@ -817,9 +789,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -864,9 +835,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
@@ -921,9 +891,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
+
 
         $this->checkCsrfToken();
 
