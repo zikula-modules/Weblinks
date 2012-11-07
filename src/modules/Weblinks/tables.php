@@ -16,21 +16,21 @@
 function Weblinks_tables()
 {
     // Initialise table array
-    $pntable = array();
+    $dbtable = array();
 
     // Full table definition
-    $pntable['links_categories'] = DBUtil::getLimitedTablename('links_categories');
-    $pntable['links_categories_column']     = array ('cat_id'       => 'pn_cat_id',
+    $dbtable['links_categories'] = DBUtil::getLimitedTablename('links_categories');
+    $dbtable['links_categories_column']     = array ('cat_id'       => 'pn_cat_id',
                                                      'parent_id'    => 'pn_parent_id',
                                                      'title'        => 'pn_title',
                                                      'cdescription' => 'pn_description');
-    $pntable['links_categories_column_def'] = array ('cat_id'       => 'I AUTO PRIMARY',
+    $dbtable['links_categories_column_def'] = array ('cat_id'       => 'I AUTO PRIMARY',
                                                      'parent_id'    => 'I DEFAULT NULL',
                                                      'title'        => "C(50) NOTNULL DEFAULT ''",
                                                      'cdescription' => "X NOTNULL DEFAULT ''");
 
-    $pntable['links_links'] = DBUtil::getLimitedTablename('links_links');
-    $pntable['links_links_column']     = array ('lid'               => 'pn_lid',
+    $dbtable['links_links'] = DBUtil::getLimitedTablename('links_links');
+    $dbtable['links_links_column']     = array ('lid'               => 'pn_lid',
                                                 'cat_id'            => 'pn_cat_id',
                                                 'title'             => 'pn_title',
                                                 'url'               => 'pn_url',
@@ -43,7 +43,7 @@ function Weblinks_tables()
                                                 'linkratingsummary' => 'pn_ratingsummary',
                                                 'totalvotes'        => 'pn_totalvotes',
                                                 'totalcomments'     => 'pn_totalcomments');
-    $pntable['links_links_column_def'] = array ('lid'               => 'I AUTO PRIMARY',
+    $dbtable['links_links_column_def'] = array ('lid'               => 'I AUTO PRIMARY',
                                                 'cat_id'            => "I NOTNULL DEFAULT '0'",
                                                 'title'             => "C(100) NOTNULL DEFAULT ''",
                                                 'url'               => "C(254) NOTNULL DEFAULT ''",
@@ -57,8 +57,8 @@ function Weblinks_tables()
                                                 'totalvotes'        => "I NOTNULL DEFAULT '0'",
                                                 'totalcomments'     => "I NOTNULL DEFAULT '0'");
 
-    $pntable['links_modrequest'] = DBUtil::getLimitedTablename('links_modrequest');
-    $pntable['links_modrequest_column']     = array ('requestid'       => 'pn_requestid',
+    $dbtable['links_modrequest'] = DBUtil::getLimitedTablename('links_modrequest');
+    $dbtable['links_modrequest_column']     = array ('requestid'       => 'pn_requestid',
                                                      'lid'             => 'pn_lid',
                                                      'cat_id'          => 'pn_cat_id',
                                                      'sid'             => 'pn_sid',
@@ -67,7 +67,7 @@ function Weblinks_tables()
                                                      'description'     => 'pn_description',
                                                      'modifysubmitter' => 'pn_modifysubmitter',
                                                      'brokenlink'      => 'pn_brokenlink');
-    $pntable['links_modrequest_column_def'] = array ('requestid'       => 'I AUTO PRIMARY',
+    $dbtable['links_modrequest_column_def'] = array ('requestid'       => 'I AUTO PRIMARY',
                                                      'lid'             => "I NOTNULL DEFAULT '0'",
                                                      'cat_id'          => "I NOTNULL DEFAULT '0'",
                                                      'sid'             => "I NOTNULL DEFAULT '0'",
@@ -77,8 +77,8 @@ function Weblinks_tables()
                                                      'modifysubmitter' => "C(60) NOTNULL DEFAULT ''",
                                                      'brokenlink'      => "I1 NOTNULL DEFAULT '0'");
 
-    $pntable['links_newlink'] = DBUtil::getLimitedTablename('links_newlink');
-    $pntable['links_newlink_column']     = array ('lid'         => 'pn_lid',
+    $dbtable['links_newlink'] = DBUtil::getLimitedTablename('links_newlink');
+    $dbtable['links_newlink_column']     = array ('lid'         => 'pn_lid',
                                                   'cat_id'      => 'pn_cat_id',
                                                   'title'       => 'pn_title',
                                                   'url'         => 'pn_url',
@@ -86,7 +86,7 @@ function Weblinks_tables()
                                                   'name'        => 'pn_name',
                                                   'email'       => 'pn_email',
                                                   'submitter'   => 'pn_submitter');
-    $pntable['links_newlink_column_def'] = array ('lid'         => 'I AUTO PRIMARY',
+    $dbtable['links_newlink_column_def'] = array ('lid'         => 'I AUTO PRIMARY',
                                                   'cat_id'      => "I NOTNULL DEFAULT '0'",
                                                   'title'       => "C(100) NOTNULL DEFAULT ''",
                                                   'url'         => "C(254) NOTNULL DEFAULT ''",
@@ -95,15 +95,15 @@ function Weblinks_tables()
                                                   'email'       => "C(100) NOTNULL DEFAULT ''",
                                                   'submitter'   => "C(60) NOTNULL DEFAULT ''");
 
-    $pntable['links_votedata'] = DBUtil::getLimitedTablename('links_votedata');
-    $pntable['links_votedata_column']     = array ('ratingdbid'      => 'pn_id',
+    $dbtable['links_votedata'] = DBUtil::getLimitedTablename('links_votedata');
+    $dbtable['links_votedata_column']     = array ('ratingdbid'      => 'pn_id',
                                                    'ratinglid'       => 'pn_lid',
                                                    'ratinguser'      => 'pn_user',
                                                    'rating'          => 'pn_rating',
                                                    'ratinghostname'  => 'pn_hostname',
                                                    'ratingcomments'  => 'pn_comments',
                                                    'ratingtimestamp' => 'pn_timestamp');
-    $pntable['links_votedata_column_def'] = array ('ratingdbid'      => 'I AUTO PRIMARY',
+    $dbtable['links_votedata_column_def'] = array ('ratingdbid'      => 'I AUTO PRIMARY',
                                                    'ratinglid'       => "I NOTNULL DEFAULT '0'",
                                                    'ratinguser'      => "C(60) NOTNULL DEFAULT ''",
                                                    'rating'          => "I NOTNULL DEFAULT '0'",
@@ -111,6 +111,6 @@ function Weblinks_tables()
                                                    'ratingcomments'  => "X NOTNULL DEFAULT ''",
                                                    'ratingtimestamp' => "T NOTNULL DEFAULT '1970-01-01 00:00:00'");
 
-    return $pntable;
+    return $dbtable;
 
 }

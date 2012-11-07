@@ -1,5 +1,4 @@
-{*  $Id: weblinks_user_searchresults.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
-{include file="weblinks_user_header.html"}
+{include file="user/header.tpl"}
 <div class="wl-borderbox">
 
     <div class="wl-center">
@@ -57,4 +56,4 @@
     <p class="wl-center"><strong>{gt text="No matches found to your query"}</strong></p>
     {/if}
 </div>
-{include file="weblinks_user_footer.html"}
+{include file="user/footer.tpl"}

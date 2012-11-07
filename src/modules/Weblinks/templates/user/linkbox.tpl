@@ -1,4 +1,3 @@
-{*  $Id: weblinks_user_linkbox.html 172 2010-10-23 13:39:45Z Petzi-Juist $  *}
 <div class="wl-topbox">
     <a href="{modurl modname=Weblinks type=user func=visit lid=$weblinks.lid}" {if $helper.tb == 1}target="_blank"{/if} >
         {$weblinks.title|safetext}
@@ -16,7 +15,7 @@
     {/if}
 
     {if $weblinks.description}
-    <p>{$weblinks.description|safehtml|modcallhooks:"Weblinks"}</p>
+    <p>{$weblinks.description|safehtml}</p>{* |modcallhooks:"Weblinks" *}
     {/if}
 
     {if $helper.showcat == 1}
@@ -25,10 +24,10 @@
 
     <p>{gt text="Added on"}: {$weblinks.date|dateformat:"datebrief"} | {gt text="Hits"}: {$weblinks.hits}</p>
 
-    {modcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks implode=false}
-    {if $hooks.Ratings}
+    {* modcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks implode=false *}
+    {* if $hooks.Ratings}
     <p>{ $hooks.Ratings }</p>
-    {/if}
+    {/if *}
 </div>
 
 <div class="wl-bottombox">

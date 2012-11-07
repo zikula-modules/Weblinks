@@ -4,9 +4,6 @@
  *
  * Weblinks
  *
- * @version $Id: $
- * @copyright 2010 by Petzi-Juist
- * @link http://www.petzi-juist.de
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -34,17 +31,17 @@ function smarty_function_linkbottommenu($params, &$smarty)
         $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(ModUtil::url('Weblinks', 'user', 'viewlinkdetails', array('lid' => (int)$params['lid'])))."\" class=\"wl-readmore\" title=\"".DataUtil::formatForDisplay(__('Details', $dom))."\">".DataUtil::formatForDisplay(__('Details', $dom))."</a>";
 
         // set default
-        $ezcommentscounter = "";
-
-        if (ModUtil::available('EZComments') && ModUtil::isHooked('EZComments', 'Weblinks')) {
-            $items = ModUtil::apiFunc('EZComments', 'user', 'getall', array('mod' => 'Weblinks', 'status' => 0, 'objectid' => $params['lid']));
-            $ezcommentscounter = count($items);
-
-            $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(ModUtil::url('Weblinks', 'user', 'viewlinkdetails', array('lid' => (int)$params['lid'])))."\" class=\"wl-commentlink\" title=\"".DataUtil::formatForDisplay(__('Add a comment', $dom))."\">";
-            if ($ezcommentscounter == "0") $linkbottommenu .= DataUtil::formatForDisplay(__('Add a comment', $dom))."</a>";
-            elseif ($ezcommentscounter == "1") $linkbottommenu .= "1 ".DataUtil::formatForDisplay(__('Comment', $dom))."</a>";
-            else $linkbottommenu .= "$ezcommentscounter ".DataUtil::formatForDisplay(__('Comments', $dom))."</a>";
-        }
+//        $ezcommentscounter = "";
+//
+//        if (ModUtil::available('EZComments') && ModUtil::isHooked('EZComments', 'Weblinks')) {
+//            $items = ModUtil::apiFunc('EZComments', 'user', 'getall', array('mod' => 'Weblinks', 'status' => 0, 'objectid' => $params['lid']));
+//            $ezcommentscounter = count($items);
+//
+//            $linkbottommenu .= "<a href=\"".DataUtil::formatForDisplay(ModUtil::url('Weblinks', 'user', 'viewlinkdetails', array('lid' => (int)$params['lid'])))."\" class=\"wl-commentlink\" title=\"".DataUtil::formatForDisplay(__('Add a comment', $dom))."\">";
+//            if ($ezcommentscounter == "0") $linkbottommenu .= DataUtil::formatForDisplay(__('Add a comment', $dom))."</a>";
+//            elseif ($ezcommentscounter == "1") $linkbottommenu .= "1 ".DataUtil::formatForDisplay(__('Comment', $dom))."</a>";
+//            else $linkbottommenu .= "$ezcommentscounter ".DataUtil::formatForDisplay(__('Comments', $dom))."</a>";
+//        }
     }
 
     if ($params['details']) {

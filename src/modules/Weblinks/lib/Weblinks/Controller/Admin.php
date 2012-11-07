@@ -13,7 +13,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     */
     public function main()
     {
-        return Weblinks_admin_view();
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'view'));
     }
 
     /**
@@ -244,7 +244,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         // get parameters we need
         $link = FormUtil::getPassedValue('link', array(), 'POST');
         $sitename = System::getVar('sitename');
-        $adminmail = System::getVar('adminmail');
+//        $adminmail = System::getVar('adminmail');
 
         // Security check
         if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_ADD)) {
@@ -815,17 +815,17 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         // assign various useful template variables
         $this->view->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
 
-        if (ModUtil::available('EZComments') && ModUtil::isHooked('EZComments', 'Weblinks')) {
-            $this->view->assign('ezcomments', 1);
-        } else {
-            $this->view->assign('ezcomments', 0);
-        }
-
-        if (ModUtil::available('Ratings') && ModUtil::isHooked('Ratings', 'Weblinks')) {
-            $this->view->assign('ratings', 1);
-        } else {
-            $this->view->assign('ratings', 0);
-        }
+//        if (ModUtil::available('EZComments') && ModUtil::isHooked('EZComments', 'Weblinks')) {
+//            $this->view->assign('ezcomments', 1);
+//        } else {
+//            $this->view->assign('ezcomments', 0);
+//        }
+//
+//        if (ModUtil::available('Ratings') && ModUtil::isHooked('Ratings', 'Weblinks')) {
+//            $this->view->assign('ratings', 1);
+//        } else {
+//            $this->view->assign('ratings', 0);
+//        }
 
         if (ModUtil::available('CmodsWebLinks')) {
             $this->view->assign('cmodsweblinks', 1);
@@ -864,8 +864,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         }
 
         ModUtil::dbInfoLoad('Ratings');
-        $pntable = DBUtil::getTables();
-        $linkscolumn = $pntable['links_links_column'];
+        $dbtable = DBUtil::getTables();
+        $linkscolumn = $dbtable['links_links_column'];
         $where = "WHERE $linkscolumn[totalvotes] != '0'";
         $votes = DBUtil::selectObjectArray('links_links', $where);
         $counter = 0;
@@ -913,14 +913,14 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         }
 
         ModUtil::dbInfoLoad('EZComments');
-        $pntable = DBUtil::getTables();
-        $linkscolumn = $pntable['links_votedata_column'];
+        $dbtable = DBUtil::getTables();
+        $linkscolumn = $dbtable['links_votedata_column'];
         $where = "WHERE $linkscolumn[ratingcomments] != ''";
         $comments = DBUtil::selectObjectArray('links_votedata', $where);
         $counter = 0;
 
         foreach ($comments as $c) {
-            $linkscolumn = $pntable['links_links_column'];
+            $linkscolumn = $dbtable['links_links_column'];
             $where = "WHERE $linkscolumn[lid] = ".$c['ratinglid'];
             $user = DBUtil::selectObject('links_links', $where);
             if ($c['ratinguser'] == "Anonymous") {
@@ -963,10 +963,10 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         }
 
         ModUtil::dbInfoLoad('CmodsWebLinks');
-        $pntable = DBUtil::getTables();
+        $dbtable = DBUtil::getTables();
 
         // import categories
-        $table = $pntable['cmodsweblinks_categories'];
+        $table = $dbtable['cmodsweblinks_categories'];
         $sql = "SELECT * FROM $table";
         $categories = DBUtil::selectObjectArraySQL($sql, 'cmodsweblinks_categories');
     //     $categories = DBUtil::selectObjectArray('cmodsweblinks_categories', '', 'cat_id', '-1', '-1');
@@ -983,7 +983,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         LogUtil::registerStatus($this->__f('migrated: %s categories from CmodsWebLinks to Weblinks', $counter));
 
         // import links
-        $table = $pntable['cmodsweblinks_links'];
+        $table = $dbtable['cmodsweblinks_links'];
         $sql = "SELECT * FROM $table";
         $links = DBUtil::selectObjectArraySQL($sql, 'cmodsweblinks_links');
     //    $links = DBUtil::selectObjectArray('cmodsweblinks_links', '', 'lid', '-1', '-1');
@@ -1009,7 +1009,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         LogUtil::registerStatus($this->__f('migrated: %s links from CmodsWebLinks to Weblinks', $counter));
 
         // import modrequests
-        $table = &$pntable['cmodsweblinks_modrequest'];
+        $table = &$dbtable['cmodsweblinks_modrequest'];
         $sql = "SELECT * FROM $table";
         $modrequests = DBUtil::selectObjectArraySQL($sql, 'cmodsweblinks_modrequest');
     //    $modrequests = DBUtil::selectObjectArray('cmodsweblinks_modrequest', '', 'requestid', '-1', '-1');
@@ -1029,7 +1029,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
         LogUtil::registerStatus($this->__f('migrated: %s modrequests from CmodsWebLinks to Weblinks', $counter));
 
         // import newlinks
-        $table = $pntable['cmodsweblinks_newlink'];
+        $table = $dbtable['cmodsweblinks_newlink'];
         $sql = "SELECT * FROM $table";
         $newlinks = DBUtil::selectObjectArraySQL($sql, 'cmodsweblinks_newlink');
     //    $newlinks = DBUtil::selectObjectArray('cmodsweblinks_newlink', '', 'lid', '-1', '-1');

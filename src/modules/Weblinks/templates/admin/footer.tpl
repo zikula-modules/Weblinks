@@ -1,4 +1,3 @@
-{* $Id: weblinks_admin_footer.html 154 2010-10-05 23:36:25Z Petzi-Juist $ *}
   <p class="wl-center">
     { pnmodgetinfo module=Weblinks info=all assign=modinfo}
     <a href="http://code.zikula.org/weblinks/" title="Weblinks">{ $modinfo.name } v{ $modinfo.version }</a> | 

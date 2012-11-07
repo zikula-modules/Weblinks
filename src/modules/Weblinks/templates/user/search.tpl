@@ -1,4 +1,3 @@
-{*  $Id: weblinks_user_search.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
 <form action="{modurl modname="Weblinks" type="user" func="search"}" method="post">
     <div>
         <label for="query">{gt text="Weblinks"}</label>

@@ -4,9 +4,6 @@
  *
  * Weblinks
  *
- * @version $Id: function.catlist.php 40 2009-01-09 14:13:23Z herr.vorragend $
- * @copyright 2010 by Petzi-Juist
- * @link http://www.petzi-juist.de
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -16,9 +13,9 @@ function smarty_function_catlist($params, &$smarty)
         return LogUtil::registerArgsError();
     }
     
-    $pntable = DBUtil::getTables();
+    $dbtable = DBUtil::getTables();
     $s = "";
-    $column = $pntable['links_categories_column'];
+    $column = $dbtable['links_categories_column'];
     $where = "WHERE $column[parent_id]='".(int)DataUtil::formatForStore($params['scat'])."'";
     $objArray = DBUtil::selectObjectArray('links_categories', $where, 'title');
 
@@ -44,9 +41,9 @@ function catlist($scat, $sel)
         return LogUtil::registerArgsError();
     }
 
-    $pntable = DBUtil::getTables();
+    $dbtable = DBUtil::getTables();
     $s = "";
-    $column = $pntable['links_categories_column'];
+    $column = $dbtable['links_categories_column'];
     $where = "WHERE $column[parent_id]='".(int)DataUtil::formatForStore($scat)."'";
     $objArray = DBUtil::selectObjectArray('links_categories', $where, 'title');
 

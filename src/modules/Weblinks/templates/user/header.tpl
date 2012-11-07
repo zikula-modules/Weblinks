@@ -1,4 +1,3 @@
-{*  $Id: weblinks_user_header.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
 {insert name="getstatusmsg"}
 <div id="wl-main">
 

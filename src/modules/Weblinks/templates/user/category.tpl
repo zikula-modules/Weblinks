@@ -1,5 +1,4 @@
-{*  $Id: weblinks_user_category.html 72 2009-02-06 08:05:37Z Petzi-Juist $  *}
-{include file="weblinks_user_header.html"}
+{include file="user/header.tpl"}
 {pagesetvar name=title value=$category.title}
 <div class="wl-borderbox">
 
@@ -29,4 +28,4 @@
 
     {pager rowcount=$wlpager.numitems limit=$wlpager.itemsperpage posvar=startnum shift=1 img_prev=images/icons/extrasmall/previous.gif img_next=images/icons/extrasmall/next.gif}
 </div>
-{include file="weblinks_user_footer.html"}
+{include file="user/footer.tpl"}

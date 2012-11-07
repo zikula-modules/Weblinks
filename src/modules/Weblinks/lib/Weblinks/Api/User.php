@@ -103,8 +103,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
             return LogUtil::registerArgsError();
         }
 
-        $pntable = DBUtil::getTables();
-        $weblinkscolumn = &$pntable['links_categories_column'];
+        $dbtable = DBUtil::getTables();
+        $weblinkscolumn = &$dbtable['links_categories_column'];
 
         $where = "WHERE $weblinkscolumn[parent_id] = ".(int)DataUtil::formatForStore($args['cid']);
 
@@ -145,8 +145,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         // by rgasch to solve http://code.zikula.org/weblinks/ticket/37
         $where = "";
         if (isset($args['cid']) && is_numeric($args['cid']) && $args['cid']) {
-            $pntable = DBUtil::getTables();
-            $weblinkscolumn = &$pntable['links_links_column'];
+            $dbtable = DBUtil::getTables();
+            $weblinkscolumn = &$dbtable['links_links_column'];
             $where = "WHERE $weblinkscolumn[cat_id] = ".(int)DataUtil::formatForStore($args['cid']);
         }
 
@@ -178,8 +178,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     */
     public function orderby($args)
     {
-        $pntable = DBUtil::getTables();
-        $column = $pntable['links_links_column'];
+        $dbtable = DBUtil::getTables();
+        $column = $dbtable['links_links_column'];
 
         if ($args['orderby'] == "titleA") {
             $orderbysql = "$column[title] ASC";
@@ -255,8 +255,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         $hits = $args['hits'] + 1;
 
-        $pntable = DBUtil::getTables();
-        $weblinkscolumn = $pntable['links_links_column'];
+        $dbtable = DBUtil::getTables();
+        $weblinkscolumn = $dbtable['links_links_column'];
 
         $items = array('hits' => $hits);
         $where = "WHERE $weblinkscolumn[lid] = ".DataUtil::formatForStore($args['lid']);
@@ -276,8 +276,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
             return LogUtil::registerArgsError();
         }
 
-        $pntable = DBUtil::getTables();
-        $weblinkscolumn = $pntable['links_categories_column'];
+        $dbtable = DBUtil::getTables();
+        $weblinkscolumn = $dbtable['links_categories_column'];
 
         $where ="WHERE $weblinkscolumn[title] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
@@ -320,8 +320,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         $startnum = (isset($args['startnum']) && is_numeric($args['startnum'])) ? $args['startnum'] : 1;
         $numlinks = (isset($args['numlinks']) && is_numeric($args['numlinks'])) ? $args['numlinks'] : -1;
 
-        $pntable = DBUtil::getTables();
-        $column = $pntable['links_links_column'];
+        $dbtable = DBUtil::getTables();
+        $column = $dbtable['links_links_column'];
 
         $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
@@ -336,7 +336,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
                             'instance_right'   => 'cat_id',
                             'level'            => ACCESS_READ);
 
-        $result = DBUtil::selectObjectArray('links_links', $where, $args['orderby'], $args['startnum']-1, $args['numlinks'], '', $permFilter);
+        $result = DBUtil::selectObjectArray('links_links', $where, $orderby, $startnum - 1, $numlinks, '', $permFilter);
 
         // check for db error
         if ($result === false) {
@@ -357,8 +357,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
             return LogUtil::registerArgsError();
         }
 
-        $pntable = DBUtil::getTables();
-        $column = $pntable['links_links_column'];
+        $dbtable = DBUtil::getTables();
+        $column = $dbtable['links_links_column'];
 
         $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
 
@@ -385,11 +385,12 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
                             'level'            => ACCESS_READ);
 
         $objArray = DBUtil::selectObjectArray('links_links', '', '', '-1', '-1', '', $permFilter);
+        $lidarray = array();
         foreach ($objArray as $link) {
             $lidarray[] = $link['lid'];
         }
 
-        if ($lidarray < 1) { // if no link
+        if (count($lidarray) < 1) { // if no link
             return DataUtil::formatForDisplayHTML($this->__('Sorry! There is no such link'));
         }
 
@@ -419,9 +420,9 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         $newlinkdb = date("Y-m-d", $args['selectdate']);
 
-        $pntable = DBUtil::getTables();
-        $column = $pntable['links_links_column'];
-        $column2 = $pntable['links_categories_column'];
+        $dbtable = DBUtil::getTables();
+        $column = $dbtable['links_links_column'];
+        $column2 = $dbtable['links_categories_column'];
 
         $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
 
@@ -439,9 +440,9 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
             return LogUtil::registerArgsError();
         }
 
-        $pntable = DBUtil::getTables();
+        $dbtable = DBUtil::getTables();
         $newlinkdb = date("Y-m-d", $args['selectdate']);
-        $column = $pntable['links_links_column'];
+        $column = $dbtable['links_links_column'];
         $where = "WHERE $column[date] LIKE '%".DataUtil::formatForStore($newlinkdb)."%'";
 
         // define the permission filter to apply
@@ -533,6 +534,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         $checkurl = ModUtil::apiFunc('Weblinks', 'user', 'checkurl', array('url' => $args['url']));
         $valid = System::varValidate($args['url'], 'url');
+        $link = array();
 
         if ($checkurl > 0) {
             $link['text'] = $this->__('Sorry! This URL is already listed in the database!');
@@ -594,8 +596,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
             $args['lastlinks'] = ModUtil::getVar('Weblinks', 'linksinblock');
         }
 
-        $pntable = DBUtil::getTables();
-        $weblinkscolumn = $pntable['links_links_column'];
+        $dbtable = DBUtil::getTables();
+        $weblinkscolumn = $dbtable['links_links_column'];
 
         $orderby = "ORDER BY $weblinkscolumn[date] DESC";
 
@@ -634,8 +636,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
             $args['mostpoplinks'] = ModUtil::getVar('Weblinks', 'linksinblock');
         }
 
-        $pntable = DBUtil::getTables();
-        $weblinkscolumn = $pntable['links_links_column'];
+        $dbtable = DBUtil::getTables();
+        $weblinkscolumn = $dbtable['links_links_column'];
 
         $orderby = "ORDER BY $weblinkscolumn[hits] DESC";
 

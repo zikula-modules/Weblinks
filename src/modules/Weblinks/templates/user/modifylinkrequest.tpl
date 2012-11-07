@@ -1,5 +1,4 @@
-{*  $Id: weblinks_user_modifylinkrequest.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
-{include file="weblinks_user_header.html"}
+{include file="user/header.tpl"}
 <div class="wl-borderbox">
     {if $blockunregmodify == 1 && $ratinguser == $anonymous}
     <div class="z-errormsg">{gt text="Sorry! Only registered users can suggest link modifications."}</div>
@@ -40,4 +39,4 @@
     </form>
     {/if}
 </div>
-{include file="weblinks_user_footer.html"}
+{include file="user/footer.tpl"}

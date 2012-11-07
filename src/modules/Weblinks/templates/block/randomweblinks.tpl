@@ -1,4 +1,3 @@
-{*  $Id: weblinks_block_randomweblinks.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
 {if $links}
 <ul class="randomweblinks">
     {foreach from=$links item=links name=loop}

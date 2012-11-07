@@ -1,5 +1,4 @@
-{*  $Id: weblinks_user_brokenlink.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
-{include file="weblinks_user_header.html"}
+{include file="user/header.tpl"}
 <div class="wl-borderbox">
 
     <form class="z-form wl-form" action="{modurl modname="Weblinks" type="user" func="brokenlinks"}" method="post" enctype="application/x-www-form-urlencoded">
@@ -24,4 +23,4 @@
     </form>
 
 </div>
-{include file="weblinks_user_footer.html"}
+{include file="user/footer.tpl"}

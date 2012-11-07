@@ -1,4 +1,4 @@
-{include file="weblinks_admin_header.html"}
+{include file="admin/header.tpl"}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname=core src=info.gif set=icons/large __alt="Overview" __title="Overview"}</div>
     <h2>{gt text="Overview"}</h2>
@@ -81,4 +81,4 @@
 
     {/if}
 </div>
-{include file="weblinks_admin_footer.html"}
+{include file="admin/footer.tpl"}

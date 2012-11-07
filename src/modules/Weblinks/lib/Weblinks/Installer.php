@@ -73,7 +73,7 @@ class Weblinks_Installer extends Zikula_Installer {
     public function Upgrade($oldversion)
     {
         // Get database information
-        $pntable = DBUtil::getTables();
+        $dbtable = DBUtil::getTables();
 
         switch($oldversion) {
             case '1.0':
@@ -108,8 +108,8 @@ class Weblinks_Installer extends Zikula_Installer {
             }
 
             // rename hook
-            $pntable = DBUtil::getTables();
-            $hookscolumn = $pntable['hooks_column'];
+            $dbtable = DBUtil::getTables();
+            $hookscolumn = $dbtable['hooks_column'];
             $object = array('smodule' => 'Weblinks');
             $where = "WHERE $hookscolumn[smodule] = 'Web_Links'";
             DBUtil::updateObject($object, 'hooks', $where, 'id');
@@ -117,8 +117,8 @@ class Weblinks_Installer extends Zikula_Installer {
             // rename hooks entries
             if (ModUtil::available('EZComments')) {
                 ModUtil::dbInfoLoad('EZComments');
-                $pntable = DBUtil::getTables();
-                $ezccolumn = $pntable['EZComments_column'];
+                $dbtable = DBUtil::getTables();
+                $ezccolumn = $dbtable['EZComments_column'];
                 $where = "WHERE $ezccolumn[modname] = 'Web_Links'";
                 $ezcarray = DBUtil::selectObjectArray('EZComments', $where, '', -1, -1, false);
                 $ezccount = count($ezcarray);
@@ -130,8 +130,8 @@ class Weblinks_Installer extends Zikula_Installer {
 
             if (ModUtil::available('Ratings')) {
                 ModUtil::dbInfoLoad('Ratings');
-                $pntable = DBUtil::getTables();
-                $ratcolumn = $pntable['ratings_column'];
+                $dbtable = DBUtil::getTables();
+                $ratcolumn = $dbtable['ratings_column'];
                 $where = "WHERE $ratcolumn[module] = 'Web_Links'";
                 $ratarray = DBUtil::selectObjectArray('ratings', $where, '', -1, -1, false);
                 $ratcount = count($ratarray);

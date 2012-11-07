@@ -1,5 +1,4 @@
-{*  $Id: weblinks_user_addlink.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
-{include file="weblinks_user_header.html"}
+{include file="user/header.tpl"}
 <div class="wl-borderbox">
     {if $addlink == 1}
     <dl>
@@ -60,4 +59,4 @@
     </div>
     {/if}
 </div>
-{include file="weblinks_user_footer.html"}
+{include file="user/footer.tpl"}

@@ -1,5 +1,4 @@
-{*  $Id: weblinks_user_newlinks.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
-{include file="weblinks_user_header.html"}
+{include file="user/header.tpl"}
 <div class="wl-borderbox wl-center">
     <h3>{gt text="New links"}</h3>
     <p>{gt text="Total new links"}: {gt text="Last week"}: {countlinks days=7} | {gt text="Last 30 days"}: {countlinks days=30}
@@ -12,4 +11,4 @@
     <p><strong>{gt text="Total new links over the last"} {$newlinkshowdays|safetext} {gt text="days"} :</strong></p>
     {newlinksbyday newlinkshowdays=$newlinkshowdays}
 </div>
-{include file="weblinks_user_footer.html"}
+{include file="user/footer.tpl"}

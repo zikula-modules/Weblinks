@@ -1,5 +1,4 @@
-{*  $Id: weblinks_user_newlinksdate.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
-{include file="weblinks_user_header.html"}
+{include file="user/header.tpl"}
 <div class="wl-borderbox">
 
     <h3>{$dateview|safetext} - {$totallinks|safetext} {gt text="new link" plural="new links" count=$totallinks}</h3>
@@ -11,4 +10,4 @@
     {/foreach}
 
 </div>
-{include file="weblinks_user_footer.html"}
+{include file="user/footer.tpl"}

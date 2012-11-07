@@ -1,4 +1,3 @@
-{*  $Id: weblinks_user_sortlinksbymenu.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
 <dl class="wl-sortlinks wl-center">
     <dt><strong>{gt text="Sites currently sorted by"}: {orderbyTrans orderby=$orderby}</strong></dt>
     <dd>{gt text="Sort links by"}:

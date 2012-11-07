@@ -1,4 +1,3 @@
-{*  $Id: weblinks_user_links.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
 <ul class="wl-nav">
     {if $helper.main != 1}
     <li><a href="{modurl modname=Weblinks type=user func=main}">{gt text="Link-Index"}</a></li>

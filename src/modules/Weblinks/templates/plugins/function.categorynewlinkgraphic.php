@@ -4,9 +4,6 @@
  *
  * Weblinks
  *
- * @version $Id: function.categorynewlinkgraphic.php 40 2009-01-09 14:13:23Z herr.vorragend $
- * @copyright 2010 by Petzi-Juist
- * @link http://www.petzi-juist.de
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -17,8 +14,8 @@ function smarty_function_categorynewlinkgraphic($params, &$smarty)
     if (!isset($params['cat']) || !is_numeric($params['cat'])){
         return LogUtil::registerArgsError();
     }
-    $pntable = DBUtil::getTables();
-    $column = $pntable['links_links_column'];
+    $dbtable = DBUtil::getTables();
+    $column = $dbtable['links_links_column'];
     $where = "WHERE $column[cat_id]= '".(int)DataUtil::formatForStore($params['cat'])."'";
     $orderby = "ORDER BY $column[date] DESC";
     $time = DBUtil::selectObjectArray('links_links', $where, $orderby, '-1', '1');
@@ -27,6 +24,7 @@ function smarty_function_categorynewlinkgraphic($params, &$smarty)
         return;
     } else {
         echo "&nbsp;";
+        $datetime = date();
         preg_match ("[([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})]", $time['0']['date'], $datetime);
 
         $datenow = $datetime[3]."-".$datetime[2]."-".$datetime[1];

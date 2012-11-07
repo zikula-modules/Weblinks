@@ -1,5 +1,4 @@
-{*  $Id: weblinks_admin_listmodrequests.html 165 2010-10-19 13:28:15Z herr.vorragend $  *}
-{include file="weblinks_admin_header.html"}
+{include file="admin/header.tpl"}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname=core src=agt_internet.gif set=icons/large __alt="Links administer" __title="Links administer"}</div>
     <h2>{gt text="User link modification requests"} ({$totalmodrequests|safetext})</h2>
@@ -71,4 +70,4 @@
     {/if}
 
 </div>
-{include file="weblinks_admin_footer.html"}
+{include file="admin/footer.tpl"}

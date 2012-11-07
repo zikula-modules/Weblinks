@@ -1,10 +1,10 @@
-{*  $Id: weblinks_admin_import.html 165 2010-10-19 13:28:15Z herr.vorragend $  *}
-{include file="weblinks_admin_header.html"}
+{include file="admin/header.tpl"}
 {modgetinfo modname=Weblinks info=all assign=info}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname=core src=configure.gif set=icons/large __alt="Import" __title="Import"}</div>
     <h2>{gt text="Import"}</h2>
-    <form class="z-form" action="{modurl modname=Weblinks type=admin func=importratings}" method="post" enctype="application/x-www-form-urlencoded">
+    <!--
+        <form class="z-form" action="{modurl modname=Weblinks type=admin func=importratings}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <legend>{gt text="Ratings"}</legend>
@@ -41,6 +41,7 @@
                 {/if}
             </fieldset>
         </form>
+    -->
         <form class="z-form" action="{modurl modname=Weblinks type=admin func=importcmodsweblinks}" method="post" enctype="application/x-www-form-urlencoded">
             <fieldset>
                 <legend>{gt text="CmodsWebLinks"}</legend>
@@ -65,4 +66,4 @@
         </div>
     </form>
 </div>
-{include file="weblinks_admin_footer.html"}
+{include file="admin/footer.tpl"}

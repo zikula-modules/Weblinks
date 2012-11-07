@@ -12,7 +12,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     */
     public function main()
     {
-        return Weblinks_user_view();
+        $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
     }
 
     /**

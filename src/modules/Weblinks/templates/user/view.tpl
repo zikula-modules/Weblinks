@@ -1,5 +1,4 @@
-{*  $Id: weblinks_user_view.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
-{include file="weblinks_user_header.html"}
+{include file="user/header.tpl"}
 <div class="wl-borderbox">
     <h3>{gt text="Main-Categories"}</h3>
 
@@ -64,4 +63,4 @@
 </div>
 {/if}
 
-{include file="weblinks_user_footer.html"}
+{include file="user/footer.tpl"}

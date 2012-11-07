@@ -1,4 +1,3 @@
-{*  $Id: weblinks_block_mostpopularweblinks.html 166 2010-10-19 14:39:19Z herr.vorragend $  *}
 {if $weblinks}
 <ol class="mostpopularweblinks">
     {foreach from=$weblinks item=weblinks name=loop}

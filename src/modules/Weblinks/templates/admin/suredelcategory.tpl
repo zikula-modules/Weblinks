@@ -1,5 +1,4 @@
-{*  $Id: weblinks_admin_suredelcategory.html 165 2010-10-19 13:28:15Z herr.vorragend $  *}
-{include file="weblinks_admin_header.html"}
+{include file="admin/header.tpl"}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname=core src=folder.gif set=icons/large __alt="Delete Category" __title="Delete Category"}</div>
 
@@ -24,4 +23,4 @@
     </form>
 
 </div>
-{include file="weblinks_admin_footer.html"}
+{include file="admin/footer.tpl"}

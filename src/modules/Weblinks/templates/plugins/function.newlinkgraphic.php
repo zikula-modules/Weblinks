@@ -4,9 +4,6 @@
  *
  * Weblinks
  *
- * @version $Id: function.newlinkgraphic.php 40 2009-01-09 14:13:23Z herr.vorragend $
- * @copyright 2010 by Petzi-Juist
- * @link http://www.petzi-juist.de
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
@@ -15,6 +12,7 @@ function smarty_function_newlinkgraphic($params, &$smarty)
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
     echo "&nbsp;";
+    $datetime = date();
     preg_match ("[([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})]", $params['time'], $datetime);
 
     $datenow = $datetime[3]."-".$datetime[2]."-".$datetime[1];
