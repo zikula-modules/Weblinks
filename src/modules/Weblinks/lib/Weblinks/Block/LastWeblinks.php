@@ -61,7 +61,7 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
 
         //  Check if the block is cached
         if ($this->view->is_cached('weblinks_block_lastweblinks.html')) {
-            $blockinfo['content'] = $this->view->fetch('weblinks_block_lastweblinks.html');
+            $blockinfo['content'] = $this->view->fetch('block/lastweblinks.tpl');
             return BlockUtil::themeBlock($blockinfo);
         }
 
@@ -69,7 +69,7 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
         $this->view->assign('tb', ModUtil::getVar('Weblinks', 'targetblank'));
 
         // Populate block info and pass to theme
-        $blockinfo['content'] = $this->view->fetch('weblinks_block_lastweblinks.html');
+        $blockinfo['content'] = $this->view->fetch('block/lastweblinks.tpl');
 
         return BlockUtil::themeBlock($blockinfo);
     }
@@ -91,7 +91,7 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
         $this->view->assign($vars);
 
         // Return output
-        return $this->view->fetch('weblinks_block_weblinks_modify.html');
+        return $this->view->fetch('block/weblinks_modify.tpl');
     }
 
     /**
@@ -114,7 +114,7 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
         $blockinfo['content'] = BlockUtil::varsToContent($vars);
 
         // clear the block cache
-        $this->view->clear_cache('weblinks_block_lastweblinks.html');
+        $this->view->clear_cache('block/lastweblinks.tpl');
 
         return $blockinfo;
     }
