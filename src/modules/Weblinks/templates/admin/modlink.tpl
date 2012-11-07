@@ -7,7 +7,7 @@
         <div>
             <fieldset>
                 <legend>{gt text="Modify/Delete a link"} - {gt text="Link ID"}: <strong>{$link.lid|safetext}</strong></legend>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <input type="hidden" name="link[lid]" value="{$link.lid|safetext}" />
                 <div class="z-formrow">
                     <label for="modlinks_title">{gt text="Page title"}</label>

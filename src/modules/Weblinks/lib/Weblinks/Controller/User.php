@@ -374,7 +374,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
 
 
         // assign various useful template variables
-        $this->view->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
+        
         $this->view->assign('lid', $lid);
         $this->view->assign('submitter', $submitter);
         $this->view->assign('helper', array('main' => 0, 'tb' => ModUtil::getVar('Weblinks', 'targetblank')));
@@ -398,10 +398,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
             return LogUtil::registerPermissionError();
         }
 
-        // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError (ModUtil::url('Weblinks', 'user', 'view'));
-        }
+        $this->checkCsrfToken();
+
 
         // add broken link
         ModUtil::apiFunc('Weblinks', 'user', 'addbrockenlink', array('lid' => $lid, 'submitter' => $submitter));
@@ -461,10 +459,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
             return LogUtil::registerPermissionError();
         }
 
-        // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError (ModUtil::url('Weblinks', 'user', 'view'));
-        }
+        $this->checkCsrfToken();
+
 
         // add link request
         ModUtil::apiFunc('Weblinks', 'user', 'modifylinkrequest', array('lid' => $modlink['lid'],
@@ -495,7 +491,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
 
 
         // assign various useful template variables
-        $this->view->assign('authid', SecurityUtil::generateAuthKey('Weblinks'));
+        
         $this->view->assign('addlink', $addlink);
         $this->view->assign('helper', array('main' => 0, 'tb' => ModUtil::getVar('Weblinks', 'targetblank')));
         if (UserUtil::isLoggedIn()) {
@@ -521,10 +517,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
             return LogUtil::registerPermissionError();
         }
 
-        // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError (ModUtil::url('Weblinks', 'user', 'view'));
-        }
+        $this->checkCsrfToken();
+
 
         // write the link to db and get a status message back
         $link = ModUtil::apiFunc('Weblinks', 'user', 'add', array('title' => $newlink['title'],

@@ -10,7 +10,7 @@
 
     <form class="z-form" action="{modurl modname="Weblinks" type="user" func="add"}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+            <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <fieldset>
                 <legend>{gt text="Add a new link"}</legend>
 

@@ -6,7 +6,7 @@
         <div>
             <fieldset>
                 <legend>{gt text="Delete Category"}</legend>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <input type="hidden" name="cid" value="{$cid}" />
 
                 <div class="z-formrow">

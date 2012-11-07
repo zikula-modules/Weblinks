@@ -12,7 +12,7 @@
                 <div class="z-informationmsg">
                     {gt text="With this function <strong>Weblinks-Votes</strong> will be imported to the <strong>Rating</strong> module.<br /><strong>!Attention!</strong> - befor you use this function you should set the style of the Ratings."}
                 </div>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formbuttons">
                     {button src=button_ok.gif set=icons/small __alt="OK" __title="OK"}
                 </div>
@@ -30,7 +30,7 @@
                 <div class="z-informationmsg">
                     {gt text="With this function <strong>Weblinks-Comments</strong> will be imported to the <strong>EZComments</strong> module."}
                 </div>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formbuttons">
                     {button src=button_ok.gif set=icons/small alt="OK" title="OK"}
                 </div>
@@ -49,7 +49,7 @@
                 <div class="z-informationmsg">
                     {gt text="With this function <strong>CmodsWebLinks</strong> will be imported to the <strong>Weblinks</strong> module.<br /><strong>!Attention!</strong> - this function add the CmodsWebLinks categories and links to the Weblinks module and don't replace it."}
                 </div>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formbuttons">
                     {button src=button_ok.gif set=icons/small alt="OK" title="OK"}
                 </div>
@@ -57,7 +57,7 @@
                 <div class="z-informationmsg">
                     {gt text="CmodsWebLinks isn't activated! Try to import?<br /><strong>!Attention!</strong> - this function add the CmodsWebLinks categories and links to the Weblinks module and don't replace it."}
                 </div>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formbuttons">
                     {button src=button_ok.gif set=icons/small alt="OK" title="OK"}
                 </div>

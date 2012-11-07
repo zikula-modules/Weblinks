@@ -5,7 +5,7 @@
     {else}
     <form class="z-form" action="{modurl modname=Weblinks type=user func=modifylinkrequests}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+            <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <input type="hidden" name="modlink[lid]" value="{$link.lid|safetext}" />
             <input type="hidden" name="modlink[submitter]" value="{$submitter|safetext}" />
 

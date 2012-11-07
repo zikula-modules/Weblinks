@@ -15,7 +15,7 @@
 
     <form class="z-form" action="{modurl modname=Weblinks type=admin func=validate}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+            <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <fieldset>
                 <legend>{gt text="Link validation"}</legend>
                 <div class="z-formrow">
@@ -37,7 +37,7 @@
     <form class="z-form" action="{modurl modname=Weblinks type=admin func=addlink}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <input type="hidden" name="link[new]" value="1" />
                 <input type="hidden" name="link[lid]" value="{$newlinks.lid|safetext}" />
                 <input type="hidden" name="link[submitter]" value="{$newlinks.submitter|safetext}" />

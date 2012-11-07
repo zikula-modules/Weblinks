@@ -3,7 +3,7 @@
 
     <form class="z-form wl-form" action="{modurl modname="Weblinks" type="user" func="brokenlinks"}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+            <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <input type="hidden" name="lid" value="{$lid}" />
             <input type="hidden" name="submitter" value="{$submitter}" />
 

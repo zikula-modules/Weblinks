@@ -7,7 +7,7 @@
         <div>
             <fieldset>
                 <legend>{gt text="Add a category"}</legend>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
 
                 <div class="z-formrow">
                     <label for="addcat_title">{gt text="Name"}</label>
@@ -36,7 +36,7 @@
         <div>
             <fieldset>
                 <legend>{gt text="Modify a category"}</legend>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
 
                 <div class="z-formrow">
                     <label for="modcat_cat">{gt text="Category"}</label>
@@ -54,7 +54,7 @@
         <div>
             <fieldset>
                 <legend>{gt text="Delete category"}</legend>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
 
                 <div class="z-formrow">
                     <label for="suredel_cat">{gt text="Category"}</label>

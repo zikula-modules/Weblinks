@@ -9,7 +9,7 @@
         <div>
             <fieldset>
                 <legend>{gt text="Add link"}</legend>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <input type="hidden" name="link[submitter]" value="{$submitter}" />
                 <input type="hidden" name="link[new]" value="0" />
                 <input type="hidden" name="link[lid]" value="0" />
@@ -51,7 +51,7 @@
         <div>
             <fieldset>
                 <legend>{gt text="Modify/Delete a link"}</legend>
-                <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formrow">
                     <label for="modlink_lid">{gt text="Link ID"}</label>
                     <input id="modlink_lid" type="text" name="lid" size="12" maxlength="11" />

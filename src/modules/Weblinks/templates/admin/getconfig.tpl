@@ -5,7 +5,7 @@
 
     <form class="z-form" action="{modurl modname="Weblinks" type="admin" func="updateconfig"}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input type="hidden" name="authid" value="{insert name="generateauthkey" module="Weblinks"}" />
+            <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <fieldset>
                 <legend>{gt text="Number of links"}</legend>
                 <div class="z-formrow">
