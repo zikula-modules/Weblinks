@@ -372,8 +372,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
      */
     public function dellink($args)
     {
-
-
         // Argument check
         if (!isset($args['lid']) || !is_numeric($args['lid'])) {
             return LogUtil::registerArgsError();
@@ -399,8 +397,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
      */
     public function checklinks($args)
     {
-
-
         // Argument check
         if (!isset($args['cid']) || !is_numeric($args['cid'])) {
             return LogUtil::registerArgsError();
@@ -462,8 +458,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
      */
     public function brokenlinks()
     {
-
-
         $dbtable = DBUtil::getTables();
         $column = $dbtable['links_modrequest_column'];
         $where = "WHERE $column[brokenlink] = '1'";
@@ -515,8 +509,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
      */
     public function delrequest($args)
     {
-
-
         // Argument check
         if (!isset($args['rid']) || !is_numeric($args['rid'])) {
             return LogUtil::registerArgsError();
@@ -539,8 +531,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
      */
     public function modrequests()
     {
-
-
         $dbtable = DBUtil::getTables();
         $column = $dbtable['links_modrequest_column'];
         $where = "WHERE $column[brokenlink] = '0'";
@@ -602,8 +592,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
      */
     public function linkmodrequest($args)
     {
-
-
         // Argument check
         if ((!isset($args['rid']) || !is_numeric($args['rid']))) {
             return LogUtil::registerArgsError();
@@ -636,8 +624,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
      */
     public function updatemodlink($args)
     {
-
-
         // Argument check
         if (!isset($args['lid']) || !is_numeric($args['lid']) ||
                 !isset($args['cid']) || !is_numeric($args['cid']) ||

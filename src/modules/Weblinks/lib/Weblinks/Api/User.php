@@ -15,8 +15,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function categories()
     {
-
-
         // define the permission filter to apply
         $permFilter = array();
         $permFilter[] = array('realm' => 0,
@@ -63,8 +61,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function category($args)
     {
-
-
         // Argument check
         if ((!isset($args['cid']) || !is_numeric($args['cid']))) {
             return LogUtil::registerArgsError();
@@ -98,8 +94,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function subcategory($args)
     {
-
-
         // Argument check
         if ((!isset($args['cid']) || !is_numeric($args['cid']))) {
             return LogUtil::registerArgsError();
@@ -138,8 +132,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function weblinks($args)
     {
-
-
         $orderbysql = (isset($args['orderbysql'])) ? $args['orderbysql'] : 'titleA';
         $startnum = (isset($args['startnum']) && is_numeric($args['startnum'])) ? $args['startnum'] : 1;
         $numlinks = (isset($args['numlinks']) && is_numeric($args['numlinks'])) ? $args['numlinks'] : -1;
@@ -214,8 +206,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function link($args)
     {
-
-
         // Argument check
         if ((!isset($args['lid']) || !is_numeric($args['lid']))) {
             return LogUtil::registerArgsError();
@@ -271,8 +261,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function searchcats($args)
     {
-
-
         // Argument check
         if (!isset($args['query'])) {
             return LogUtil::registerArgsError();
@@ -311,8 +299,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function search_weblinks($args)
     {
-
-
         // Argument check
         if (!isset($args['query'])) {
             return LogUtil::registerArgsError();
@@ -372,8 +358,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function random($args)
     {
-
-
         $num = (isset($args['num']) && is_numeric($args['num'])) ? $args['num'] : 1;
 
         // define the permission filter to apply
@@ -437,8 +421,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function weblinksbydate($args)
     {
-
-
         if (!isset($args['selectdate']) || !is_numeric($args['selectdate'])) {
             return LogUtil::registerArgsError();
         }
@@ -475,8 +457,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function addbrockenlink($args)
     {
-
-
         // Argument check
         if (!isset($args['lid']) || !is_numeric($args['lid'])) {
             return LogUtil::registerArgsError();
@@ -501,8 +481,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function modifylinkrequest($args)
     {
-
-
         // Argument check
         if (!isset($args['lid']) || !is_numeric($args['lid'])) {
             return LogUtil::registerArgsError();
@@ -527,8 +505,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function add($args)
     {
-
-
         // Security check
         if (!ModUtil::getVar('Weblinks', 'links_anonaddlinklock') == 1 &&
                 !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
@@ -592,8 +568,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function lastweblinks($args)
     {
-
-
         // Argument check
         if (!isset($args['lastlinks']) || !is_numeric($args['lastlinks'])) {
             $args['lastlinks'] = ModUtil::getVar('Weblinks', 'linksinblock');
@@ -632,8 +606,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
      */
     public function mostpopularweblinks($args)
     {
-
-
         // Argument check
         if (!isset($args['mostpoplinks']) || !is_numeric($args['mostpoplinks'])) {
             $args['mostpoplinks'] = ModUtil::getVar('Weblinks', 'linksinblock');

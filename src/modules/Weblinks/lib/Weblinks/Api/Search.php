@@ -39,8 +39,6 @@ class Weblinks_Api_Search extends Zikula_AbstractApi
      * */
     public function search($args)
     {
-
-
         if (!SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ)) {
             return true;
         }

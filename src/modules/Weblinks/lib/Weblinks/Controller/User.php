@@ -23,11 +23,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController
      */
     public function view()
     {
-
-
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
-
 
         // get all categories
         $categories = ModUtil::apiFunc('Weblinks', 'user', 'categories');
@@ -36,7 +33,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         if (!$categories) {
             return DataUtil::formatForDisplayHTML($this->__('No existing categories'));
         }
-
 
         // assign various useful template variables
         $this->view->assign('categories', $categories);
@@ -67,7 +63,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
-
 
         // get category vars
         $category = ModUtil::apiFunc('Weblinks', 'user', 'category', array('cid' => $cid));
@@ -106,8 +101,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
      */
     public function visit()
     {
-
-
         // get parameters we need
         $lid = (int)$this->getPassedValue('lid', null, 'GET');
 
@@ -153,7 +146,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
-
         // get categories with $query inside
         $categories = ModUtil::apiFunc('Weblinks', 'user', 'searchcats', array('query' => $query));
 
@@ -162,7 +154,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
                     'orderbysql' => ModUtil::apiFunc('Weblinks', 'user', 'orderby', array('orderby' => $orderby)),
                     'startnum' => $startnum,
                     'numlinks' => ModUtil::getVar('Weblinks', 'linksresults')));
-
 
         // assign various useful template variables
         $this->view->assign('query', $query);
@@ -192,7 +183,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
-
         // get random link id an redirect to the visit function
         System::redirect(ModUtil::url('Weblinks', 'user', 'visit', array('lid' => ModUtil::apiFunc('Weblinks', 'user', 'random'))));
 
@@ -210,10 +200,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
-
         // get link details
         $weblink = ModUtil::apiFunc('Weblinks', 'user', 'link', array('lid' => $lid));
-
 
         // assign various useful template variables
         $this->view->assign('weblinks', $weblink);
@@ -240,8 +228,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
-
-
         // assign various useful template variables
         $this->view->assign('newlinkshowdays', $newlinkshowdays);
         $this->view->assign('helper', array('main' => 0, 'tb' => ModUtil::getVar('Weblinks', 'targetblank')));
@@ -255,21 +241,17 @@ class Weblinks_Controller_User extends Zikula_AbstractController
      */
     public function newlinksdate()
     {
-
-
         // get parameters we need
         $selectdate = (int)$this->getPassedValue('selectdate', null, 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
-
         // count weblinks from the selected day
         $totallinks = ModUtil::apiFunc('Weblinks', 'user', 'totallinks', array('selectdate' => $selectdate));
 
         // get weblinks from the selected day
         $weblinks = ModUtil::apiFunc('Weblinks', 'user', 'weblinksbydate', array('selectdate' => $selectdate));
-
 
         // assign various useful template variables
         $this->view->assign('dateview', DateUtil::getDatetime($selectdate, 'datebrief'));
@@ -299,7 +281,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
-
         $mostpoplinkspercentrigger = ModUtil::getVar('Weblinks', 'mostpoplinkspercentrigger');
         $mostpoplinks = ModUtil::getVar('Weblinks', 'mostpoplinks');
         $toplinkspercent = 0;
@@ -328,7 +309,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         // get most popular weblinks
         $weblinks = ModUtil::apiFunc('Weblinks', 'user', 'mostpopularweblinks', array('mostpoplinks' => $mostpoplinks));
-
 
         // assign various useful template variables
         $this->view->assign('mostpoplinkspercentrigger', $mostpoplinkspercentrigger);
@@ -368,9 +348,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
             $submitter = System::getVar("anonymous");
         }
 
-
         // assign various useful template variables
-
         $this->view->assign('lid', $lid);
         $this->view->assign('submitter', $submitter);
         $this->view->assign('helper', array('main' => 0, 'tb' => ModUtil::getVar('Weblinks', 'targetblank')));
@@ -395,7 +373,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         $this->checkCsrfToken();
-
 
         // add broken link
         ModUtil::apiFunc('Weblinks', 'user', 'addbrockenlink', array('lid' => $lid, 'submitter' => $submitter));
@@ -429,7 +406,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
             $submitter = System::getVar("anonymous");
         }
 
-
         // assign various useful template variables
         $this->view->assign('blockunregmodify', ModUtil::getVar('Weblinks', 'blockunregmodify'));
         $this->view->assign('link', $link);
@@ -456,7 +432,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         $this->checkCsrfToken();
-
 
         // add link request
         ModUtil::apiFunc('Weblinks', 'user', 'modifylinkrequest', array('lid' => $modlink['lid'],
@@ -485,9 +460,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
             $addlink = true;
         }
 
-
         // assign various useful template variables
-
         $this->view->assign('addlink', $addlink);
         $this->view->assign('helper', array('main' => 0, 'tb' => ModUtil::getVar('Weblinks', 'targetblank')));
         if (UserUtil::isLoggedIn()) {
@@ -514,7 +487,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         $this->checkCsrfToken();
-
 
         // write the link to db and get a status message back
         $link = ModUtil::apiFunc('Weblinks', 'user', 'add', array('title' => $newlink['title'],
