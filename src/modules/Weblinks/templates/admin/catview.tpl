@@ -1,6 +1,6 @@
 {include file="admin/header.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname=core src=folder.gif set=icons/large __alt="Categories administer" __title="Categories administer"}</div>
+    <div class="z-adminpageicon">{img modname='core' src=folder.png set='icons/large' __alt="Categories administer" __title="Categories administer"}</div>
     <h2>{gt text="Categories administer"}</h2>
 
     <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='addcategory'}" method="post" enctype="application/x-www-form-urlencoded">
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small __alt="Add category" __title="Add Category"}
+                    {button src='button_ok.png' set='icons/small' __alt="Add category" __title="Add Category"}
                 </div>
             </fieldset>
         </div>
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small __alt="Modify a category" __title="Modify a category"}
+                    {button src='button_ok.png' set='icons/small' __alt="Modify a category" __title="Modify a category"}
                 </div>
             </fieldset>
         </div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small __alt="Delete category" __title="Delete category"}
+                    {button src='button_ok.png' set='icons/small' __alt="Delete category" __title="Delete category"}
                 </div>
             </fieldset>
         </div>

@@ -1,6 +1,6 @@
 {include file="admin/header.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname=core src=configure.gif set=icons/large __alt="Modify configuration" __title="Modify configuration"}</div>
+    <div class="z-adminpageicon">{img modname='core' src='configure.png' set='icons/large' __alt="Modify configuration" __title="Modify configuration"}</div>
     <h2>{gt text="Configuration"}</h2>
 
     <form class="z-form" action="{modurl modname="Weblinks" type="admin" func="updateconfig"}" method="post" enctype="application/x-www-form-urlencoded">
@@ -180,8 +180,8 @@
             </fieldset>
 
             <div class="z-formbuttons">
-                {button src=button_ok.gif set=icons/small __alt="Modify configuration" __title="Modify configuration"}
-                <a href="{modurl modname='Weblinks' type='admin' func='view'}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
+                {button src='button_ok.png' set='icons/small' __alt="Modify configuration" __title="Modify configuration"}
+                <a href="{modurl modname='Weblinks' type='admin' func='view'}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Back" __title="Back"}</a>
             </div>
 
         </div>

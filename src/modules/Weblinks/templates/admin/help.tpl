@@ -1,6 +1,6 @@
 {include file="admin/header.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname=core src=agt_internet.gif set=icons/large __alt="Links administer" __title="Links administer"}</div>
+    <div class="z-adminpageicon">{img modname='core' src='agt_internet.png' set='icons/large' __alt="Links administer" __title="Links administer"}</div>
     <h2>{gt text="Help"}</h2>
     <div class="z-form">
         <fieldset>

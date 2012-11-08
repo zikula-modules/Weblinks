@@ -1,6 +1,6 @@
 {include file="admin/header.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname=core src=info.gif set=icons/large __alt="Overview" __title="Overview"}</div>
+    <div class="z-adminpageicon">{img modname='core' src='info.png' set='icons/large' __alt="Overview" __title="Overview"}</div>
     <h2>{gt text="Overview"}</h2>
 
     <h3>{gt text="Status"}</h3>
@@ -23,7 +23,7 @@
                     <select id="vat_cid" name="cid"><option value="0">{gt text="Check ALL categories"}</option>{catlist scat=0 sel=0}</select>
                 </div>
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small __alt="Check category" __title="Check category"}
+                    {button src='button_ok.png' set='icons/small' __alt="Check category" __title="Check category"}
                 </div>
             </fieldset>
         </div>
@@ -71,8 +71,8 @@
                     <input id="addlink_email" type="text" name="link[email]" size="20" maxlength="100" value="{$newlinks.email|safetext}" />
                 </div>
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small __alt="Add link" __title="Add link"}
-                    <a href="{modurl modname='Weblinks' type='admin' func='delnewlink' lid=$newlinks.lid authid=$authid}">{img modname=core src=editdelete.gif set=icons/small __alt="Delete link" __title="Delete link"}</a>
+                    {button src='button_ok.png' set='icons/small' __alt="Add link" __title="Add link"}
+                    <a href="{modurl modname='Weblinks' type='admin' func='delnewlink' lid=$newlinks.lid authid=$authid}">{img modname='core' src='editdelete.png' set='icons/small' __alt="Delete link" __title="Delete link"}</a>
                 </div>
             </fieldset>
         </div>

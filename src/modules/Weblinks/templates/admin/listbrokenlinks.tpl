@@ -1,6 +1,6 @@
 {include file="admin/header.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname=core src=info.gif set=icons/large __alt="Overview" __title="Overview"}</div>
+    <div class="z-adminpageicon">{img modname='core' src='info.png' set='icons/large' __alt="Overview" __title="Overview"}</div>
     <h2>{gt text="User-reported broken links"} ({$totalbrokenlinks|safetext})</h2>
 
     <div class="z-informationmsg">
@@ -43,12 +43,12 @@
 
                 <td>
                     <a href="{modurl modname='Weblinks' type='admin' func='ignorebrokenlinks' rid=$brokenlinks.rid authid=$authid}">
-                        {img modname='core' src='ok.gif' set='icons/extrasmall' __alt="Ignore" __title="Ignore"}
+                        {img modname='core' src='button_ok.png' set='icons/extrasmall' __alt="Ignore" __title="Ignore"}
                     </a>
                 </td>
                 <td>
                     <a href="{modurl modname='Weblinks' type='admin' func='delbrokenlinks' rid=$brokenlinks.rid lid=$brokenlinks.lid authid=$authid}">
-                        {img modname='core' src='14_layer_deletelayer.gif' set='icons/extrasmall' __alt="Delete" __title="Delete"}
+                        {img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall' __alt="Delete" __title="Delete"}
                     </a>
                 </td>
 

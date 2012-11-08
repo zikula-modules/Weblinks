@@ -40,7 +40,7 @@ class Weblinks_Api_Account extends Zikula_AbstractApi
                     'module' => 'core',
                     'set' => 'icons/large',
                     'title' => $this->__('Add link'),
-                    'icon' => 'folder_html.gif'));
+                    'icon' => 'folder_html.png'));
         }
 
         // Return the items

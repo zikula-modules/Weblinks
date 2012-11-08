@@ -1,7 +1,7 @@
 {include file="admin/header.tpl"}
 {modgetinfo modname=Weblinks info=all assign=info}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname=core src=configure.gif set=icons/large __alt="Import" __title="Import"}</div>
+    <div class="z-adminpageicon">{img modname='core' src='configure.png' set='icons/large' __alt="Import" __title="Import"}</div>
     <h2>{gt text="Import"}</h2>
     <!--
         <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='importratings'}" method="post" enctype="application/x-www-form-urlencoded">
@@ -14,7 +14,7 @@
                 </div>
                 <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small __alt="OK" __title="OK"}
+                    {button src='button_ok.png' set='icons/small' __alt="OK" __title="OK"}
                 </div>
                 {else}
                 <div class="z-informationmsg">
@@ -32,7 +32,7 @@
                 </div>
                 <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small alt="OK" title="OK"}
+                    {button src='button_ok.png' set='icons/small' alt="OK" title="OK"}
                 </div>
                 {else}
                 <div class="z-informationmsg">
@@ -51,7 +51,7 @@
                 </div>
                 <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small alt="OK" title="OK"}
+                    {button src='button_ok.png' set='icons/small' alt="OK" title="OK"}
                 </div>
                 {else}
                 <div class="z-informationmsg">
@@ -59,7 +59,7 @@
                 </div>
                 <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small alt="OK" title="OK"}
+                    {button src='button_ok.png' set='icons/small' alt="OK" title="OK"}
                 </div>
                 {/if}
             </fieldset>

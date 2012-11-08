@@ -26,19 +26,19 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
         if (SecurityUtil::checkPermission('Weblinks::Category', '::', ACCESS_EDIT)) {
             $links[] = array(
                 'url' => ModUtil::url('Weblinks', 'admin', 'catview'),
-                'text' => $this->__('Categories administer'),
+                'text' => $this->__('Categories administration'),
                 'class' => 'z-icon-es-cubes');
         }
         if (SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_EDIT)) {
             $links[] = array(
                 'url' => ModUtil::url('Weblinks', 'admin', 'linkview'),
-                'text' => $this->__('Links administer'),
+                'text' => $this->__('Links administration'),
                 'class' => 'z-icon-es-view');
         }
         if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN)) {
             $links[] = array(
                 'url' => ModUtil::url('Weblinks', 'admin', 'getconfig'),
-                'text' => $this->__('Configuration'),
+                'text' => $this->__('Settings'),
                 'class' => 'z-icon-es-config');
             $links[] = array(
                 'url' => ModUtil::url('Weblinks', 'admin', 'import'),
@@ -52,7 +52,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
                 'class' => 'z-icon-es-help');
             $links[] = array(
                 'url' => ModUtil::url('Weblinks', 'user', 'view'),
-                'text' => $this->__('Link-Index'),
+                'text' => $this->__('User Link-Index'),
                 'class' => 'z-icon-es-url');
         }
         return $links;

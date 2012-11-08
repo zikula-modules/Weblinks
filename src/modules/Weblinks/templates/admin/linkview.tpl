@@ -1,6 +1,6 @@
 {include file="admin/header.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname=core src=agt_internet.gif set=icons/large __alt="Links administer" __title="Links administer"}</div>
+    <div class="z-adminpageicon">{img modname='core' src='agt_internet.png' set='icons/large' __alt="Links administer" __title="Links administer"}</div>
     <h2>{gt text="Links administer"}</h2>
 
     {if $catnum>0}
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small __alt="Add link" __title="Add link"}
+                    {button src='button_ok.png' set='icons/small' __alt="Add link" __title="Add link"}
                 </div>
             </fieldset>
         </div>
@@ -57,7 +57,7 @@
                     <input id="modlink_lid" type="text" name="lid" size="12" maxlength="11" />
                 </div>
                 <div class="z-formbuttons">
-                    {button src=button_ok.gif set=icons/small __alt="Modify link" __title="Modify link"}
+                    {button src='button_ok.png' set='icons/small' __alt="Modify link" __title="Modify link"}
                 </div>
             </fieldset>
         </div>

@@ -40,8 +40,8 @@
                 </div>
             </fieldset>
             <div class="z-formbuttons">
-                {button src=button_ok.gif set=icons/small __alt="Add this URL" __title="Add this URL"}
-                <a href="{modurl modname='Weblinks' type='user' func='view'}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
+                {button src='button_ok.png' set='icons/small' __alt="Add this URL" __title="Add this URL"}
+                <a href="{modurl modname='Weblinks' type='user' func='view'}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Back" __title="Back"}</a>
             </div>
         </div>
     </form>
@@ -55,7 +55,7 @@
         {gt text="So that you are offered only the highest-quality content,"}<br />
         {gt text="each item is individually reviewed and approved."}<br />
         {gt text="The site editor aims to offer useful information only."}<br />
-        {gt text="<a href=\"index.php?module=Users&func=register\">Register for a new user account</a>"}
+        <a href="index.php?module=Users&func=register">{gt text="Register for a new user account"}</a>
     </div>
     {/if}
 </div>

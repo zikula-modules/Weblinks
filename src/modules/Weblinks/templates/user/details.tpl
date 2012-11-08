@@ -1,5 +1,5 @@
 {include file="user/header.tpl"}
-{pagesetvar name=title value=$weblinks.title}
+{pagesetvar name='title' value=$weblinks.title}
 <div class="wl-borderbox">
     <div class="wl-linkbox">
         {include file="user/linkbox.tpl"}

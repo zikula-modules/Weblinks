@@ -1,6 +1,6 @@
 {include file="admin/header.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname=core src=agt_internet.gif set=icons/large __alt="Links administer" __title="Links administer"}</div>
+    <div class="z-adminpageicon">{img modname='core' src='agt_internet.png' set='icons/large' __alt="Links administer" __title="Links administer"}</div>
     <h2>{gt text="User link modification requests"} ({$totalmodrequests|safetext})</h2>
 
     {foreach from=$modrequests item=modrequests}
@@ -55,8 +55,8 @@
             <tr>
                 <td colspan="3">
                     <div class="z-formbuttons">
-                        <a href="{modurl modname='Weblinks' type='admin' func='changemodrequests' rid=$modrequests.rid authid=$authid}">{img modname=core src=button_ok.gif set=icons/small __alt="Accept" __title="Accept"}</a>
-                        <a href="{modurl modname='Weblinks' type='admin' func='delmodrequests' rid=$modrequests.rid authid=$authid}">{img modname=core src=editdelete.gif set=icons/small __alt="Ignore" __title="Ignore"}</a>
+                        <a href="{modurl modname='Weblinks' type='admin' func='changemodrequests' rid=$modrequests.rid authid=$authid}">{img modname='core' src='button_ok.png' set='icons/small' __alt="Accept" __title="Accept"}</a>
+                        <a href="{modurl modname='Weblinks' type='admin' func='delmodrequests' rid=$modrequests.rid authid=$authid}">{img modname='core' src=editdelete.png set='icons/small' __alt="Ignore" __title="Ignore"}</a>
                     </div>
                 </td>
             </tr>

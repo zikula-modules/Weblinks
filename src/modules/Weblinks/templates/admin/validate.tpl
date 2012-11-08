@@ -1,6 +1,6 @@
 {include file="admin/header.tpl"}
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname=core src=agt_internet.gif set=icons/large __alt="Links administer" __title="Links administer"}</div>
+    <div class="z-adminpageicon">{img modname='core' src='agt_internet.png' set='icons/large' __alt="Links administer" __title="Links administer"}</div>
     {if $cid == 0}
     <h2>{gt text="Check ALL links"}</h2>
     {/if}
@@ -20,9 +20,9 @@
             {foreach from=$links item='links'}
             <tr class="{cycle values="z-odd,z-even" name=abacs}">
                 {if !$links.fp}
-                <td>{img modname='core' src='editdelete.gif' set='icons/extrasmall' __alt="Failed!" __title="Failed!"}</td>
+                <td>{img modname='core' src='editdelete.png' set='icons/extrasmall' __alt="Failed!" __title="Failed!"}</td>
                 <td><a href="{$links.url|safetext}" target="new">{$links.title|safetext}</a></td>
-                <td>[&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='modlink' lid=$links.lid authid=$authid}">{img modname='core' src='xedit.gif' set='icons/extrasmall' __alt="Edit" __title="Edit"}</a>&nbsp;|&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$links.lid authid=$authid}">{img modname='core' src='14_layer_deletelayer.gif' set='icons/extrasmall' __alt="Delete" __title="Delete"}</a>&nbsp;]</td>
+                <td>[&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='modlink' lid=$links.lid authid=$authid}">{img modname='core' src='xedit.png' set='icons/extrasmall' __alt="Edit" __title="Edit"}</a>&nbsp;|&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$links.lid authid=$authid}">{img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall' __alt="Delete" __title="Delete"}</a>&nbsp;]</td>
                 {/if}
 
                 {if $links.fp}
