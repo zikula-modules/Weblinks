@@ -1,35 +1,36 @@
-{include file="admin/header.tpl"}
-<div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname='core' src='info.png' set='icons/large' __alt="Overview" __title="Overview"}</div>
-    <h2>{gt text="Overview"}</h2>
+{adminheader}
+<div class="z-admin-content-pagetitle">
+    {icon type="info" size="small"}
+    <h3>{gt text='Overview'}</h3>
+</div>
 
-    <h3>{gt text="Status"}</h3>
-    <p>{gt text="There are"} <strong>{$numrows}</strong> {gt text="link" plural="links" count=$numrows} {gt text="and"} <strong>{$catnum}</strong> {gt text="category" plural="categories" count=$catnum} {gt text="in the database"}</p>
+<h3>{gt text="Status"}</h3>
+<p>{gt text="There are"} <strong>{$numrows}</strong> {gt text="link" plural="links" count=$numrows} {gt text="and"} <strong>{$catnum}</strong> {gt text="category" plural="categories" count=$catnum} {gt text="in the database"}</p>
 
-    {if $totalbrokenlinks gt 0 || $totalmodrequests gt 0}
-    <div class="z-informationmsg">
-        <a href="{modurl modname='Weblinks' type='admin' func='listbrokenlinks'}">{gt text="Broken link reports"} ({$totalbrokenlinks|safetext})</a><br />
-        <a href="{modurl modname='Weblinks' type='admin' func='listmodrequests'}">{gt text="Link modification requests"} ({$totalmodrequests|safetext})</a>
+{if $totalbrokenlinks gt 0 || $totalmodrequests gt 0}
+<div class="z-informationmsg">
+    <a href="{modurl modname='Weblinks' type='admin' func='listbrokenlinks'}">{gt text="Broken link reports"} ({$totalbrokenlinks|safetext})</a><br />
+    <a href="{modurl modname='Weblinks' type='admin' func='listmodrequests'}">{gt text="Link modification requests"} ({$totalmodrequests|safetext})</a>
+</div>
+{/if}
+
+<form class="z-form" action="{modurl modname='Weblinks' type='admin' func='validate'}" method="post" enctype="application/x-www-form-urlencoded">
+    <div>
+        <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
+        <fieldset>
+            <legend>{gt text="Link validation"}</legend>
+            <div class="z-formrow">
+                <label for="vat_cid">{gt text="Check category"}</label>
+                <select id="vat_cid" name="cid"><option value="0">{gt text="Check ALL categories"}</option>{catlist scat=0 sel=0}</select>
+            </div>
+            <div class="z-formbuttons">
+                {button src='button_ok.png' set='icons/small' __alt="Check category" __title="Check category"}
+            </div>
+        </fieldset>
     </div>
-    {/if}
+</form>
 
-    <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='validate'}" method="post" enctype="application/x-www-form-urlencoded">
-        <div>
-            <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
-            <fieldset>
-                <legend>{gt text="Link validation"}</legend>
-                <div class="z-formrow">
-                    <label for="vat_cid">{gt text="Check category"}</label>
-                    <select id="vat_cid" name="cid"><option value="0">{gt text="Check ALL categories"}</option>{catlist scat=0 sel=0}</select>
-                </div>
-                <div class="z-formbuttons">
-                    {button src='button_ok.png' set='icons/small' __alt="Check category" __title="Check category"}
-                </div>
-            </fieldset>
-        </div>
-    </form>
-
-    {if $newlinks}
+{if $newlinks}
 
     <h3>{gt text="Links awaiting validation"}</h3>
 
@@ -79,6 +80,4 @@
     </form>
     {/foreach}
 
-    {/if}
-</div>
-{include file="admin/footer.tpl"}
+{/if}

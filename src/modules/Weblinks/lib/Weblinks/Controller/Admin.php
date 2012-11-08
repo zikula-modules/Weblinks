@@ -691,6 +691,10 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
 //        } else {
 //            $this->view->assign('ratings', 0);
 //        }
+        // temporary to avoid E_NOTICE errors:
+        $this->view->assign('ratings', 0)
+                ->assign('ezcomments', 0)
+                ->assign('info', array('id' => 0));
 
         if (ModUtil::available('CmodsWebLinks')) {
             $this->view->assign('cmodsweblinks', 1);
