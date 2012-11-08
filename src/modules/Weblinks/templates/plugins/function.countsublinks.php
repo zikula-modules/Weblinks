@@ -7,7 +7,7 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-function smarty_function_countsublinks($params, &$smarty)
+function smarty_function_countsublinks($params, Zikula_View $view)
 {
     if (!isset($params['cid']) || !is_numeric($params['cid'])) {
         return LogUtil::registerArgsError();

@@ -7,7 +7,7 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-function smarty_function_catlist($params, &$smarty)
+function smarty_function_catlist($params, Zikula_View $view)
 {
     if (!isset($params['scat']) || !is_numeric($params['scat'])) {
         return LogUtil::registerArgsError();
@@ -19,7 +19,7 @@ function smarty_function_catlist($params, &$smarty)
     $where = "WHERE $column[parent_id]='" . (int)DataUtil::formatForStore($params['scat']) . "'";
     $objArray = DBUtil::selectObjectArray('links_categories', $where, 'title');
 
-    require_once $smarty->_get_plugin_filepath('function', 'catpath');
+    require_once $view->_get_plugin_filepath('function', 'catpath');
 
     foreach ($objArray as $request) {
         if ($params['sel'] == $request['cat_id']) {

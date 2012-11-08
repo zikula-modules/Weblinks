@@ -102,7 +102,7 @@ class Weblinks_Api_Search extends Zikula_AbstractApi
      * Access checking is ignored since access check has
      * already been done. But we do add a URL to the found user
      */
-    public function search_check(&$args)
+    public function search_check($args)
     {
         $datarow = $args['datarow'];
         $linkId = $datarow['extra'];

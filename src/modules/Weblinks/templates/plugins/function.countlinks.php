@@ -7,7 +7,7 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-function smarty_function_countlinks($params, &$smarty)
+function smarty_function_countlinks($params, Zikula_View $view)
 {
     $totallinks = 0;
     $counter = 0;

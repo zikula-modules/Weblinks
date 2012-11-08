@@ -7,7 +7,7 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-function smarty_function_orderbyTrans($params, &$smarty)
+function smarty_function_orderbyTrans($params, Zikula_View $view)
 {
     $dom = ZLanguage::getModuleDomain('Weblinks');
 

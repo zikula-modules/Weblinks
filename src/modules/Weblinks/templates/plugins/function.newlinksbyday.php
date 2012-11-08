@@ -7,7 +7,7 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-function smarty_function_newlinksbyday($params, &$smarty)
+function smarty_function_newlinksbyday($params, Zikula_View $view)
 {
     if (($params['newlinkshowdays'] != "7" && $params['newlinkshowdays'] != "14" && $params['newlinkshowdays'] != "30") ||
             (!is_numeric($params['newlinkshowdays'])) || (!isset($params['newlinkshowdays']))) {

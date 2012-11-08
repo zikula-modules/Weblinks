@@ -861,7 +861,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         LogUtil::registerStatus($this->__f('migrated: %s links from CmodsWebLinks to Weblinks', $counter));
 
         // import modrequests
-        $table = &$dbtable['cmodsweblinks_modrequest'];
+        $table = $dbtable['cmodsweblinks_modrequest'];
         $sql = "SELECT * FROM $table";
         $modrequests = DBUtil::selectObjectArraySQL($sql, 'cmodsweblinks_modrequest');
         //    $modrequests = DBUtil::selectObjectArray('cmodsweblinks_modrequest', '', 'requestid', '-1', '-1');

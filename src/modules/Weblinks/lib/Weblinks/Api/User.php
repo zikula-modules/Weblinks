@@ -100,7 +100,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
         }
 
         $dbtable = DBUtil::getTables();
-        $weblinkscolumn = &$dbtable['links_categories_column'];
+        $weblinkscolumn = $dbtable['links_categories_column'];
 
         $where = "WHERE $weblinkscolumn[parent_id] = " . (int)DataUtil::formatForStore($args['cid']);
 
@@ -140,7 +140,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
         $where = "";
         if (isset($args['cid']) && is_numeric($args['cid']) && $args['cid']) {
             $dbtable = DBUtil::getTables();
-            $weblinkscolumn = &$dbtable['links_links_column'];
+            $weblinkscolumn = $dbtable['links_links_column'];
             $where = "WHERE $weblinkscolumn[cat_id] = " . (int)DataUtil::formatForStore($args['cid']);
         }
 

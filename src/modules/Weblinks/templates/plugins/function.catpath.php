@@ -7,7 +7,7 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-function smarty_function_catpath($params, &$smarty)
+function smarty_function_catpath($params, Zikula_View $view)
 {
     $dom = ZLanguage::getModuleDomain('Weblinks');
 
