@@ -9,12 +9,12 @@
         {/if}
         <p>
             {gt text="Show leading"}: [
-            <a href="{modurl modname=Weblinks type=user func=mostpopular ratenum=10 ratetype=num}">10</a> -
-            <a href="{modurl modname=Weblinks type=user func=mostpopular ratenum=25 ratetype=num}">25</a> -
-            <a href="{modurl modname=Weblinks type=user func=mostpopular ratenum=50 ratetype=num}">50</a> |
-            <a href="{modurl modname=Weblinks type=user func=mostpopular ratenum=1 ratetype=percent}">1%</a> -
-            <a href="{modurl modname=Weblinks type=user func=mostpopular ratenum=5 ratetype=percent}">5%</a> -
-            <a href="{modurl modname=Weblinks type=user func=mostpopular ratenum=10 ratetype=percent}">10%</a> ]
+            <a href="{modurl modname='Weblinks' type='user' func='mostpopular' ratenum=10 ratetype=num}">10</a> -
+            <a href="{modurl modname='Weblinks' type='user' func='mostpopular' ratenum=25 ratetype=num}">25</a> -
+            <a href="{modurl modname='Weblinks' type='user' func='mostpopular' ratenum=50 ratetype=num}">50</a> |
+            <a href="{modurl modname='Weblinks' type='user' func='mostpopular' ratenum=1 ratetype=percent}">1%</a> -
+            <a href="{modurl modname='Weblinks' type='user' func='mostpopular' ratenum=5 ratetype=percent}">5%</a> -
+            <a href="{modurl modname='Weblinks' type='user' func='mostpopular' ratenum=10 ratetype=percent}">10%</a> ]
         </p>
     </div>
 

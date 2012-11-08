@@ -3,7 +3,7 @@
     {if $blockunregmodify == 1 && $ratinguser == $anonymous}
     <div class="z-errormsg">{gt text="Sorry! Only registered users can suggest link modifications."}</div>
     {else}
-    <form class="z-form" action="{modurl modname=Weblinks type=user func=modifylinkrequests}" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="z-form" action="{modurl modname='Weblinks' type='user' func='modifylinkrequests'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <input type="hidden" name="modlink[lid]" value="{$link.lid|safetext}" />
@@ -32,7 +32,7 @@
             </fieldset>
             <div class="z-formbuttons">
                 {button src=button_ok.gif set=icons/small __alt="Send request" __title="Send request"}
-                <a href="{modurl modname=Weblinks type=user func=view}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
+                <a href="{modurl modname='Weblinks' type='user' func='view'}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
             </div>
 
         </div>

@@ -181,7 +181,7 @@
 
             <div class="z-formbuttons">
                 {button src=button_ok.gif set=icons/small __alt="Modify configuration" __title="Modify configuration"}
-                <a href="{modurl modname=Weblinks type=admin func=view}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
+                <a href="{modurl modname='Weblinks' type='admin' func='view'}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
             </div>
 
         </div>

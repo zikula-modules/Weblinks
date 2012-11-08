@@ -55,8 +55,8 @@
             <tr>
                 <td colspan="3">
                     <div class="z-formbuttons">
-                        <a href="{modurl modname=Weblinks type=admin func=changemodrequests rid=$modrequests.rid authid=$authid}">{img modname=core src=button_ok.gif set=icons/small __alt="Accept" __title="Accept"}</a>
-                        <a href="{modurl modname=Weblinks type=admin func=delmodrequests rid=$modrequests.rid authid=$authid}">{img modname=core src=editdelete.gif set=icons/small __alt="Ignore" __title="Ignore"}</a>
+                        <a href="{modurl modname='Weblinks' type='admin' func='changemodrequests' rid=$modrequests.rid authid=$authid}">{img modname=core src=button_ok.gif set=icons/small __alt="Accept" __title="Accept"}</a>
+                        <a href="{modurl modname='Weblinks' type='admin' func='delmodrequests' rid=$modrequests.rid authid=$authid}">{img modname=core src=editdelete.gif set=icons/small __alt="Ignore" __title="Ignore"}</a>
                     </div>
                 </td>
             </tr>

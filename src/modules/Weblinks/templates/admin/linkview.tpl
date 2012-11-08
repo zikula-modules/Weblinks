@@ -5,7 +5,7 @@
 
     {if $catnum>0}
 
-    <form class="z-form" action="{modurl modname=Weblinks type=admin func=addlink}" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='addlink'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <legend>{gt text="Add link"}</legend>
@@ -47,7 +47,7 @@
     </form>
 
     {if $numrows>0}
-    <form class="z-form" action="{modurl modname=Weblinks type=admin func=modlink}" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='modlink'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <legend>{gt text="Modify/Delete a link"}</legend>

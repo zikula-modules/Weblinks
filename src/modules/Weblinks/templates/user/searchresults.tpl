@@ -10,7 +10,7 @@
         <ul>
             {foreach from=$categories item=categories}
             <li>
-                <a href="{modurl modname=Weblinks type=user func=category cid=$categories.cat_id}" class="wl-catsub" >
+                <a href="{modurl modname='Weblinks' type='user' func='category' cid=$categories.cat_id}" class="wl-catsub" >
                     {catpath cid=$categories.cat_id start=0 links=1 linkmyself=1}
                 </a>
             </li>
@@ -25,9 +25,9 @@
     <dl class="wl-sortlinks wl-center">
         <dt><strong>{gt text="Sites currently sorted by"}: {orderbyTrans orderby=$orderby}</strong></dt>
         <dd>{gt text="Sort links by"}:
-            {gt text="Title"} ( <a href="{modurl modname=Weblinks type=user func=search orderby=titleA query=$query}" title="{gt text="Title (A to Z)"}">+</a> | <a href="{modurl modname=Weblinks type=user func=search orderby=titleD query=$query}" title="{gt text="Title (Z to A)"}">-</a> )
-            {gt text="Date"} ( <a href="{modurl modname=Weblinks type=user func=search orderby=dateA query=$query}" title="{gt text="Date (oldest links listed first)"}">+</a> | <a href="{modurl modname=Weblinks type=user func=search orderby=dateD query=$query}" title="{gt text="Date (newest links listed first)"}">-</a> )
-            {gt text="Popularity"} ( <a href="{modurl modname=Weblinks type=user func=search orderby=hitsA query=$query}" title="{gt text="Popularity (from fewest hits to most hits)"}">+</a> | <a href="{modurl modname=Weblinks type=user func=search orderby=hitsD query=$query}" title="{gt text="Popularity (from most hits to fewest hits)"}">-</a> )
+            {gt text="Title"} ( <a href="{modurl modname='Weblinks' type='user' func='search' orderby=titleA query=$query}" title="{gt text="Title (A to Z)"}">+</a> | <a href="{modurl modname='Weblinks' type='user' func='search orderby=titleD query=$query}" title="{gt text="Title (Z to A)"}">-</a> )
+            {gt text="Date"} ( <a href="{modurl modname='Weblinks' type='user' func='search' orderby=dateA query=$query}" title="{gt text="Date (oldest links listed first)"}">+</a> | <a href="{modurl modname='Weblinks' type='user' func='search orderby=dateD query=$query}" title="{gt text="Date (newest links listed first)"}">-</a> )
+            {gt text="Popularity"} ( <a href="{modurl modname='Weblinks' type='user' func='search' orderby=hitsA query=$query}" title="{gt text="Popularity (from fewest hits to most hits)"}">+</a> | <a href="{modurl modname='Weblinks' type='user' func='search orderby=hitsD query=$query}" title="{gt text="Popularity (from most hits to fewest hits)"}">-</a> )
         </dd>
     </dl>
     
@@ -40,7 +40,7 @@
     {pager show="page" rowcount=$wlpager.numlinks limit=$wlpager.itemsperpage posvar=startnum shift=1}
 
     {else}
-    <p class="wl-center"><em>{gt text="No matches found to your query"} [ <a href="{modurl modname=Weblinks type=user func=view}">{gt text="Back"}</a> ]</em></p>
+    <p class="wl-center"><em>{gt text="No matches found to your query"} [ <a href="{modurl modname='Weblinks' type='user' func='view'}">{gt text="Back"}</a> ]</em></p>
     {/if}
 
     <p class="wl-center">

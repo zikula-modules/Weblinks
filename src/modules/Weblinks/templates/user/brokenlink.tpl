@@ -17,7 +17,7 @@
 
             <div class="z-formrow z-formbuttons">
                 {button src=button_ok.gif set=icons/small __alt="Report broken link" __title="Report broken link"}
-                <a href="{modurl modname=Weblinks type=user func=view}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
+                <a href="{modurl modname='Weblinks' type='user' func='view'}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
             </div>
         </div>
     </form>

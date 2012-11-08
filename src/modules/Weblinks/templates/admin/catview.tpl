@@ -3,7 +3,7 @@
     <div class="z-adminpageicon">{img modname=core src=folder.gif set=icons/large __alt="Categories administer" __title="Categories administer"}</div>
     <h2>{gt text="Categories administer"}</h2>
 
-    <form class="z-form" action="{modurl modname=Weblinks type=admin func=addcategory}" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='addcategory'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <legend>{gt text="Add a category"}</legend>
@@ -32,7 +32,7 @@
     </form>
 
     {if $catnum>0}
-    <form class="z-form" action="{modurl modname=Weblinks type=admin func=modcategory}" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='modcategory'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <legend>{gt text="Modify a category"}</legend>
@@ -50,7 +50,7 @@
         </div>
     </form>
 
-    <form class="z-form" action="{modurl modname=Weblinks type=admin func=suredelcategory}" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='suredelcategory'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <legend>{gt text="Delete category"}</legend>

@@ -11,13 +11,13 @@
             {math equation="$count+1" assign="count"}
 
             <dl class="wl-cat">
-                <dt class="wl-catname"><a href="{modurl modname=Weblinks type=user func=category cid=$category.cat_id}" class="wl-catmain">{$category.title|safetext}</a> ({countsublinks cid=$category.cat_id}){categorynewlinkgraphic cat=$category.cat_id}</dt>
+                <dt class="wl-catname"><a href="{modurl modname='Weblinks' type='user' func='category' cid=$category.cat_id}" class="wl-catmain">{$category.title|safetext}</a> ({countsublinks cid=$category.cat_id}){categorynewlinkgraphic cat=$category.cat_id}</dt>
                 {if $category.cdescription ne ""}
                 <dd class="wl-catdescr">{$category.cdescription|safehtml}</dd>
                 {/if}
                 {foreach from=$categories item=subcategory}
                 {if $subcategory.parent_id == $category.cat_id}
-                <dd class="wl-sub"><a href="{modurl modname=Weblinks type=user func=category cid=$subcategory.cat_id}" class="wl-catsub">{$subcategory.title|safetext}</a>{categorynewlinkgraphic cat=$subcategory.cat_id}</dd>
+                <dd class="wl-sub"><a href="{modurl modname='Weblinks' type='user' func='category' cid=$subcategory.cat_id}" class="wl-catsub">{$subcategory.title|safetext}</a>{categorynewlinkgraphic cat=$subcategory.cat_id}</dd>
                 {/if}
                 {/foreach}
             </dl>
@@ -41,7 +41,7 @@
         <ol class="lastweblinks">
             {foreach from=$blocklast item=weblinks name=loop}
             <li>
-                <a href="{modurl modname=Weblinks type=user func=visit lid=$weblinks.lid}"{if $helper.tb eq 1} target="_blank"{/if}>{$weblinks.title|safetext}</a>
+                <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}"{if $helper.tb eq 1} target="_blank"{/if}>{$weblinks.title|safetext}</a>
             </li>
             {/foreach}
         </ol>
@@ -53,7 +53,7 @@
         <ol class="mostpopularweblinks">
             {foreach from=$blockmostpop item=weblinks name=loop}
             <li>
-                <a href="{modurl modname=Weblinks type=user func=visit lid=$weblinks.lid}"{if $helper.tb eq 1} target="_blank"{/if}>{$weblinks.title|safetext}</a>
+                <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}"{if $helper.tb eq 1} target="_blank"{/if}>{$weblinks.title|safetext}</a>
                 <em>({$weblinks.hits|safetext})</em>
             </li>
             {/foreach}

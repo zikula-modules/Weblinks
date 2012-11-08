@@ -3,7 +3,7 @@
     <div class="z-adminpageicon">{img modname=core src=agt_internet.gif set=icons/large __alt="Links administer" __title="Links administer"}</div>
     <h2>{gt text="Links administer"}</h2>
 
-    <form class="z-form" action="{modurl modname=Weblinks type=admin func=modlinks}" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='modlinks'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <legend>{gt text="Modify/Delete a link"} - {gt text="Link ID"}: <strong>{$link.lid|safetext}</strong></legend>
@@ -41,7 +41,7 @@
 
             <div class="z-formbuttons">
                 {button src=button_ok.gif set=icons/small __alt="Modify link" __title="Modify link"}
-                <a href="{modurl modname=Weblinks type=admin func=dellink lid=$link.lid authid=$authid}">{img modname=core src=editdelete.gif set=icons/small __alt="Delete link" __title="Delete link"}</a>
+                <a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$link.lid authid=$authid}">{img modname=core src=editdelete.gif set=icons/small __alt="Delete link" __title="Delete link"}</a>
             </div>
         </div>
     </form>

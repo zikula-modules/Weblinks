@@ -4,7 +4,7 @@
     <div class="z-adminpageicon">{img modname=core src=configure.gif set=icons/large __alt="Import" __title="Import"}</div>
     <h2>{gt text="Import"}</h2>
     <!--
-        <form class="z-form" action="{modurl modname=Weblinks type=admin func=importratings}" method="post" enctype="application/x-www-form-urlencoded">
+        <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='importratings'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <legend>{gt text="Ratings"}</legend>
@@ -23,7 +23,7 @@
                 {/if}
             </fieldset>
         </form>
-        <form class="z-form" action="{modurl modname=Weblinks type=admin func=importezcomments}" method="post" enctype="application/x-www-form-urlencoded">
+        <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='importezcomments'}" method="post" enctype="application/x-www-form-urlencoded">
             <fieldset>
                 <legend>{gt text="EZComments"}</legend>
                 {if $ezcomments eq 1}
@@ -42,7 +42,7 @@
             </fieldset>
         </form>
     -->
-        <form class="z-form" action="{modurl modname=Weblinks type=admin func=importcmodsweblinks}" method="post" enctype="application/x-www-form-urlencoded">
+        <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='importcmodsweblinks'}" method="post" enctype="application/x-www-form-urlencoded">
             <fieldset>
                 <legend>{gt text="CmodsWebLinks"}</legend>
                 {if $cmodsweblinks eq 1}

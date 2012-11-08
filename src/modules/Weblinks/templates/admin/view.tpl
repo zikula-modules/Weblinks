@@ -8,12 +8,12 @@
 
     {if $totalbrokenlinks gt 0 || $totalmodrequests gt 0}
     <div class="z-informationmsg">
-        <a href="{modurl modname=Weblinks type=admin func=listbrokenlinks}">{gt text="Broken link reports"} ({$totalbrokenlinks|safetext})</a><br />
-        <a href="{modurl modname=Weblinks type=admin func=listmodrequests}">{gt text="Link modification requests"} ({$totalmodrequests|safetext})</a>
+        <a href="{modurl modname='Weblinks' type='admin' func='listbrokenlinks'}">{gt text="Broken link reports"} ({$totalbrokenlinks|safetext})</a><br />
+        <a href="{modurl modname='Weblinks' type='admin' func='listmodrequests'}">{gt text="Link modification requests"} ({$totalmodrequests|safetext})</a>
     </div>
     {/if}
 
-    <form class="z-form" action="{modurl modname=Weblinks type=admin func=validate}" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='validate'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <fieldset>
@@ -34,7 +34,7 @@
     <h3>{gt text="Links awaiting validation"}</h3>
 
     {foreach from=$newlinks item=newlinks}
-    <form class="z-form" action="{modurl modname=Weblinks type=admin func=addlink}" method="post" enctype="application/x-www-form-urlencoded">
+    <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='addlink'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
@@ -72,7 +72,7 @@
                 </div>
                 <div class="z-formbuttons">
                     {button src=button_ok.gif set=icons/small __alt="Add link" __title="Add link"}
-                    <a href="{modurl modname=Weblinks type=admin func=delnewlink lid=$newlinks.lid authid=$authid}">{img modname=core src=editdelete.gif set=icons/small __alt="Delete link" __title="Delete link"}</a>
+                    <a href="{modurl modname='Weblinks' type='admin' func='delnewlink' lid=$newlinks.lid authid=$authid}">{img modname=core src=editdelete.gif set=icons/small __alt="Delete link" __title="Delete link"}</a>
                 </div>
             </fieldset>
         </div>

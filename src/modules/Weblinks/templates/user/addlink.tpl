@@ -41,7 +41,7 @@
             </fieldset>
             <div class="z-formbuttons">
                 {button src=button_ok.gif set=icons/small __alt="Add this URL" __title="Add this URL"}
-                <a href="{modurl modname=Weblinks type=user func=view}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
+                <a href="{modurl modname='Weblinks' type='user' func='view'}">{img modname=core src=button_cancel.gif set=icons/small __alt="Back" __title="Back"}</a>
             </div>
         </div>
     </form>

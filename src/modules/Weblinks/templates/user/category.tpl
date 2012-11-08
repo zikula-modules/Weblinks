@@ -12,7 +12,7 @@
         <dl class="wl-sublist">
             <dt>{gt text="Links also available in"} {$category.title|safetext} {gt text="sub-categories"}:</dt>
             {foreach from=$subcategory item=subcategory}
-            <dd><a href="{modurl modname=Weblinks type=user func=category cid=$subcategory.cat_id}" class="wl-catsub">{$subcategory.title|safetext}</a> ({countsublinks cid=$subcategory.cat_id})&nbsp;{categorynewlinkgraphic cat=$subcategory.cat_id}</dd>
+            <dd><a href="{modurl modname='Weblinks' type='user' func='category' cid=$subcategory.cat_id}" class="wl-catsub">{$subcategory.title|safetext}</a> ({countsublinks cid=$subcategory.cat_id})&nbsp;{categorynewlinkgraphic cat=$subcategory.cat_id}</dd>
             {/foreach}
         </dl>
         {/if}
