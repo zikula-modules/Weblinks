@@ -1,4 +1,8 @@
-Version 2.1.0
+Version 3.0.0
+- converted to 1.3 standards
+- temporarily commented all 1.2-style hook calls
+
+Version 2.1.0 (not released)
 - converted to Gettext
 - css has changed to Zikula 1.2 style
 - little bugfixes
@@ -9,13 +13,12 @@ Version 2.1.0
 
 Version 2.0.1
 - all db calls changed to DBUtil
-- Permissions should work now (see install.txt for more informations)
+- Permissions should work now (see install.txt for more information)
 - some little fixes for bugs I found
-
 
 Version 2.0
 - fully templated using pnRender
-- some stuff were killed (Votes, Comments, Editorial)
+- some stuff was killed (Votes, Comments, Editorial)
 - supports the Rating-Hook and EZComments-Hook, I think any other too
 - it is possible to set a setting in the configuration for open links in a new window
-- you can aktivate the last and the best links at the module main site (Featured Link-Box)
+- you can activate the last and the best links at the module main site (Featured Link-Box)
