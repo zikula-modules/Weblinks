@@ -24,7 +24,7 @@ function smarty_function_categorynewlinkgraphic($params, &$smarty)
         return;
     } else {
         echo "&nbsp;";
-        $datetime = date();
+        $datetime = array();
         preg_match("[([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})]", $time['0']['date'], $datetime);
 
         $datenow = $datetime[3] . "-" . $datetime[2] . "-" . $datetime[1];
