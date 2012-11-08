@@ -17,23 +17,23 @@
             </tr>
         </thead>
         <tbody>
-            {foreach from=$links item=links}
+            {foreach from=$links item='links'}
             <tr class="{cycle values="z-odd,z-even" name=abacs}">
                 {if !$links.fp}
-                <td>{img modname=core src=editdelete.gif set=icons/extrasmall __alt="Failed!" __title="Failed!"}</td>
+                <td>{img modname='core' src='editdelete.gif' set='icons/extrasmall' __alt="Failed!" __title="Failed!"}</td>
                 <td><a href="{$links.url|safetext}" target="new">{$links.title|safetext}</a></td>
-                <td>[&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='modlink' lid=$links.lid authid=$authid}">{img modname=core src=xedit.gif set=icons/extrasmall __alt="Edit" __title="Edit"}</a>&nbsp;|&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='dellink lid=$links.lid authid=$authid}">{img modname=core src=14_layer_deletelayer.gif set=icons/extrasmall __alt="Delete" __title="Delete"}</a>&nbsp;]</td>
+                <td>[&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='modlink' lid=$links.lid authid=$authid}">{img modname='core' src='xedit.gif' set='icons/extrasmall' __alt="Edit" __title="Edit"}</a>&nbsp;|&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$links.lid authid=$authid}">{img modname='core' src='14_layer_deletelayer.gif' set='icons/extrasmall' __alt="Delete" __title="Delete"}</a>&nbsp;]</td>
                 {/if}
 
                 {if $links.fp}
-                <td>{img modname=core src=ok.gif set=icons/extrasmall __alt="OK" __title="OK"}</td>
+                <td>{img modname='core' src='button_ok.png' set='icons/extrasmall' __alt="OK" __title="OK"}</td>
                 <td><a href="{$links.url|safetext}" target="new">{$links.title|safetext}</a></td>
                 <td>{gt text="None"}</td>
                 {/if}
             </tr>
             {foreachelse}
             <tr>
-                <td colspan="3">{ gt text="No link found" }</td>
+                <td colspan="3">{gt text="No link found"}</td>
             </tr>
             {/foreach}
         </tbody>

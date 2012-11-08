@@ -43,17 +43,17 @@
 
                 <td>
                     <a href="{modurl modname='Weblinks' type='admin' func='ignorebrokenlinks' rid=$brokenlinks.rid authid=$authid}">
-                        {img modname=core src='ok.gif' set=icons/extrasmall __alt="Ignore" __title="Ignore"}
+                        {img modname='core' src='ok.gif' set='icons/extrasmall' __alt="Ignore" __title="Ignore"}
                     </a>
                 </td>
                 <td>
                     <a href="{modurl modname='Weblinks' type='admin' func='delbrokenlinks' rid=$brokenlinks.rid lid=$brokenlinks.lid authid=$authid}">
-                        {img modname=core src='14_layer_deletelayer.gif' set=icons/extrasmall __alt="Delete" __title="Delete"}
+                        {img modname='core' src='14_layer_deletelayer.gif' set='icons/extrasmall' __alt="Delete" __title="Delete"}
                     </a>
                 </td>
 
             </tr>
-            { /foreach }
+            {/foreach}
         </tbody>
     </table>
 

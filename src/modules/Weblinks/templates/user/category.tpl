@@ -26,6 +26,6 @@
     </div>
     {/foreach}
 
-    {pager rowcount=$wlpager.numitems limit=$wlpager.itemsperpage posvar=startnum shift=1 img_prev=images/icons/extrasmall/previous.gif img_next=images/icons/extrasmall/next.gif}
+    {pager rowcount=$wlpager.numitems limit=$wlpager.itemsperpage posvar='startnum' shift=1 img_prev='images/icons/extrasmall/previous.gif' img_next='images/icons/extrasmall/next.gif'}
 </div>
 {include file="user/footer.tpl"}
