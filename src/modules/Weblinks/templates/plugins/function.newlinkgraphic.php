@@ -25,13 +25,13 @@ function smarty_function_newlinkgraphic($params, &$smarty)
 
         if ("$daysold" == "$datenow") {
             if ($count <= 1) {
-                echo "<img src=\"modules/Weblinks/pnimages/newred.gif\" width=\"34\" height=\"15\" alt=\"" . DataUtil::formatForDisplay(__('New today', $dom)) . "\" title=\"" . DataUtil::formatForDisplay(__('New today', $dom)) . "\" />";
+                echo "<img src=\"modules/Weblinks/images/newred.gif\" width=\"34\" height=\"15\" alt=\"" . DataUtil::formatForDisplay(__('New today', $dom)) . "\" title=\"" . DataUtil::formatForDisplay(__('New today', $dom)) . "\" />";
             }
             if ($count <= 3 && $count > 1) {
-                echo "<img src=\"modules/Weblinks/pnimages/newgreen.gif\" width=\"34\" height=\"15\" alt=\"" . DataUtil::formatForDisplay(__('New during last 3 days', $dom)) . "\" title=\"" . DataUtil::formatForDisplay(__('New during last 3 days', $dom)) . "\" />";
+                echo "<img src=\"modules/Weblinks/images/newgreen.gif\" width=\"34\" height=\"15\" alt=\"" . DataUtil::formatForDisplay(__('New during last 3 days', $dom)) . "\" title=\"" . DataUtil::formatForDisplay(__('New during last 3 days', $dom)) . "\" />";
             }
             if ($count <= 7 && $count > 3) {
-                echo "<img src=\"modules/Weblinks/pnimages/newblue.gif\" width=\"34\" height=\"15\" alt=\"" . DataUtil::formatForDisplay(__('New this week', $dom)) . "\" title=\"" . DataUtil::formatForDisplay(__('New this week', $dom)) . "\" />";
+                echo "<img src=\"modules/Weblinks/images/newblue.gif\" width=\"34\" height=\"15\" alt=\"" . DataUtil::formatForDisplay(__('New this week', $dom)) . "\" title=\"" . DataUtil::formatForDisplay(__('New this week', $dom)) . "\" />";
             }
         }
         $count++;
