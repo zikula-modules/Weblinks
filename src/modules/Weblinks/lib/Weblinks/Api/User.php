@@ -386,10 +386,11 @@ class Weblinks_Api_User extends Zikula_AbstractApi
         if ($num > 1) {
             $lid = array();
             foreach ($links as $link) {
-                $lid[] = array('lid' => $link, 'title' => DBUtil::selectFieldByID('links_links', 'title', $link, 'lid'));
+                $thisLid = $lidarray[$link];
+                $lid[] = array('lid' => $thisLid, 'title' => DBUtil::selectFieldByID('links_links', 'title', $thisLid, 'lid'));
             }
         } else {
-            $lid = $links;
+            $lid = $lidarray[$links];
         }
 
         return $lid;
