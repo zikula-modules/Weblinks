@@ -58,9 +58,9 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function category()
     {
         // get parameters we need
-        $cid = (int)FormUtil::getPassedValue('cid', null, 'GET');
-        $orderby = FormUtil::getPassedValue('orderby', 'titleA', 'GET');
-        $startnum = (int)FormUtil::getPassedValue('startnum', 1, 'GET');
+        $cid = (int)$this->getPassedValue('cid', null, 'GET');
+        $orderby = $this->getPassedValue('orderby', 'titleA', 'GET');
+        $startnum = (int)$this->getPassedValue('startnum', 1, 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
@@ -106,7 +106,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', null, 'GET');
 
         // get link
         $link = ModUtil::apiFunc('Weblinks', 'user', 'link', array('lid' => $lid));
@@ -143,9 +143,9 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function search()
     {
         // get parameters we need
-        $query = FormUtil::getPassedValue('query', null, 'GETPOST');
-        $orderby = FormUtil::getPassedValue('orderby', 'titleA', 'GETPOST');
-        $startnum = (int)FormUtil::getPassedValue('startnum', 1, 'GETPOST');
+        $query = $this->getPassedValue('query', null, 'GETPOST');
+        $orderby = $this->getPassedValue('orderby', 'titleA', 'GETPOST');
+        $startnum = (int)$this->getPassedValue('startnum', 1, 'GETPOST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
@@ -202,7 +202,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function viewlinkdetails()
     {
         // get parameters we need
-        $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', null, 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
@@ -232,7 +232,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function newlinks()
     {
         // get parameters we need
-        $newlinkshowdays = (int)FormUtil::getPassedValue('newlinkshowdays', '7', 'GET');
+        $newlinkshowdays = (int)$this->getPassedValue('newlinkshowdays', '7', 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
@@ -255,7 +255,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $selectdate = (int)FormUtil::getPassedValue('selectdate', null, 'GET');
+        $selectdate = (int)$this->getPassedValue('selectdate', null, 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
@@ -290,8 +290,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function mostpopular()
     {
         // get parameters we need
-        $ratenum = (int)FormUtil::getPassedValue('ratenum', null, 'GET');
-        $ratetype = FormUtil::getPassedValue('ratetype', null, 'GET');
+        $ratenum = (int)$this->getPassedValue('ratenum', null, 'GET');
+        $ratetype = $this->getPassedValue('ratetype', null, 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
@@ -350,7 +350,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function brokenlink()
     {
         // get parameters we need
-        $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', null, 'GET');
 
         // Security check
         if (!ModUtil::getVar('Weblinks', 'unregbroken') == 1 &&
@@ -381,8 +381,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function brokenlinks()
     {
         // get parameters we need
-        $lid = (int)FormUtil::getPassedValue('lid', null, 'POST');
-        $submitter = FormUtil::getPassedValue('submitter', null, 'POST');
+        $lid = (int)$this->getPassedValue('lid', null, 'POST');
+        $submitter = $this->getPassedValue('submitter', null, 'POST');
 
         // Security check
         if (!ModUtil::getVar('Weblinks', 'unregbroken') == 1 &&
@@ -408,7 +408,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function modifylinkrequest()
     {
         // get parameters we need
-        $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', null, 'GET');
 
         // Security check
         if (!ModUtil::getVar('Weblinks', 'blockunregmodify') == 1 &&
@@ -443,7 +443,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function modifylinkrequests()
     {
         // get parameters we need
-        $modlink = FormUtil::getPassedValue('modlink', array(), 'POST');
+        $modlink = $this->getPassedValue('modlink', array(), 'POST');
 
         // Security check
         if (!ModUtil::getVar('Weblinks', 'blockunregmodify') == 1 &&
@@ -501,7 +501,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
     public function add()
     {
         // get parameters we need
-        $newlink = FormUtil::getPassedValue('newlink', array(), 'POST');
+        $newlink = $this->getPassedValue('newlink', array(), 'POST');
 
         // Security check
         if (!ModUtil::getVar('Weblinks', 'links_anonaddlinklock') == 1 &&
@@ -528,5 +528,16 @@ class Weblinks_Controller_User extends Zikula_AbstractController {
 
         // Return the output that has been generated by this function
         return $this->view->fetch('user/add.tpl');
+    }
+    
+    private function getPassedValue($variable, $defaultValue, $type = 'POST') {
+        if ($type == 'POST') {
+            return $this->request->request->get($variable, $defaultValue);
+        } else if ($type == 'GET') {
+            return $this->request->query->get($variable, $defaultValue);
+        } else {
+            // else try GET then POST
+            return $this->request->query->get($variable, $this->request->request->get($variable, $defaultValue));
+        }
     }
 }

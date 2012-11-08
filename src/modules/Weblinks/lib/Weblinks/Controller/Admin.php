@@ -60,9 +60,9 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $pid = (int)FormUtil::getPassedValue('pid', null, 'POST');
-        $title = FormUtil::getPassedValue('title', null, 'POST');
-        $cdescription = FormUtil::getPassedValue('cdescription', null, 'POST');
+        $pid = (int)$this->getPassedValue('pid', null, 'POST');
+        $title = $this->getPassedValue('title', null, 'POST');
+        $cdescription = $this->getPassedValue('cdescription', null, 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADD), LogUtil::getErrorMsgPermission());
@@ -89,7 +89,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     public function modcategory()
     {
         // get parameters we need
-        $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
+        $cid = (int)$this->getPassedValue('cid', null, 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -115,10 +115,10 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
-        $title = FormUtil::getPassedValue('title', null, 'POST');
-        $pid = (int)FormUtil::getPassedValue('pid', null, 'POST');
-        $cdescription = FormUtil::getPassedValue('cdescription', null, 'POST');
+        $cid = (int)$this->getPassedValue('cid', null, 'POST');
+        $title = $this->getPassedValue('title', null, 'POST');
+        $pid = (int)$this->getPassedValue('pid', null, 'POST');
+        $cdescription = $this->getPassedValue('cdescription', null, 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -147,7 +147,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     public function suredelcategory()
     {
         // get parameters we need
-        $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
+        $cid = (int)$this->getPassedValue('cid', null, 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
@@ -173,7 +173,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
+        $cid = (int)$this->getPassedValue('cid', null, 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
@@ -220,7 +220,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $link = FormUtil::getPassedValue('link', array(), 'POST');
+        $link = $this->getPassedValue('link', array(), 'POST');
         $sitename = System::getVar('sitename');
 //        $adminmail = System::getVar('adminmail');
 
@@ -305,7 +305,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $lid = (int)FormUtil::getPassedValue('lid', null, 'GETPOST');
+        $lid = (int)$this->getPassedValue('lid', null, 'GETPOST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -337,7 +337,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $link = FormUtil::getPassedValue('link', array(), 'POST');
+        $link = $this->getPassedValue('link', array(), 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -371,7 +371,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $lid = (int)FormUtil::getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', null, 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
@@ -400,7 +400,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $lid = (int)FormUtil::getPassedValue('lid', null, 'GETPOST');
+        $lid = (int)$this->getPassedValue('lid', null, 'GETPOST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
@@ -425,7 +425,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
     public function validate()
     {
         // get parameters we need
-        $cid = (int)FormUtil::getPassedValue('cid', null, 'POST');
+        $cid = (int)$this->getPassedValue('cid', null, 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -474,8 +474,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $rid = (int)FormUtil::getPassedValue('rid', null, 'REQUEST');
-        $lid = (int)FormUtil::getPassedValue('lid', null, 'REQUEST');
+        $rid = (int)$this->getPassedValue('rid', null, 'REQUEST');
+        $lid = (int)$this->getPassedValue('lid', null, 'REQUEST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
@@ -505,7 +505,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $rid = (int)FormUtil::getPassedValue('rid', null, 'REQUEST');
+        $rid = (int)$this->getPassedValue('rid', null, 'REQUEST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -550,7 +550,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $rid = FormUtil::getPassedValue('rid', null, 'REQUEST');
+        $rid = $this->getPassedValue('rid', null, 'REQUEST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -590,7 +590,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get parameters we need
-        $rid = FormUtil::getPassedValue('rid', null, 'REQUEST');
+        $rid = $this->getPassedValue('rid', null, 'REQUEST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -635,7 +635,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
 
         // get our input
-        $config = FormUtil::getPassedValue('config', 'array()', 'POST');
+        $config = $this->getPassedValue('config', 'array()', 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
@@ -984,5 +984,16 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController {
 
         // redirect to function view
         return System::redirect(ModUtil::url('Weblinks', 'admin', 'import'));
+    }
+    
+    private function getPassedValue($variable, $defaultValue, $type = 'POST') {
+        if ($type == 'POST') {
+            return $this->request->request->get($variable, $defaultValue);
+        } else if ($type == 'GET') {
+            return $this->request->query->get($variable, $defaultValue);
+        } else {
+            // else try GET then POST
+            return $this->request->query->get($variable, $this->request->request->get($variable, $defaultValue));
+        }
     }
 }
