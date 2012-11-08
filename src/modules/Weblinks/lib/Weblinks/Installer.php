@@ -15,11 +15,6 @@ class Weblinks_Installer extends Zikula_Installer
      */
     public function Install()
     {
-        if (version_compare(Zikula_Core::VERSION_NUM, '1.2.0', '<')) {
-            SessionUtil::setVar('errormsg', $this->__('Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met.'));
-            return false;
-        }
-
         // Create tables
         // creating categories table
         if (!DBUtil::createTable('links_categories')) {
@@ -157,8 +152,11 @@ class Weblinks_Installer extends Zikula_Installer
                 ModUtil::delVar('Weblinks', 'toplinkspercentrigger');
 
             case '2.1.0':
-
+                // not released
                 break;
+            
+            case '3.0.0':
+                // future code
         }
         // Upgrade successful
         return true;

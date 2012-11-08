@@ -22,6 +22,8 @@ class Weblinks_Version extends Zikula_AbstractVersion
         $meta['version'] = '3.0.0';
         $meta['securityschema'] = array('Weblinks::Category' => 'Category name::Category ID',
             'Weblinks::Link' => '::');
+        $meta['core_min'] = '1.3.0'; // requires minimum 1.3.0 or later
+        $meta['core_max'] = '1.3.99'; // doesn't work with 1.4.0 (yet)
         return $meta;
     }
 
