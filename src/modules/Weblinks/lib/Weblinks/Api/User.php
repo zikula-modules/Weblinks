@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zikula Application Framework
  *
@@ -6,25 +7,26 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-class Weblinks_Api_User extends Zikula_AbstractApi {
+class Weblinks_Api_User extends Zikula_AbstractApi
+{
 
     /**
-    * get all categories
-    */
+     * get all categories
+     */
     public function categories()
     {
 
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         // get all categories from db
         $categories = DBUtil::selectObjectArray('links_categories', '', 'title', '-1', '-1', '', $permFilter);
@@ -39,8 +41,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * count all links
-    */
+     * count all links
+     */
     public function numrows()
     {
         // count links in db
@@ -48,8 +50,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * count all categories
-    */
+     * count all categories
+     */
     public function catnum()
     {
         // count categories in db
@@ -57,8 +59,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * get a specific category
-    */
+     * get a specific category
+     */
     public function category($args)
     {
 
@@ -70,14 +72,14 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         // get the category vars from the db
         $category = DBUtil::selectObjectById('links_categories', $args['cid'], 'cat_id', '', $permFilter);
@@ -92,8 +94,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * get subcategories
-    */
+     * get subcategories
+     */
     public function subcategory($args)
     {
 
@@ -106,18 +108,18 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         $dbtable = DBUtil::getTables();
         $weblinkscolumn = &$dbtable['links_categories_column'];
 
-        $where = "WHERE $weblinkscolumn[parent_id] = ".(int)DataUtil::formatForStore($args['cid']);
+        $where = "WHERE $weblinkscolumn[parent_id] = " . (int)DataUtil::formatForStore($args['cid']);
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         // get the subcategories vars from the db
         $subcategories = DBUtil::selectObjectArray('links_categories', $where, 'title', '-1', '-1', '', $permFilter);
@@ -132,8 +134,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * get weblinks
-    */
+     * get weblinks
+     */
     public function weblinks($args)
     {
 
@@ -147,22 +149,22 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         if (isset($args['cid']) && is_numeric($args['cid']) && $args['cid']) {
             $dbtable = DBUtil::getTables();
             $weblinkscolumn = &$dbtable['links_links_column'];
-            $where = "WHERE $weblinkscolumn[cat_id] = ".(int)DataUtil::formatForStore($args['cid']);
+            $where = "WHERE $weblinkscolumn[cat_id] = " . (int)DataUtil::formatForStore($args['cid']);
         }
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         // get the weblinks vars from the db
-        $weblinks = DBUtil::selectObjectArray('links_links', $where, $orderbysql, $startnum-1, $numlinks, '', $permFilter);
+        $weblinks = DBUtil::selectObjectArray('links_links', $where, $orderbysql, $startnum - 1, $numlinks, '', $permFilter);
 
         // chack for db error
         if ($weblinks === false) {
@@ -174,8 +176,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * order funktion
-    */
+     * order funktion
+     */
     public function orderby($args)
     {
         $dbtable = DBUtil::getTables();
@@ -200,16 +202,16 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * count weblinks in the category
-    */
+     * count weblinks in the category
+     */
     public function countcatlinks($args)
     {
         return DBUtil::selectObjectCountByID('links_links', $args['cid'], 'cat_id');
     }
 
     /**
-    * get weblink array
-    */
+     * get weblink array
+     */
     public function link($args)
     {
 
@@ -221,14 +223,14 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         // get link array
         $link = DBUtil::selectObjectByID('links_links', $args['lid'], 'lid', '', $permFilter);
@@ -243,13 +245,13 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * update hits for a link
-    */
+     * update hits for a link
+     */
     public function hitcountinc($args)
     {
         // Argument check
         if (!isset($args['lid']) || !is_numeric($args['lid']) ||
-            !isset($args['hits']) || !is_numeric($args['hits'])) {
+                !isset($args['hits']) || !is_numeric($args['hits'])) {
             return LogUtil::registerArgsError();
         }
 
@@ -259,14 +261,14 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         $weblinkscolumn = $dbtable['links_links_column'];
 
         $items = array('hits' => $hits);
-        $where = "WHERE $weblinkscolumn[lid] = ".DataUtil::formatForStore($args['lid']);
+        $where = "WHERE $weblinkscolumn[lid] = " . DataUtil::formatForStore($args['lid']);
 
         return DBUtil::updateObject($items, 'links_links', $where, 'lid');
     }
 
     /**
-    * get categories with query inside
-    */
+     * get categories with query inside
+     */
     public function searchcats($args)
     {
 
@@ -279,18 +281,18 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         $dbtable = DBUtil::getTables();
         $weblinkscolumn = $dbtable['links_categories_column'];
 
-        $where ="WHERE $weblinkscolumn[title] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
+        $where = "WHERE $weblinkscolumn[title] LIKE '%" . DataUtil::formatForStore($args['query']) . "%'";
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         // get categories from db
         $searchcats = DBUtil::selectObjectArray('links_categories', $where, 'title', '-1', '-1', '', $permFilter);
@@ -305,8 +307,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * get weblinks with query inside
-    */
+     * get weblinks with query inside
+     */
     public function search_weblinks($args)
     {
 
@@ -323,18 +325,18 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         $dbtable = DBUtil::getTables();
         $column = $dbtable['links_links_column'];
 
-        $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
+        $where = "WHERE $column[title] LIKE '%" . DataUtil::formatForStore($args['query']) . "%' OR $column[description] LIKE '%" . DataUtil::formatForStore($args['query']) . "%'";
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         $result = DBUtil::selectObjectArray('links_links', $where, $orderby, $startnum - 1, $numlinks, '', $permFilter);
 
@@ -348,8 +350,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * count searchlinks
-    */
+     * count searchlinks
+     */
     public function countsearchlinks($args)
     {
         // Argument check
@@ -360,13 +362,14 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         $dbtable = DBUtil::getTables();
         $column = $dbtable['links_links_column'];
 
-        $where = "WHERE $column[title] LIKE '%".DataUtil::formatForStore($args['query'])."%' OR $column[description] LIKE '%".DataUtil::formatForStore($args['query'])."%'";
+        $where = "WHERE $column[title] LIKE '%" . DataUtil::formatForStore($args['query']) . "%' OR $column[description] LIKE '%" . DataUtil::formatForStore($args['query']) . "%'";
 
         return DBUtil::selectObjectCount('links_links', $where);
     }
+
     /**
-    * get random links
-    */
+     * get random links
+     */
     public function random($args)
     {
 
@@ -375,14 +378,14 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         $objArray = DBUtil::selectObjectArray('links_links', '', '', '-1', '-1', '', $permFilter);
         $lidarray = array();
@@ -409,8 +412,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * get number of links per day
-    */
+     * get number of links per day
+     */
     public function totallinks($args)
     {
         // Argument check
@@ -430,8 +433,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * get weblinks by day
-    */
+     * get weblinks by day
+     */
     public function weblinksbydate($args)
     {
 
@@ -443,18 +446,18 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         $dbtable = DBUtil::getTables();
         $newlinkdb = date("Y-m-d", $args['selectdate']);
         $column = $dbtable['links_links_column'];
-        $where = "WHERE $column[date] LIKE '%".DataUtil::formatForStore($newlinkdb)."%'";
+        $where = "WHERE $column[date] LIKE '%" . DataUtil::formatForStore($newlinkdb) . "%'";
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         // get weblinks from db
         $weblinks = DBUtil::selectObjectArray('links_links', $where, 'title', '-1', '-1', '', $permFilter);
@@ -468,8 +471,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * add broken link to db
-    */
+     * add broken link to db
+     */
     public function addbrockenlink($args)
     {
 
@@ -481,7 +484,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         // Security check
         if (!ModUtil::getVar('Weblinks', 'unregbroken') == 1 &&
-            !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
+                !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
             return LogUtil::registerPermissionError();
         }
 
@@ -494,8 +497,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * add link rewuest to db
-    */
+     * add link rewuest to db
+     */
     public function modifylinkrequest($args)
     {
 
@@ -507,7 +510,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         // Security check
         if (!ModUtil::getVar('Weblinks', 'blockunregmodify') == 1 &&
-            !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
+                !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
             return LogUtil::registerPermissionError();
         }
 
@@ -520,15 +523,15 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * add link to db
-    */
+     * add link to db
+     */
     public function add($args)
     {
 
 
         // Security check
         if (!ModUtil::getVar('Weblinks', 'links_anonaddlinklock') == 1 &&
-            !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
+                !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
             return LogUtil::registerPermissionError();
         }
 
@@ -549,11 +552,11 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
             $link['submit'] = 0;
             return $link;
         } else if (empty($args['cat']) || !is_numeric($args['cat'])) {
-            $link['text'] =$this->__('Sorry! Error! No category!');
+            $link['text'] = $this->__('Sorry! Error! No category!');
             $link['submit'] = 0;
             return $link;
         } else if (empty($args['description'])) {
-            $link['text'] =$this->__('Sorry! Error! You must type a description for the URL!');
+            $link['text'] = $this->__('Sorry! Error! You must type a description for the URL!');
             $link['submit'] = 0;
             return $link;
         } else {
@@ -561,7 +564,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
                 $link['submitter'] = System::getVar("anonymous");
             }
 
-            $items = array('cat_id' => $args['cat'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'name' => $args['submitter'], 'email' => $args['submitteremail'], 'submitter' => $args['submitter']);
+            $items = array('cat_id' => $args['cat'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'name' => $args['submitter'], 'email' => $args['submitteremail'], 'submitter' => $args['submitter']);
             if (!DBUtil::insertObject($items, 'links_newlink', 'lid')) {
                 return LogUtil::registerError($this->__('Error! Could not load items.'));
             }
@@ -577,16 +580,16 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * check if url exists
-    */
+     * check if url exists
+     */
     public function checkurl($args)
     {
         return DBUtil::selectObjectCountByID('links_links', $args['url'], 'url', 'lower');
     }
 
     /**
-    * get the last weblinks
-    */
+     * get the last weblinks
+     */
     public function lastweblinks($args)
     {
 
@@ -603,14 +606,14 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         // get last weblinks from db
         $lastweblinks = DBUtil::selectObjectArray('links_links', '', $orderby, '-1', $args['lastlinks'], '', $permFilter);
@@ -625,8 +628,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
     }
 
     /**
-    * get the most popular weblinks
-    */
+     * get the most popular weblinks
+     */
     public function mostpopularweblinks($args)
     {
 
@@ -643,14 +646,14 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_READ);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_READ);
 
         // get most popular weblinks from db
         $mostpopularweblinks = DBUtil::selectObjectArray('links_links', '', $orderby, '-1', $args['mostpoplinks'], '', $permFilter);
@@ -663,4 +666,5 @@ class Weblinks_Api_User extends Zikula_AbstractApi {
         // return the most popular weblinks
         return $mostpopularweblinks;
     }
+
 }

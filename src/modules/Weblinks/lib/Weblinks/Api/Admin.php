@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zikula Application Framework
  *
@@ -6,50 +7,51 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-class Weblinks_Api_Admin extends Zikula_AbstractApi {
+class Weblinks_Api_Admin extends Zikula_AbstractApi
+{
 
     /**
-    * get available admin panel links
-    */
+     * get available admin panel links
+     */
     public function getlinks()
     {
         $links = array();
 
         if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT)) {
             $links[] = array(
-                'url' => ModUtil::url('Weblinks', 'admin', 'view'), 
+                'url' => ModUtil::url('Weblinks', 'admin', 'view'),
                 'text' => $this->__('Overview'),
                 'class' => 'z-icon-es-view');
         }
         if (SecurityUtil::checkPermission('Weblinks::Category', '::', ACCESS_EDIT)) {
             $links[] = array(
-                'url' => ModUtil::url('Weblinks', 'admin', 'catview'), 
+                'url' => ModUtil::url('Weblinks', 'admin', 'catview'),
                 'text' => $this->__('Categories administer'),
                 'class' => 'z-icon-es-cubes');
         }
         if (SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_EDIT)) {
             $links[] = array(
-                'url' => ModUtil::url('Weblinks', 'admin', 'linkview'), 
+                'url' => ModUtil::url('Weblinks', 'admin', 'linkview'),
                 'text' => $this->__('Links administer'),
                 'class' => 'z-icon-es-view');
         }
         if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN)) {
             $links[] = array(
-                'url' => ModUtil::url('Weblinks', 'admin', 'getconfig'), 
+                'url' => ModUtil::url('Weblinks', 'admin', 'getconfig'),
                 'text' => $this->__('Configuration'),
                 'class' => 'z-icon-es-config');
             $links[] = array(
-                'url' => ModUtil::url('Weblinks', 'admin', 'import'), 
+                'url' => ModUtil::url('Weblinks', 'admin', 'import'),
                 'text' => $this->__('Import'),
                 'class' => 'z-icon-es-import');
         }
         if (SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_EDIT)) {
             $links[] = array(
-                'url' => ModUtil::url('Weblinks', 'admin', 'help'), 
+                'url' => ModUtil::url('Weblinks', 'admin', 'help'),
                 'text' => $this->__('Help'),
                 'class' => 'z-icon-es-help');
             $links[] = array(
-                'url' => ModUtil::url('Weblinks', 'user', 'view'), 
+                'url' => ModUtil::url('Weblinks', 'user', 'view'),
                 'text' => $this->__('Link-Index'),
                 'class' => 'z-icon-es-url');
         }
@@ -57,16 +59,16 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * count brocken links
-    */
+     * count brocken links
+     */
     public function countbrokenlinks()
     {
         return DBUtil::selectObjectCountByID('links_modrequest', 1, 'brokenlink');
     }
 
     /**
-    * count modrequests for links
-    */
+     * count modrequests for links
+     */
     public function countmodrequests()
     {
         $dbtable = DBUtil::getTables();
@@ -76,20 +78,20 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * get new links waiting for approve
-    */
+     * get new links waiting for approve
+     */
     public function newlinks()
     {
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_DELETE);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_DELETE);
 
         // get newlinks vars from db
         $newlinks = DBUtil::selectObjectArray('links_newlink', '', 'lid', '-1', '-1', '', $permFilter);
@@ -104,8 +106,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * add a category to db
-    */
+     * add a category to db
+     */
     public function addcategory($args)
     {
         // Argument check
@@ -122,15 +124,15 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
         if ($checktitle) {
             $dbtable = DBUtil::getTables();
             $column = $dbtable['links_categories_column'];
-            $where = "WHERE $column[parent_id] = '".(int)DataUtil::formatForStore($args['pid'])."' AND $column[title] = '".DataUtil::formatForStore($args['title'])."'";
+            $where = "WHERE $column[parent_id] = '" . (int)DataUtil::formatForStore($args['pid']) . "' AND $column[title] = '" . DataUtil::formatForStore($args['title']) . "'";
             if (DBUtil::selectObjectCount('links_categories', $where)) {
                 return LogUtil::registerError($this->__('ERROR: The category title exists on this level.'));
             }
         }
 
         $items = array(
-            'parent_id' => $args['pid'], 
-            'title' => $args['title'], 
+            'parent_id' => $args['pid'],
+            'title' => $args['title'],
             'cdescription' => $args['cdescription']);
         if (!DBUtil::insertObject($items, 'links_categories', 'cat_id')) {
             return LogUtil::registerError($this->__('ERROR: The category isn\'t added.'));
@@ -140,8 +142,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * get vars from category to modify
-    */
+     * get vars from category to modify
+     */
     public function getcategory($args)
     {
         // Argument check
@@ -156,14 +158,14 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_EDIT);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_EDIT);
 
         // get the category vars from the db
         $category = DBUtil::selectObjectById('links_categories', $args['cid'], 'cat_id', '', $permFilter);
@@ -178,14 +180,14 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * update category vars
-    */
+     * update category vars
+     */
     public function updatecategory($args)
     {
         // Argument check
         if (!isset($args['cid']) || !is_numeric($args['cid']) ||
-            !isset($args['pid']) || !is_numeric($args['pid']) ||
-            !isset($args['title'])) {
+                !isset($args['pid']) || !is_numeric($args['pid']) ||
+                !isset($args['title'])) {
             return LogUtil::registerArgsError();
         }
 
@@ -197,7 +199,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
         $dbtable = DBUtil::getTables();
         $column = $dbtable['links_categories_column'];
         $items = array('title' => $args['title'], 'parent_id' => $args['pid'], 'cdescription' => $args['cdescription']);
-        $where = "WHERE $column[cat_id]='".(int)DataUtil::formatForStore($args['cid'])."'";
+        $where = "WHERE $column[cat_id]='" . (int)DataUtil::formatForStore($args['cid']) . "'";
         if (!DBUtil::updateObject($items, 'links_categories', $where, 'cat_id')) {
             return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
@@ -206,8 +208,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * delete a category
-    */
+     * delete a category
+     */
     public function delcategory($args)
     {
         // Argument check
@@ -224,20 +226,20 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         // delete links
         $linkcolumn = $dbtable['links_links_column'];
-        $where = "WHERE $linkcolumn[cat_id] = '".(int)DataUtil::formatForStore($args['cid'])."'";
+        $where = "WHERE $linkcolumn[cat_id] = '" . (int)DataUtil::formatForStore($args['cid']) . "'";
         if (!DBUtil::deleteWhere('links_links', $where)) {
             return false;
         }
 
         // delete subcategories
         $catcolumn = $dbtable['links_categories_column'];
-        $where = "WHERE '".(int)DataUtil::formatForStore($args['cid'])."' = $catcolumn[parent_id]";
+        $where = "WHERE '" . (int)DataUtil::formatForStore($args['cid']) . "' = $catcolumn[parent_id]";
         if (!DBUtil::deleteWhere('links_categories', $where)) {
             return false;
         }
 
         // delete category
-        $where = "WHERE $catcolumn[cat_id] = '".(int)DataUtil::formatForStore($args['cid'])."'";
+        $where = "WHERE $catcolumn[cat_id] = '" . (int)DataUtil::formatForStore($args['cid']) . "'";
         if (!DBUtil::deleteWhere('links_categories', $where)) {
             return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
@@ -246,8 +248,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * add a link to db
-    */
+     * add a link to db
+     */
     public function addlink($args)
     {
         // Argument check
@@ -260,7 +262,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
             return LogUtil::registerPermissionError();
         }
 
-        $items = array('cat_id' => $args['cat'], 'title' => $args['title'],'url' => $args['url'], 'description' => $args['description'], 'date' => $args['date'], 'name' => $args['name'], 'email' => $args['email'], 'submitter' => $args['submitter']);
+        $items = array('cat_id' => $args['cat'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'date' => $args['date'], 'name' => $args['name'], 'email' => $args['email'], 'submitter' => $args['submitter']);
         if (!DBUtil::insertObject($items, 'links_links', 'lid')) {
             return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
@@ -275,8 +277,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * delete a newlink
-    */
+     * delete a newlink
+     */
     public function delnewlink($args)
     {
         // Argument check
@@ -286,7 +288,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         // Security check
         if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError ();
+            return LogUtil::registerPermissionError();
         }
 
         // delete link from the newlink table
@@ -298,8 +300,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * get link vars for modify
-    */
+     * get link vars for modify
+     */
     public function getlink($args) //ready
     {
         // Argument check
@@ -314,14 +316,14 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Link',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'lid',
-                            'level'            => ACCESS_EDIT);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Link',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'lid',
+            'level' => ACCESS_EDIT);
 
         // get the object from the db
         $link = DBUtil::selectObjectById('links_links', $args['lid'], 'lid', '', $permFilter);
@@ -335,14 +337,14 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * update link vars
-    */
+     * update link vars
+     */
     public function updatelink($args)
     {
         // Argument check
         if (!isset($args['lid']) || !is_numeric($args['lid']) ||
-            !isset($args['cid']) || !is_numeric($args['cid']) ||
-            !isset($args['title']) || !isset($args['url'])) {
+                !isset($args['cid']) || !is_numeric($args['cid']) ||
+                !isset($args['title']) || !isset($args['url'])) {
             return LogUtil::registerArgsError();
         }
 
@@ -354,7 +356,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
         $dbtable = DBUtil::getTables();
         $column = $dbtable['links_links_column'];
         $items = array('cat_id' => $args['cid'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'name' => $args['name'], 'email' => $args['email'], 'hits' => $args['hits']);
-        $where = "WHERE $column[lid]='".(int)DataUtil::formatForStore($args['lid'])."'";
+        $where = "WHERE $column[lid]='" . (int)DataUtil::formatForStore($args['lid']) . "'";
         if (!DBUtil::updateObject($items, 'links_links', $where, 'lid')) {
             return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
@@ -366,8 +368,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * delete a link
-    */
+     * delete a link
+     */
     public function dellink($args)
     {
 
@@ -379,7 +381,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         // Security check
         if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError ();
+            return LogUtil::registerPermissionError();
         }
 
         if (!DBUtil::deleteObjectByID('links_links', $args['lid'], 'lid')) {
@@ -393,8 +395,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * check links
-    */
+     * check links
+     */
     public function checklinks($args)
     {
 
@@ -413,19 +415,19 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
         if ($args['cid'] != 0) {
             $dbtable = DBUtil::getTables();
             $column = $dbtable['links_links_column'];
-            $where = "WHERE $column[cat_id]='".(int)DataUtil::formatForStore($args['cid'])."'";
+            $where = "WHERE $column[cat_id]='" . (int)DataUtil::formatForStore($args['cid']) . "'";
         }
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_EDIT);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_EDIT);
 
         // get the vars from the db
         $checkcatlinks = DBUtil::selectObjectArray('links_links', $where, 'title', '-1', '-1', '', $permFilter);
@@ -445,10 +447,10 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
                 $fp = fsockopen($vurl['host'], 80, $errno, $errstr, 15);
             }
 
-            $links[] = array('lid'   => $link['lid'],
-                            'title' => $link['title'],
-                            'url'   => $link['url'],
-                            'fp'    => $fp);
+            $links[] = array('lid' => $link['lid'],
+                'title' => $link['title'],
+                'url' => $link['url'],
+                'fp' => $fp);
         }
 
         // return array
@@ -456,8 +458,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * get broken links
-    */
+     * get broken links
+     */
     public function brokenlinks()
     {
 
@@ -468,14 +470,14 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_EDIT);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_EDIT);
 
         // get the vars from the db
         $objArray = DBUtil::selectObjectArray('links_modrequest', $where, 'requestid', '-1', '-1', '', $permFilter);
@@ -494,14 +496,14 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
                 $email = DBUtil::selectObjectByID('users', $request['modifysubmitter'], 'uname');
             }
 
-            $brokenlinks[] = array('lid'            => $request['lid'],
-                                'rid'            => $request['requestid'],
-                                'title'          => $link['title'],
-                                'url'            => $link['url'],
-                                'submitter'      => $request['modifysubmitter'],
-                                'submitteremail' => $email['email'],
-                                'owner'          => $link['name'],
-                                'owneremail'     => $link['email']);
+            $brokenlinks[] = array('lid' => $request['lid'],
+                'rid' => $request['requestid'],
+                'title' => $link['title'],
+                'url' => $link['url'],
+                'submitter' => $request['modifysubmitter'],
+                'submitteremail' => $email['email'],
+                'owner' => $link['name'],
+                'owneremail' => $link['email']);
         }
 
         // return array
@@ -509,8 +511,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * delete a request
-    */
+     * delete a request
+     */
     public function delrequest($args)
     {
 
@@ -522,7 +524,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         // Security check
         if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError ();
+            return LogUtil::registerPermissionError();
         }
 
         if (!DBUtil::deleteObjectByID('links_modrequest', $args['rid'], 'requestid')) {
@@ -533,8 +535,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * get links with modrequest
-    */
+     * get links with modrequest
+     */
     public function modrequests()
     {
 
@@ -545,14 +547,14 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Category',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'cat_id',
-                            'level'            => ACCESS_EDIT);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Category',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'cat_id',
+            'level' => ACCESS_EDIT);
 
         // get the vars from the db
         $objArray = DBUtil::selectObjectArray('links_modrequest', $where, 'requestid', '-1', '-1', '', $permFilter);
@@ -573,22 +575,22 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
                 $email = DBUtil::selectObjectByID('users', $request['modifysubmitter'], 'uname');
             }
 
-            $modrequests[] = array('rid'             => $request['requestid'],
-                                'lid'             => $request['lid'],
-                                'title'           => $request['title'],
-                                'url'             => $request['url'],
-                                'description'     => $request['description'],
-                                'cid'             => $request['cat_id'],
-                                'cidtitle'        => $category['title'],
-                                'origtitle'       => $link['title'],
-                                'origurl'         => $link['url'],
-                                'origdescription' => $link['description'],
-                                'origcid'         => $link['cat_id'],
-                                'origcidtitle'    => $origcategory['title'],
-                                'submitter'       => $request['modifysubmitter'],
-                                'submitteremail'  => $email['email'],
-                                'owner'           => $link['name'],
-                                'owneremail'      => $link['email']);
+            $modrequests[] = array('rid' => $request['requestid'],
+                'lid' => $request['lid'],
+                'title' => $request['title'],
+                'url' => $request['url'],
+                'description' => $request['description'],
+                'cid' => $request['cat_id'],
+                'cidtitle' => $category['title'],
+                'origtitle' => $link['title'],
+                'origurl' => $link['url'],
+                'origdescription' => $link['description'],
+                'origcid' => $link['cat_id'],
+                'origcidtitle' => $origcategory['title'],
+                'submitter' => $request['modifysubmitter'],
+                'submitteremail' => $email['email'],
+                'owner' => $link['name'],
+                'owneremail' => $link['email']);
         }
 
         // return array
@@ -596,8 +598,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
     }
 
     /**
-    * get link with modrequest
-    */
+     * get link with modrequest
+     */
     public function linkmodrequest($args)
     {
 
@@ -609,37 +611,37 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         // define the permission filter to apply
         $permFilter = array();
-        $permFilter[] = array('realm'            => 0,
-                            'component_left'   => 'Weblinks',
-                            'component_middle' => '',
-                            'component_right'  => 'Link',
-                            'instance_left'    => 'title',
-                            'instance_middle'  => '',
-                            'instance_right'   => 'lid',
-                            'level'            => ACCESS_EDIT);
+        $permFilter[] = array('realm' => 0,
+            'component_left' => 'Weblinks',
+            'component_middle' => '',
+            'component_right' => 'Link',
+            'instance_left' => 'title',
+            'instance_middle' => '',
+            'instance_right' => 'lid',
+            'level' => ACCESS_EDIT);
 
         // get the object from the db
         $requestlink = DBUtil::selectObjectById('links_modrequest', $args['rid'], 'requestid', '', $permFilter);
 
         // check for a db error
         if ($requestlink === false) {
-        return LogUtil::registerError($this->__('Error! Could not load items.'));
+            return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
 
         return $requestlink;
     }
 
     /**
-    * update link vars from modrequest
-    */
+     * update link vars from modrequest
+     */
     public function updatemodlink($args)
     {
 
 
-    // Argument check
+        // Argument check
         if (!isset($args['lid']) || !is_numeric($args['lid']) ||
-            !isset($args['cid']) || !is_numeric($args['cid']) ||
-            !isset($args['title']) || !isset($args['url'])) {
+                !isset($args['cid']) || !is_numeric($args['cid']) ||
+                !isset($args['title']) || !isset($args['url'])) {
             return LogUtil::registerArgsError();
         }
 
@@ -651,7 +653,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
         $dbtable = DBUtil::getTables();
         $column = $dbtable['links_links_column'];
         $items = array('cat_id' => $args['cid'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description']);
-        $where = "WHERE $column[lid]='".(int)DataUtil::formatForStore($args['lid'])."'";
+        $where = "WHERE $column[lid]='" . (int)DataUtil::formatForStore($args['lid']) . "'";
         if (!DBUtil::updateObject($items, 'links_links', $where, 'lid')) {
             return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
@@ -661,4 +663,5 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi {
 
         return true;
     }
+
 }

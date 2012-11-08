@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zikula Application Framework
  *
@@ -6,11 +7,12 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
+class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock
+{
 
     /**
-    * initialise block
-    */
+     * initialise block
+     */
     public function init()
     {
         // Security
@@ -18,26 +20,26 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
     }
 
     /**
-    * get information on block
-    */
+     * get information on block
+     */
     public function info()
     {
 
 
         // Values
         return array('text_type' => 'lastweblinks',
-                    'module' => $this->__('Weblinks'),
-                    'text_type_long' => $this->__('Latest Weblinks'),
-                    'allow_multiple' => true,
-                    'form_content' => false,
-                    'form_refresh' => false,
-                    'show_preview' => true,
-                    'admin_tableless' => true);
+            'module' => $this->__('Weblinks'),
+            'text_type_long' => $this->__('Latest Weblinks'),
+            'allow_multiple' => true,
+            'form_content' => false,
+            'form_refresh' => false,
+            'show_preview' => true,
+            'admin_tableless' => true);
     }
 
     /**
-    * display block
-    */
+     * display block
+     */
     public function display($blockinfo)
     {
         // Security check
@@ -75,8 +77,8 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
     }
 
     /**
-    * modify block settings
-    */
+     * modify block settings
+     */
     public function modify($blockinfo)
     {
         // Get current content
@@ -95,8 +97,8 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
     }
 
     /**
-    * update block settings
-    */
+     * update block settings
+     */
     public function update($blockinfo)
     {
         // Get current content
@@ -118,4 +120,5 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
 
         return $blockinfo;
     }
+
 }

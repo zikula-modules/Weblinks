@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zikula Application Framework
  *
@@ -6,14 +7,13 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-
 function smarty_function_countlinks($params, &$smarty)
 {
     $totallinks = 0;
     $counter = 0;
-    
+
     while ($counter < $params['days']) {
-        $newlinkdayraw = (time()-(86400 * $counter));
+        $newlinkdayraw = (time() - (86400 * $counter));
         $newlinkdb = DateUtil::transformInternalDate($newlinkdayraw);
         $dbtable = DBUtil::getTables();
         $column = $dbtable['links_links_column'];

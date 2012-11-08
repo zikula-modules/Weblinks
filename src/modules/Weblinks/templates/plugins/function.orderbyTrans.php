@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zikula Application Framework
  *
@@ -6,7 +7,6 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-
 function smarty_function_orderbyTrans($params, &$smarty)
 {
     $dom = ZLanguage::getModuleDomain('Weblinks');

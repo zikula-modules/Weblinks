@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zikula Application Framework
  *
@@ -6,11 +7,12 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-class Weblinks_Installer extends Zikula_Installer {
+class Weblinks_Installer extends Zikula_Installer
+{
 
     /**
-    * init Weblinks module
-    */
+     * init Weblinks module
+     */
     public function Install()
     {
         if (version_compare(Zikula_Core::VERSION_NUM, '1.2.0', '<')) {
@@ -19,7 +21,6 @@ class Weblinks_Installer extends Zikula_Installer {
         }
 
         // Create tables
-
         // creating categories table
         if (!DBUtil::createTable('links_categories')) {
             return false;
@@ -43,131 +44,129 @@ class Weblinks_Installer extends Zikula_Installer {
         // Weblinks settings
         // set up config variables
         $modvars = array('perpage' => 25,
-                        'newlinks' => 10,
-                        'bestlinks' => 10,
-                        'linksresults' => 10,
-                        'linksinblock' => 10,
-                        'popular' => 500,
-                        'mostpoplinkspercentrigger' => 0,
-                        'mostpoplinks' => 25,
-                        'featurebox' => 1,
-                        'targetblank' => 0,
-                        'doubleurl' => 0,
-                        'unregbroken' => 0,
-                        'blockunregmodify' => 0,
-                        'links_anonaddlinklock' => 0,
-                        'thumber' => 0,
-                        'thumbersize' => 'XL');
+            'newlinks' => 10,
+            'bestlinks' => 10,
+            'linksresults' => 10,
+            'linksinblock' => 10,
+            'popular' => 500,
+            'mostpoplinkspercentrigger' => 0,
+            'mostpoplinks' => 25,
+            'featurebox' => 1,
+            'targetblank' => 0,
+            'doubleurl' => 0,
+            'unregbroken' => 0,
+            'blockunregmodify' => 0,
+            'links_anonaddlinklock' => 0,
+            'thumber' => 0,
+            'thumbersize' => 'XL');
 
         // set up module variables
         ModUtil::setVars('Weblinks', $modvars);
 
         // Initialisation successful
         return true;
-
     }
 
     /**
-    * upgrade
-    */
+     * upgrade
+     */
     public function Upgrade($oldversion)
     {
         // Get database information
         $dbtable = DBUtil::getTables();
 
-        switch($oldversion) {
+        switch ($oldversion) {
             case '1.0':
 
-            // Weblinks settings
-            // set up config variables
-            $modvars = array('perpage' => 25,
-                        'newlinks' => 10,
-                        'bestlinks' => 10,
-                        'linksresults' => 10,
-                        'linksinblock' => 10,
-                        'popular' => 500,
-                        'mostpoplinkspercentrigger' => 0,
-                        'mostpoplinks' => 25,
-                        'featurebox' => 1,
-                        'targetblank' => 0,
-                        'blockunregmodify' => 0,
-                        'links_anonaddlinklock' => 0);
+                // Weblinks settings
+                // set up config variables
+                $modvars = array('perpage' => 25,
+                    'newlinks' => 10,
+                    'bestlinks' => 10,
+                    'linksresults' => 10,
+                    'linksinblock' => 10,
+                    'popular' => 500,
+                    'mostpoplinkspercentrigger' => 0,
+                    'mostpoplinks' => 25,
+                    'featurebox' => 1,
+                    'targetblank' => 0,
+                    'blockunregmodify' => 0,
+                    'links_anonaddlinklock' => 0);
 
-            // set up module variables
-            ModUtil::setVars('Weblinks', $modvars);
+                // set up module variables
+                ModUtil::setVars('Weblinks', $modvars);
 
             case '2.0':
 
-            // rename Web_Links to Weblinks
-
-            // rename modvars
-            $oldvars = ModUtil::getVar('Web_Links');
-            if ($oldvars) {
-                ModUtil::setVars('Weblinks', $oldvars);
-                ModUtil::delVar('Web_Links');
-            }
-
-            // rename hook
-            $dbtable = DBUtil::getTables();
-            $hookscolumn = $dbtable['hooks_column'];
-            $object = array('smodule' => 'Weblinks');
-            $where = "WHERE $hookscolumn[smodule] = 'Web_Links'";
-            DBUtil::updateObject($object, 'hooks', $where, 'id');
-
-            // rename hooks entries
-            if (ModUtil::available('EZComments')) {
-                ModUtil::dbInfoLoad('EZComments');
-                $dbtable = DBUtil::getTables();
-                $ezccolumn = $dbtable['EZComments_column'];
-                $where = "WHERE $ezccolumn[modname] = 'Web_Links'";
-                $ezcarray = DBUtil::selectObjectArray('EZComments', $where, '', -1, -1, false);
-                $ezccount = count($ezcarray);
-                for ($cnt=0; $cnt<$ezccount; $cnt++) {
-                    $ezcarray[$cnt]['modname'] = str_replace('Web_Links', 'Weblinks', $ezcarray[$cnt]['modname']);
+                // rename Web_Links to Weblinks
+                // rename modvars
+                $oldvars = ModUtil::getVar('Web_Links');
+                if ($oldvars) {
+                    ModUtil::setVars('Weblinks', $oldvars);
+                    ModUtil::delVar('Web_Links');
                 }
-                DBUtil::updateObjectArray($ezcarray, 'EZComments', 'id');
-            }
 
-            if (ModUtil::available('Ratings')) {
-                ModUtil::dbInfoLoad('Ratings');
+                // rename hook
                 $dbtable = DBUtil::getTables();
-                $ratcolumn = $dbtable['ratings_column'];
-                $where = "WHERE $ratcolumn[module] = 'Web_Links'";
-                $ratarray = DBUtil::selectObjectArray('ratings', $where, '', -1, -1, false);
-                $ratcount = count($ratarray);
-                for ($cnt=0; $cnt<$ratcount; $cnt++) {
-                    $ratarray[$cnt]['module'] = str_replace('Web_Links', 'Weblinks', $ratarray[$cnt]['module']);
+                $hookscolumn = $dbtable['hooks_column'];
+                $object = array('smodule' => 'Weblinks');
+                $where = "WHERE $hookscolumn[smodule] = 'Web_Links'";
+                DBUtil::updateObject($object, 'hooks', $where, 'id');
+
+                // rename hooks entries
+                if (ModUtil::available('EZComments')) {
+                    ModUtil::dbInfoLoad('EZComments');
+                    $dbtable = DBUtil::getTables();
+                    $ezccolumn = $dbtable['EZComments_column'];
+                    $where = "WHERE $ezccolumn[modname] = 'Web_Links'";
+                    $ezcarray = DBUtil::selectObjectArray('EZComments', $where, '', -1, -1, false);
+                    $ezccount = count($ezcarray);
+                    for ($cnt = 0; $cnt < $ezccount; $cnt++) {
+                        $ezcarray[$cnt]['modname'] = str_replace('Web_Links', 'Weblinks', $ezcarray[$cnt]['modname']);
+                    }
+                    DBUtil::updateObjectArray($ezcarray, 'EZComments', 'id');
                 }
-                DBUtil::updateObjectArray($ratarray, 'ratings', 'rid');
-            }
+
+                if (ModUtil::available('Ratings')) {
+                    ModUtil::dbInfoLoad('Ratings');
+                    $dbtable = DBUtil::getTables();
+                    $ratcolumn = $dbtable['ratings_column'];
+                    $where = "WHERE $ratcolumn[module] = 'Web_Links'";
+                    $ratarray = DBUtil::selectObjectArray('ratings', $where, '', -1, -1, false);
+                    $ratcount = count($ratarray);
+                    for ($cnt = 0; $cnt < $ratcount; $cnt++) {
+                        $ratarray[$cnt]['module'] = str_replace('Web_Links', 'Weblinks', $ratarray[$cnt]['module']);
+                    }
+                    DBUtil::updateObjectArray($ratarray, 'ratings', 'rid');
+                }
 
             case '2.0.1':
 
-            if (version_compare(Zikula_Core::VERSION_NUM, '1.2.0', '<')) {
-                SessionUtil::setVar('errormsg', $this->__('Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met.'));
-                return false;
-            }
+                if (version_compare(Zikula_Core::VERSION_NUM, '1.2.0', '<')) {
+                    SessionUtil::setVar('errormsg', $this->__('Error! This version of the Weblinks module requires Zikula 1.2.0 or later. Installation has been stopped because this requirement is not met.'));
+                    return false;
+                }
 
-            ModUtil::setVar('Weblinks', 'doubleurl', 0);
-            ModUtil::setVar('Weblinks', 'unregbroken', 0);
-            ModUtil::setVar('Weblinks', 'thumber', 0);
-            ModUtil::setVar('Weblinks', 'thumbersize', 'XL');
+                ModUtil::setVar('Weblinks', 'doubleurl', 0);
+                ModUtil::setVar('Weblinks', 'unregbroken', 0);
+                ModUtil::setVar('Weblinks', 'thumber', 0);
+                ModUtil::setVar('Weblinks', 'thumbersize', 'XL');
 
-            // remove obsolete module vars
-            ModUtil::delVar('Weblinks', 'toplinks');
-            ModUtil::delVar('Weblinks', 'toplinkspercentrigger');
+                // remove obsolete module vars
+                ModUtil::delVar('Weblinks', 'toplinks');
+                ModUtil::delVar('Weblinks', 'toplinkspercentrigger');
 
             case '2.1.0':
 
-            break;
+                break;
         }
         // Upgrade successful
         return true;
     }
 
     /**
-    * delete the Weblinks module
-    */
+     * delete the Weblinks module
+     */
     public function Uninstall()
     {
         // Delete tables
@@ -194,4 +193,5 @@ class Weblinks_Installer extends Zikula_Installer {
         // Deletion successful
         return true;
     }
+
 }
