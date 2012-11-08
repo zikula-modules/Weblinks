@@ -304,7 +304,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             return LogUtil::registerArgsError();
         }
 
-        $orderby = (isset($args['orderby'])) ? $args['orderby'] : 'titleA';
+        $orderby = (isset($args['orderby'])) ? $args['orderby'] : 'title ASC';
         $startnum = (isset($args['startnum']) && is_numeric($args['startnum'])) ? $args['startnum'] : 1;
         $numlinks = (isset($args['numlinks']) && is_numeric($args['numlinks'])) ? $args['numlinks'] : -1;
 
