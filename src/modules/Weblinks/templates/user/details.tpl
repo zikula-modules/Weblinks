@@ -2,7 +2,7 @@
 {pagesetvar name=title value=$weblinks.title}
 <div class="wl-borderbox">
     <div class="wl-linkbox">
-        {include file="weblinks_user_linkbox.html"}
+        {include file="user/linkbox.tpl"}
         <p>&nbsp;</p>
         {* modcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks implode=false *}
         {* $hooks.EZComments *}

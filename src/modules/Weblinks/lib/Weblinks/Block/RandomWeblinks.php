@@ -60,7 +60,7 @@ class Weblinks_Block_RandomWeblinks extends Zikula_Controller_AbstractBlock {
 
 
         //  Check if the block is cached
-        if ($this->view->is_cached('weblinks_block_randomweblinks.html')) {
+        if ($this->view->is_cached('block/randomweblinks.tpl')) {
             $blockinfo['content'] = $this->view->fetch('block/randomweblinks.tpl');
             return BlockUtil::themeBlock($blockinfo);
         }

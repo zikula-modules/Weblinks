@@ -60,7 +60,7 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock {
 
 
         //  Check if the block is cached
-        if ($this->view->is_cached('weblinks_block_lastweblinks.html')) {
+        if ($this->view->is_cached('block/lastweblinks.tpl')) {
             $blockinfo['content'] = $this->view->fetch('block/lastweblinks.tpl');
             return BlockUtil::themeBlock($blockinfo);
         }

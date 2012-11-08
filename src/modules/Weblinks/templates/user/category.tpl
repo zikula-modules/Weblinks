@@ -18,11 +18,11 @@
         {/if}
     </div>
 
-    {include file="weblinks_user_sortlinksbymenu.html"}
+    {include file="user/sortlinksbymenu.tpl"}
 
     {foreach from=$weblinks item=weblinks}
     <div class="wl-linkbox">
-        {include file="weblinks_user_linkbox.html"}
+        {include file="user/linkbox.tpl"}
     </div>
     {/foreach}
 

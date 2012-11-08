@@ -60,7 +60,7 @@ class Weblinks_Block_MostPopularWeblinks extends Zikula_Controller_AbstractBlock
 
 
         //  Check if the block is cached
-        if ($this->view->is_cached('weblinks_block_mostpopularweblinks.html')) {
+        if ($this->view->is_cached('block/mostpopularweblinks.tpl')) {
             $blockinfo['content'] = $this->view->fetch('block/mostpopularweblinks.tpl');
             return BlockUtil::themeBlock($blockinfo);
         }
