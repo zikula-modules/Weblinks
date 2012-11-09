@@ -20,12 +20,12 @@
 
     {include file="user/sortlinksbymenu.tpl"}
 
-    {foreach from=$weblinks item=weblinks}
+    {foreach from=$weblinks item='weblinks'}
     <div class="wl-linkbox">
         {include file="user/linkbox.tpl"}
     </div>
     {/foreach}
 
-    {pager rowcount=$wlpager.numitems limit=$wlpager.itemsperpage posvar='startnum' shift=1 img_prev='images/icons/extrasmall/previous.png' img_next='images/icons/extrasmall/next.png'}
+    {pager rowcount=$pagernumitems limit=$modvars.Weblinks.perpage posvar='startnum' shift=1 img_prev='images/icons/extrasmall/previous.png' img_next='images/icons/extrasmall/next.png'}
 </div>
 {include file="user/footer.tpl"}

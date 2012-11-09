@@ -33,7 +33,7 @@
     <div class="wl-center wl-stats">{gt text="There are"} <strong>{$numrows}</strong> {gt text="link" plural="links" count=$numrows} {gt text="and"} <strong>{$catnum}</strong> {gt text="category" plural="categories" count=$catnum} {gt text="in the database"}</div>
 </div>
 
-{if $linkbox eq 1}
+{if $modvars.Weblinks.featurebox eq 1}
 <div class="wl-borderbox z-clearfix">
     <div class="blocklast">
         <h4>{gt text="Last links"}</h4>
@@ -41,7 +41,7 @@
         <ol class="lastweblinks">
             {foreach from=$blocklast item=weblinks name=loop}
             <li>
-                <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}"{if $helper.tb eq 1} target="_blank"{/if}>{$weblinks.title|safetext}</a>
+                <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}"{if $modvars.Weblinks.targetblank eq 1} target="_blank"{/if}>{$weblinks.title|safetext}</a>
             </li>
             {/foreach}
         </ol>
@@ -53,7 +53,7 @@
         <ol class="mostpopularweblinks">
             {foreach from=$blockmostpop item=weblinks name=loop}
             <li>
-                <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}"{if $helper.tb eq 1} target="_blank"{/if}>{$weblinks.title|safetext}</a>
+                <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}"{if $modvars.Weblinks.targetblank eq 1} target="_blank"{/if}>{$weblinks.title|safetext}</a>
                 <em>({$weblinks.hits|safetext})</em>
             </li>
             {/foreach}

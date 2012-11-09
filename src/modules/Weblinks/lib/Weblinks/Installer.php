@@ -145,14 +145,14 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
                     return false;
                 }
 
-                ModUtil::setVar('Weblinks', 'doubleurl', 0);
-                ModUtil::setVar('Weblinks', 'unregbroken', 0);
-                ModUtil::setVar('Weblinks', 'thumber', 0);
-                ModUtil::setVar('Weblinks', 'thumbersize', 'XL');
+                $this->setVar('doubleurl', 0);
+                $this->setVar('unregbroken', 0);
+                $this->setVar('thumber', 0);
+                $this->setVar('thumbersize', 'XL');
 
                 // remove obsolete module vars
-                ModUtil::delVar('Weblinks', 'toplinks');
-                ModUtil::delVar('Weblinks', 'toplinkspercentrigger');
+                $this->delVar('toplinks');
+                $this->delVar('toplinkspercentrigger');
 
             case '2.1.0':
                 // not released

@@ -68,7 +68,6 @@ class Weblinks_Block_RandomWeblinks extends Zikula_Controller_AbstractBlock
         }
 
         $this->view->assign('links', ModUtil::apiFunc('Weblinks', 'user', 'random', array('num' => $vars['limit'])));
-        $this->view->assign('tb', ModUtil::getVar('Weblinks', 'targetblank'));
 
         // Populate block info and pass to theme
         $blockinfo['content'] = $this->view->fetch('block/randomweblinks.tpl');

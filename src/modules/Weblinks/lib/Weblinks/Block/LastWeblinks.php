@@ -68,7 +68,6 @@ class Weblinks_Block_LastWeblinks extends Zikula_Controller_AbstractBlock
         }
 
         $this->view->assign('weblinks', ModUtil::apiFunc('Weblinks', 'user', 'lastweblinks', array('lastlinks' => $vars['limit'])));
-        $this->view->assign('tb', ModUtil::getVar('Weblinks', 'targetblank'));
 
         // Populate block info and pass to theme
         $blockinfo['content'] = $this->view->fetch('block/lastweblinks.tpl');

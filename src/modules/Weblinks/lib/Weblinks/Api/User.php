@@ -456,7 +456,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     /**
      * add broken link to db
      */
-    public function addbrockenlink($args)
+    public function addbrokenlink($args)
     {
         // Argument check
         if (!isset($args['lid']) || !is_numeric($args['lid'])) {
@@ -464,7 +464,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
         }
 
         // Security check
-        if (!ModUtil::getVar('Weblinks', 'unregbroken') == 1 &&
+        if (!$this->getVar('unregbroken') == 1 &&
                 !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
             return LogUtil::registerPermissionError();
         }
@@ -488,7 +488,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
         }
 
         // Security check
-        if (!ModUtil::getVar('Weblinks', 'blockunregmodify') == 1 &&
+        if (!$this->getVar('blockunregmodify') == 1 &&
                 !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
             return LogUtil::registerPermissionError();
         }
@@ -507,7 +507,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     public function add($args)
     {
         // Security check
-        if (!ModUtil::getVar('Weblinks', 'links_anonaddlinklock') == 1 &&
+        if (!$this->getVar('links_anonaddlinklock') == 1 &&
                 !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
             return LogUtil::registerPermissionError();
         }
@@ -579,7 +579,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     {
         // Argument check
         if (!isset($args['lastlinks']) || !is_numeric($args['lastlinks'])) {
-            $args['lastlinks'] = ModUtil::getVar('Weblinks', 'linksinblock');
+            $args['lastlinks'] = $this->getVar('linksinblock');
         }
 
         $dbtable = DBUtil::getTables();
@@ -617,7 +617,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     {
         // Argument check
         if (!isset($args['mostpoplinks']) || !is_numeric($args['mostpoplinks'])) {
-            $args['mostpoplinks'] = ModUtil::getVar('Weblinks', 'linksinblock');
+            $args['mostpoplinks'] = $this->getVar('linksinblock');
         }
 
         $dbtable = DBUtil::getTables();

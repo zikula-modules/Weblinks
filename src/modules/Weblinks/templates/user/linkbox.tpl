@@ -1,15 +1,15 @@
 <div class="wl-topbox">
-    <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}" {if $helper.tb == 1}target="_blank"{/if} >
+    <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}" {if $modvars.Weblinks.targetblank == 1}target="_blank"{/if} >
         {$weblinks.title|safetext}
     </a>
     {newlinkgraphic time=$weblinks.date}{popgraphic hits=$weblinks.hits}
 </div>
 
 <div class="wl-centerbox z-clearfix">
-    {if $thumber}
+    {if $modvars.Weblinks.thumber}
     <div class="wl-thumb">
-        <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}" {if $helper.tb == 1}target="_blank"{/if} >
-            <img src="http://image.thumber.de/?size={$thumbersize}&amp;url={$weblinks.url}" />
+        <a href="{modurl modname='Weblinks' type='user' func='visit' lid=$weblinks.lid}" {if $modvars.Weblinks.targetblank == 1}target="_blank"{/if} >
+            <img src="http://image.thumber.de/?size={$modvars.Weblinks.thumbersize}&amp;url={$weblinks.url}" />
         </a>
     </div>
     {/if}

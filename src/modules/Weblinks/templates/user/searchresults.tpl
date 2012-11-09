@@ -31,13 +31,13 @@
         </dd>
     </dl>
     
-    {foreach from=$weblinks item=weblinks}
+    {foreach from=$weblinks item='weblinks'}
     <div class="wl-linkbox">
         {include file="user/linkbox.tpl"}
     </div>
     {/foreach}
 
-    {pager show="page" rowcount=$wlpager.numlinks limit=$wlpager.itemsperpage posvar=startnum shift=1}
+    {pager rowcount=$pagernumlinks limit=$modvars.Weblinks.perpage show="page" posvar=startnum shift=1}
 
     {else}
     <p class="wl-center"><em>{gt text="No matches found to your query"} [ <a href="{modurl modname='Weblinks' type='user' func='view'}">{gt text="Back"}</a> ]</em></p>
