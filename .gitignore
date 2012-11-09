@@ -1,1 +1,6 @@
-/nbproject/private/
+# /
+.git_externals
+/nbproject
+/.project
+/.settings
+/.buildpath
