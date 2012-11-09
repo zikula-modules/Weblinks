@@ -4,8 +4,7 @@
     <div class="wl-linkbox">
         {include file="user/linkbox.tpl"}
         <p>&nbsp;</p>
-        {* modcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks implode=false *}
-        {* $hooks.EZComments *}
+        {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_view' id=$weblinks.lid}
     </div>
 </div>
 {include file="user/footer.tpl"}

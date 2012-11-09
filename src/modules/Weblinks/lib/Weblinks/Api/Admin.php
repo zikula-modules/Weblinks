@@ -269,11 +269,11 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
 
         // get lid from the new link
         $lid = DBUtil::getInsertID('links_links', 'lid');
-
-        // Let any hooks know that we have created a new link.
-//        ModUtil::callHooks('item', 'display', $lid, array('module' => 'Weblinks'));
-
-        return true;
+        if ($lid > 0) {
+            return $lid;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -361,9 +361,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
             return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
 
-        // Let any other modules know we have updated an item
-//        ModUtil::callHooks('item', 'update', $args['lid'], array('module' => 'Weblinks'));
-
         return true;
     }
 
@@ -383,11 +380,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
         }
 
         if (!DBUtil::deleteObjectByID('links_links', $args['lid'], 'lid')) {
-            return LogUtil::registerError($this->__('Error! Could not load items.'));
+            return LogUtil::registerError($this->__('Error! Could not delete item.'));
         }
-
-        // Let any hooks know that we have deleted a link.
-//        ModUtil::callHooks('item', 'delete', $args['lid'], array('module' => 'Weblinks'));
 
         return true;
     }
@@ -643,9 +637,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
         if (!DBUtil::updateObject($items, 'links_links', $where, 'lid')) {
             return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
-
-        // Let any other modules know we have updated an item
-//        ModUtil::callHooks('item', 'update', $args['lid'], array('module' => 'Weblinks'));
 
         return true;
     }

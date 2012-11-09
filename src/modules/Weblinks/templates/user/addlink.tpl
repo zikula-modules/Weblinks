@@ -39,6 +39,8 @@
                     <input id="add_email" type="text" name="newlink[submitteremail]" size="30" maxlength="60" value="{$submitteremail}" />
                 </div>
             </fieldset>
+                {* cannot hook here because it cannot be processed properly with current workflow *}
+                {* notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_edit' id=null *}
             <div class="z-formbuttons">
                 {button src='button_ok.png' set='icons/small' __alt="Add this URL" __title="Add this URL"}
                 <a href="{modurl modname='Weblinks' type='user' func='view'}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Back" __title="Back"}</a>

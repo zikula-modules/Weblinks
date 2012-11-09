@@ -58,6 +58,9 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
         // set up module variables
         ModUtil::setVars('Weblinks', $modvars);
 
+        // register hooks
+        HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+
         // Initialisation successful
         return true;
     }
@@ -153,7 +156,8 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
 
             case '2.1.0':
                 // not released
-                break;
+                // register new hooks
+                HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
             
             case '3.0.0':
                 // future code
@@ -187,6 +191,9 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
 
         // remove module vars
         ModUtil::delVar('Weblinks');
+
+        // remove hooks
+        HookUtil::unregisterSubscriberBundles($this->version->getHookSubscriberBundles());
 
         // Deletion successful
         return true;

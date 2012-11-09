@@ -20,7 +20,7 @@ function smarty_function_categorynewlinkgraphic($params, Zikula_View $view)
     $orderby = "ORDER BY $column[date] DESC";
     $time = DBUtil::selectObjectArray('links_links', $where, $orderby, '-1', '1');
 
-    if (!$time['0']['date']) {
+    if (!isset($time['0']['date'])) {
         return;
     } else {
         echo "&nbsp;";

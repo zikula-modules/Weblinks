@@ -232,6 +232,13 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
               return System::redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
               }
              */
+            // check hooked modules for validation
+            $hook = new Zikula_ValidationHook('weblinks.ui_hooks.link.validate_edit', new Zikula_Hook_ValidationProviders());
+            $hookvalidators = $this->notifyHooks($hook)->getValidators();
+            if ($hookvalidators->hasErrors()) {
+                LogUtil::registerError($this->__('Error! Hooked content does not validate.'));
+                return System::redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+            }
             // add link to db
             $addlink = ModUtil::apiFunc('Weblinks', 'admin', 'addlink', array('cat' => $link['cat'],
                         'title' => $link['title'],
@@ -243,7 +250,10 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
                         'submitter' => $link['submitter']));
 
             // Statusmessage if true or false
-            if ($addlink == true) {
+            if ($addlink > 0) {
+                // notify hooks
+                $url = new Zikula_ModUrl('Weblinks', 'user', 'viewlinkdetails', ZLanguage::getLanguageCode(), array('lid' => $addlink));
+                $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_edit', $addlink, $url));
                 if ($link['new'] == 1) {
                     ModUtil::apiFunc('Weblinks', 'admin', 'delnewlink', array('lid' => $link['lid']));
                     if ($link['email'] == "") {
@@ -322,6 +332,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
                     'email' => $link['email'],
                     'hits' => $link['hits']))) {
             // Success
+            $url = new Zikula_ModUrl('Weblinks', 'user', 'viewlinkdetails', ZLanguage::getLanguageCode(), array('lid' => $link['lid']));
+            $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_edit', $link['lid'], $url));
             LogUtil::registerStatus($this->__('Link successfully modified'));
         }
 
@@ -340,15 +352,13 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
 
-        // Confirm authorisation code.
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError();
-        }
+        $this->checkCsrfToken();
 
         // delete the link
         if (ModUtil::apiFunc('Weblinks', 'admin', 'dellink', array('lid' => $lid))) {
             // Success
             LogUtil::registerStatus($this->__('Link removed from the database'));
+            $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_delete', $lid));
         }
 
         // redirect to function linkview
@@ -372,6 +382,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         if (ModUtil::apiFunc('Weblinks', 'admin', 'delnewlink', array('lid' => $lid))) {
             // Success
             LogUtil::registerStatus($this->__('New link removed from the database'));
+            $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_delete', $lid));
         }
 
         // redirect to function view
@@ -439,6 +450,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         if (ModUtil::apiFunc('Weblinks', 'admin', 'dellink', array('lid' => $lid))) {
             // Success
             LogUtil::registerStatus($this->__('Link removed from the database'));
+            $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_delete', $lid));
         }
 
         // redirect to function listbrokenlinks
@@ -674,33 +686,15 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     /**
      * function import
      */
-    public function import() // ready
+    public function import()
     {
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
 
         // assign various useful template variables
-//        if (ModUtil::available('EZComments') && ModUtil::isHooked('EZComments', 'Weblinks')) {
-//            $this->view->assign('ezcomments', 1);
-//        } else {
-//            $this->view->assign('ezcomments', 0);
-//        }
-//
-//        if (ModUtil::available('Ratings') && ModUtil::isHooked('Ratings', 'Weblinks')) {
-//            $this->view->assign('ratings', 1);
-//        } else {
-//            $this->view->assign('ratings', 0);
-//        }
-        // temporary to avoid E_NOTICE errors:
-        $this->view->assign('ratings', 0)
-                ->assign('ezcomments', 0)
-                ->assign('info', array('id' => 0));
-
-        if (ModUtil::available('CmodsWebLinks')) {
-            $this->view->assign('cmodsweblinks', 1);
-        } else {
-            $this->view->assign('cmodsweblinks', 0);
-        }
+        $this->view->assign('ezcomments', ModUtil::available('EZComments'));
+        $this->view->assign('ratings', ModUtil::available('Ratings'));
+        $this->view->assign('cmodsweblinks', ModUtil::available('CmodsWebLinks'));
 
         // Return the output that has been generated by this function
         return $this->view->fetch('admin/import.tpl');

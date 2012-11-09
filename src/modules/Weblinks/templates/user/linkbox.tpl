@@ -15,7 +15,7 @@
     {/if}
 
     {if $weblinks.description}
-    <p>{$weblinks.description|safehtml}</p>{* |modcallhooks:"Weblinks" *}
+    <p>{$weblinks.description|notifyfilters:'weblinks.filter_hooks.linkfilter.filter'|safehtml}</p>
     {/if}
 
     {if $helper.showcat == 1}
@@ -24,10 +24,6 @@
 
     <p>{gt text="Added on"}: {$weblinks.date|dateformat:"datebrief"} | {gt text="Hits"}: {$weblinks.hits}</p>
 
-    {* modcallhooks hookobject=item hookaction=display hookid=$weblinks.lid module=Weblinks implode=false *}
-    {* if $hooks.Ratings}
-    <p>{ $hooks.Ratings }</p>
-    {/if *}
 </div>
 
 <div class="wl-bottombox">

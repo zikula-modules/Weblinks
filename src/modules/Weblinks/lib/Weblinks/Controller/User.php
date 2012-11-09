@@ -496,7 +496,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
                     'submitter' => $newlink['submitter'],
                     'submitteremail' => $newlink['submitteremail']));
 
-
         // assign various useful template variables
         $this->view->assign('submit', $link['submit']);
         $this->view->assign('text', $link['text']);

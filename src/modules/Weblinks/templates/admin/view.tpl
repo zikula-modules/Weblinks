@@ -71,6 +71,7 @@
                     <label for="addlink_email">{gt text="E-mail address"}</label>
                     <input id="addlink_email" type="text" name="link[email]" size="20" maxlength="100" value="{$newlinks.email|safetext}" />
                 </div>
+                {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_edit' id=$newlinks.lid"}
                 <div class="z-formbuttons">
                     {button src='button_ok.png' set='icons/small' __alt="Add link" __title="Add link"}
                     <a href="{modurl modname='Weblinks' type='admin' func='delnewlink' lid=$newlinks.lid authid=$authid}">{img modname='core' src='editdelete.png' set='icons/small' __alt="Delete link" __title="Delete link"}</a>

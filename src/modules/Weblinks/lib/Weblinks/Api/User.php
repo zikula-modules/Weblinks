@@ -541,10 +541,18 @@ class Weblinks_Api_User extends Zikula_AbstractApi
                 $link['submitter'] = System::getVar("anonymous");
             }
 
-            $items = array('cat_id' => $args['cat'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'name' => $args['submitter'], 'email' => $args['submitteremail'], 'submitter' => $args['submitter']);
+            $items = array(
+                'cat_id' => $args['cat'], 
+                'title' => $args['title'], 
+                'url' => $args['url'], 
+                'description' => $args['description'], 
+                'name' => $args['submitter'], 
+                'email' => $args['submitteremail'], 
+                'submitter' => $args['submitter']);
             if (!DBUtil::insertObject($items, 'links_newlink', 'lid')) {
                 return LogUtil::registerError($this->__('Error! Could not load items.'));
             }
+            $link['lid'] = DBUtil::getInsertID('links_newlink', 'lid');
 
             if (empty($args['submitteremail'])) {
                 $link['text'] = $this->__('You didn\'t enter an e-mail address. However, your link will still be checked.');

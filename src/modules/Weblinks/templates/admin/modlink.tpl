@@ -39,7 +39,7 @@
                 <select id="modlinks_cat" name="link[cat]">{catlist scat=0 sel=$link.cat_id}</select>
             </div>
         </fieldset>
-
+        {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_edit' id=$link.lid}
         <div class="z-formbuttons">
             {button src='button_ok.png' set='icons/small' __alt="Modify link" __title="Modify link"}
             <a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$link.lid authid=$authid}">{img modname='core' src='editdelete.png' set='icons/small' __alt="Delete link" __title="Delete link"}</a>
