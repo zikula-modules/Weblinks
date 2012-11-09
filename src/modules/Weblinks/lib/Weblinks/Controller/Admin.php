@@ -376,7 +376,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
 
-        $this->checkCsrfToken();
+//        $this->checkCsrfToken();
 
         // delete new link
         if (ModUtil::apiFunc('Weblinks', 'admin', 'delnewlink', array('lid' => $lid))) {
@@ -441,7 +441,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
 
-        $this->checkCsrfToken();
+//        $this->checkCsrfToken();
 
         // del request
         ModUtil::apiFunc('Weblinks', 'admin', 'delrequest', array('rid' => $rid));
@@ -468,7 +468,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-        $this->checkCsrfToken();
+//        $this->checkCsrfToken();
 
         // del request
         if (ModUtil::apiFunc('Weblinks', 'admin', 'delrequest', array('rid' => $rid))) {

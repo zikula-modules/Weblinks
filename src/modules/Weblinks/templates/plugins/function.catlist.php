@@ -27,7 +27,7 @@ function smarty_function_catlist($params, Zikula_View $view)
         } else {
             $selstr = '';
         }
-        $catpath = smarty_function_catpath(array('cid' => $request['cat_id']), $render);
+        $catpath = smarty_function_catpath(array('cid' => $request['cat_id']), $view);
         $s .= "<option value=\"$request[cat_id]\" $selstr>$catpath</option>";
         $s .= catlist($request['cat_id'], $params['sel']);
     }
@@ -53,7 +53,7 @@ function catlist($scat, $sel)
         } else {
             $selstr = '';
         }
-        $catpath = smarty_function_catpath(array('cid' => $request['cat_id']), $render);
+        $catpath = smarty_function_catpath(array('cid' => $request['cat_id']), $view);
         $s .= "<option value=\"$request[cat_id]\" $selstr>$catpath</option>";
         $s .= catlist($request['cat_id'], $sel);
     }
