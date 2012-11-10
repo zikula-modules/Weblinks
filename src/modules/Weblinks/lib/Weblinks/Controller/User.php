@@ -105,20 +105,19 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         if (!SecurityUtil::checkPermission('Weblinks::Category', "::$link[cat_id]", ACCESS_READ)) {
             return LogUtil::registerPermissionError();
             $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
-        } else {
-            // set the counter for the link +1
-            ModUtil::apiFunc('Weblinks', 'user', 'hitcountinc', array('lid' => $lid, 'hits' => $link['hits']));
-
-            // is the URL local?
-            if (eregi('^http:|^ftp:|^https:', $link['url'])) {
-                $this->redirect($link['url']);
-            } else {
-                header('HTTP/1.1 301 Moved Permanently');
-                header('Location: ' . $link['url']);
-            }
         }
 
-        return true;
+        // set the counter for the link +1
+        ModUtil::apiFunc('Weblinks', 'user', 'hitcountinc', array('lid' => $lid, 'hits' => $link['hits']));
+
+        // is the URL local?
+        if (eregi('^http:|^ftp:|^https:', $link['url'])) {
+            $this->redirect($link['url']);
+        } else {
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: ' . $link['url']);
+        }
+
     }
 
     /**
@@ -169,8 +168,6 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         // get random link id and redirect to the visit function
         $this->redirect(ModUtil::url('Weblinks', 'user', 'visit', array('lid' => ModUtil::apiFunc('Weblinks', 'user', 'random'))));
-
-        return true;
     }
 
     /**

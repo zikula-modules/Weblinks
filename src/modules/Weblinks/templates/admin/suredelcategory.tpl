@@ -12,7 +12,7 @@
             <input type="hidden" name="cid" value="{$cid}" />
 
             <div class="z-formrow">
-                <p style="font-weight:bold">{gt text="Confirmation prompt: are you sure you want to delete this category and ALL its links?"}</p>
+                <p style="font-weight:bold">{gt text="Are you sure you want to delete this category, ALL subcategories and ALL links in this category and these subcategories?"}</p>
             </div>
         </fieldset>
 
