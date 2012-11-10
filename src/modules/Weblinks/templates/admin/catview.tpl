@@ -12,17 +12,20 @@
 
             <div class="z-formrow">
                 <label for="addcat_title">{gt text="Name"}</label>
-                <input id="addcat_title" type="text" name="title" size="30" maxlength="100" />
+                <input id="addcat_title" type="text" name="newcategory[title]" size="30" maxlength="100" />
             </div>
 
             <div class="z-formrow">
                 <label for="addcat_pid">{gt text="in category"}</label>
-                <select id="addcat_pid" name="pid"><option value="0">{gt text="None"}</option>{catlist scat=0 sel=0}</select>
+                <select id="addcat_pid" name="newcategory[parent_id]">
+                    <option value="0">{gt text="None"}</option>
+                    {catlist scat=0 sel=0}
+                </select>
             </div>
 
             <div class="z-formrow">
                 <label for="addcat_description">{gt text="Description"}</label>
-                <textarea id="addcat_description" name="cdescription" cols="65" rows="10"></textarea>
+                <textarea id="addcat_description" name="newcategory[cdescription]" cols="65" rows="10"></textarea>
             </div>
 
             <div class="z-formbuttons">

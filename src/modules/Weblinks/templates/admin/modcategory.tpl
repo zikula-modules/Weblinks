@@ -8,18 +8,18 @@
         <fieldset>
             <legend>{gt text="Modify a category"}</legend>
             <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
-            <input type="hidden" name="cid" value="{$category.cat_id}" />
+            <input type="hidden" name="modifiedcategory[cat_id]" value="{$category.cat_id}" />
             <div class="z-formrow">
                 <label>{gt text="Name"}</label>
-                <input id="title" type="text" name="title" value="{$category.title|safetext}" size="51" maxlength="50" />
+                <input id="title" type="text" name="modifiedcategory[title]" value="{$category.title|safetext}" size="51" maxlength="50" />
             </div>
             <div class="z-formrow">
                 <label>{gt text="Parent category"}</label>
-                <select id="pid" name="pid"><option value="0">{gt text="None"}</option>{catlist scat=0 sel=$category.parent_id}</select>
+                <select id="pid" name="modifiedcategory[parent_id]"><option value="0">{gt text="None"}</option>{catlist scat=0 sel=$category.parent_id}</select>
             </div>
             <div class="z-formrow">
                 <label>{gt text="Description"}</label>
-                <textarea id="description" name="cdescription" cols="50" rows="10">{$category.cdescription|safetext}</textarea>
+                <textarea id="description" name="modifiedcategory[cdescription]" cols="50" rows="10">{$category.cdescription|safetext}</textarea>
             </div>
         </fieldset>
         <div class="z-formbuttons">

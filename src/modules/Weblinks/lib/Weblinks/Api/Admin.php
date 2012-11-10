@@ -106,12 +106,12 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     }
 
     /**
-     * add a category to db
+     * add/modify a category
      */
-    public function addcategory($args)
+    public function editcategory($category)
     {
         // Argument check
-        if (!isset($args['pid']) || !is_numeric($args['pid']) || !isset($args['title'])) {
+        if (!isset($category['parent_id']) || !is_numeric($category['parent_id']) || !isset($category['title'])) {
             return LogUtil::registerArgsError();
         }
 
@@ -120,88 +120,22 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
             return LogUtil::registerPermissionError();
         }
 
-        $checktitle = DBUtil::selectObjectCountByID('links_categories', $args['title'], 'title', 'lower');
-        if ($checktitle) {
-            $dbtable = DBUtil::getTables();
-            $column = $dbtable['links_categories_column'];
-            $where = "WHERE $column[parent_id] = '" . (int)DataUtil::formatForStore($args['pid']) . "' AND $column[title] = '" . DataUtil::formatForStore($args['title']) . "'";
-            if (DBUtil::selectObjectCount('links_categories', $where)) {
-                return LogUtil::registerError($this->__('ERROR: The category title exists on this level.'));
-            }
+        if ($this->entityManager->getRepository('Weblinks_Entity_Category')->exists($category)) {
+            return LogUtil::registerError($this->__('ERROR: The category title exists on this level.'));
         }
 
-        $items = array(
-            'parent_id' => $args['pid'],
-            'title' => $args['title'],
-            'cdescription' => $args['cdescription']);
-        if (!DBUtil::insertObject($items, 'links_categories', 'cat_id')) {
-            return LogUtil::registerError($this->__('ERROR: The category isn\'t added.'));
+        if (isset($category['cat_id'])) {
+            $catEntity = $this->entityManager->find('Weblinks_Entity_Category', $category['cat_id']);
+        } else {
+            $catEntity = new Weblinks_Entity_Category();
         }
-
-        return true;
-    }
-
-    /**
-     * get vars from category to modify
-     */
-    public function getcategory($args)
-    {
-        // Argument check
-        if ((!isset($args['cid']) || !is_numeric($args['cid']))) {
-            return LogUtil::registerArgsError();
-        }
-
-        // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
-
-        // define the permission filter to apply
-        $permFilter = array();
-        $permFilter[] = array('realm' => 0,
-            'component_left' => 'Weblinks',
-            'component_middle' => '',
-            'component_right' => 'Category',
-            'instance_left' => 'title',
-            'instance_middle' => '',
-            'instance_right' => 'cat_id',
-            'level' => ACCESS_EDIT);
-
-        // get the category vars from the db
-        $category = DBUtil::selectObjectById('links_categories', $args['cid'], 'cat_id', '', $permFilter);
-
-        // check for a db error
-        if ($category === false) {
-            return LogUtil::registerError($this->__('Error! Could not load items.'));
-        }
-
-        // return the category array
-        return $category;
-    }
-
-    /**
-     * update category vars
-     */
-    public function updatecategory($args)
-    {
-        // Argument check
-        if (!isset($args['cid']) || !is_numeric($args['cid']) ||
-                !isset($args['pid']) || !is_numeric($args['pid']) ||
-                !isset($args['title'])) {
-            return LogUtil::registerArgsError();
-        }
-
-        // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
-
-        $dbtable = DBUtil::getTables();
-        $column = $dbtable['links_categories_column'];
-        $items = array('title' => $args['title'], 'parent_id' => $args['pid'], 'cdescription' => $args['cdescription']);
-        $where = "WHERE $column[cat_id]='" . (int)DataUtil::formatForStore($args['cid']) . "'";
-        if (!DBUtil::updateObject($items, 'links_categories', $where, 'cat_id')) {
-            return LogUtil::registerError($this->__('Error! Could not load items.'));
+        
+        try {
+            $catEntity->merge($category);
+            $this->entityManager->persist($catEntity);
+            $this->entityManager->flush();
+        } catch (Zikula_Exception $e) {
+            return LogUtil::registerError($this->__("ERROR: The category was not created: " . $e->getMessage()));
         }
 
         return true;
@@ -221,30 +155,37 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
         if (!SecurityUtil::checkPermission('Weblinks::Category', "::", ACCESS_DELETE)) {
             return LogUtil::registerPermissionError();
         }
-
-        $dbtable = DBUtil::getTables();
-
-        // delete links
-        $linkcolumn = $dbtable['links_links_column'];
-        $where = "WHERE $linkcolumn[cat_id] = '" . (int)DataUtil::formatForStore($args['cid']) . "'";
-        if (!DBUtil::deleteWhere('links_links', $where)) {
-            return false;
-        }
-
-        // delete subcategories
-        $catcolumn = $dbtable['links_categories_column'];
-        $where = "WHERE '" . (int)DataUtil::formatForStore($args['cid']) . "' = $catcolumn[parent_id]";
-        if (!DBUtil::deleteWhere('links_categories', $where)) {
-            return false;
-        }
-
-        // delete category
-        $where = "WHERE $catcolumn[cat_id] = '" . (int)DataUtil::formatForStore($args['cid']) . "'";
-        if (!DBUtil::deleteWhere('links_categories', $where)) {
-            return LogUtil::registerError($this->__('Error! Could not load items.'));
-        }
-
+        
+        $cat = $this->entityManager->find('Weblinks_Entity_Category', $args['cid']);
+        $this->recursiveCategoryRemoval($cat);
+        
         return true;
+    }
+    
+    /**
+     * Private function to handle recursive category removal
+     * @param Weblinks_Entity_Category $cat 
+     */
+    private function recursiveCategoryRemoval(Weblinks_Entity_Category $cat)
+    {
+        $cid = $cat->getCat_id();
+        // is category a parent?
+        $children = $this->entityManager->getRepository('Weblinks_Entity_Category')->findBy(array('parent_id' => $cid));
+        if (isset($children)) {
+            foreach ($children as $child) {
+                $this->recursiveCategoryRemoval($child);
+            }
+        }
+        // remove the links in the category
+        $links = $this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('category' => $cid));
+        if (isset($links)) {
+            foreach ($links as $link) {
+                $this->entityManager->remove($link);
+            }
+        }
+        // remove the category
+        $this->entityManager->remove($cat);
+        $this->entityManager->flush();
     }
 
     /**

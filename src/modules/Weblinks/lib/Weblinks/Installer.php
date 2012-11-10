@@ -15,26 +15,16 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
      */
     public function Install()
     {
-        // Create tables
-        // creating categories table
-        if (!DBUtil::createTable('links_categories')) {
+        // create tables
+        try {
+            DoctrineHelper::createSchema($this->entityManager, array(
+                'Weblinks_Entity_Link',
+                'Weblinks_Entity_Category'));
+        } catch (Exception $e) {
+            LogUtil::registerError($this->__f('Error! Could not create tables (%s).', $e->getMessage()));
             return false;
         }
 
-        // creating links table
-        if (!DBUtil::createTable('links_links')) {
-            return false;
-        }
-
-        // creating modrequest table
-        if (!DBUtil::createTable('links_modrequest')) {
-            return false;
-        }
-
-        // creating newlink table
-        if (!DBUtil::createTable('links_newlink')) {
-            return false;
-        }
 
         // Weblinks settings
         // set up config variables
@@ -158,6 +148,12 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
                 // not released
                 // register new hooks
                 HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+                // need to move links from 'links_newlink' to 'links_link' with status INACTIVE
+                // then remove 'links_newlink' table
+                // need to move links from 'links_modrequest' to 'links_links' into the '$modifiedContent' column as serialized object
+                // then remove 'links_modrequest' table
+                // remove 'links_votedata' table
+                // remove 'links_editorials' table
             
             case '3.0.0':
                 // future code

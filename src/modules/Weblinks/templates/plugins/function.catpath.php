@@ -26,8 +26,8 @@ function smarty_function_catpath($params, Zikula_View $view)
     if (!isset($params['start']) || !is_numeric($params['start'])) {
         $params['start'] = 0;
     }
-
-    $cat = DBUtil::selectObjectByID('links_categories', $params['cid'], 'cat_id');
+    $em = ServiceUtil::getService('doctrine.entitymanager');
+    $cat = $em->find('Weblinks_Entity_Category', $params['cid'])->toArray();
 
     if ($params['linkmyself']) {
         $cpath = "<a href=\"" . DataUtil::formatForDisplay(ModUtil::url('Weblinks', 'user', 'category', array('cid' => $params['cid']))) . "\"> " . DataUtil::formatForDisplay($cat['title']) . " </a>";
@@ -36,7 +36,7 @@ function smarty_function_catpath($params, Zikula_View $view)
     }
 
     for ($v = $cat['parent_id']; $v != 0; $v = $scat['parent_id']) {
-        $scat = DBUtil::selectObjectByID('links_categories', $v, 'cat_id');
+        $scat = $em->find('Weblinks_Entity_Category', $v)->toArray();
 
         if ($params['links']) {
             $cpath = "<a href=\"" . DataUtil::formatForDisplay(ModUtil::url('Weblinks', 'user', 'category', array('cid' => $scat['cat_id']))) . "\"> " . DataUtil::formatForDisplay($scat['title']) . "</a> / $cpath";

@@ -7,6 +7,8 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
+use \Weblinks_Entity_Link as Link;
+
 class Weblinks_Controller_Admin extends Zikula_AbstractController
 {
 
@@ -25,11 +27,11 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     {
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-        $this->view->assign('numrows', ModUtil::apiFunc('Weblinks', 'user', 'numrows'))
-                ->assign('catnum', ModUtil::apiFunc('Weblinks', 'user', 'catnum'))
-                ->assign('totalbrokenlinks', ModUtil::apiFunc('Weblinks', 'admin', 'countbrokenlinks'))
-                ->assign('totalmodrequests', ModUtil::apiFunc('Weblinks', 'admin', 'countmodrequests'))
-                ->assign('newlinks', ModUtil::apiFunc('Weblinks', 'admin', 'newlinks'));
+        $this->view->assign('numrows', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount())
+                ->assign('catnum', $this->entityManager->getRepository('Weblinks_Entity_Category')->getCount())
+                ->assign('totalbrokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_BROKEN, '='))
+                ->assign('totalmodrequests', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_MODIFIED, '='))
+                ->assign('newlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::INACTIVE));
 
         return $this->view->fetch('admin/view.tpl');
     }
@@ -41,7 +43,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     {
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-        $this->view->assign('catnum', ModUtil::apiFunc('Weblinks', 'user', 'catnum'));
+        $this->view->assign('catnum', $this->entityManager->getRepository('Weblinks_Entity_Category')->getCount());
 
         return $this->view->fetch('admin/catview.tpl');
     }
@@ -52,9 +54,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     public function addcategory()
     {
         // get parameters we need
-        $pid = (int)$this->getPassedValue('pid', null, 'POST');
-        $title = $this->getPassedValue('title', null, 'POST');
-        $cdescription = $this->getPassedValue('cdescription', null, 'POST');
+        $newCategory = $this->getPassedValue('newcategory', null, 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADD), LogUtil::getErrorMsgPermission());
@@ -62,15 +62,13 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->checkCsrfToken();
 
         // check and add a new category
-        if (ModUtil::apiFunc('Weblinks', 'admin', 'addcategory', array('pid' => $pid,
-                    'title' => $title,
-                    'cdescription' => $cdescription))) {
+        if (ModUtil::apiFunc('Weblinks', 'admin', 'editcategory', $newCategory)) {
             // Success
             $this->registerStatus($this->__('Category successfully added'));
         }
 
         // redirect to function catview
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'catview'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'catview'));
     }
 
     /**
@@ -86,7 +84,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
 
         $this->checkCsrfToken();
 
-        $this->view->assign('category', ModUtil::apiFunc('Weblinks', 'admin', 'getcategory', array('cid' => $cid)));
+        $this->view->assign('category', $this->entityManager->find('Weblinks_Entity_Category', $cid)->toArray());
 
         return $this->view->fetch('admin/modcategory.tpl');
     }
@@ -97,10 +95,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     public function savemodcategory()
     {
         // get parameters we need
-        $cid = (int)$this->getPassedValue('cid', null, 'POST');
-        $title = $this->getPassedValue('title', null, 'POST');
-        $pid = (int)$this->getPassedValue('pid', null, 'POST');
-        $cdescription = $this->getPassedValue('cdescription', null, 'POST');
+        $modifiedCategory = $this->getPassedValue('modifiedcategory', null, 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -108,18 +103,13 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->checkCsrfToken();
 
         // update the category with new vars
-        if (ModUtil::apiFunc('Weblinks', 'admin', 'updatecategory', array(
-            'cid' => $cid,
-            'title' => $title,
-            'pid' => $pid,
-            'cdescription' => $cdescription))) {
-
+        if (ModUtil::apiFunc('Weblinks', 'admin', 'editcategory', $modifiedCategory)) {
             // Success
             $this->registerStatus($this->__('Category successfully modified'));
         }
 
         // redirect to function catview
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'catview'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'catview'));
     }
 
     /**
@@ -160,7 +150,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         }
 
         // redirect to function catview
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'catview'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'catview'));
     }
 
     /**
@@ -201,17 +191,16 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
 
         if ($checkurl > 0) {
             $this->registerError($this->__('Sorry! Please try again: this link is already listed in the database!'));
-            return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
         } else {
             /* Check if Title exist */
             if (empty($link['title'])) {
                 $this->registerError($this->__('Sorry! Please try again: you need to specify a TITLE for your link!'));
-                return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+                $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
             }
             /* Check if URL exist */
             if (empty($link['url'])) {
                 $this->registerError($this->__('Sorry! Please try again: you need to specify a URL for your link!'));
-                return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+                $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
             }
             /*        // Check if Description exist
               if (empty($link['description'])) {
@@ -224,7 +213,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
             $hookvalidators = $this->notifyHooks($hook)->getValidators();
             if ($hookvalidators->hasErrors()) {
                 $this->registerError($this->__('Error! Hooked content does not validate.'));
-                return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+                $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
             }
             // add link to db
             $addlink = ModUtil::apiFunc('Weblinks', 'admin', 'addlink', array('cat' => $link['cat'],
@@ -259,14 +248,12 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
                     $this->registerStatus($this->__('New link added to the database'));
                     return $this->redirect(ModUtil::url('Weblinks', 'admin', 'view'));
                 }
-
                 $this->registerStatus($this->__('New link added to the database'));
-                return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
             } else {
                 $this->registerError($this->__('Error! Could not add link to db.'));
-                return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
             }
         }
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
     }
 
     /**
@@ -286,7 +273,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // check if $link return
         if (!$link) {
             $this->registerError($this->__('No link found'));
-            return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+            $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
         }
 
         $this->view->assign('link', $link);
@@ -324,7 +311,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         }
 
         // redirect to function linkview
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
     }
 
     /**
@@ -348,7 +335,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         }
 
         // redirect to function linkview
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
     }
 
     /**
@@ -372,7 +359,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         }
 
         // redirect to function view
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'view'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'view'));
     }
 
     /**
@@ -436,7 +423,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         }
 
         // redirect to function listbrokenlinks
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'listbrokenlinks'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'listbrokenlinks'));
     }
 
     /**
@@ -459,7 +446,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         }
 
         // redirect to function listbrokenlinks
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'listbrokenlinks'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'listbrokenlinks'));
     }
 
     /**
@@ -509,7 +496,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         }
 
         // redirect to function listmodrequests
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'listmodrequests'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'listmodrequests'));
     }
 
     /**
@@ -532,7 +519,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         }
 
         // redirect to function listmodrequests
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'listmodrequests'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'listmodrequests'));
     }
 
     /**
@@ -615,7 +602,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->registerStatus($this->__('Configuration updated'));
 
         // redirect to function getconfig
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'getconfig'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'getconfig'));
     }
 
     /**
@@ -685,7 +672,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->registerStatus($this->__f('migrated: %s votes from Weblinks to Ratings', $counter));
 
         // redirect to function view
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'import'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'import'));
     }
 
     /**
@@ -739,7 +726,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->registerStatus($this->__f('migrated: %s comments from Weblinks to EZComments', $counter));
 
         // redirect to function view
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'import'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'import'));
     }
 
     /**
@@ -846,7 +833,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->registerStatus($this->__f('migrated: %s newlinks from CmodsWebLinks to Weblinks', $counter));
 
         // redirect to function view
-        return $this->redirect(ModUtil::url('Weblinks', 'admin', 'import'));
+        $this->redirect(ModUtil::url('Weblinks', 'admin', 'import'));
     }
 
     private function getPassedValue($variable, $defaultValue, $type = 'POST')
