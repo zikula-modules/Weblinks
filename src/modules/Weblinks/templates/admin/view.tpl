@@ -34,47 +34,47 @@
 
     <h3>{gt text="Links awaiting validation"}</h3>
 
-    {foreach from=$newlinks item=newlinks}
+    {foreach from=$newlinks item='link'}
     <form class="z-form" action="{modurl modname='Weblinks' type='admin' func='addlink'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
             <fieldset>
                 <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <input type="hidden" name="link[new]" value="1" />
-                <input type="hidden" name="link[lid]" value="{$newlinks.lid|safetext}" />
-                <input type="hidden" name="link[submitter]" value="{$newlinks.submitter|safetext}" />
-                <legend>{gt text="Link ID"}: <strong>{$newlinks.lid}</strong></legend>
+                <input type="hidden" name="link[lid]" value="{$link.lid|safetext}" />
+                <input type="hidden" name="link[submitter]" value="{$link.submitter|safetext}" />
+                <legend>{gt text="Link ID"}: <strong>{$link.lid}</strong></legend>
                 <div class="z-formrow">
                     <label>{gt text="Submitter"}</label>
-                    <span>{$newlinks.submitter|safetext}</span>
+                    <span>{$link.submitter|safetext}</span>
                 </div>
                 <div class="z-formrow">
                     <label for="addlink_title">{gt text="Page title"}</label>
-                    <input id="addlink_title" type="text" name="link[title]" value="{$newlinks.title|safetext}" size="50" maxlength="100" />
+                    <input id="addlink_title" type="text" name="link[title]" value="{$link.title|safetext}" size="50" maxlength="100" />
                 </div>
                 <div class="z-formrow">
-                    <label for="addlink_url">{gt text="URL"} [ <a target="_blank" href="{$newlinks.url|safetext}">{gt text="Visit"}</a> ]</label>
-                    <input id="addlink_url" type="text" name="link[url]" value="{$newlinks.url|safetext}" size="65" maxlength="254" />
+                    <label for="addlink_url">{gt text="URL"} [ <a target="_blank" href="{$link.url|safetext}">{gt text="Visit"}</a> ]</label>
+                    <input id="addlink_url" type="text" name="link[url]" value="{$link.url|safetext}" size="65" maxlength="254" />
                 </div>
                 <div class="z-formrow">
                     <label for="addlink_cat">{gt text="Category"}</label>
-                    <select id="addlink_cat" name="link[cat]">{catlist scat=0 sel=$newlinks.cat_id}</select>
+                    <select id="addlink_cat" name="link[cat_id]">{catlist scat=0 sel=$link.category.cat_id}</select>
                 </div>
                 <div class="z-formrow">
                     <label for="addlink_description">{gt text="Description"}</label>
-                    <textarea id="addlink_description" name="link[description]" cols="65" rows="10">{$newlinks.description|safehtml}</textarea>
+                    <textarea id="addlink_description" name="link[description]" cols="65" rows="10">{$link.description|safehtml}</textarea>
                 </div>
                 <div class="z-formrow">
                     <label for="addlink_name">{gt text="Name"}</label>
-                    <input id="addlink_name" type="text" name="link[name]" size="20" maxlength="100" value="{$newlinks.name|safetext}" />
+                    <input id="addlink_name" type="text" name="link[name]" size="20" maxlength="100" value="{$link.name|safetext}" />
                 </div>
                 <div class="z-formrow">
                     <label for="addlink_email">{gt text="E-mail address"}</label>
-                    <input id="addlink_email" type="text" name="link[email]" size="20" maxlength="100" value="{$newlinks.email|safetext}" />
+                    <input id="addlink_email" type="text" name="link[email]" size="20" maxlength="100" value="{$link.email|safetext}" />
                 </div>
-                {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_edit' id=$newlinks.lid"}
+                {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_edit' id=$link.lid"}
                 <div class="z-formbuttons">
                     {button src='button_ok.png' set='icons/small' __alt="Add link" __title="Add link"}
-                    <a href="{modurl modname='Weblinks' type='admin' func='delnewlink' lid=$newlinks.lid}">{img modname='core' src='editdelete.png' set='icons/small' __alt="Delete link" __title="Delete link"}</a>
+                    <a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$link.lid}">{img modname='core' src='editdelete.png' set='icons/small' __alt="Delete link" __title="Delete link"}</a>
                 </div>
             </fieldset>
         </div>

@@ -18,7 +18,8 @@ function smarty_function_catlist($params, Zikula_View $view)
     require_once $view->_get_plugin_filepath('function', 'catpath');
 
     $s = "";
-    foreach ($categories as $cat) {
+    foreach ($categories as $category) {
+        $cat = array('cat_id' => $category->getCat_id());
         if ($params['sel'] == $cat['cat_id']) {
             $selstr = ' selected="selected"';
         } else {

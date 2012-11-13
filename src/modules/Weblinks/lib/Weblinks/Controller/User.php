@@ -7,6 +7,8 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
+use \Weblinks_Entity_Link as Link;
+
 class Weblinks_Controller_User extends Zikula_AbstractController
 {
 
@@ -27,7 +29,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
         // get all categories
-        $categories = ModUtil::apiFunc('Weblinks', 'user', 'categories');
+        $categories = $this->entityManager->getRepository('Weblinks_Entity_Category')->getAll();
 
         // value of the function is checked
         if (!$categories) {
@@ -35,12 +37,12 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         $this->view->assign('categories', $categories)
-                ->assign('numrows', ModUtil::apiFunc('Weblinks', 'user', 'numrows'))
-                ->assign('catnum', ModUtil::apiFunc('Weblinks', 'user', 'catnum'))
+                ->assign('numrows', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount())
+                ->assign('catnum', $this->entityManager->getRepository('Weblinks_Entity_Category')->getCount())
                 ->assign('helper', array('main' => 1));
         if ($this->getVar('featurebox') == 1) {
-            $this->view->assign('blocklast', ModUtil::apiFunc('Weblinks', 'user', 'lastweblinks'))
-                    ->assign('blockmostpop', ModUtil::apiFunc('Weblinks', 'user', 'mostpopularweblinks'));
+            $this->view->assign('blocklast', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, 0, 'date', 'DESC', $this->getVar('linksinblock')))
+                    ->assign('blockmostpop', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, 0, 'hits', 'DESC', $this->getVar('linksinblock')));
         }
 
         return $this->view->fetch('user/view.tpl');
@@ -53,24 +55,21 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     {
         // get parameters we need
         $cid = (int)$this->getPassedValue('cid', null, 'GET');
-        $orderby = $this->getPassedValue('orderby', 'titleA', 'GET');
+        $orderby = ModUtil::apiFunc('Weblinks', 'user', 'orderby', array('orderby' => $this->getPassedValue('orderby', 'titleA', 'GET')));
         $startnum = (int)$this->getPassedValue('startnum', 1, 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
         // get category vars
-        $category = ModUtil::apiFunc('Weblinks', 'user', 'category', array('cid' => $cid));
+        $category = $this->entityManager->find('Weblinks_Entity_Category', $cid);
 
         // get subcategories in this category
-        $subcategory = ModUtil::apiFunc('Weblinks', 'user', 'subcategory', array('cid' => $cid));
+        $subcategory = $this->entityManager->getRepository('Weblinks_Entity_Category')->getAll('title', $cid);
 
         // get links in this category
-        $weblinks = ModUtil::apiFunc('Weblinks', 'user', 'weblinks', array(
-            'cid' => $cid,
-            'orderbysql' => ModUtil::apiFunc('Weblinks', 'user', 'orderby', array('orderby' => $orderby)),
-            'startnum' => $startnum,
-            'numlinks' => $this->getVar('perpage')));
+        $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, $cid, $orderby['sortby'], $orderby['sortdir'], $this->getVar('perpage'), $startnum);
+        $numitems = $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Weblinks_Entity_Link::ACTIVE, ">=", $cid);
 
         $this->view->assign('orderby', $orderby)
                 ->assign('category', $category)
@@ -79,8 +78,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController
                 ->assign('helper', array(
                     'main' => 0, 
                     'showcat' => 0, 
-                    'details' => 0));
-        $this->view->assign('pagernumitems', ModUtil::apiFunc('Weblinks', 'user', 'countcatlinks', array('cid' => $cid)));
+                    'details' => 0))
+                ->assign('pagernumitems', $numitems);
 
         return $this->view->fetch('user/category.tpl');
     }
@@ -94,12 +93,12 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $lid = (int)$this->getPassedValue('lid', null, 'GET');
 
         // get link
-        $link = ModUtil::apiFunc('Weblinks', 'user', 'link', array('lid' => $lid));
+        $linkObj = $this->entityManager->find('Weblinks_Entity_Link', $lid);
 
-        // the return value of the function is checked here
-        if ($link == false) {
-            return $this->registerError($this->__('Link don\'t exist!'));
+        if (!isset($linkObj)) {
+            return $this->registerError($this->__('Link does not exist!'));
         }
+        $link = $linkObj->toArray();
 
         // Security check
         if (!SecurityUtil::checkPermission('Weblinks::Category', "::$link[cat_id]", ACCESS_READ)) {
@@ -108,7 +107,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         // set the counter for the link +1
-        ModUtil::apiFunc('Weblinks', 'user', 'hitcountinc', array('lid' => $lid, 'hits' => $link['hits']));
+        $this->entityManager->getRepository('Weblinks_Entity_Link')->addHit($linkObj);
 
         // is the URL local?
         if (eregi('^http:|^ftp:|^https:', $link['url'])) {
@@ -166,8 +165,17 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
-        // get random link id and redirect to the visit function
-        $this->redirect(ModUtil::url('Weblinks', 'user', 'visit', array('lid' => ModUtil::apiFunc('Weblinks', 'user', 'random'))));
+        // get random link id
+        $randomLinkId = ModUtil::apiFunc('Weblinks', 'user', 'random', array('num' => 1));
+        
+        if ($randomLinkId > 0) {
+            $url = ModUtil::url('Weblinks', 'user', 'visit', array('lid' => $randomLinkId));
+        } else {
+            $url = ModUtil::url('Weblinks', 'user', 'view');
+        }
+        
+        // redirect
+        $this->redirect($url);
     }
 
     /**
@@ -182,9 +190,9 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
         // get link details
-        $weblink = ModUtil::apiFunc('Weblinks', 'user', 'link', array('lid' => $lid));
+        $weblink = $this->entityManager->find('Weblinks_Entity_Link',  $lid)->toArray();
 
-        $this->view->assign('weblinks', $weblink)
+        $this->view->assign('link', $weblink)
                 ->assign('helper', array(
                     'main' => 0, 
                     'showcat' => 1, 
@@ -253,7 +261,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $mostpoplinkspercentrigger = $this->getVar('mostpoplinkspercentrigger');
         $mostpoplinks = $this->getVar('mostpoplinks');
         $toplinkspercent = 0;
-        $totalmostpoplinks = ModUtil::apiFunc('Weblinks', 'user', 'numrows');
+        $totalmostpoplinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount();
 
         if ($ratenum != "" && $ratetype != "") {
             if (!is_numeric($ratenum)) {
@@ -277,7 +285,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         // get most popular weblinks
-        $weblinks = ModUtil::apiFunc('Weblinks', 'user', 'mostpopularweblinks', array('mostpoplinks' => $mostpoplinks));
+        $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, 0, 'hits', 'DESC', $mostpoplinks);
 
         $this->view->assign('mostpoplinkspercentrigger', $mostpoplinkspercentrigger)
                 ->assign('toplinkspercent', $toplinkspercent)
@@ -293,7 +301,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function brockenlink
+     * function brokenlink
      */
     public function brokenlink()
     {
@@ -320,7 +328,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function brockenlinks
+     * function brokenlinks
      */
     public function brokenlinks()
     {
@@ -336,10 +344,16 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         $this->checkCsrfToken();
 
-        // add broken link
-        ModUtil::apiFunc('Weblinks', 'user', 'addbrokenlink', array(
-            'lid' => $lid, 
-            'submitter' => $submitter));
+        // change link status to ACTIVE_BROKEN
+        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
+        if ($link) {
+            $link->setStatus(Link::ACTIVE_BROKEN);
+            $link->setModifysubmitter($submitter);
+            $this->entityManager->flush();
+        } else {
+            LogUtil::registerError($this->__('No link found with that id.'));
+            $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
+        }
 
         $this->view->assign('helper', array('main' => 0));
 
@@ -448,21 +462,23 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $this->checkCsrfToken();
 
         // write the link to db and get a status message back
-        $link = ModUtil::apiFunc('Weblinks', 'user', 'add', array(
-            'title' => $newlink['title'],
-            'url' => $newlink['url'],
-            'cat' => $newlink['cat'],
-            'description' => $newlink['description'],
-            'submitter' => $newlink['submitter'],
-            'submitteremail' => $newlink['submitteremail']));
+        $result = ModUtil::apiFunc('Weblinks', 'user', 'add', $newlink);
 
-        $this->view->assign('submit', $link['submit'])
-                ->assign('text', $link['text'])
+        $this->view->assign('submit', $result['submit'])
+                ->assign('text', $result['text'])
                 ->assign('helper', array('main' => 0));
 
         return $this->view->fetch('user/add.tpl');
     }
 
+    /**
+     * helper function to convert old getPassedValue method to Core 1.3.3-standard
+     * 
+     * @param string $variable
+     * @param mixed $defaultValue
+     * @param string $type
+     * @return mixed 
+     */
     private function getPassedValue($variable, $defaultValue, $type = 'POST')
     {
         if ($type == 'POST') {

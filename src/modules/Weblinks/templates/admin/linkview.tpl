@@ -11,8 +11,6 @@
             <legend>{gt text="Add link"}</legend>
             <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <input type="hidden" name="link[submitter]" value="{$submitter}" />
-            <input type="hidden" name="link[new]" value="0" />
-            <input type="hidden" name="link[lid]" value="0" />
 
             <div class="z-formrow">
                 <label for="addlink_title">{gt text="Page title"}</label>
@@ -24,7 +22,7 @@
             </div>
             <div class="z-formrow">
                 <label for="addlink_cat">{gt text="Category"}</label>
-                <select id="addlink_cat" name="link[cat]">{catlist scat=0 sel=0}</select>
+                <select id="addlink_cat" name="link[cat_id]">{catlist scat=0 sel=0}</select>
             </div>
             <div class="z-formrow">
                 <label for="addlink_description">{gt text="Description (255 characters max)"}</label>
@@ -38,6 +36,7 @@
                 <label for="addlink_email">{gt text="E-mail address"}</label>
                 <input id="addlink_email" type="text" name="link[email]" size="30" maxlength="60" value="{$submitteremail}" />
             </div>
+            {* NEED HOOK HERE *}
 
             <div class="z-formbuttons">
                 {button src='button_ok.png' set='icons/small' __alt="Add link" __title="Add link"}

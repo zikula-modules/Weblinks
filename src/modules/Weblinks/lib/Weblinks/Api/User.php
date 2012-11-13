@@ -168,29 +168,31 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     }
 
     /**
-     * order funktion
+     * order function
      */
     public function orderby($args)
     {
-        $dbtable = DBUtil::getTables();
-        $column = $dbtable['links_links_column'];
-
-        if ($args['orderby'] == "titleA") {
-            $orderbysql = "$column[title] ASC";
-        } else if ($args['orderby'] == "dateA") {
-            $orderbysql = "$column[date] ASC";
-        } else if ($args['orderby'] == "hitsA") {
-            $orderbysql = "$column[hits] ASC";
-        } else if ($args['orderby'] == "titleD") {
-            $orderbysql = "$column[title] DESC";
-        } else if ($args['orderby'] == "dateD") {
-            $orderbysql = "$column[date] DESC";
-        } else if ($args['orderby'] == "hitsD") {
-            $orderbysql = "$column[hits] DESC";
-        } else {
-            $orderbysql = "$column[title] ASC";
+        switch ($args['orderby']) {
+            case 'titleD':
+                return array('sortby' => 'title', 'sortdir' => 'DESC');
+                break;
+            case 'dateA':
+                return array('sortby' => 'date', 'sortdir' => 'ASC');
+                break;
+            case 'dateD':
+                return array('sortby' => 'date', 'sortdir' => 'DESC');
+                break;
+            case 'hitsA':
+                return array('sortby' => 'title', 'hits' => 'ASC');
+                break;
+            case 'hitsD':
+                return array('sortby' => 'title', 'hits' => 'DESC');
+                break;
+            case 'titleA':
+            default:
+                return array('sortby' => 'title', 'sortdir' => 'ASC');
+                break;
         }
-        return $orderbysql;
     }
 
     /**
@@ -361,39 +363,55 @@ class Weblinks_Api_User extends Zikula_AbstractApi
         $num = (isset($args['num']) && is_numeric($args['num'])) ? $args['num'] : 1;
 
         // define the permission filter to apply
-        $permFilter = array();
-        $permFilter[] = array('realm' => 0,
-            'component_left' => 'Weblinks',
-            'component_middle' => '',
-            'component_right' => 'Category',
-            'instance_left' => 'title',
-            'instance_middle' => '',
-            'instance_right' => 'cat_id',
-            'level' => ACCESS_READ);
+//        $permFilter = array();
+//        $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
 
-        $objArray = DBUtil::selectObjectArray('links_links', '', '', '-1', '-1', '', $permFilter);
-        $lidarray = array();
-        foreach ($objArray as $link) {
-            $lidarray[] = $link['lid'];
-        }
+        $weblinks = array();
 
-        if (count($lidarray) < 1) { // if no link
-            return DataUtil::formatForDisplayHTML($this->__('Sorry! There is no such link'));
-        }
-
-        $links = array_rand($lidarray, $num);
-
-        if ($num > 1) {
-            $lid = array();
-            foreach ($links as $link) {
-                $thisLid = $lidarray[$link];
-                $lid[] = array('lid' => $thisLid, 'title' => DBUtil::selectFieldByID('links_links', 'title', $thisLid, 'lid'));
+        // this is unfortunate since every record must be retrieved in order to randomize them properly.
+        $templinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks();
+        if (count($templinks) > $num) {
+            $randomIds = array_rand($templinks, $num);
+            foreach ($randomIds as $id) {
+                $weblinks[] = $templinks[$id];
             }
         } else {
-            $lid = $lidarray[$links];
+            $weblinks = $templinks;
+        }
+        
+        // extract the lids
+        $lidarray = array();
+        $linkTitles = array();
+        foreach ($weblinks as $link) {
+            $lidarray[] = $link['lid'];
+            $linkTitles[$link['lid']] = $link['title'];
+        }
+        
+
+        if (count($lidarray) < 1) { // if no link
+            return LogUtil::registerError($this->__('Sorry! There are no links to select randomly.'));
         }
 
-        return $lid;
+
+        if ($num > 1) {
+            $returnValue = array();
+            foreach ($lidarray as $lid) {
+                $returnValue[] = array('lid' => $lid, 'title' => $linkTitles[$lid]);
+            }
+        } else {
+            $returnValue = $lidarray[0];
+        }
+        
+        // here there should be a check on the permissions...
+
+        return $returnValue;
     }
 
     /**
@@ -504,7 +522,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     /**
      * add link to db
      */
-    public function add($args)
+    public function add($link)
     {
         // Security check
         if (!$this->getVar('links_anonaddlinklock') == 1 &&
@@ -512,11 +530,10 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             return LogUtil::registerPermissionError();
         }
 
-        $checkurl = ModUtil::apiFunc('Weblinks', 'user', 'checkurl', array('url' => $args['url']));
-        $valid = System::varValidate($args['url'], 'url');
-        $link = array();
+        $checkurl = $this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('url' => $link['url']));
+        $valid = System::varValidate($link['url'], 'url');
 
-        if ($checkurl > 0) {
+        if (count($checkurl) > 0) {
             $link['text'] = $this->__('Sorry! This URL is already listed in the database!');
             $link['submit'] = 0;
             return $link;
@@ -524,43 +541,49 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             $link['text'] = $this->__('Sorry! Error! You must type a URL for the web link!');
             $link['submit'] = 0;
             return $link;
-        } else if (empty($args['title'])) {
+        } else if (empty($link['title'])) {
             $link['text'] = $this->__('Sorry! Error! You must type a title for the URL!');
             $link['submit'] = 0;
             return $link;
-        } else if (empty($args['cat']) || !is_numeric($args['cat'])) {
+        } else if (empty($link['cat_id']) || !is_numeric($link['cat_id'])) {
             $link['text'] = $this->__('Sorry! Error! No category!');
             $link['submit'] = 0;
             return $link;
-        } else if (empty($args['description'])) {
+        } else if (empty($link['description'])) {
             $link['text'] = $this->__('Sorry! Error! You must type a description for the URL!');
             $link['submit'] = 0;
             return $link;
+        // validate hooks here!
         } else {
-            if (empty($args['submitter'])) {
-                $link['submitter'] = System::getVar("anonymous");
+            if (empty($link['name'])) {
+                $link['name'] = System::getVar("anonymous");
             }
 
-            $items = array(
-                'cat_id' => $args['cat'], 
-                'title' => $args['title'], 
-                'url' => $args['url'], 
-                'description' => $args['description'], 
-                'name' => $args['submitter'], 
-                'email' => $args['submitteremail'], 
-                'submitter' => $args['submitter']);
-            if (!DBUtil::insertObject($items, 'links_newlink', 'lid')) {
-                return LogUtil::registerError($this->__('Error! Could not load items.'));
-            }
-            $link['lid'] = DBUtil::getInsertID('links_newlink', 'lid');
+            $link['submitter'] = $link['name'];
+            $link['status'] = Weblinks_Entity_Link::INACTIVE;
 
-            if (empty($args['submitteremail'])) {
-                $link['text'] = $this->__('You didn\'t enter an e-mail address. However, your link will still be checked.');
+            $linkEntity = new Weblinks_Entity_Link();
+        
+            try {
+                $linkEntity->merge($link);
+                $linkEntity->setCategory($this->entityManager->find('Weblinks_Entity_Category', $link['cat_id']));
+                $this->entityManager->persist($linkEntity);
+                $this->entityManager->flush();
+            } catch (Zikula_Exception $e) {
+                return LogUtil::registerError($this->__("ERROR: The link was not created: " . $e->getMessage()));
+            }
+
+            // notify hooks here!
+            $result = array();
+            $result['lid'] = $linkEntity->getLid();
+
+            if (empty($link['email'])) {
+                $result['text'] = $this->__("You didn't enter an e-mail address. However, your link will still be checked.");
             } else {
-                $link['text'] = $this->__('Thank you! You\'ll receive an e-mail message when it\'s approved.');
+                $result['text'] = $this->__("Thank you! You'll receive an e-mail message when it's approved.");
             }
-            $link['submit'] = 1;
-            return $link;
+            $result['submit'] = 1;
+            return $result;
         }
     }
 

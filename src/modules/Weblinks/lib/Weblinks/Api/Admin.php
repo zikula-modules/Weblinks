@@ -7,6 +7,8 @@
  *
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
+use \Weblinks_Entity_Link as Link;
+
 class Weblinks_Api_Admin extends Zikula_AbstractApi
 {
 
@@ -189,32 +191,40 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     }
 
     /**
-     * add a link to db
+     * edit/create a link
      */
-    public function addlink($args)
+    public function editlink($link)
     {
         // Argument check
-        if (!isset($args['cat']) || !isset($args['title']) || !isset($args['url']) || !isset($args['date'])) {
+        if (!isset($link['cat_id']) || !isset($link['title']) || !isset($link['url'])) {
             return LogUtil::registerArgsError();
         }
+        unset($link['new']);
 
         // Security check
         if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_ADD)) {
             return LogUtil::registerPermissionError();
         }
 
-        $items = array('cat_id' => $args['cat'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'date' => $args['date'], 'name' => $args['name'], 'email' => $args['email'], 'submitter' => $args['submitter']);
-        if (!DBUtil::insertObject($items, 'links_links', 'lid')) {
-            return LogUtil::registerError($this->__('Error! Could not load items.'));
+        if (isset($link['lid'])) {
+            $linkEntity = $this->entityManager->find('Weblinks_Entity_Link', $link['lid']);
+        } else {
+            $linkEntity = new Weblinks_Entity_Link();
+        }
+//        $status = (isset($link['new']) && ($link['new'] == 1)) ? Link::INACTIVE : Link::ACTIVE;
+        $status = Link::ACTIVE;
+        
+        try {
+            $linkEntity->merge($link);
+            $linkEntity->setStatus($status);
+            $linkEntity->setCategory($this->entityManager->find('Weblinks_Entity_Category', $link['cat_id']));
+            $this->entityManager->persist($linkEntity);
+            $this->entityManager->flush();
+        } catch (Zikula_Exception $e) {
+            return LogUtil::registerError($this->__("ERROR: The link was not created: " . $e->getMessage()));
         }
 
-        // get lid from the new link
-        $lid = DBUtil::getInsertID('links_links', 'lid');
-        if ($lid > 0) {
-            return $lid;
-        } else {
-            return false;
-        }
+        return $linkEntity->getLid();
     }
 
     /**
@@ -308,24 +318,24 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     /**
      * delete a link
      */
-    public function dellink($args)
-    {
-        // Argument check
-        if (!isset($args['lid']) || !is_numeric($args['lid'])) {
-            return LogUtil::registerArgsError();
-        }
-
-        // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError();
-        }
-
-        if (!DBUtil::deleteObjectByID('links_links', $args['lid'], 'lid')) {
-            return LogUtil::registerError($this->__('Error! Could not delete item.'));
-        }
-
-        return true;
-    }
+//    public function dellink($args)
+//    {
+//        // Argument check
+//        if (!isset($args['lid']) || !is_numeric($args['lid'])) {
+//            return LogUtil::registerArgsError();
+//        }
+//
+//        // Security check
+//        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_DELETE)) {
+//            return LogUtil::registerPermissionError();
+//        }
+//
+//        if (!DBUtil::deleteObjectByID('links_links', $args['lid'], 'lid')) {
+//            return LogUtil::registerError($this->__('Error! Could not delete item.'));
+//        }
+//
+//        return true;
+//    }
 
     /**
      * check links

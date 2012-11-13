@@ -24,7 +24,7 @@
                 </div>
                 <div class="z-formrow">
                     <label for="add_cat">{gt text="Category"}:</label>
-                    <select id="add_cat" name="newlink[cat]">{catlist scat=0 sel=0}</select>
+                    <select id="add_cat" name="newlink[cat_id]">{catlist scat=0 sel=0}</select>
                 </div>
                 <div class="z-formrow">
                     <label for="add_description">{gt text="Description (255 characters max)"}:</label>
@@ -32,11 +32,11 @@
                 </div>
                 <div class="z-formrow">
                     <label for="add_nname">{gt text="Your name"}:</label>
-                    <input id="add_nname" type="text" name="newlink[submitter]" size="30" maxlength="60" value="{$submitter}" />
+                    <input id="add_nname" type="text" name="newlink[name]" size="30" maxlength="60" value="{$submitter}" />
                 </div>
                 <div class="z-formrow">
                     <label for="add_email">{gt text="Your e-mail address"}:</label>
-                    <input id="add_email" type="text" name="newlink[submitteremail]" size="30" maxlength="60" value="{$submitteremail}" />
+                    <input id="add_email" type="text" name="newlink[email]" size="30" maxlength="60" value="{$submitteremail}" />
                 </div>
             </fieldset>
                 {* cannot hook here because it cannot be processed properly with current workflow *}

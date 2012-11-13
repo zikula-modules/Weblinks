@@ -9,22 +9,18 @@
  */
 function smarty_function_countlinks($params, Zikula_View $view)
 {
-    $totallinks = 0;
-    $counter = 0;
+    $comparisonDate = new DateTime();
+    $comparisonDate->modify("-$params[days] days");
+    $comparisonDate->setTime(0, 0, 0);
+    
+    $em = ServiceUtil::getService('doctrine.entitymanager');
+    $dql = "SELECT COUNT(DISTINCT a.lid) FROM Weblinks_Entity_Link a";
+    $dql .= " WHERE a.status = :status";
+    $dql .= " AND a.date >= :comparisondate";
 
-    while ($counter < $params['days']) {
-        $newlinkdayraw = (time() - (86400 * $counter));
-        $newlinkdb = DateUtil::transformInternalDate($newlinkdayraw);
-        $dbtable = DBUtil::getTables();
-        $column = $dbtable['links_links_column'];
-        $column2 = $dbtable['links_categories_column'];
-        $where = "WHERE $column[date] LIKE '%$newlinkdb%' AND $column[cat_id] = $column2[cat_id]";
-        $countlinks = DBUtil::selectObjectCount('links_links', $where);
-        if ($countlinks) {
-            $totallinks = $totallinks + $countlinks;
-        }
-        $counter++;
-    }
+    $query = $em->createQuery($dql);
+    $query->setParameter('status', Weblinks_Entity_Link::ACTIVE);
+    $query->setParameter('comparisondate', $comparisonDate);
 
-    return $totallinks;
+    return $query->getResult(Doctrine\ORM\Query::HYDRATE_SINGLE_SCALAR);
 }

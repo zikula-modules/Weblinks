@@ -19,14 +19,20 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
      * 
      * @return Scalar 
      */
-    public function getCount($status = Link::ACTIVE, $comp = ">=")
+    public function getCount($status = Link::ACTIVE, $comp = ">=", $category = 0)
     {
         $dql = "SELECT COUNT(DISTINCT a.lid) FROM Weblinks_Entity_Link a";
         $dql .= " WHERE a.status $comp :status";
+        if ($category > 0) {
+            $dql .= " AND a.category IN (:cat)";
+        }
         
         $query = $this->_em->createQuery($dql);
         
         $query->setParameter('status', $status);
+        if ($category > 0) {
+            $query->setParameter('cat', $category);
+        }
 
         return $query->getResult(Query::HYDRATE_SINGLE_SCALAR);
     }
@@ -37,13 +43,29 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
      * @param integer $status
      * @return array 
      */
-    public function getLinks($status = Link::ACTIVE)
+    public function getLinks($status = Link::ACTIVE, $category = 0, $orderBy = null, $sortDir = 'DESC', $limit = 0, $startNum = 1)
     {
-        $dql = "SELECT a FROM Weblinks_Entity_Link a";
+        $dql = "SELECT a, c FROM Weblinks_Entity_Link a JOIN a.category c";
         $dql .= " WHERE a.status = :status";
-        
+        if ($category > 0) {
+            $dql .= " AND a.category IN (:cat)";
+        }
+        if ($orderBy) {
+            $dql .= " ORDER BY a.$orderBy $sortDir";
+        }
+
         $query = $this->_em->createQuery($dql);
 
+        if ($limit > 0) {
+            $query->setMaxResults($limit);
+        }
+        if ($startNum > 1) {
+            $query->setFirstResult($startNum);
+        }
+
+        if ($category > 0) {
+            $query->setParameter('cat', $category);
+        }
         $query->setParameter('status', $status);
         
         return $query->getResult(Query::HYDRATE_ARRAY);

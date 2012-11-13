@@ -114,7 +114,7 @@ class Weblinks_Entity_Link extends Zikula_EntityAccess
     /**
      * sid field (modify submitter id)
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $sid = null;
     
@@ -132,6 +132,14 @@ class Weblinks_Entity_Link extends Zikula_EntityAccess
      * @ORM\Column(type="object", nullable=true, name="modcontent") 
      */
     private $modifiedContent = null;
+    
+    /**
+     * non-persisted property
+     * stores the category id
+     * 
+     * @var integer 
+     */
+    private $cat_id;
 
 
     /**
@@ -152,9 +160,9 @@ class Weblinks_Entity_Link extends Zikula_EntityAccess
         $this->lid = $lid;
     }
 
-    public function getCid()
+    public function getCat_id()
     {
-        return $this->category->getCid();
+        return $this->category->getCat_id();
     }
     
     public function getCategory()
@@ -276,6 +284,25 @@ class Weblinks_Entity_Link extends Zikula_EntityAccess
     {
         $this->modifiedContent = $modifiedContent;
     }
+    
+    public function getModifysubmitter()
+    {
+        return $this->modifysubmitter;
+    }
 
+    public function setModifysubmitter($modifysubmitter)
+    {
+        $this->modifysubmitter = $modifysubmitter;
+    }
+
+    public function merge(array $array)
+    {
+        foreach ($array as $key => $value) {
+            if ($key <> "cat_id") {
+                $method = "set" . ucfirst($key);
+                $this->$method($value);
+            }
+        }
+    }
 
 }

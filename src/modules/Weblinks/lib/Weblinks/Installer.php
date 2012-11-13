@@ -154,6 +154,7 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
                 // then remove 'links_modrequest' table
                 // remove 'links_votedata' table
                 // remove 'links_editorials' table
+                // change 'links_links' table to match new Entity
             
             case '3.0.0':
                 // future code

@@ -160,8 +160,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     {
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-        $this->view->assign('catnum', ModUtil::apiFunc('Weblinks', 'user', 'catnum'))
-                ->assign('numrows', ModUtil::apiFunc('Weblinks', 'user', 'numrows'))
+        $this->view->assign('catnum', $this->entityManager->getRepository('Weblinks_Entity_Category')->getCount())
+                ->assign('numrows', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount())
                 ->assign('submitter', UserUtil::getVar('uname'))
                 ->assign('submitteremail', UserUtil::getVar('email'));
 
@@ -175,84 +175,68 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     {
         // get parameters we need
         $link = $this->getPassedValue('link', array(), 'POST');
-        $sitename = System::getVar('sitename');
-//        $adminmail = System::getVar('adminmail');
+
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADD), LogUtil::getErrorMsgPermission());
 
         $this->checkCsrfToken();
 
+        // VALIDATION
         if ($this->getVar('doubleurl') == 0) {
-            // check if URL exist
-            $checkurl = ModUtil::apiFunc('Weblinks', 'user', 'checkurl', array('url' => $link['url']));
-        } else {
-            $checkurl = 0;
-        }
-
-        if ($checkurl > 0) {
-            $this->registerError($this->__('Sorry! Please try again: this link is already listed in the database!'));
-        } else {
-            /* Check if Title exist */
-            if (empty($link['title'])) {
-                $this->registerError($this->__('Sorry! Please try again: you need to specify a TITLE for your link!'));
+            // check if URL already exists
+            $checkurl = count($this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('url' => $link['url'], 'status' => Link::ACTIVE)));
+            if ($checkurl > 0) {
+                $this->registerError($this->__('Sorry! Please try again: this link is already listed in the database!'));
                 $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
-            }
-            /* Check if URL exist */
-            if (empty($link['url'])) {
-                $this->registerError($this->__('Sorry! Please try again: you need to specify a URL for your link!'));
-                $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
-            }
-            /*        // Check if Description exist
-              if (empty($link['description'])) {
-              $this->registerError ($this->__('Sorry! Please try again: you need to include a DESCRIPTION for your link!'));
-              return $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
-              }
-             */
-            // check hooked modules for validation
-            $hook = new Zikula_ValidationHook('weblinks.ui_hooks.link.validate_edit', new Zikula_Hook_ValidationProviders());
-            $hookvalidators = $this->notifyHooks($hook)->getValidators();
-            if ($hookvalidators->hasErrors()) {
-                $this->registerError($this->__('Error! Hooked content does not validate.'));
-                $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
-            }
-            // add link to db
-            $addlink = ModUtil::apiFunc('Weblinks', 'admin', 'addlink', array('cat' => $link['cat'],
-                        'title' => $link['title'],
-                        'url' => $link['url'],
-                        'description' => $link['description'],
-                        'date' => DateUtil::getDatetime(),
-                        'name' => $link['name'],
-                        'email' => $link['email'],
-                        'submitter' => $link['submitter']));
-
-            // Statusmessage if true or false
-            if ($addlink > 0) {
-                // notify hooks
-                $url = new Zikula_ModUrl('Weblinks', 'user', 'viewlinkdetails', ZLanguage::getLanguageCode(), array('lid' => $addlink));
-                $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_edit', $addlink, $url));
-                if ($link['new'] == 1) {
-                    ModUtil::apiFunc('Weblinks', 'admin', 'delnewlink', array('lid' => $link['lid']));
-                    if ($link['email'] == "") {
-                        
-                    } else {
-                        // $from = $adminmail; ??
-                        $subject = DataUtil::formatForDisplay($this->__('Your link at')) . " " . DataUtil::formatForDisplay($sitename);
-                        $message = DataUtil::formatForDisplay($this->__('Hello')) . " " . DataUtil::formatForDisplay($link['name']) . ",<br /><br />" . DataUtil::formatForDisplay($this->__('your link submission has been approved for the site\'s search engine.')) . "<br /><br />" . DataUtil::formatForDisplay($this->__('Link title'))
-                                . ": " . DataUtil::formatForDisplay($link['title']) . "<br />" . DataUtil::formatForDisplay($this->__('URL')) . ": " . DataUtil::formatForDisplay($link['url']) . "<br />" . DataUtil::formatForDisplay($this->__('Description')) . ": " . DataUtil::formatForDisplayHTML($link['description']) . "<br /><br /><br />"
-                                . DataUtil::formatForDisplay($this->__('The site\'s search engine is available at:')) . "<br /><a href=\"" . System::getBaseUrl() . "index.php?module=Weblinks\">" . System::getBaseUrl() . "index.php?module=Weblinks</a><br /><br />"
-                                . DataUtil::formatForDisplay($this->__('Thank you for your submission!')) . "<br /><br />" . DataUtil::formatForDisplay($sitename) . " " . DataUtil::formatForDisplay($this->__('Team.')) . "";
-                        // send the e-mail
-                        ModUtil::apiFunc('Mailer', 'user', 'sendmessage', array('toaddress' => $link['email'], 'subject' => $subject, 'body' => $message, 'html' => true));
-                    }
-
-                    $this->registerStatus($this->__('New link added to the database'));
-                    return $this->redirect(ModUtil::url('Weblinks', 'admin', 'view'));
-                }
-                $this->registerStatus($this->__('New link added to the database'));
-            } else {
-                $this->registerError($this->__('Error! Could not add link to db.'));
             }
         }
+        /* Check if Title exists */
+        if (empty($link['title'])) {
+            $this->registerError($this->__('Sorry! Please try again: you need to specify a TITLE for your link!'));
+            $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+        }
+        /* Check if URL exists */
+        if (empty($link['url'])) {
+            $this->registerError($this->__('Sorry! Please try again: you need to specify a URL for your link!'));
+            $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+        }
+        // check hooked modules for validation
+        $hook = new Zikula_ValidationHook('weblinks.ui_hooks.link.validate_edit', new Zikula_Hook_ValidationProviders());
+        $hookvalidators = $this->notifyHooks($hook)->getValidators();
+        if ($hookvalidators->hasErrors()) {
+            $this->registerError($this->__('Error! Hooked content does not validate.'));
+            $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+        }
+       
+        // add link to db
+        $lid = ModUtil::apiFunc('Weblinks', 'admin', 'editlink', $link);
+        if ($lid <= 0) {
+            $this->registerError($this->__('Error! Could not add link to db.'));
+            $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
+        } else {
+            $this->registerStatus($this->__('New link added to the database'));
+        }
+
+        // notify hooks
+        $url = new Zikula_ModUrl('Weblinks', 'user', 'viewlinkdetails', ZLanguage::getLanguageCode(), array('lid' => $lid));
+        $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_edit', $lid, $url));
+        
+        if ($link['new'] == 1) {
+            // send email
+            if (!empty($link['email'])) {
+                $sitename = System::getVar('sitename');
+                // $adminmail = System::getVar('adminmail');
+                // $from = $adminmail; ??
+                $subject = DataUtil::formatForDisplay($this->__('Your link at')) . " " . DataUtil::formatForDisplay($sitename);
+                $message = DataUtil::formatForDisplay($this->__('Hello')) . " " . DataUtil::formatForDisplay($link['name']) . ",<br /><br />" . DataUtil::formatForDisplay($this->__("your link submission has been approved for the site's search engine.")) . "<br /><br />" . DataUtil::formatForDisplay($this->__('Link title'))
+                        . ": " . DataUtil::formatForDisplay($link['title']) . "<br />" . DataUtil::formatForDisplay($this->__('URL')) . ": " . DataUtil::formatForDisplay($link['url']) . "<br />" . DataUtil::formatForDisplay($this->__('Description')) . ": " . DataUtil::formatForDisplayHTML($link['description']) . "<br /><br /><br />"
+                        . DataUtil::formatForDisplay($this->__("The site's search engine is available at:")) . "<br /><a href='" . System::getBaseUrl() . "index.php?module=Weblinks'>" . System::getBaseUrl() . "index.php?module=Weblinks</a><br /><br />"
+                        . DataUtil::formatForDisplay($this->__('Thank you for your submission!')) . "<br /><br />" . DataUtil::formatForDisplay($sitename) . " " . DataUtil::formatForDisplay($this->__('Team.')) . "";
+                // send the e-mail
+                ModUtil::apiFunc('Mailer', 'user', 'sendmessage', array('toaddress' => $link['email'], 'subject' => $subject, 'body' => $message, 'html' => true));
+            }
+        }
+
         $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
     }
 
@@ -268,10 +252,10 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
         // get linkarray from db
-        $link = ModUtil::apiFunc('Weblinks', 'admin', 'getlink', array('lid' => $lid));
-
+        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
+        
         // check if $link return
-        if (!$link) {
+        if (!isset($link)) {
             $this->registerError($this->__('No link found'));
             $this->redirect(ModUtil::url('Weblinks', 'admin', 'linkview'));
         }
@@ -325,11 +309,13 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
 
-        $this->checkCsrfToken();
+//        $this->checkCsrfToken();
 
         // delete the link
-        if (ModUtil::apiFunc('Weblinks', 'admin', 'dellink', array('lid' => $lid))) {
-            // Success
+        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
+        if (isset($link)) {
+            $this->entityManager->remove($link);
+            $this->entityManager->flush();
             $this->registerStatus($this->__('Link removed from the database'));
             $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_delete', $lid));
         }
@@ -392,8 +378,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-        $this->view->assign('totalbrokenlinks', ModUtil::apiFunc('Weblinks', 'admin', 'countbrokenlinks'))
-                ->assign('brokenlinks', ModUtil::apiFunc('Weblinks', 'admin', 'brokenlinks'));
+        $this->view->assign('totalbrokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_BROKEN, '='))
+                ->assign('brokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('status' => Link::ACTIVE_BROKEN)));
 
         return $this->view->fetch('admin/listbrokenlinks.tpl');
     }
@@ -432,18 +418,17 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     public function ignorebrokenlinks()
     {
         // get parameters we need
-        $rid = (int)$this->getPassedValue('rid', null, 'REQUEST');
+        $lid = (int)$this->getPassedValue('lid', null, 'REQUEST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
 //        $this->checkCsrfToken();
 
-        // del request
-        if (ModUtil::apiFunc('Weblinks', 'admin', 'delrequest', array('rid' => $rid))) {
-            // Success
-            $this->registerStatus($this->__('Ignore requests'));
-        }
+        // change status of link
+        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
+        $link->setStatus(Link::ACTIVE);
+        $this->entityManager->flush();
 
         // redirect to function listbrokenlinks
         $this->redirect(ModUtil::url('Weblinks', 'admin', 'listbrokenlinks'));
@@ -835,7 +820,15 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // redirect to function view
         $this->redirect(ModUtil::url('Weblinks', 'admin', 'import'));
     }
-
+    
+    /**
+     * helper function to convert old getPassedValue method to Core 1.3.3-standard
+     * 
+     * @param string $variable
+     * @param mixed $defaultValue
+     * @param string $type
+     * @return mixed 
+     */
     private function getPassedValue($variable, $defaultValue, $type = 'POST')
     {
         if ($type == 'POST') {

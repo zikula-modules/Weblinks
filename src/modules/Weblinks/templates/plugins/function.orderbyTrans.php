@@ -10,23 +10,24 @@
 function smarty_function_orderbyTrans($params, Zikula_View $view)
 {
     $dom = ZLanguage::getModuleDomain('Weblinks');
+    $orderby = implode('', $params['orderby']);
 
-    if ($params['orderby'] == "hitsA") {
+    if ($orderby == "hitsASC") {
         $orderbyTrans = DataUtil::formatForDisplay(__('Popularity (from fewest hits to most hits)', $dom));
     }
-    if ($params['orderby'] == "hitsD") {
+    if ($orderby == "hitsDESC") {
         $orderbyTrans = DataUtil::formatForDisplay(__('Popularity (from most hits to fewest hits)', $dom));
     }
-    if ($params['orderby'] == "titleA") {
+    if ($orderby == "titleASC") {
         $orderbyTrans = DataUtil::formatForDisplay(__('Title (A to Z)', $dom));
     }
-    if ($params['orderby'] == "titleD") {
+    if ($orderby == "titleDESC") {
         $orderbyTrans = DataUtil::formatForDisplay(__('Title (Z to A)', $dom));
     }
-    if ($params['orderby'] == "dateA") {
+    if ($orderby == "dateASC") {
         $orderbyTrans = DataUtil::formatForDisplay(__('Date (oldest links listed first)', $dom));
     }
-    if ($params['orderby'] == "dateD") {
+    if ($orderby == "dateDESC") {
         $orderbyTrans = DataUtil::formatForDisplay(__('Date (newest links listed first)', $dom));
     }
 

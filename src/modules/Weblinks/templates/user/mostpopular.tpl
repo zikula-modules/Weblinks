@@ -18,7 +18,7 @@
         </p>
     </div>
 
-    {foreach from=$weblinks item='weblinks'}
+    {foreach from=$weblinks item='link'}
     <div class="wl-linkbox">
         {include file="user/linkbox.tpl"}
     </div>

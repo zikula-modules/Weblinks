@@ -30,25 +30,27 @@
         <tr class="{cycle values="z-odd,z-even" name=abacs}">
 
             <td><a href="{$brokenlinks.url|safetext}">{$brokenlinks.title|safetext}</a></td>
-            {if $brokenlinks.submitteremail == ""}
-            <td>{$brokenlinks.submitter|safetext}</td>
+            {usergetidfromname uname=$brokenlinks.modifysubmitter assign='modifysubmitterid'}
+            {usergetvar id=$modifysubmitterid name='email' assign='submitteremail'}
+            {if $submitteremail == ""}
+            <td>{$brokenlinks.modifysubmitter|safetext}</td>
             {else}
-            <td><a href="mailto:{$brokenlinks.submitteremail}">{$brokenlinks.submitter|safetext}</a></td>
+            <td><a href="mailto:{$submitteremail}">{$brokenlinks.modifysubmitter|safetext}</a></td>
             {/if}
 
-            {if $brokenlinks.owneremail == ""}
-            <td>{$brokenlinks.owner|safetext}</td>
+            {if $brokenlinks.email == ""}
+            <td>{$brokenlinks.name|safetext}</td>
             {else}
-            <td><a href="mailto:{$brokenlinks.owneremail}">{$brokenlinks.owner|safetext}</a></td>
+            <td><a href="mailto:{$brokenlinks.email}">{$brokenlinks.name|safetext}</a></td>
             {/if}
 
             <td>
-                <a href="{modurl modname='Weblinks' type='admin' func='ignorebrokenlinks' rid=$brokenlinks.rid}">
+                <a href="{modurl modname='Weblinks' type='admin' func='ignorebrokenlinks' lid=$brokenlinks.lid}">
                     {img modname='core' src='button_ok.png' set='icons/extrasmall' __alt="Ignore" __title="Ignore"}
                 </a>
             </td>
             <td>
-                <a href="{modurl modname='Weblinks' type='admin' func='delbrokenlinks' rid=$brokenlinks.rid lid=$brokenlinks.lid}">
+                <a href="{modurl modname='Weblinks' type='admin' func='dellinks' lid=$brokenlinks.lid}">
                     {img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall' __alt="Delete" __title="Delete"}
                 </a>
             </td>
