@@ -183,10 +183,10 @@ class Weblinks_Api_User extends Zikula_AbstractApi
                 return array('sortby' => 'date', 'sortdir' => 'DESC');
                 break;
             case 'hitsA':
-                return array('sortby' => 'title', 'hits' => 'ASC');
+                return array('sortby' => 'hits', 'sortdir' => 'ASC');
                 break;
             case 'hitsD':
-                return array('sortby' => 'title', 'hits' => 'DESC');
+                return array('sortby' => 'hits', 'sortdir' => 'DESC');
                 break;
             case 'titleA':
             default:
@@ -268,29 +268,29 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             return LogUtil::registerArgsError();
         }
 
-        $dbtable = DBUtil::getTables();
-        $weblinkscolumn = $dbtable['links_categories_column'];
-
-        $where = "WHERE $weblinkscolumn[title] LIKE '%" . DataUtil::formatForStore($args['query']) . "%'";
-
         // define the permission filter to apply
-        $permFilter = array();
-        $permFilter[] = array('realm' => 0,
-            'component_left' => 'Weblinks',
-            'component_middle' => '',
-            'component_right' => 'Category',
-            'instance_left' => 'title',
-            'instance_middle' => '',
-            'instance_right' => 'cat_id',
-            'level' => ACCESS_READ);
+//        $permFilter = array();
+//        $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
 
-        // get categories from db
-        $searchcats = DBUtil::selectObjectArray('links_categories', $where, 'title', '-1', '-1', '', $permFilter);
+        $dql = "SELECT a FROM Weblinks_Entity_Category a";
+        $dql .= " WHERE a.title LIKE '%" . DataUtil::formatForStore($args['query']) . "%'";
+         // generate query
+        $query = $this->entityManager->createQuery($dql);
 
-        // check for db error
-        if ($searchcats === false) {
-            return LogUtil::registerError($this->__('Error! Could not load items.'));
+        try {
+            $searchcats = $query->getResult();
+        } catch (Exception $e) {
+            return LogUtil::registerError($this->__('Error! Could not load items: ' . $e->getMessage()));
         }
+        
+        // should process for permissions here?
 
         // Return the subcategories array
         return $searchcats;
@@ -306,32 +306,30 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             return LogUtil::registerArgsError();
         }
 
-        $orderby = (isset($args['orderby'])) ? $args['orderby'] : 'title ASC';
-        $startnum = (isset($args['startnum']) && is_numeric($args['startnum'])) ? $args['startnum'] : 1;
-        $numlinks = (isset($args['numlinks']) && is_numeric($args['numlinks'])) ? $args['numlinks'] : -1;
-
-        $dbtable = DBUtil::getTables();
-        $column = $dbtable['links_links_column'];
-
-        $where = "WHERE $column[title] LIKE '%" . DataUtil::formatForStore($args['query']) . "%' OR $column[description] LIKE '%" . DataUtil::formatForStore($args['query']) . "%'";
+        $query = DataUtil::formatForStore($args['query']);
+        $orderBy = (isset($args['orderby'])) ? $args['orderby'] : array('sortby' => 'date', 'sortdir' => 'ASC');
+        $startNum = (isset($args['startnum']) && is_numeric($args['startnum'])) ? $args['startnum'] : 1;
+        $limit = (isset($args['limit']) && is_numeric($args['limit'])) ? $args['limit'] : 0;
 
         // define the permission filter to apply
-        $permFilter = array();
-        $permFilter[] = array('realm' => 0,
-            'component_left' => 'Weblinks',
-            'component_middle' => '',
-            'component_right' => 'Category',
-            'instance_left' => 'title',
-            'instance_middle' => '',
-            'instance_right' => 'cat_id',
-            'level' => ACCESS_READ);
+//        $permFilter = array();
+//        $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
 
-        $result = DBUtil::selectObjectArray('links_links', $where, $orderby, $startnum - 1, $numlinks, '', $permFilter);
+        $result = $this->entityManager->getRepository('Weblinks_Entity_Link')->searchLinks($query, $orderBy['sortby'], $orderBy['sortdir'], $limit, $startNum);
 
         // check for db error
         if ($result === false) {
             return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
+        
+        // should process result for permissions here
 
         // Return the array
         return $result;
@@ -347,12 +345,12 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             return LogUtil::registerArgsError();
         }
 
-        $dbtable = DBUtil::getTables();
-        $column = $dbtable['links_links_column'];
+        $query = DataUtil::formatForStore($args['query']);
+        $result = $this->entityManager->getRepository('Weblinks_Entity_Link')->searchLinks($query);
+        
+        // should process for permissions here too?
 
-        $where = "WHERE $column[title] LIKE '%" . DataUtil::formatForStore($args['query']) . "%' OR $column[description] LIKE '%" . DataUtil::formatForStore($args['query']) . "%'";
-
-        return DBUtil::selectObjectCount('links_links', $where);
+        return count($result);
     }
 
     /**

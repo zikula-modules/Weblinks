@@ -72,6 +72,40 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
     }
 
     /**
+     * search collection of link titles
+     * 
+     * @param integer $status
+     * @return array 
+     */
+    public function searchLinks($query, $orderBy = 'title', $sortDir = 'ASC', $limit = 0, $startNum = 1)
+    {
+        $dql = "SELECT a, c FROM Weblinks_Entity_Link a JOIN a.category c";
+        $dql .= " WHERE a.title LIKE '%" . DataUtil::formatForStore($query) . "%'";
+        $dql .= " AND a.status = :status";
+
+        if ($orderBy) {
+            $dql .= " ORDER BY a.$orderBy $sortDir";
+        }
+
+        $query = $this->_em->createQuery($dql);
+
+        if ($limit > 0) {
+            $query->setMaxResults($limit);
+        }
+        if ($startNum > 1) {
+            $query->setFirstResult($startNum);
+        }
+
+        $query->setParameter('status', Link::ACTIVE);
+        try {
+            $result = $query->getResult(Query::HYDRATE_ARRAY);
+        } catch (Exception $e) {
+            $result = false;
+        }
+        return $result;
+    }
+
+    /**
      * Increment the hit count for an item
      * 
      * @param object $item

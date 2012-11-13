@@ -126,7 +126,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     {
         // get parameters we need
         $query = $this->getPassedValue('query', null, 'GETPOST');
-        $orderby = $this->getPassedValue('orderby', 'titleA', 'GETPOST');
+        $orderby = ModUtil::apiFunc('Weblinks', 'user', 'orderby', array('orderby' => $this->getPassedValue('orderby', 'titleA', 'GETPOST')));
         $startnum = (int)$this->getPassedValue('startnum', 1, 'GETPOST');
 
         // Security check
@@ -138,9 +138,9 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         // get weblinks with $query inside
         $weblinks = ModUtil::apiFunc('Weblinks', 'user', 'search_weblinks', array(
             'query' => $query,
-            'orderbysql' => ModUtil::apiFunc('Weblinks', 'user', 'orderby', array('orderby' => $orderby)),
+            'orderby' => $orderby,
             'startnum' => $startnum,
-            'numlinks' => $this->getVar('linksresults')));
+            'limit' => $this->getVar('linksresults')));
 
         $this->view->assign('query', $query)
                 ->assign('categories', $categories)
@@ -190,7 +190,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
         // get link details
-        $weblink = $this->entityManager->find('Weblinks_Entity_Link',  $lid)->toArray();
+        $weblink = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
 
         $this->view->assign('link', $weblink)
                 ->assign('helper', array(
