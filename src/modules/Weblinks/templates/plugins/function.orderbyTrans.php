@@ -9,6 +9,9 @@
  */
 function smarty_function_orderbyTrans($params, Zikula_View $view)
 {
+    if (!isset($params['orderby'])) {
+        return;
+    }
     $dom = ZLanguage::getModuleDomain('Weblinks');
     $orderby = implode('', $params['orderby']);
 
