@@ -110,7 +110,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $this->entityManager->getRepository('Weblinks_Entity_Link')->addHit($linkObj);
 
         // is the URL local?
-        if (eregi('^http:|^ftp:|^https:', $link['url'])) {
+        if (preg_match('/^http:|^ftp:|^https:/i', $link['url'])) {
             $this->redirect($link['url']);
         } else {
             header('HTTP/1.1 301 Moved Permanently');
