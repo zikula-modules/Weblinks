@@ -7,7 +7,7 @@
         <div>
             <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <input type="hidden" name="modlink[lid]" value="{$link.lid|safetext}" />
-            <input type="hidden" name="modlink[submitter]" value="{$submitter|safetext}" />
+            <input type="hidden" name="modlink[modifysubmitter]" value="{$submitter|safetext}" />
 
             <fieldset>
                 <legend>{gt text="Request link modification"} - <em>{gt text="Link ID"}: {$link.lid|safetext}</em></legend>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="z-formrow">
                     <label for="linkrequest_cat">{gt text="Category"}:</label>
-                    <select id="linkrequest_cat" name="modlink[cid]">{catlist scat=0 sel=$link.cat_id}</select>
+                    <select id="linkrequest_cat" name="modlink[cat_id]">{catlist scat=0 sel=$link.category.cat_id}</select>
                 </div>
                 <div class="z-formrow">
                     <label for="linkrequest_description">{gt text="Description (255 characters max)"}:</label>

@@ -16,7 +16,7 @@ function smarty_function_categorynewlinkgraphic($params, Zikula_View $view)
     }
 
     $em = ServiceUtil::getService('doctrine.entitymanager');
-    $lastLink = $em->getRepository('Weblinks_Entity_Link')->getLinks(Weblinks_Entity_Link::ACTIVE, $params['cat'], 'date', 'DESC', 1);
+    $lastLink = $em->getRepository('Weblinks_Entity_Link')->getLinks(Weblinks_Entity_Link::ACTIVE, ">=", $params['cat'], 'date', 'DESC', 1);
     
     if (!isset($lastLink[0])) {
         return;

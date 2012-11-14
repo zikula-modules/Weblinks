@@ -508,12 +508,17 @@ class Weblinks_Api_User extends Zikula_AbstractApi
                 !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
             return LogUtil::registerPermissionError();
         }
-
-        $items = array('lid' => $args['lid'], 'cat_id' => $args['cid'], 'title' => $args['title'], 'url' => $args['url'], 'description' => $args['description'], 'modifysubmitter' => $args['submitter'], 'brokenlink' => 0);
-        if (!DBUtil::insertObject($items, 'links_modrequest', 'requestid')) {
-            return LogUtil::registerError($this->__('Error! Could not load items.'));
-        }
-
+        
+        // get original link
+        $originalLink = $this->entityManager->find('Weblinks_Entity_Link', $args['lid']);
+        // set modified values in original link
+        $originalLink->setModifiedContent($args);
+        $originalLink->setModifySubmitter($args['modifysubmitter']);
+        // update original link status
+        $originalLink->setStatus(Weblinks_Entity_Link::ACTIVE_MODIFIED);
+        
+        $this->entityManager->flush();
+        
         return true;
     }
 

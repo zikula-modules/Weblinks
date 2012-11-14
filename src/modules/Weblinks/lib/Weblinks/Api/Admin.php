@@ -347,40 +347,30 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
             return LogUtil::registerArgsError();
         }
 
-        // Check ALL Links
-        if ($args['cid'] == 0) {
-            $where = "";
-        }
-
-        // Check Categories
-        if ($args['cid'] != 0) {
-            $dbtable = DBUtil::getTables();
-            $column = $dbtable['links_links_column'];
-            $where = "WHERE $column[cat_id]='" . (int)DataUtil::formatForStore($args['cid']) . "'";
-        }
-
         // define the permission filter to apply
-        $permFilter = array();
-        $permFilter[] = array('realm' => 0,
-            'component_left' => 'Weblinks',
-            'component_middle' => '',
-            'component_right' => 'Category',
-            'instance_left' => 'title',
-            'instance_middle' => '',
-            'instance_right' => 'cat_id',
-            'level' => ACCESS_EDIT);
+//        $permFilter = array();
+//        $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_EDIT);
 
-        // get the vars from the db
-        $checkcatlinks = DBUtil::selectObjectArray('links_links', $where, 'title', '-1', '-1', '', $permFilter);
-
-        // check for a db error
-        if ($checkcatlinks === false) {
-            return LogUtil::registerError($this->__('Error! Could not load items.'));
+        if ((int)$args['cid'] == 0) {
+            $checkcatlinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks();
+        } else {
+            $checkcatlinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", $args['cid']);
         }
+
 
         // put items into result array.
         $links = array();
         foreach ($checkcatlinks as $link) {
+            
+            // check perms here
+            
             if ($link['url'] == 'http://' || $link['url'] == '') {
                 $fp = false;
             } else {
@@ -476,56 +466,50 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
      */
     public function modrequests()
     {
-        $dbtable = DBUtil::getTables();
-        $column = $dbtable['links_modrequest_column'];
-        $where = "WHERE $column[brokenlink] = '0'";
 
         // define the permission filter to apply
-        $permFilter = array();
-        $permFilter[] = array('realm' => 0,
-            'component_left' => 'Weblinks',
-            'component_middle' => '',
-            'component_right' => 'Category',
-            'instance_left' => 'title',
-            'instance_middle' => '',
-            'instance_right' => 'cat_id',
-            'level' => ACCESS_EDIT);
+//        $permFilter = array();
+//        $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_EDIT);
 
-        // get the vars from the db
-        $objArray = DBUtil::selectObjectArray('links_modrequest', $where, 'requestid', '-1', '-1', '', $permFilter);
-
-        // check for a db error
-        if ($objArray === false) {
-            return LogUtil::registerError($this->__('Error! Could not load items.'));
-        }
+        // get the links from the db
+        $modifiedLinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('status' => Link::ACTIVE_MODIFIED));
 
         // put items into result array.
         $modrequests = array();
-        foreach ($objArray as $request) {
-            $link = ModUtil::apiFunc('Weblinks', 'admin', 'getlink', array('lid' => $request['lid']));
-            $category = ModUtil::apiFunc('Weblinks', 'admin', 'getcategory', array('cid' => $request['cat_id']));
-            $origcategory = ModUtil::apiFunc('Weblinks', 'admin', 'getcategory', array('cid' => $link['cat_id']));
+        foreach ($modifiedLinks as $link) {
+            
+            // should process for permissions here
 
-            if ($request['modifysubmitter'] != System::getVar('anonymous')) {
-                $email = DBUtil::selectObjectByID('users', $request['modifysubmitter'], 'uname');
+            if ($link->getModifysubmitter() != System::getVar('anonymous')) {
+                // ewww. forced to use DBUtil...
+                $email = DBUtil::selectObjectByID('users', $link->getModifysubmitter(), 'uname');
             }
+            $modifiedContent = $link->getModifiedContent();
+            $modifiedCategory = $this->entityManager->find('Weblinks_Entity_Category', $modifiedContent['cat_id']);
 
-            $modrequests[] = array('rid' => $request['requestid'],
-                'lid' => $request['lid'],
-                'title' => $request['title'],
-                'url' => $request['url'],
-                'description' => $request['description'],
-                'cid' => $request['cat_id'],
-                'cidtitle' => $category['title'],
-                'origtitle' => $link['title'],
-                'origurl' => $link['url'],
-                'origdescription' => $link['description'],
-                'origcid' => $link['cat_id'],
-                'origcidtitle' => $origcategory['title'],
-                'submitter' => $request['modifysubmitter'],
+            $modrequests[] = array(
+                'lid' => $link->getLid(),
+                'title' => $modifiedContent['title'],
+                'url' => $modifiedContent['url'],
+                'description' => $modifiedContent['description'],
+                'cid' => $modifiedCategory->getCat_id(),
+                'cidtitle' => $modifiedCategory->getTitle(),
+                'origtitle' => $link->getTitle(),
+                'origurl' => $link->getUrl(),
+                'origdescription' => $link->getDescription(),
+                'origcid' => $link->getCat_id(),
+                'origcidtitle' => $link->getCategory()->getTitle(),
+                'submitter' => $link->getModifysubmitter(),
                 'submitteremail' => $email['email'],
-                'owner' => $link['name'],
-                'owneremail' => $link['email']);
+                'owner' => $link->getName(),
+                'owneremail' => $link->getEmail());
         }
 
         // return array

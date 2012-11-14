@@ -41,8 +41,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController
                 ->assign('catnum', $this->entityManager->getRepository('Weblinks_Entity_Category')->getCount())
                 ->assign('helper', array('main' => 1));
         if ($this->getVar('featurebox') == 1) {
-            $this->view->assign('blocklast', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, 0, 'date', 'DESC', $this->getVar('linksinblock')))
-                    ->assign('blockmostpop', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, 0, 'hits', 'DESC', $this->getVar('linksinblock')));
+            $this->view->assign('blocklast', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", 0, 'date', 'DESC', $this->getVar('linksinblock')))
+                    ->assign('blockmostpop', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", 0, 'hits', 'DESC', $this->getVar('linksinblock')));
         }
 
         return $this->view->fetch('user/view.tpl');
@@ -68,8 +68,8 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $subcategory = $this->entityManager->getRepository('Weblinks_Entity_Category')->getAll('title', $cid);
 
         // get links in this category
-        $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, $cid, $orderby['sortby'], $orderby['sortdir'], $this->getVar('perpage'), $startnum);
-        $numitems = $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Weblinks_Entity_Link::ACTIVE, ">=", $cid);
+        $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", $cid, $orderby['sortby'], $orderby['sortdir'], $this->getVar('perpage'), $startnum);
+        $numitems = $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE, ">=", $cid);
 
         $this->view->assign('orderby', $orderby)
                 ->assign('category', $category)
@@ -285,7 +285,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         // get most popular weblinks
-        $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, 0, 'hits', 'DESC', $mostpoplinks);
+        $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", 0, 'hits', 'DESC', $mostpoplinks);
 
         $this->view->assign('mostpoplinkspercentrigger', $mostpoplinkspercentrigger)
                 ->assign('toplinkspercent', $toplinkspercent)
@@ -375,7 +375,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         // get link vars
-        $link = ModUtil::apiFunc('Weblinks', 'user', 'link', array('lid' => $lid));
+        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
 
         if (UserUtil::isLoggedIn()) {
             $submitter = UserUtil::getVar('uname');
@@ -409,13 +409,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $this->checkCsrfToken();
 
         // add link request
-        ModUtil::apiFunc('Weblinks', 'user', 'modifylinkrequest', array(
-            'lid' => $modlink['lid'],
-            'cid' => $modlink['cid'],
-            'title' => $modlink['title'],
-            'url' => $modlink['url'],
-            'description' => $modlink['description'],
-            'submitter' => $modlink['submitter']));
+        ModUtil::apiFunc('Weblinks', 'user', 'modifylinkrequest', $modlink);
 
         $this->view->assign('helper', array('main' => 0));
 

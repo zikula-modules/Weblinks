@@ -31,7 +31,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
                 ->assign('catnum', $this->entityManager->getRepository('Weblinks_Entity_Category')->getCount())
                 ->assign('totalbrokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_BROKEN, '='))
                 ->assign('totalmodrequests', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_MODIFIED, '='))
-                ->assign('newlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::INACTIVE));
+                ->assign('newlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::INACTIVE, "<="));
 
         return $this->view->fetch('admin/view.tpl');
     }
@@ -354,7 +354,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     public function validate()
     {
         // get parameters we need
-        $cid = (int)$this->getPassedValue('cid', null, 'POST');
+        $cid = (int)$this->getPassedValue('cid', 0, 'POST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -442,7 +442,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-        $this->view->assign('totalmodrequests', ModUtil::apiFunc('Weblinks', 'admin', 'countmodrequests'))
+        $this->view->assign('totalmodrequests', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_MODIFIED, '='))
                 ->assign('modrequests', ModUtil::apiFunc('Weblinks', 'admin', 'modrequests'));
 
         return $this->view->fetch('admin/listmodrequests.tpl');
@@ -454,33 +454,36 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     public function changemodrequests()
     {
         // get parameters we need
-        $rid = $this->getPassedValue('rid', null, 'REQUEST');
+        $lid = $this->getPassedValue('lid', null, 'REQUEST');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-        $this->checkCsrfToken();
+//        $this->checkCsrfToken();
 
-        // get vars from request
-        $requestlink = ModUtil::apiFunc('Weblinks', 'admin', 'linkmodrequest', array('rid' => $rid));
+        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
 
-        if ($requestlink) {
-            // del request
-            ModUtil::apiFunc('Weblinks', 'admin', 'delrequest', array('rid' => $rid));
-
-            // change link
-            if (ModUtil::apiFunc('Weblinks', 'admin', 'updatemodlink', array('lid' => $requestlink['lid'],
-                        'cid' => $requestlink['cat_id'],
-                        'title' => $requestlink['title'],
-                        'url' => $requestlink['url'],
-                        'description' => $requestlink['description']))) {
-
-                // Success
-                $this->registerStatus($this->__('Link was changed successfuly'));
+        if ($link) {
+            // update to new values
+            $modifiedContent = $link->getModifiedContent();
+            $link->setTitle($modifiedContent['title']);
+            $link->setUrl($modifiedContent['url']);
+            $link->setDescription($modifiedContent['description']);
+            $link->setSubmitter($modifiedContent['modifysubmitter']);
+            if ($link->getCat_id() <> $modifiedContent['cat_id']) {
+                $newCategory = $this->entityManager->find('Weblinks_Entity_Category', $modifiedContent['cat_id']);
+                $link->setCategory($newCategory);
             }
+            // clear modified values
+            $link->setModifiedContent(null);
+            $link->setModifysubmitter('');
+            $link->setStatus(Link::ACTIVE);
+            
+            $this->entityManager->flush();
+            
+            $this->registerStatus($this->__('Link was changed successfuly'));
         }
 
-        // redirect to function listmodrequests
         $this->redirect(ModUtil::url('Weblinks', 'admin', 'listmodrequests'));
     }
 
@@ -490,18 +493,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     public function delmodrequests()
     {
         // get parameters we need
-        $rid = $this->getPassedValue('rid', null, 'REQUEST');
+        $lid = $this->getPassedValue('lid', null, 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-        $this->checkCsrfToken();
+//        $this->checkCsrfToken();
 
-        // delete request
-        if (ModUtil::apiFunc('Weblinks', 'admin', 'delrequest', array('rid' => $rid))) {
-            // Success
-            $this->registerStatus($this->__('User link modification requests was ignored'));
-        }
+        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
+        $link->setModifiedContent(null);
+        $link->setModifysubmitter('');
+        $link->setStatus(Link::ACTIVE);
+        $this->entityManager->flush();
+        $this->registerStatus($this->__('User link modification requests was ignored'));
 
         // redirect to function listmodrequests
         $this->redirect(ModUtil::url('Weblinks', 'admin', 'listmodrequests'));

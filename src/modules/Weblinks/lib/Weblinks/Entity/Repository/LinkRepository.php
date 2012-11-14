@@ -43,10 +43,10 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
      * @param integer $status
      * @return array 
      */
-    public function getLinks($status = Link::ACTIVE, $category = 0, $orderBy = null, $sortDir = 'DESC', $limit = 0, $startNum = 1)
+    public function getLinks($status = Link::ACTIVE, $comp = ">=", $category = 0, $orderBy = null, $sortDir = 'DESC', $limit = 0, $startNum = 1)
     {
         $dql = "SELECT a, c FROM Weblinks_Entity_Link a JOIN a.category c";
-        $dql .= " WHERE a.status = :status";
+        $dql .= " WHERE a.status $comp :status";
         if ($category > 0) {
             $dql .= " AND a.category IN (:cat)";
         }

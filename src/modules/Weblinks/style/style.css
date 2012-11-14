@@ -238,3 +238,12 @@
   display: table-cell;
   width: 95%;
 }
+
+/***/
+/* other stuff
+/***/
+
+.wl-red {
+    border: 1px solid #CC0000 !important;
+    background-color: #F7CBCA !important;
+}

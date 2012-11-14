@@ -127,21 +127,12 @@ class Weblinks_Entity_Link extends Zikula_EntityAccess
     
     /**
      * Content submitted as replacement data
-     * stored as serialized Weblinks_Entity_Link object
+     * stored as serialized array
      * 
-     * @ORM\Column(type="object", nullable=true, name="modcontent") 
+     * @ORM\Column(type="array", nullable=true, name="modcontent") 
      */
     private $modifiedContent = null;
     
-    /**
-     * non-persisted property
-     * stores the category id
-     * 
-     * @var integer 
-     */
-    private $cat_id;
-
-
     /**
      * Constructor 
      */
@@ -280,7 +271,7 @@ class Weblinks_Entity_Link extends Zikula_EntityAccess
         return $this->modifiedContent;
     }
 
-    public function setModifiedContent(Weblinks_Entity_Link $modifiedContent)
+    public function setModifiedContent(array $modifiedContent)
     {
         $this->modifiedContent = $modifiedContent;
     }
