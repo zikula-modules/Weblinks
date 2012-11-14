@@ -42,10 +42,6 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
                 'url' => ModUtil::url('Weblinks', 'admin', 'getconfig'),
                 'text' => $this->__('Settings'),
                 'class' => 'z-icon-es-config');
-            $links[] = array(
-                'url' => ModUtil::url('Weblinks', 'admin', 'import'),
-                'text' => $this->__('Import'),
-                'class' => 'z-icon-es-import');
         }
         if (SecurityUtil::checkPermission('Weblinks::Link', '::', ACCESS_EDIT)) {
             $links[] = array(

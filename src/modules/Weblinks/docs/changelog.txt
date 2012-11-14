@@ -1,6 +1,10 @@
 Version 3.0.0
-- converted to 1.3 standards
-- temporarily commented all 1.2-style hook calls
+- converted to 1.3 standards (including conversion to Doctrine 2)
+- removed need for modrequest and newlink tables through refactoring
+- added 1.3-style hooks
+- css restyled to 1.3-standards
+- removed all old tables (votes, etc)
+- removed all import routines (import as needed before upgrade to 3.0.0)
 
 Version 2.1.0 (not released)
 - converted to Gettext
