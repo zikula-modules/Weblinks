@@ -39,57 +39,47 @@ class Weblinks_Api_Search extends Zikula_AbstractApi
      * */
     public function search($args)
     {
-        if (!SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ)) {
-            return true;
-        }
-
         ModUtil::dbInfoLoad('Search');
-        $dbtable = DBUtil::getTables();
-        $linkstable = $dbtable['links_links'];
-        $linkscolumn = $dbtable['links_links_column'];
-        $searchTable = $dbtable['search_result'];
-        $searchColumn = $dbtable['search_result_column'];
-
-        $where = search_construct_where($args, array($linkscolumn['title'],
-            $linkscolumn['description']), null);
 
         $sessionId = session_id();
 
-        // define the permission filter to apply
-        $permFilter = array();
-        $permFilter[] = array('realm' => 0,
-            'component_left' => 'Weblinks',
-            'component_middle' => '',
-            'component_right' => 'Category',
-            'instance_left' => 'title',
-            'instance_middle' => '',
-            'instance_right' => 'cat_id',
-            'level' => ACCESS_READ);
-
-        // get the result set
-        $links = DBUtil::selectObjectArray('links_links', $where, 'lid', 1, -1, '', $permFilter);
-        if ($links === false) {
-            return LogUtil::registerError($this->__('Error! Could not load any link.'));
+        // this is a bit of a hacky way to ustilize this API for Doctrine calls.
+        $where = Search_Api_User::construct_where($args, array(
+                    'a.title',
+                    'a.description'), null);
+        if (!empty($where)) {
+            $where = trim(substr(trim($where), 1, -1));
         }
 
-        $insertSql = "INSERT INTO $searchTable ($searchColumn[title],
-                                                $searchColumn[text],
-                                                $searchColumn[extra],
-                                                $searchColumn[module],
-                                                $searchColumn[created],
-                                                $searchColumn[session]) VALUES ";
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb->select('a')
+            ->from('Weblinks_Entity_Link', 'a')
+            ->where($where);
+        $query = $qb->getQuery();
+        $results = $query->getResult();
+        
+        // TODO: filter for permissions?
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
 
-        foreach ($links as $link) {
-            $sql = $insertSql . '('
-                    . '\'' . DataUtil::formatForStore($link['title']) . '\', '
-                    . '\'' . DataUtil::formatForStore($link['description']) . '\', '
-                    . '\'' . DataUtil::formatForStore($link['lid']) . '\', '
-                    . '\'' . 'Weblinks' . '\', '
-                    . '\'' . DataUtil::formatForStore($link['date']) . '\', '
-                    . '\'' . DataUtil::formatForStore($sessionId) . '\')';
-            $insertResult = DBUtil::executeSQL($sql);
-            if (!$insertResult) {
-                return LogUtil::registerError($this->__('Error! Could not load any link.'));
+        foreach ($results as $result) {
+            $record = array(
+                'title' => $result->getTitle(),
+                'text' => '',
+                'extra' => serialize(array('lid' => $result->getLid())),
+                'created' => $result->getDate()->format('Y-m-d h:m:s'),
+                'module' => 'Weblinks',
+                'session' => $sessionId
+            );
+
+            if (!DBUtil::insertObject($record, 'search_result')) {
+                return LogUtil::registerError($this->__('Error! Could not save the search results.'));
             }
         }
 
@@ -104,10 +94,10 @@ class Weblinks_Api_Search extends Zikula_AbstractApi
      */
     public function search_check($args)
     {
-        $datarow = $args['datarow'];
-        $linkId = $datarow['extra'];
-
-        $datarow['url'] = ModUtil::url('Weblinks', 'user', 'visit', array('lid' => $linkId));
+        $datarow = &$args['datarow'];
+        $extra = unserialize($datarow['extra']);
+        
+        $datarow['url'] = ModUtil::url('Weblinks', 'user', 'visit', array('lid' => $extra['lid']));
 
         return true;
     }
