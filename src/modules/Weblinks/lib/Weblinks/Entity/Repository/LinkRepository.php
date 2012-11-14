@@ -43,12 +43,20 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
      * @param integer $status
      * @return array 
      */
-    public function getLinks($status = Link::ACTIVE, $comp = ">=", $category = 0, $orderBy = null, $sortDir = 'DESC', $limit = 0, $startNum = 1)
+    public function getLinks($status = Link::ACTIVE, $comp = ">=", $category = 0, $orderBy = null, $sortDir = 'DESC', $limit = 0, $startNum = 1, $beginning = null, $end = null)
     {
         $dql = "SELECT a, c FROM Weblinks_Entity_Link a JOIN a.category c";
         $dql .= " WHERE a.status $comp :status";
         if ($category > 0) {
             $dql .= " AND a.category IN (:cat)";
+        }
+        if (isset($beginning)) {
+            if (!isset($end)) {
+                $end = new DateTime();
+                $end->setTime(23, 59, 59);
+            }
+            $dql .= " AND a.date >= :beginning";
+            $dql .= " AND a.date <= :end";
         }
         if ($orderBy) {
             $dql .= " ORDER BY a.$orderBy $sortDir";
@@ -63,10 +71,24 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
             $query->setFirstResult($startNum);
         }
 
+        if (isset($beginning)) {
+            $query->setParameter('beginning', $beginning);
+            $query->setParameter('end', $end);
+        }
         if ($category > 0) {
             $query->setParameter('cat', $category);
         }
         $query->setParameter('status', $status);
+        
+        // TODO - results need to be filtered for permissions
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
         
         return $query->getResult(Query::HYDRATE_ARRAY);
     }
@@ -105,6 +127,35 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
         return $result;
     }
 
+    /**
+     * Count the number of links by Date in a given time period
+     * 
+     * @param DateTime $beginning
+     * @param DateTime $end (default today)
+     * @param integer $status (default ACTIVE)
+     * @return Scalar 
+     */
+    public function countByDatePeriod(DateTime $beginning, DateTime $end = null, $status = Link::ACTIVE)
+    {
+        if (!isset($end)) {
+            // default end is now
+            $end = new DateTime();
+        }
+        $dql = "SELECT COUNT(DISTINCT a.lid) FROM Weblinks_Entity_Link a";
+        $dql .= " WHERE a.status = :status";
+        $dql .= " AND a.date >= :beginning";
+        $dql .= " AND a.date <= :end";
+
+        $query = $this->_em->createQuery($dql);
+        $query->setParameter('status', $status);
+        $query->setParameter('beginning', $beginning);
+        $query->setParameter('end', $end);
+        
+        // TODO - filter by perms?
+        
+        return $query->getResult(Query::HYDRATE_SINGLE_SCALAR);
+    }
+    
     /**
      * Increment the hit count for an item
      * 

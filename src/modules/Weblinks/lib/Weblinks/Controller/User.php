@@ -31,6 +31,16 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         // get all categories
         $categories = $this->entityManager->getRepository('Weblinks_Entity_Category')->getAll();
 
+        // TODO: categories not filtered for perms
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
+
         // value of the function is checked
         if (!$categories) {
             return DataUtil::formatForDisplayHTML($this->__('No existing categories'));
@@ -63,10 +73,30 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         // get category vars
         $category = $this->entityManager->find('Weblinks_Entity_Category', $cid);
+        
+        // TODO: filter category for permissions?
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
 
         // get subcategories in this category
         $subcategory = $this->entityManager->getRepository('Weblinks_Entity_Category')->getAll('title', $cid);
 
+        // TODO: filter subcategory for permissions?
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
+//            
         // get links in this category
         $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", $cid, $orderby['sortby'], $orderby['sortdir'], $this->getVar('perpage'), $startnum);
         $numitems = $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE, ">=", $cid);
@@ -94,6 +124,16 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         // get link
         $linkObj = $this->entityManager->find('Weblinks_Entity_Link', $lid);
+        
+        // TODO: filter for perms on link
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
 
         if (!isset($linkObj)) {
             return $this->registerError($this->__('Link does not exist!'));
@@ -191,7 +231,17 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         // get link details
         $weblink = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
-
+        
+        // TODO: filter for perms on link
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
+        
         $this->view->assign('link', $weblink)
                 ->assign('helper', array(
                     'main' => 0, 
@@ -224,18 +274,22 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     public function newlinksdate()
     {
         // get parameters we need
-        $selectdate = (int)$this->getPassedValue('selectdate', null, 'GET');
+        $selectdate = DateTime::createFromFormat("U", (int)$this->getPassedValue('selectdate', null, 'GET'));
+        $start = clone $selectdate;
+        $start->setTime(0, 0);
+        $end = clone $selectdate;
+        $end->setTime(23, 59, 59);
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
         // count weblinks from the selected day
-        $totallinks = ModUtil::apiFunc('Weblinks', 'user', 'totallinks', array('selectdate' => $selectdate));
+        $totallinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->countByDatePeriod($start, $end);
 
         // get weblinks from the selected day
-        $weblinks = ModUtil::apiFunc('Weblinks', 'user', 'weblinksbydate', array('selectdate' => $selectdate));
+        $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", 0, null, 'DESC', 0, 1, $start, $end);
 
-        $this->view->assign('dateview', DateUtil::getDatetime($selectdate, 'datebrief'))
+        $this->view->assign('dateview', $selectdate->format('M j, Y'))
                 ->assign('totallinks', $totallinks)
                 ->assign('weblinks', $weblinks)
                 ->assign('helper', array(
@@ -376,6 +430,17 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         // get link vars
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
+        
+        // TODO: filter for perms on link
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_READ);
+        
 
         if (UserUtil::isLoggedIn()) {
             $submitter = UserUtil::getVar('uname');

@@ -36,7 +36,7 @@
             </div>
             <div class="z-formrow">
                 <label for="modlinks_cat">{gt text="Category"}</label>
-                <select id="modlinks_cat" name="link[cat]">{catlist scat=0 sel=$link.category.cat_id}</select>
+                <select id="modlinks_cat" name="link[cat_id]">{catlist scat=0 sel=$link.category.cat_id}</select>
             </div>
         </fieldset>
         {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_edit' id=$link.lid}

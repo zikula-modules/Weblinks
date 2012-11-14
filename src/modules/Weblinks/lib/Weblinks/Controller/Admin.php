@@ -32,6 +32,16 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
                 ->assign('totalbrokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_BROKEN, '='))
                 ->assign('totalmodrequests', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_MODIFIED, '='))
                 ->assign('newlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::INACTIVE, "<="));
+        
+        // TODO: 'newlinks' are not filtered for permissions and used to be... 
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_DELETE);
 
         return $this->view->fetch('admin/view.tpl');
     }
@@ -279,15 +289,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->checkCsrfToken();
 
         // update the link with new vars
-        if (ModUtil::apiFunc('Weblinks', 'admin', 'updatelink', array(
-            'lid' => $link['lid'],
-            'cid' => $link['cat'],
-            'title' => $link['title'],
-            'url' => $link['url'],
-            'description' => $link['description'],
-            'name' => $link['name'],
-            'email' => $link['email'],
-            'hits' => $link['hits']))) {
+        if (ModUtil::apiFunc('Weblinks', 'admin', 'editlink', $link)) {
             // Success
             $url = new Zikula_ModUrl('Weblinks', 'user', 'viewlinkdetails', ZLanguage::getLanguageCode(), array('lid' => $link['lid']));
             $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_edit', $link['lid'], $url));
@@ -325,30 +327,6 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function delnewlink
-     */
-    public function delnewlink()
-    {
-        // get parameters we need
-        $lid = (int)$this->getPassedValue('lid', null, 'GETPOST');
-
-        // Security check
-        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
-
-//        $this->checkCsrfToken();
-
-        // delete new link
-        if (ModUtil::apiFunc('Weblinks', 'admin', 'delnewlink', array('lid' => $lid))) {
-            // Success
-            $this->registerStatus($this->__('New link removed from the database'));
-            $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_delete', $lid));
-        }
-
-        // redirect to function view
-        $this->redirect(ModUtil::url('Weblinks', 'admin', 'view'));
-    }
-
-    /**
      * function validate
      */
     public function validate()
@@ -381,35 +359,16 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->view->assign('totalbrokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_BROKEN, '='))
                 ->assign('brokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('status' => Link::ACTIVE_BROKEN)));
 
+        // TODO: 'brokenlinks' are not filtered for permissions and used to be...
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Category',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'cat_id',
+//            'level' => ACCESS_EDIT);
         return $this->view->fetch('admin/listbrokenlinks.tpl');
-    }
-
-    /**
-     * function delbrokenlinks
-     */
-    public function delbrokenlinks()
-    {
-        // get parameters we need
-        $rid = (int)$this->getPassedValue('rid', null, 'REQUEST');
-        $lid = (int)$this->getPassedValue('lid', null, 'REQUEST');
-
-        // Security check
-        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
-
-//        $this->checkCsrfToken();
-
-        // del request
-        ModUtil::apiFunc('Weblinks', 'admin', 'delrequest', array('rid' => $rid));
-
-        // del link
-        if (ModUtil::apiFunc('Weblinks', 'admin', 'dellink', array('lid' => $lid))) {
-            // Success
-            $this->registerStatus($this->__('Link removed from the database'));
-            $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_delete', $lid));
-        }
-
-        // redirect to function listbrokenlinks
-        $this->redirect(ModUtil::url('Weblinks', 'admin', 'listbrokenlinks'));
     }
 
     /**
@@ -462,6 +421,16 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
 //        $this->checkCsrfToken();
 
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
+        
+        // TODO: should the link be checked for permissions?
+//                $permFilter[] = array('realm' => 0,
+//            'component_left' => 'Weblinks',
+//            'component_middle' => '',
+//            'component_right' => 'Link',
+//            'instance_left' => 'title',
+//            'instance_middle' => '',
+//            'instance_right' => 'lid',
+//            'level' => ACCESS_EDIT);
 
         if ($link) {
             // update to new values
