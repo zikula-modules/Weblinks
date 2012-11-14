@@ -289,20 +289,4 @@ class Weblinks_Api_User extends Zikula_AbstractApi
         }
     }
 
-    /**
-     * get the last weblinks
-     */
-    public function lastweblinks($args)
-    {
-        // erase  this method once the code is changed in the block
-    }
-
-    /**
-     * get the most popular weblinks
-     */
-    public function mostpopularweblinks($args)
-    {
-        // erase  this method once the code is changed in the block
-    }
-
 }

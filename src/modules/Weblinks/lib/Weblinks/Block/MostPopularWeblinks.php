@@ -67,7 +67,7 @@ class Weblinks_Block_MostPopularWeblinks extends Zikula_Controller_AbstractBlock
             return BlockUtil::themeBlock($blockinfo);
         }
 
-        $this->view->assign('weblinks', ModUtil::apiFunc('Weblinks', 'user', 'mostpopularweblinks', array('lastlinks' => $vars['limit'])));
+        $this->view->assign('weblinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Weblinks_Entity_Link::ACTIVE, ">=", 0, 'hits', 'DESC', $vars['limit']));
 
         // Populate block info and pass to theme
         $blockinfo['content'] = $this->view->fetch('block/mostpopularweblinks.tpl');
