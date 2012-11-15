@@ -36,7 +36,7 @@
                 <label for="addlink_email">{gt text="E-mail address"}</label>
                 <input id="addlink_email" type="text" name="link[email]" size="30" maxlength="60" value="{$submitteremail}" />
             </div>
-            {* NEED HOOK HERE *}
+            {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_edit' id=null}
             
             <div class="z-buttons z-formbuttons">
                 {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Add link" __title="Add link" __text="Add link"}

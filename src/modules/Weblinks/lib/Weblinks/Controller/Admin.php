@@ -252,6 +252,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
 
     /**
      * function modlink
+     * Allow admin to directly modify the link
+     * 
      */
     public function modlink()
     {
@@ -277,6 +279,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
 
     /**
      * function modlinks
+     * process modlink input
+     * 
      */
     public function modlinks()
     {
@@ -450,6 +454,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
             
             $this->entityManager->flush();
             
+            $url = new Zikula_ModUrl('Weblinks', 'user', 'viewlinkdetails', ZLanguage::getLanguageCode(), array('lid' => $link->getLid()));
+            $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_edit', $link->getLid(), $url));
             $this->registerStatus($this->__('Link was changed successfuly'));
         }
 

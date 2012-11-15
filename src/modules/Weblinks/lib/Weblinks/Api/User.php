@@ -272,7 +272,7 @@ class Weblinks_Api_User extends Zikula_AbstractApi
                 LogUtil::registerStatus($this->__("You'll receive an e-mail message when it's approved."));
             }
             
-            return true;
+            return $linkEntity->getLid();
         }
     }
 

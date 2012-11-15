@@ -398,8 +398,18 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         $this->checkCsrfToken();
 
-        // change link status to ACTIVE_BROKEN
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
+        // has link already been reported?
+        if ($link->getStatus() == Link::ACTIVE_BROKEN) {
+            LogUtil::registerStatus($this->__("This link has already been reported as broken. The site admin will review it as soon as possible! Thank you!"));
+            $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
+        }
+        if ($link->getStatus() == Link::ACTIVE_MODIFIED) {
+            LogUtil::registerStatus($this->__("This link has already been submitted for modification. The site admin will review it as soon as possible! Thank you!"));
+            $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
+        }
+        
+        // change link status to ACTIVE_BROKEN
         if ($link) {
             $link->setStatus(Link::ACTIVE_BROKEN);
             $link->setModifysubmitter($submitter);
@@ -428,9 +438,18 @@ class Weblinks_Controller_User extends Zikula_AbstractController
             return LogUtil::registerPermissionError();
         }
 
-        // get link vars
-        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
+        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
         
+        // has link already been reported?
+        if ($link->getStatus() == Link::ACTIVE_BROKEN) {
+            LogUtil::registerStatus($this->__("This link has already been reported as broken. The site admin will review it as soon as possible! Thank you!"));
+            $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
+        }
+        if ($link->getStatus() == Link::ACTIVE_MODIFIED) {
+            LogUtil::registerStatus($this->__("This link has already been submitted for modification. The site admin will review it as soon as possible! Thank you!"));
+            $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
+        }
+
         // TODO: filter for perms on link
 //                $permFilter[] = array('realm' => 0,
 //            'component_left' => 'Weblinks',
@@ -449,7 +468,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         $this->view->assign('blockunregmodify', $this->getVar('blockunregmodify'))
-                ->assign('link', $link)
+                ->assign('link', $link->toArray())
                 ->assign('submitter', $submitter)
                 ->assign('anonymous', System::getVar("anonymous"))
                 ->assign('helper', array('main' => 0));
@@ -521,15 +540,24 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         $this->checkCsrfToken();
 
-        // validate hooks here!
+        // check hooked modules for validation
+        $hook = new Zikula_ValidationHook('weblinks.ui_hooks.link.validate_edit', new Zikula_Hook_ValidationProviders());
+        $hookvalidators = $this->notifyHooks($hook)->getValidators();
+        if ($hookvalidators->hasErrors()) {
+            $this->registerError($this->__('Error! Hooked content does not validate.'));
+            $this->redirect(ModUtil::url('Weblinks', 'admin', 'addlink', $newlink));
+        }
 
         // write the link to db
-        $result = ModUtil::apiFunc('Weblinks', 'user', 'add', $newlink);
+        $lid = ModUtil::apiFunc('Weblinks', 'user', 'add', $newlink);
         
-        if ($result) {
-            // notify hooks here!
+        if ($lid > 0) {
+            // success - notify hooks
+            $url = new Zikula_ModUrl('Weblinks', 'user', 'viewlinkdetails', ZLanguage::getLanguageCode(), array('lid' => $lid));
+            $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_edit', $lid, $url));
             $url = ModUtil::url('Weblinks', 'user', 'view');
         } else {
+            // add operation failed
             $url = ModUtil::url('Weblinks', 'user', 'addlink', $newlink);
         }
 

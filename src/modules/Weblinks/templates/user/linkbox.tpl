@@ -23,6 +23,8 @@
     {/if}
 
     <p>{gt text="Added on"}: {$link.date|dateformat:"datebrief"} | {gt text="Hits"}: {$link.hits}</p>
+    
+    {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_view' id=$link.lid}
 
 </div>
 
