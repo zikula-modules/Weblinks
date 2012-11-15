@@ -179,11 +179,9 @@
                 </div>
             </div>
         </fieldset>
-
-        <div class="z-formbuttons">
-            {button src='button_ok.png' set='icons/small' __alt="Modify configuration" __title="Modify configuration"}
-            <a href="{modurl modname='Weblinks' type='admin' func='view'}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Back" __title="Back"}</a>
+        <div class="z-buttons z-formbuttons">
+            {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Modify configuration" __title="Modify configuration" __text="Modify configuration"}
+            <a class='z-btred' href="{modurl modname='Weblinks' type='admin' func='view'}" title="{gt text="Cancel"}">{img modname='core' src="button_cancel.png" set="icons/extrasmall" __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
         </div>
-
     </div>
 </form>

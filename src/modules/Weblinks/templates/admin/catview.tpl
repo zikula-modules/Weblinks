@@ -28,8 +28,8 @@
                 <textarea id="addcat_description" name="newcategory[cdescription]" cols="65" rows="10"></textarea>
             </div>
 
-            <div class="z-formbuttons">
-                {button src='button_ok.png' set='icons/small' __alt="Add category" __title="Add Category"}
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Add category" __title="Add category" __text="Add category"}
             </div>
         </fieldset>
     </div>
@@ -46,9 +46,8 @@
                 <label for="modcat_cat">{gt text="Category"}</label>
                 <select id="modcat_cat" name="cid">{catlist scat=0 sel=0}</select>
             </div>
-
-            <div class="z-formbuttons">
-                {button src='button_ok.png' set='icons/small' __alt="Modify a category" __title="Modify a category"}
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Modify category" __title="Modify category" __text="Modify category"}
             </div>
         </fieldset>
     </div>
@@ -64,9 +63,8 @@
                 <label for="suredel_cat">{gt text="Category"}</label>
                 <select id="suredel_cat" name="cid">{catlist scat=0 sel=0}</select>
             </div>
-
-            <div class="z-formbuttons">
-                {button src='button_ok.png' set='icons/small' __alt="Delete category" __title="Delete category"}
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" class='z-btred' __alt="Delete category" __title="Delete category" __text="Delete category"}
             </div>
         </fieldset>
     </div>

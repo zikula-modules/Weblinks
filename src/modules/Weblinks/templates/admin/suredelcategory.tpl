@@ -16,9 +16,9 @@
             </div>
         </fieldset>
 
-        <div class="z-formbuttons">
-            {button src='button_ok.png' set='icons/small' __alt="Delete Category" __title="Delete Category"}
-            <a href="{modurl modname='Weblinks' type='admin' func='catview'}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Back" __title="Back"}</a>
+        <div class="z-buttons z-formbuttons">
+            {button src="button_ok.png" set="icons/extrasmall" class='z-btred' __alt="Delete Category" __title="Delete Category" __text="Delete Category"}
+            <a class='z-btred' href="{modurl modname='Weblinks' type='admin' func='catview'}" title="{gt text="Cancel"}">{img modname='core' src="button_cancel.png" set="icons/extrasmall" __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
         </div>
 
     </div>

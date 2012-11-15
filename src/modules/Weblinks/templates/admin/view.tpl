@@ -23,8 +23,8 @@
                 <label for="vat_cid">{gt text="Check category"}</label>
                 <select id="vat_cid" name="cid"><option value="0">{gt text="Check ALL categories"}</option>{catlist scat=0 sel=0}</select>
             </div>
-            <div class="z-formbuttons">
-                {button src='button_ok.png' set='icons/small' __alt="Check category" __title="Check category"}
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Validate Categories" __title="Validate Categories" __text="Validate Categories"}
             </div>
         </fieldset>
     </div>
@@ -72,9 +72,9 @@
                     <input id="addlink_email" type="text" name="link[email]" size="20" maxlength="100" value="{$link.email|safetext}" />
                 </div>
                 {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_edit' id=$link.lid"}
-                <div class="z-formbuttons">
-                    {button src='button_ok.png' set='icons/small' __alt="Add link" __title="Add link"}
-                    <a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$link.lid}">{img modname='core' src='editdelete.png' set='icons/small' __alt="Delete link" __title="Delete link"}</a>
+                <div class="z-buttons z-formbuttons">
+                    {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Add link" __title="Add link" __text="Add link"}
+                    <a class='z-btred' href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$link.lid}" title="{gt text="Delete link"}">{img modname='core' src="editdelete.png" set="icons/extrasmall" __alt="Delete link" __title="Delete link"} {gt text="Delete link"}</a>
                 </div>
             </fieldset>
         </div>

@@ -37,9 +37,9 @@
                 <input id="addlink_email" type="text" name="link[email]" size="30" maxlength="60" value="{$submitteremail}" />
             </div>
             {* NEED HOOK HERE *}
-
-            <div class="z-formbuttons">
-                {button src='button_ok.png' set='icons/small' __alt="Add link" __title="Add link"}
+            
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Add link" __title="Add link" __text="Add link"}
             </div>
         </fieldset>
     </div>
@@ -55,9 +55,9 @@
                     <label for="modlink_lid">{gt text="Link ID"}</label>
                     <input id="modlink_lid" type="text" name="lid" size="12" maxlength="11" />
                 </div>
-                <div class="z-formbuttons">
-                    {button src='button_ok.png' set='icons/small' __alt="Modify link" __title="Modify link"}
-                </div>
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Modify link" __title="Modify link" __text="Modify link"}
+            </div>
             </fieldset>
         </div>
     </form>

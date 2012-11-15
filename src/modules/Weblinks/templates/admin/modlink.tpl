@@ -40,9 +40,9 @@
             </div>
         </fieldset>
         {notifydisplayhooks eventname='weblinks.ui_hooks.link.ui_edit' id=$link.lid}
-        <div class="z-formbuttons">
-            {button src='button_ok.png' set='icons/small' __alt="Modify link" __title="Modify link"}
-            <a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$link.lid}">{img modname='core' src='editdelete.png' set='icons/small' __alt="Delete link" __title="Delete link"}</a>
+        <div class="z-buttons z-formbuttons">
+            {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Modify link" __title="Modify link" __text="Modify link"}
+            <a class='z-btred' href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$link.lid}" title="{gt text="Delete link"}">{img modname='core' src="editdelete.png" set="icons/extrasmall" __alt="Delete link" __title="Delete link"} {gt text="Delete link"}</a>
         </div>
     </div>
 </form>

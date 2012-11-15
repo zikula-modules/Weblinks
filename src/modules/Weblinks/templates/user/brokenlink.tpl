@@ -14,10 +14,10 @@
                     {gt text="For security reasons, your user name and IP address will also be recorded temporarily."}
                 </p>
             </fieldset>
-
-            <div class="z-formrow z-formbuttons">
-                {button src='button_ok.png' set='icons/small' __alt="Report broken link" __title="Report broken link"}
-                <a href="{modurl modname='Weblinks' type='user' func='view'}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Back" __title="Back"}</a>
+                
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Report broken link" __title="Report broken link" __text="Report broken link"}
+                <a class='z-btred' href="{modurl modname='Weblinks' type='user' func='view'}" title="{gt text="Cancel"}">{img modname='core' src="button_cancel.png" set="icons/extrasmall" __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
             </div>
         </div>
     </form>

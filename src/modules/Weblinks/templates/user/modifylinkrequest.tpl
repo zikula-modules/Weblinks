@@ -30,9 +30,9 @@
                 </div>
 
             </fieldset>
-            <div class="z-formbuttons">
-                {button src='button_ok.png' set='icons/small' __alt="Send request" __title="Send request"}
-                <a href="{modurl modname='Weblinks' type='user' func='view'}">{img modname='core' src='button_cancel.png' set='icons/small' __alt="Back" __title="Back"}</a>
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" class='z-btgreen' __alt="Send request" __title="Send request" __text="Send request"}
+                <a class='z-btred' href="{modurl modname='Weblinks' type='user' func='view'}" title="{gt text="Cancel"}">{img modname='core' src="button_cancel.png" set="icons/extrasmall" __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
             </div>
 
         </div>
