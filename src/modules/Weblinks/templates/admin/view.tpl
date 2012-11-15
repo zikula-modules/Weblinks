@@ -8,9 +8,11 @@
 <p>{gt text="There are"} <strong>{$numrows}</strong> {gt text="link" plural="links" count=$numrows} {gt text="and"} <strong>{$catnum}</strong> {gt text="category" plural="categories" count=$catnum} {gt text="in the database"}</p>
 
 {if $totalbrokenlinks gt 0 || $totalmodrequests gt 0}
-<div class="z-informationmsg">
-    <a href="{modurl modname='Weblinks' type='admin' func='listbrokenlinks'}">{gt text="Broken link reports"} ({$totalbrokenlinks|safetext})</a><br />
-    <a href="{modurl modname='Weblinks' type='admin' func='listmodrequests'}">{gt text="Link modification requests"} ({$totalmodrequests|safetext})</a>
+<div class="z-warningmsg">
+    <ul>
+        <li><a href="{modurl modname='Weblinks' type='admin' func='listbrokenlinks'}">{gt text="Broken link reports"} ({$totalbrokenlinks|safetext})</a></li>
+        <li><a href="{modurl modname='Weblinks' type='admin' func='listmodrequests'}">{gt text="Link modification requests"} ({$totalmodrequests|safetext})</a></li>
+    </ul>
 </div>
 {/if}
 

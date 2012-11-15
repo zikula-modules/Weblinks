@@ -236,26 +236,15 @@ class Weblinks_Api_User extends Zikula_AbstractApi
         $valid = System::varValidate($link['url'], 'url');
 
         if (count($checkurl) > 0) {
-            $link['text'] = $this->__('Sorry! This URL is already listed in the database!');
-            $link['submit'] = 0;
-            return $link;
+            return LogUtil::registerError($this->__('Sorry! This URL is already listed in the database!'));
         } else if ($valid == false) {
-            $link['text'] = $this->__('Sorry! Error! You must type a URL for the web link!');
-            $link['submit'] = 0;
-            return $link;
+            return LogUtil::registerError($this->__('Sorry! Error! You must type a URL for the web link!'));
         } else if (empty($link['title'])) {
-            $link['text'] = $this->__('Sorry! Error! You must type a title for the URL!');
-            $link['submit'] = 0;
-            return $link;
+            return LogUtil::registerError($this->__('Sorry! Error! You must type a title for the URL!'));
         } else if (empty($link['cat_id']) || !is_numeric($link['cat_id'])) {
-            $link['text'] = $this->__('Sorry! Error! No category!');
-            $link['submit'] = 0;
-            return $link;
+            return LogUtil::registerError($this->__('Sorry! Error! No category!'));
         } else if (empty($link['description'])) {
-            $link['text'] = $this->__('Sorry! Error! You must type a description for the URL!');
-            $link['submit'] = 0;
-            return $link;
-        // validate hooks here!
+            return LogUtil::registerError($this->__('Sorry! Error! You must type a description for the URL!'));
         } else {
             if (empty($link['name'])) {
                 $link['name'] = System::getVar("anonymous");
@@ -275,17 +264,15 @@ class Weblinks_Api_User extends Zikula_AbstractApi
                 return LogUtil::registerError($this->__("ERROR: The link was not created: " . $e->getMessage()));
             }
 
-            // notify hooks here!
-            $result = array();
-            $result['lid'] = $linkEntity->getLid();
+            LogUtil::registerStatus($this->__("Thank you! Your link submission has been received."));
 
             if (empty($link['email'])) {
-                $result['text'] = $this->__("You didn't enter an e-mail address. However, your link will still be checked.");
+                LogUtil::registerStatus($this->__("It will be checked by the site admin."));
             } else {
-                $result['text'] = $this->__("Thank you! You'll receive an e-mail message when it's approved.");
+                LogUtil::registerStatus($this->__("You'll receive an e-mail message when it's approved."));
             }
-            $result['submit'] = 1;
-            return $result;
+            
+            return true;
         }
     }
 

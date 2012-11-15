@@ -5,8 +5,11 @@
 </div>
 
 <div class="z-informationmsg">
-    {gt text="Ignore (deletes all <strong><em>requests</em></strong> for a given link)"}<br />
-    {gt text="Delete (deletes <strong><em>broken link</em></strong> and <strong><em>requests</em></strong> for a given link)"}
+    {gt text="Instructions: confirm the validity of the link by clicking on the link in the left column. Contact the link submitter/owner by clicking their name. Choose which action to take:"}<br />
+    <ul>
+        <li>{gt text="Ignore: converts link to normal, active status."}</li>
+        <li>{gt text="Delete: removes link from database completely."}</li>
+    </ul>
 </div>
 
 {if $totalbrokenlinks == 0}
@@ -50,7 +53,7 @@
                 </a>
             </td>
             <td>
-                <a href="{modurl modname='Weblinks' type='admin' func='dellinks' lid=$brokenlinks.lid}">
+                <a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$brokenlinks.lid}">
                     {img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall' __alt="Delete" __title="Delete"}
                 </a>
             </td>

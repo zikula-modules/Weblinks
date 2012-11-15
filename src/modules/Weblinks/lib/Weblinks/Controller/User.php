@@ -409,9 +409,9 @@ class Weblinks_Controller_User extends Zikula_AbstractController
             $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
         }
 
-        $this->view->assign('helper', array('main' => 0));
+        LogUtil::registerStatus($this->__("Thank you for the information. Your request has been submitted for examination."));
 
-        return $this->view->fetch('user/brokenlinks.tpl');
+        $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
     }
 
     /**
@@ -473,12 +473,13 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         $this->checkCsrfToken();
 
-        // add link request
+        // add modify request
+        // TODO: nothing is validated here - maybe it should be?
         ModUtil::apiFunc('Weblinks', 'user', 'modifylinkrequest', $modlink);
+        
+        LogUtil::registerStatus($this->__("Thank you for the information. Your request has been submitted for examination."));
 
-        $this->view->assign('helper', array('main' => 0));
-
-        return $this->view->fetch('user/modifylinkrequests.tpl');
+        $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
     }
 
     /**
@@ -520,14 +521,19 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         $this->checkCsrfToken();
 
-        // write the link to db and get a status message back
+        // validate hooks here!
+
+        // write the link to db
         $result = ModUtil::apiFunc('Weblinks', 'user', 'add', $newlink);
+        
+        if ($result) {
+            // notify hooks here!
+            $url = ModUtil::url('Weblinks', 'user', 'view');
+        } else {
+            $url = ModUtil::url('Weblinks', 'user', 'addlink', $newlink);
+        }
 
-        $this->view->assign('submit', $result['submit'])
-                ->assign('text', $result['text'])
-                ->assign('helper', array('main' => 0));
-
-        return $this->view->fetch('user/add.tpl');
+        $this->redirect($url);
     }
 
     /**
