@@ -109,10 +109,10 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
                 // version 2.1.0 was not released
                 $connection = $this->entityManager->getConnection();
                 $prefix = $this->serviceManager['prefix'];
-                $prefix = (empty($prefix)) ? '' : "_" . $prefix;
+                $prefix = (empty($prefix)) ? '' : $prefix . "_";
                 $sqls = array();
                 // correct the links_link table
-                $sqls[] = 'RENAME TABLE ' . $prefix . 'links_link' . " TO links_link";
+                $sqls[] = 'RENAME TABLE ' . $prefix . 'links_links' . " TO links_links";
                 $sqls[] ="ALTER TABLE `links_links` CHANGE `pn_lid` `lid` INT(11) NOT NULL AUTO_INCREMENT, 
 CHANGE `pn_cat_id` `cat_id` INT(11) NOT NULL DEFAULT '0', 
 CHANGE `pn_title` `title` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '', 
@@ -172,16 +172,16 @@ CHANGE  `pn_description`  `description` TEXT CHARACTER SET utf8 COLLATE utf8_gen
                 $sql = "SELECT * FROM {$prefix}links_modrequest";
                 $objects = $connection->fetchAll($sql);
                 foreach ($objects as $object) {
-                    $link = $this->entityManager->find('Weblinks_Entity_Link', $object['lid']);
-                    $link->setModifysubmitter($object['modifysubmitter']);
+                    $link = $this->entityManager->find('Weblinks_Entity_Link', $object['pn_lid']);
+                    $link->setModifysubmitter($object['pn_modifysubmitter']);
                     if ($object['pn_brokenlink'] == 1) {
                         $link->setStatus(Weblinks_Entity_Link::ACTIVE_BROKEN);
                     } else {
                         $link->setModifiedContent(array(
-                            'title' => 'pn_title',
-                            'url' => 'pn_url',
-                            'description' => 'pn_description',
-                            'cat_id' => 'pn_cat_id',
+                            'title' => $object['pn_title'],
+                            'url' => $object['pn_url'],
+                            'description' => $object['pn_description'],
+                            'cat_id' => $object['pn_cat_id'],
                         ));
                         $link->setStatus(Weblinks_Entity_Link::ACTIVE_MODIFIED);
                     }
