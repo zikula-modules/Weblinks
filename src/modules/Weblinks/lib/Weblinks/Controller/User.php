@@ -29,17 +29,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
         // get all categories
-        $categories = $this->entityManager->getRepository('Weblinks_Entity_Category')->getAll();
-
-        // TODO: categories not filtered for perms
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
+        $categories = Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Category')->getAll(), ACCESS_READ);
 
         // value of the function is checked
         if (!$categories) {
@@ -73,32 +63,14 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         // get category vars
         $category = $this->entityManager->find('Weblinks_Entity_Category', $cid);
-        
-        // TODO: filter category for permissions?
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::Category', "{$category->getTitle()}::{$category->getCat_id()}", ACCESS_READ), LogUtil::getErrorMsgPermission());
 
         // get subcategories in this category
-        $subcategory = $this->entityManager->getRepository('Weblinks_Entity_Category')->getAll('title', $cid);
+        $subcategory = Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Category')->getAll('title', $cid), ACCESS_READ);
 
-        // TODO: filter subcategory for permissions?
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
-//            
         // get links in this category
         $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", $cid, $orderby['sortby'], $orderby['sortdir'], $this->getVar('perpage'), $startnum);
+        // TODO: scan each for Link perms?
         $numitems = $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE, ">=", $cid);
 
         $this->view->assign('orderby', $orderby)
@@ -121,19 +93,10 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     {
         // get parameters we need
         $lid = (int)$this->getPassedValue('lid', null, 'GET');
-
+        
         // get link
         $linkObj = $this->entityManager->find('Weblinks_Entity_Link', $lid);
-        
-        // TODO: filter for perms on link
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::Link', "::{$linkObj->getLid()}", ACCESS_READ), LogUtil::getErrorMsgPermission());
 
         if (!isset($linkObj)) {
             return $this->registerError($this->__('Link does not exist!'));
@@ -227,21 +190,12 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $lid = (int)$this->getPassedValue('lid', null, 'GET');
 
         // Security check
-        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::Link', "::$lid", ACCESS_READ), LogUtil::getErrorMsgPermission());
 
         // get link details
         $weblink = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
-        
-        // TODO: filter for perms on link
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
-        
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::Category', "{$weblink['category']->getTitle()}::{$weblink['category']->getCat_id()}", ACCESS_READ), LogUtil::getErrorMsgPermission());
+
         $this->view->assign('link', $weblink)
                 ->assign('helper', array(
                     'main' => 0, 
@@ -434,32 +388,22 @@ class Weblinks_Controller_User extends Zikula_AbstractController
 
         // Security check
         if (!$this->getVar('blockunregmodify') == 1 &&
-                !SecurityUtil::checkPermission('Weblinks::', "::", ACCESS_COMMENT)) {
+                !SecurityUtil::checkPermission('Weblinks::Link', "::$lid", ACCESS_COMMENT)) {
             return LogUtil::registerPermissionError();
         }
 
-        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
-        
+        $link = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::Category', "{$link['category']->getTitle()}::{$link['category']->getCat_id()}", ACCESS_READ), LogUtil::getErrorMsgPermission());
+
         // has link already been reported?
-        if ($link->getStatus() == Link::ACTIVE_BROKEN) {
+        if ($link['status'] == Link::ACTIVE_BROKEN) {
             LogUtil::registerStatus($this->__("This link has already been reported as broken. The site admin will review it as soon as possible! Thank you!"));
             $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
         }
-        if ($link->getStatus() == Link::ACTIVE_MODIFIED) {
+        if ($link['status'] == Link::ACTIVE_MODIFIED) {
             LogUtil::registerStatus($this->__("This link has already been submitted for modification. The site admin will review it as soon as possible! Thank you!"));
             $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
         }
-
-        // TODO: filter for perms on link
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
-        
 
         if (UserUtil::isLoggedIn()) {
             $submitter = UserUtil::getVar('uname');
@@ -468,7 +412,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         }
 
         $this->view->assign('blockunregmodify', $this->getVar('blockunregmodify'))
-                ->assign('link', $link->toArray())
+                ->assign('link', $link)
                 ->assign('submitter', $submitter)
                 ->assign('anonymous', System::getVar("anonymous"))
                 ->assign('helper', array('main' => 0));

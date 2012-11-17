@@ -48,17 +48,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             return LogUtil::registerArgsError();
         }
 
-        // define the permission filter to apply
-//        $permFilter = array();
-//        $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
-
         $dql = "SELECT a FROM Weblinks_Entity_Category a";
         $dql .= " WHERE a.title LIKE '%" . DataUtil::formatForStore($args['query']) . "%'";
          // generate query
@@ -70,10 +59,8 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             return LogUtil::registerError($this->__('Error! Could not load items: ' . $e->getMessage()));
         }
         
-        // should process for permissions here?
-
         // Return the subcategories array
-        return $searchcats;
+        return Weblinks_Util::checkCategoryPermissions($searchcats, ACCESS_READ);
     }
 
     /**
@@ -91,28 +78,17 @@ class Weblinks_Api_User extends Zikula_AbstractApi
         $startNum = (isset($args['startnum']) && is_numeric($args['startnum'])) ? $args['startnum'] : 1;
         $limit = (isset($args['limit']) && is_numeric($args['limit'])) ? $args['limit'] : 0;
 
-        // define the permission filter to apply
-//        $permFilter = array();
-//        $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
-
         $result = $this->entityManager->getRepository('Weblinks_Entity_Link')->searchLinks($query, $orderBy['sortby'], $orderBy['sortdir'], $limit, $startNum);
+
+        // filter result set for Link perms?
 
         // check for db error
         if ($result === false) {
             return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
         
-        // should process result for permissions here
-
         // Return the array
-        return $result;
+        return Weblinks_Util::checkCategoryPermissions($result, ACCESS_READ);
     }
 
     /**
@@ -140,25 +116,18 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     {
         $num = (isset($args['num']) && is_numeric($args['num'])) ? $args['num'] : 1;
 
-        // define the permission filter to apply
-//        $permFilter = array();
-//        $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
-
         $weblinks = array();
 
         // this is unfortunate since every record must be retrieved in order to randomize them properly.
-        $templinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks();
+        $templinks = Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(), ACCESS_READ);
         if (count($templinks) > $num) {
             $randomIds = array_rand($templinks, $num);
-            foreach ($randomIds as $id) {
-                $weblinks[] = $templinks[$id];
+            if (is_array($randomIds)) {
+                foreach ($randomIds as $id) {
+                    $weblinks[] = $templinks[$id];
+                }
+            } else {
+                $weblinks[] = $templinks[$randomIds];
             }
         } else {
             $weblinks = $templinks;
@@ -177,7 +146,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             return LogUtil::registerError($this->__('Sorry! There are no links to select randomly.'));
         }
 
-
         if ($num > 1) {
             $returnValue = array();
             foreach ($lidarray as $lid) {
@@ -187,8 +155,6 @@ class Weblinks_Api_User extends Zikula_AbstractApi
             $returnValue = $lidarray[0];
         }
         
-        // here there should be a check on the permissions...
-
         return $returnValue;
     }
 

@@ -80,16 +80,6 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
         }
         $query->setParameter('status', $status);
         
-        // TODO - results need to be filtered for permissions
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
-        
         return $query->getResult(Query::HYDRATE_ARRAY);
     }
 
@@ -103,7 +93,7 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
     {
         $dql = "SELECT a, c FROM Weblinks_Entity_Link a JOIN a.category c";
         $dql .= " WHERE a.title LIKE '%" . DataUtil::formatForStore($query) . "%'";
-        $dql .= " AND a.status = :status";
+        $dql .= " AND a.status >= :status";
 
         if ($orderBy) {
             $dql .= " ORDER BY a.$orderBy $sortDir";

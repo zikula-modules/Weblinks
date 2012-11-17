@@ -31,17 +31,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
                 ->assign('catnum', $this->entityManager->getRepository('Weblinks_Entity_Category')->getCount())
                 ->assign('totalbrokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_BROKEN, '='))
                 ->assign('totalmodrequests', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_MODIFIED, '='))
-                ->assign('newlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::INACTIVE, "<="));
-        
-        // TODO: 'newlinks' are not filtered for permissions and used to be... 
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_DELETE);
+                ->assign('newlinks', Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::INACTIVE, "<=")), ACCESS_DELETE);
 
         return $this->view->fetch('admin/view.tpl');
     }
@@ -361,17 +351,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
         $this->view->assign('totalbrokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_BROKEN, '='))
-                ->assign('brokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('status' => Link::ACTIVE_BROKEN)));
+                ->assign('brokenlinks', Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('status' => Link::ACTIVE_BROKEN))), ACCESS_EDIT);
 
-        // TODO: 'brokenlinks' are not filtered for permissions and used to be...
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_EDIT);
         return $this->view->fetch('admin/listbrokenlinks.tpl');
     }
 
@@ -425,16 +406,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
 //        $this->checkCsrfToken();
 
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
-        
-        // TODO: should the link be checked for permissions?
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Link',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'lid',
-//            'level' => ACCESS_EDIT);
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::Link', "::{$link->getLid()}", ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
         if ($link) {
             // update to new values
@@ -456,7 +428,9 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
             
             $url = new Zikula_ModUrl('Weblinks', 'user', 'viewlinkdetails', ZLanguage::getLanguageCode(), array('lid' => $link->getLid()));
             $this->notifyHooks(new Zikula_ProcessHook('weblinks.ui_hooks.link.process_edit', $link->getLid(), $url));
-            $this->registerStatus($this->__('Link was changed successfuly'));
+            $this->registerStatus($this->__('Link was changed successfully'));
+        } else {
+            $this->registerError($this->__('Could not find link.'));            
         }
 
         $this->redirect(ModUtil::url('Weblinks', 'admin', 'listmodrequests'));

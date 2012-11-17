@@ -56,19 +56,10 @@ class Weblinks_Api_Search extends Zikula_AbstractApi
             ->from('Weblinks_Entity_Link', 'a')
             ->where($where);
         $query = $qb->getQuery();
-        $results = $query->getResult();
-        
-        // TODO: filter for permissions?
-//                $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_READ);
+        $results = Weblinks_Util::checkCategoryPermissions($query->getResult(), ACCESS_READ);
 
         foreach ($results as $result) {
+            // TODO: check Link permissions here?
             $record = array(
                 'title' => $result->getTitle(),
                 'text' => '',

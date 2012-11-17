@@ -35,7 +35,13 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
             $links[] = array(
                 'url' => ModUtil::url('Weblinks', 'admin', 'linkview'),
                 'text' => $this->__('Links administration'),
-                'class' => 'z-icon-es-view');
+                'class' => 'z-icon-es-view',
+                'links' => array(
+                    array('url' => ModUtil::url('Weblinks', 'admin', 'listbrokenlinks'),
+                        'text' => $this->__('Broken links')),
+                    array('url' => ModUtil::url('Weblinks', 'admin', 'listmodrequests'),
+                        'text' => $this->__('Modification requests')),
+                ));
         }
         if (SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN)) {
             $links[] = array(
@@ -151,12 +157,14 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
         unset($link['new']);
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", ACCESS_ADD)) {
+        $accessLevel = isset($link['lid']) ? ACCESS_EDIT : ACCESS_ADD;
+        if (!SecurityUtil::checkPermission('Weblinks::Link', "::", $accessLevel)) {
             return LogUtil::registerPermissionError();
         }
 
         if (isset($link['lid'])) {
             $linkEntity = $this->entityManager->find('Weblinks_Entity_Link', $link['lid']);
+            // TODO: check here for Link perms?
         } else {
             $linkEntity = new Weblinks_Entity_Link();
         }
@@ -184,21 +192,11 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
             return LogUtil::registerArgsError();
         }
 
-        // define the permission filter to apply
-//        $permFilter = array();
-//        $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_EDIT);
-
         if ((int)$args['cid'] == 0) {
+            // assume ADMIN access
             $checkcatlinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks();
         } else {
-            $checkcatlinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", $args['cid']);
+            $checkcatlinks = Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", $args['cid']), ACCESS_EDIT);
         }
 
 
@@ -206,7 +204,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
         $links = array();
         foreach ($checkcatlinks as $link) {
             
-            // check perms here
+            // TODO: check Link perms here?
             
             if ($link['url'] == 'http://' || $link['url'] == '') {
                 $fp = false;
@@ -230,26 +228,14 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
      */
     public function modrequests()
     {
-
-        // define the permission filter to apply
-//        $permFilter = array();
-//        $permFilter[] = array('realm' => 0,
-//            'component_left' => 'Weblinks',
-//            'component_middle' => '',
-//            'component_right' => 'Category',
-//            'instance_left' => 'title',
-//            'instance_middle' => '',
-//            'instance_right' => 'cat_id',
-//            'level' => ACCESS_EDIT);
-
         // get the links from the db
-        $modifiedLinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('status' => Link::ACTIVE_MODIFIED));
+        $modifiedLinks = Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('status' => Link::ACTIVE_MODIFIED)), ACCESS_EDIT);
 
         // put items into result array.
         $modrequests = array();
         foreach ($modifiedLinks as $link) {
             
-            // should process for permissions here
+            // TODO: should process for Link permissions here
 
             if ($link->getModifysubmitter() != System::getVar('anonymous')) {
                 // ewww. forced to use DBUtil...
