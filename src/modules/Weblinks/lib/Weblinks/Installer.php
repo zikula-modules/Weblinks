@@ -31,6 +31,9 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
         // register hooks
         HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
 
+        // register handlers
+        EventUtil::registerPersistentModuleHandler('Weblinks', 'get.pending_content', array('Weblinks_Handlers', 'pendingContent'));
+
         // Initialisation successful
         return true;
     }
@@ -166,6 +169,10 @@ CHANGE  `pn_description`  `description` TEXT CHARACTER SET utf8 COLLATE utf8_gen
                 
                 // register new hooks
                 HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+
+                // register handlers
+                EventUtil::registerPersistentModuleHandler('Weblinks', 'get.pending_content', array('Weblinks_Handlers', 'pendingContent'));
+                $this->setVar('showPendingContent', 1);
             case '3.0.0':
                 // future code
         }

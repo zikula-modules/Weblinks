@@ -547,6 +547,9 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         if (!isset($config['thumbersize'])) {
             $config['thumbersize'] = $defaults['thumbersize'];
         }
+        if (!isset($config['showPendingContent'])) {
+            $config['showPendingContent'] = 0;
+        }
         
         $this->setVars($config);
 

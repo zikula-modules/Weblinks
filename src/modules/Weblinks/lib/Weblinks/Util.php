@@ -26,7 +26,9 @@ class Weblinks_Util
             'blockunregmodify' => 0,
             'links_anonaddlinklock' => 0,
             'thumber' => 0,
-            'thumbersize' => 'XL');;
+            'thumbersize' => 'XL',
+            'showPendingContent' => 1,
+            );;
     }
     
     /**

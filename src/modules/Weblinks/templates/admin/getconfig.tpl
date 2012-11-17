@@ -143,6 +143,12 @@
                     <label for="weblinks_settings_anonaddlinklock_no">{gt text="no"}</label>
                 </div>
             </div>
+            <div class="z-formrow">
+                <label for="weblinks_settings_showPendingContent">{gt text="Show pending content in Pending Content block"}</label>
+                <div id="weblinks_settings_showPendingContent">
+                    <input id="weblinks_settings_showPendingContent" type="checkbox" name="config[showPendingContent]" value="1"{if $modvars.Weblinks.showPendingContent} checked="checked"{/if} />
+                </div>
+            </div>
         </fieldset>
 
         <fieldset>

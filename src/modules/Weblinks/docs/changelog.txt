@@ -5,6 +5,8 @@ Version 3.0.0
 - css restyled to 1.3-standards
 - removed all old tables (votes, etc)
 - removed all import routines (import as needed before upgrade to 3.0.0)
+- pending content moved to new standard which requires no configuration. just check
+    the box in the admin settings
 
 Version 2.1.0 (not released)
 - converted to Gettext

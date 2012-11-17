@@ -35,19 +35,4 @@
             {gt text="// if a group has add permissions and higher, they can see an icon in their user profil to add links"}
         </div>
     </fieldset>
-    <fieldset>
-        <legend>{gt text="Hint for the pending module"}</legend>
-        <div class="z-informationmsg">
-            <a href="http://code.zikula.org/pendingcontent">{gt text="http://code.zikula.org/pendingcontent"}</a><br /><br />
-            {gt text="Name: New Links"}<br />
-            {gt text="URL:  index.php?module=weblinks&amp;type=admin&amp;func=linkview"}<br />
-            {gt text="SQL:  SELECT count(*) from links_links WHERE status=0"}<br /><br />
-            {gt text="Name: Broken Links"}<br />
-            {gt text="URL:  index.php?module=weblinks&amp;type=admin&amp;func=listbrokenlinks"}<br />
-            {gt text="SQL:  SELECT count(*) from links_links WHERE status=2"}<br /><br />
-            {gt text="Name: Modify Links"}<br />
-            {gt text="URL:  index.php?module=weblinks&amp;type=admin&amp;func=listmodrequests"}<br />
-            {gt text="SQL:  SELECT count(*) from links_links WHERE status=3"}<br /><br />
-        </div>
-    </fieldset>
 </div>
