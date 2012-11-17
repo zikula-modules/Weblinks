@@ -40,15 +40,14 @@
         <div class="z-informationmsg">
             <a href="http://code.zikula.org/pendingcontent">{gt text="http://code.zikula.org/pendingcontent"}</a><br /><br />
             {gt text="Name: New Links"}<br />
-            {gt text="URL:  index.php?module=Web_Links&amp;type=admin"}<br />
-            {gt text="SQL:  select count(*) from zk_links_newlink"}<br /><br />
+            {gt text="URL:  index.php?module=weblinks&amp;type=admin&amp;func=linkview"}<br />
+            {gt text="SQL:  SELECT count(*) from links_links WHERE status=0"}<br /><br />
             {gt text="Name: Broken Links"}<br />
-            {gt text="URL:  index.php?module=Web_Links&amp;type=admin&amp;func=listbrokenlinks"}<br />
-            {gt text="SQL:  select count(*) from zk_links_modrequest WHERE zk_links_modrequest.pn_brokenlink = 1"}<br /><br />
+            {gt text="URL:  index.php?module=weblinks&amp;type=admin&amp;func=listbrokenlinks"}<br />
+            {gt text="SQL:  SELECT count(*) from links_links WHERE status=2"}<br /><br />
             {gt text="Name: Modify Links"}<br />
-            {gt text="URL:  index.php?module=Web_Links&amp;type=admin&amp;func=listmodrequests"}<br />
-            {gt text="SQL:  select count(*) from zk_links_modrequest WHERE zk_links_modrequest.pn_brokenlink = 0"}<br /><br />
-            {gt text="// zk_ if this is your table prefix"}
+            {gt text="URL:  index.php?module=weblinks&amp;type=admin&amp;func=listmodrequests"}<br />
+            {gt text="SQL:  SELECT count(*) from links_links WHERE status=3"}<br /><br />
         </div>
     </fieldset>
 </div>

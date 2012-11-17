@@ -71,15 +71,13 @@ Group | scribite:: | Weblinks:: | comment
 http://code.zikula.org/pendingcontent
 
 Name: New Links
-URL:  index.php?module=Web_Links&type=admin
-SQL:  select count(*) from zk_links_newlink
+URL:  index.php?module=weblinks&amp;type=admin&amp;func=linkview
+SQL:  SELECT count(*) from links_links WHERE status=0
 
 Name: Broken Links
-URL:  index.php?module=Web_Links&type=admin&func=listbrokenlinks
-SQL:  select count(*) from zk_links_modrequest WHERE zk_links_modrequest.pn_brokenlink = 1
+URL:  index.php?module=weblinks&amp;type=admin&amp;func=listbrokenlinks
+SQL:  SELECT count(*) from links_links WHERE status=2
 
 Name: Modify Links
-URL:  index.php?module=Web_Links&type=admin&func=listmodrequests
-SQL:  select count(*) from zk_links_modrequest WHERE zk_links_modrequest.pn_brokenlink = 0
-
-// zk_ if this is your table prefix
+URL:  index.php?module=weblinks&amp;type=admin&amp;func=listmodrequests
+SQL:  SELECT count(*) from links_links WHERE status=3
