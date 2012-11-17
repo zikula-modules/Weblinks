@@ -22,16 +22,14 @@
     <tbody>
         {foreach from=$links item='links'}
         <tr class="{cycle values="z-odd,z-even" name=abacs}">
-            {if !$links.fp}
-            <td>{img modname='core' src='editdelete.png' set='icons/extrasmall' __alt="Failed!" __title="Failed!"}</td>
-            <td><a href="{$links.url|safetext}" target="new">{$links.title|safetext}</a></td>
-            <td>[&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='modlink' lid=$links.lid}">{img modname='core' src='xedit.png' set='icons/extrasmall' __alt="Edit" __title="Edit"}</a>&nbsp;|&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$links.lid}">{img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall' __alt="Delete" __title="Delete"}</a>&nbsp;]</td>
-            {/if}
-
             {if $links.fp}
             <td>{img modname='core' src='button_ok.png' set='icons/extrasmall' __alt="OK" __title="OK"}</td>
             <td><a href="{$links.url|safetext}" target="new">{$links.title|safetext}</a></td>
             <td>{gt text="None"}</td>
+            {else}
+            <td>{img modname='core' src='editdelete.png' set='icons/extrasmall' __alt="Failed!" __title="Failed!"}</td>
+            <td><a href="{$links.url|safetext}" target="new">{$links.title|safetext}</a></td>
+            <td>[&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='modlink' lid=$links.lid}">{img modname='core' src='xedit.png' set='icons/extrasmall' __alt="Edit" __title="Edit"}</a>&nbsp;|&nbsp;<a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$links.lid}">{img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall' __alt="Delete" __title="Delete"}</a>&nbsp;]</td>
             {/if}
         </tr>
         {foreachelse}

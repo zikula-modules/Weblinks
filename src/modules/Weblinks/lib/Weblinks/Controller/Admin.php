@@ -26,12 +26,17 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     public function view()
     {
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
+        
+        $newlinks = Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::INACTIVE, "<="), ACCESS_DELETE);
+        foreach ($newlinks as $key => $link) {
+            $newlinks[$key]['valid'] = Weblinks_Util::validateLink($link); 
+        }
 
         $this->view->assign('numrows', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount())
                 ->assign('catnum', $this->entityManager->getRepository('Weblinks_Entity_Category')->getCount())
                 ->assign('totalbrokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_BROKEN, '='))
                 ->assign('totalmodrequests', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_MODIFIED, '='))
-                ->assign('newlinks', Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::INACTIVE, "<=")), ACCESS_DELETE);
+                ->assign('newlinks', $newlinks);
 
         return $this->view->fetch('admin/view.tpl');
     }
@@ -334,7 +339,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->checkCsrfToken();
 
         // check links
-        $links = ModUtil::apiFunc('Weblinks', 'admin', 'checklinks', array('cid' => $cid));
+        $links = ModUtil::apiFunc('Weblinks', 'admin', 'validateLinksByCategory', array('cid' => $cid));
 
         $this->view->assign('cid', $cid)
                 ->assign('links', $links);
@@ -349,9 +354,14 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     {
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
-
+        
+        $brokenlinks = Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('status' => Link::ACTIVE_BROKEN)), ACCESS_EDIT);
+        foreach($brokenlinks as $key => $brokenlink) {
+            $brokenlinks[$key] = $brokenlink->toArray();
+            $brokenlinks[$key]['valid'] = Weblinks_Util::validateLink($brokenlink); 
+        }
         $this->view->assign('totalbrokenlinks', $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::ACTIVE_BROKEN, '='))
-                ->assign('brokenlinks', Weblinks_Util::checkCategoryPermissions($this->entityManager->getRepository('Weblinks_Entity_Link')->findBy(array('status' => Link::ACTIVE_BROKEN))), ACCESS_EDIT);
+                ->assign('brokenlinks', $brokenlinks);
 
         return $this->view->fetch('admin/listbrokenlinks.tpl');
     }

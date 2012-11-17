@@ -104,7 +104,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         $link = $linkObj->toArray();
 
         // Security check
-        if (!SecurityUtil::checkPermission('Weblinks::Category', "::$link[cat_id]", ACCESS_READ)) {
+        if (!SecurityUtil::checkPermission('Weblinks::Category', "::{$link['category']['cat_id']}", ACCESS_READ)) {
             return LogUtil::registerPermissionError();
             $this->redirect(ModUtil::url('Weblinks', 'user', 'view'));
         }

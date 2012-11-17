@@ -185,7 +185,7 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     /**
      * check links
      */
-    public function checklinks($args)
+    public function validateLinksByCategory($args)
     {
         // Argument check
         if (!isset($args['cid']) || !is_numeric($args['cid'])) {
@@ -205,24 +205,16 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
         foreach ($checkcatlinks as $link) {
             
             // TODO: check Link perms here?
-            
-            if ($link['url'] == 'http://' || $link['url'] == '') {
-                $fp = false;
-            } else {
-                $vurl = parse_url($link['url']);
-                $fp = fsockopen($vurl['host'], 80, $errno, $errstr, 15);
-            }
-
             $links[] = array('lid' => $link['lid'],
                 'title' => $link['title'],
                 'url' => $link['url'],
-                'fp' => $fp);
+                'fp' => Weblinks_Util::validateLink($link));
         }
 
         // return array
         return $links;
     }
-
+    
     /**
      * get links with modrequest
      */

@@ -54,7 +54,13 @@
                     <input id="addlink_title" type="text" name="link[title]" value="{$link.title|safetext}" size="50" maxlength="100" />
                 </div>
                 <div class="z-formrow">
-                    <label for="addlink_url">{gt text="URL"} [ <a target="_blank" href="{$link.url|safetext}">{gt text="Visit"}</a> ]</label>
+                    <label for="addlink_url">{gt text="URL"} [ <a target="_blank" href="{$link.url|safetext}">{gt text="Visit"}</a> ]
+                        {if $link.valid}
+                            {img modname='core' src='button_ok.png' set='icons/extrasmall' __alt="validates" __title="validates"}
+                        {else}
+                            {img modname='core' src='editdelete.png' set='icons/extrasmall' __alt="invalid!" __title="invalid!"}
+                        {/if}
+                    </label>
                     <input id="addlink_url" type="text" name="link[url]" value="{$link.url|safetext}" size="65" maxlength="254" />
                 </div>
                 <div class="z-formrow">

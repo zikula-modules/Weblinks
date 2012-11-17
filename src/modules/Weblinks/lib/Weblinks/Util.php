@@ -64,4 +64,25 @@ class Weblinks_Util
         }
         return $outboundArray;
     }
+    
+    /**
+     * Validate one link
+     * @param array $link
+     * @return type 
+     */
+    public static function validateLink($link)
+    {
+        if ($link['url'] == 'http://' || $link['url'] == '') {
+            $fp = false;
+        } else {
+            $vurl = parse_url($link['url']);
+            if (isset($vurl['host'])) {
+                $fp = fsockopen($vurl['host'], 80, $errno, $errstr, 15);
+            } else {
+                $fp = false;
+            }
+        }
+        return $fp;
+    }
+
 }
