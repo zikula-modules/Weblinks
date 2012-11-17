@@ -9,9 +9,24 @@
  */
 class Weblinks_Util
 {
-    public static function getdefaults()
+    public static function getDefaults()
     {
-        return array();
+        return array('perpage' => 25,
+            'newlinks' => 10,
+            'bestlinks' => 10,
+            'linksresults' => 10,
+            'linksinblock' => 10,
+            'popular' => 500,
+            'mostpoplinkspercentrigger' => 0,
+            'mostpoplinks' => 25,
+            'featurebox' => 1,
+            'targetblank' => 0,
+            'doubleurl' => 0,
+            'unregbroken' => 0,
+            'blockunregmodify' => 0,
+            'links_anonaddlinklock' => 0,
+            'thumber' => 0,
+            'thumbersize' => 'XL');;
     }
     
     /**

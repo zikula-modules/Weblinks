@@ -495,55 +495,57 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
 
         $this->checkCsrfToken();
+        
+        $defaults = Weblinks_Util::getDefaults();
 
         // Update module variables
         if (!isset($config['perpage']) || !is_numeric($config['perpage'])) {
-            $config['perpage'] = 10;
+            $config['perpage'] = $defaults['perpage'];
         }
         if (!isset($config['newlinks']) || !is_numeric($config['newlinks'])) {
-            $config['newlinks'] = 10;
+            $config['newlinks'] = $defaults['newlinks'];
         }
         if (!isset($config['bestlinks']) || !is_numeric($config['bestlinks'])) {
-            $config['bestlinks'] = 10;
+            $config['bestlinks'] = $defaults['bestlinks'];
         }
         if (!isset($config['linksresults']) || !is_numeric($config['linksresults'])) {
-            $config['linksresults'] = 10;
+            $config['linksresults'] = $defaults['linksresults'];
         }
         if (!isset($config['linksinblock']) || !is_numeric($config['linksinblock'])) {
-            $config['linksinblock'] = 10;
+            $config['linksinblock'] = $defaults['linksinblock'];
         }
         if (!isset($config['popular']) || !is_numeric($config['popular'])) {
-            $config['popular'] = 500;
+            $config['popular'] = $defaults['popular'];
         }
         if (!isset($config['mostpoplinkspercentrigger']) || !is_numeric($config['mostpoplinkspercentrigger'])) {
-            $config['mostpoplinkspercentrigger'] = 0;
+            $config['mostpoplinkspercentrigger'] = $defaults['mostpoplinkspercentrigger'];
         }
         if (!isset($config['mostpoplinks']) || !is_numeric($config['mostpoplinks'])) {
-            $config['mostpoplinks'] = 25;
+            $config['mostpoplinks'] = $defaults['mostpoplinks'];
         }
         if (!isset($config['featurebox']) || !is_numeric($config['featurebox'])) {
-            $config['featurebox'] = 1;
+            $config['featurebox'] = $defaults['featurebox'];
         }
         if (!isset($config['targetblank']) || !is_numeric($config['targetblank'])) {
-            $config['targetblank'] = 0;
+            $config['targetblank'] = $defaults['targetblank'];
         }
         if (!isset($config['doubleurl']) || !is_numeric($config['doubleurl'])) {
-            $config['doubleurl'] = 0;
+            $config['doubleurl'] = $defaults['doubleurl'];
         }
         if (!isset($config['unregbroken']) || !is_numeric($config['unregbroken'])) {
-            $config['unregbroken'] = 0;
+            $config['unregbroken'] = $defaults['unregbroken'];
         }
         if (!isset($config['blockunregmodify']) || !is_numeric($config['blockunregmodify'])) {
-            $config['blockunregmodify'] = 0;
+            $config['blockunregmodify'] = $defaults['blockunregmodify'];
         }
         if (!isset($config['links_anonaddlinklock']) || !is_numeric($config['links_anonaddlinklock'])) {
-            $config['links_anonaddlinklock'] = 0;
+            $config['links_anonaddlinklock'] = $defaults['links_anonaddlinklock'];
         }
         if (!isset($config['thumber']) || !is_numeric($config['thumber'])) {
-            $config['thumber'] = 0;
+            $config['thumber'] = $defaults['thumber'];
         }
         if (!isset($config['thumbersize'])) {
-            $config['thumbersize'] = 'XL';
+            $config['thumbersize'] = $defaults['thumbersize'];
         }
         
         $this->setVars($config);

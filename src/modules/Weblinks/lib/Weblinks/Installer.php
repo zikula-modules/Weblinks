@@ -25,28 +25,8 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
             return false;
         }
 
-
-        // Weblinks settings
-        // set up config variables
-        $modvars = array('perpage' => 25,
-            'newlinks' => 10,
-            'bestlinks' => 10,
-            'linksresults' => 10,
-            'linksinblock' => 10,
-            'popular' => 500,
-            'mostpoplinkspercentrigger' => 0,
-            'mostpoplinks' => 25,
-            'featurebox' => 1,
-            'targetblank' => 0,
-            'doubleurl' => 0,
-            'unregbroken' => 0,
-            'blockunregmodify' => 0,
-            'links_anonaddlinklock' => 0,
-            'thumber' => 0,
-            'thumbersize' => 'XL');
-
         // set up module variables
-        ModUtil::setVars('Weblinks', $modvars);
+        ModUtil::setVars('Weblinks', Weblinks_Util::getDefaults());
 
         // register hooks
         HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
@@ -63,27 +43,10 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
 
         switch ($oldversion) {
             case '1.0':
-
                 // Weblinks settings
-                // set up config variables
-                $modvars = array('perpage' => 25,
-                    'newlinks' => 10,
-                    'bestlinks' => 10,
-                    'linksresults' => 10,
-                    'linksinblock' => 10,
-                    'popular' => 500,
-                    'mostpoplinkspercentrigger' => 0,
-                    'mostpoplinks' => 25,
-                    'featurebox' => 1,
-                    'targetblank' => 0,
-                    'blockunregmodify' => 0,
-                    'links_anonaddlinklock' => 0);
-
-                // set up module variables
-                ModUtil::setVars('Weblinks', $modvars);
+                ModUtil::setVars('Weblinks', Weblinks_Util::getDefaults());
 
             case '2.0':
-
                 // rename Web_Links to Weblinks
                 // rename modvars
                 $oldvars = ModUtil::getVar('Web_Links');
