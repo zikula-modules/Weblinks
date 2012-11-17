@@ -52,15 +52,16 @@
             {else}
             <td><a href="mailto:{$link.email}">{$link.name|safetext}</a></td>
             {/if}
+            {insert name="csrftoken" assign='token'}
 
             <td>
-                <a href="{modurl modname='Weblinks' type='admin' func='ignorebrokenlinks' lid=$link.lid}">
+                <a href="{modurl modname='Weblinks' type='admin' func='ignorebrokenlinks' lid=$link.lid csrftoken=$token}">
                     {img modname='core' src='edit_remove.png' set='icons/extrasmall' __alt="Ignore" __title="Ignore"}
                 </a>&nbsp;
-                <a href="{modurl modname='Weblinks' type='admin' func='modlink' lid=$link.lid}">
-                    {img modname='core' src='edit.png' set='icons/extrasmall' __alt="Edit" __title="Edit"}
+                <a href="{modurl modname='Weblinks' type='admin' func='modlink' lid=$link.lid csrftoken=$token}">
+                    {img modname='core' src='xedit.png' set='icons/extrasmall' __alt="Edit" __title="Edit"}
                 </a>&nbsp;
-                <a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$link.lid}">
+                <a href="{modurl modname='Weblinks' type='admin' func='dellink' lid=$link.lid csrftoken=$token}">
                     {img modname='core' src='14_layer_deletelayer.png' set='icons/extrasmall' __alt="Delete" __title="Delete"}
                 </a>
             </td>

@@ -21,8 +21,20 @@
         </tr>
         <tr class="{cycle values="z-odd,z-even" name=abacs}">
             <td>{gt text="URL"}</td>
-            <td><a href="{$modrequest.origurl|safetext}">{$modrequest.origurl|safetext}</a></td>
-            <td{if $modrequest.origurl <> $modrequest.url} class='wl-red'{/if}><a href="{$modrequest.url|safetext}">{$modrequest.url|safetext}</a></td>
+            <td><a href="{$modrequest.origurl|safetext}">{$modrequest.origurl|safetext}</a>
+                {if $modrequest.origurlvalid}
+                    {img modname='core' src='button_ok.png' set='icons/extrasmall' __alt="validates" __title="validates"}
+                {else}
+                    {img modname='core' src='editdelete.png' set='icons/extrasmall' __alt="invalid!" __title="invalid!"}
+                {/if}
+            </td>
+            <td{if $modrequest.origurl <> $modrequest.url} class='wl-red'{/if}><a href="{$modrequest.url|safetext}">{$modrequest.url|safetext}</a>
+                {if $modrequest.urlvalid}
+                    {img modname='core' src='button_ok.png' set='icons/extrasmall' __alt="validates" __title="validates"}
+                {else}
+                    {img modname='core' src='editdelete.png' set='icons/extrasmall' __alt="invalid!" __title="invalid!"}
+                {/if}
+            </td>
         </tr>
         <tr class="{cycle values="z-odd,z-even" name=abacs}">
             <td>{gt text="Category"}</td>
@@ -56,8 +68,9 @@
         <tr>
             <td colspan="3">
                 <div class="z-buttons z-formbuttons">
-                    <a class='z-btgreen' href="{modurl modname='Weblinks' type='admin' func='changemodrequests' lid=$modrequest.lid}" title="{gt text="Accept"}">{img modname='core' src="button_ok.png" set="icons/extrasmall" __alt="Accept" __title="Accept"} {gt text="Accept"}</a>
-                    <a class='z-btred' href="{modurl modname='Weblinks' type='admin' func='delmodrequests' lid=$modrequest.lid}" title="{gt text="Ignore"}">{img modname='core' src="editdelete.png" set="icons/extrasmall" __alt="Ignore" __title="Ignore"} {gt text="Ignore"}</a>
+                    {insert name="csrftoken" assign='token'}
+                    <a class='z-btgreen' href="{modurl modname='Weblinks' type='admin' func='changemodrequests' lid=$modrequest.lid csrftoken=$token}}" title="{gt text="Accept"}">{img modname='core' src="button_ok.png" set="icons/extrasmall" __alt="Accept" __title="Accept"} {gt text="Accept"}</a>
+                    <a class='z-btred' href="{modurl modname='Weblinks' type='admin' func='delmodrequests' lid=$modrequest.lid csrftoken=$token}}" title="{gt text="Ignore"}">{img modname='core' src="editdelete.png" set="icons/extrasmall" __alt="Ignore" __title="Ignore"} {gt text="Ignore"}</a>
                     <a class='z-btblue' href="{modurl modname='Weblinks' type='admin' func='view'}" title="{gt text="Cancel"}">{img modname='core' src="button_cancel.png" set="icons/extrasmall" __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
                 </div>
             </td>

@@ -258,6 +258,8 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
+        $this->checkCsrfToken($this->getPassedValue('csrftoken', NULL, 'GETPOST'));
+
         // get linkarray from db
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
         
@@ -310,7 +312,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
 
-//        $this->checkCsrfToken();
+        $this->checkCsrfToken($this->getPassedValue('csrftoken', NULL, 'GETPOST'));
 
         // delete the link
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
@@ -377,7 +379,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-//        $this->checkCsrfToken();
+        $this->checkCsrfToken($this->getPassedValue('csrftoken', NULL, 'GET'));
 
         // change status of link
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
@@ -413,7 +415,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-//        $this->checkCsrfToken();
+        $this->checkCsrfToken($this->getPassedValue('csrftoken', NULL, 'GET'));
 
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::Link', "::{$link->getLid()}", ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -457,7 +459,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-//        $this->checkCsrfToken();
+        $this->checkCsrfToken($this->getPassedValue('csrftoken', NULL, 'GET'));
 
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid);
         $link->setModifiedContent(null);
