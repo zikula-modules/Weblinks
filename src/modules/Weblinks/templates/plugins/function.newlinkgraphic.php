@@ -14,7 +14,7 @@ function smarty_function_newlinkgraphic($params, Zikula_View $view)
     $lastTime = $params['time'];
     $today = new DateTime();
     $diff = $lastTime->diff($today);
-    $days = (int)$diff->format('d');
+    $days = (int)$diff->format('%a');
 
     if ($days <= 1) {
         echo " <img src='modules/Weblinks/images/newred.gif' width='34' height='15' alt='" . DataUtil::formatForDisplay(__('New today', $dom)) . "' title='" . DataUtil::formatForDisplay(__('New today', $dom)) . "' />";
