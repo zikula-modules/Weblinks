@@ -144,6 +144,29 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
         $this->entityManager->remove($cat);
         $this->entityManager->flush();
     }
+    
+    public static $recursiveCategoryCount = array();
+    
+    /**
+     * retrieve recursive category count
+     * @param Weblinks_Entity_Category $cat 
+     */
+    public function doRecursiveCategoryCount(Weblinks_Entity_Category $cat)
+    {
+        $cid = $cat->getCat_id();
+        // is category a parent?
+        $children = $this->entityManager->getRepository('Weblinks_Entity_Category')->findBy(array('parent_id' => $cid));
+        if (isset($children)) {
+            foreach ($children as $child) {
+                $this->doRecursiveCategoryCount($child);
+            }
+        }
+        // count the links (all including inactive) in the category
+        $linkCount = $this->entityManager->getRepository('Weblinks_Entity_Link')->getCount(Link::INACTIVE, ">=", $cid);
+
+        // add the result to the array
+        self::$recursiveCategoryCount[$cid] = array('title' => $cat->getTitle(), 'count' => $linkCount);
+    }
 
     /**
      * edit/create a link

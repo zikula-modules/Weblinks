@@ -129,8 +129,14 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
 
         $this->checkCsrfToken();
+        
+        $category = $this->entityManager->find('Weblinks_Entity_Category', $cid);
+        
+        ModUtil::apiFunc('Weblinks', 'admin', 'doRecursiveCategoryCount', $category);
+        $affectedCategories = Weblinks_Api_Admin::$recursiveCategoryCount;
 
-        $this->view->assign('cid', $cid);
+        $this->view->assign('category', $category)
+                ->assign('affectedcategories', $affectedCategories);
 
         return $this->view->fetch('admin/suredelcategory.tpl');
     }
