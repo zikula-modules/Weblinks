@@ -21,7 +21,10 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function view
+     * Main user view
+     * provides overview of all categories and general navigation in the module
+     * 
+     * @return string (html)
      */
     public function view()
     {
@@ -49,12 +52,21 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function category
+     * View links by category
+     * 
+     * @param integer $cid (via GET)
+     * @param string $orderby (via GET) (optional) (default: 'titleA')
+     * @param integer $startnum (via GET) (optional) (default: 1)
+     * 
+     * @return string (html)
      */
     public function category()
     {
         // get parameters we need
-        $cid = (int)$this->getPassedValue('cid', null, 'GET');
+        $cid = (int)$this->getPassedValue('cid', 0, 'GET');
+        if (empty($cid)) {
+            return LogUtil::registerArgsError();
+        }
         $orderby = ModUtil::apiFunc('Weblinks', 'user', 'orderby', array('orderby' => $this->getPassedValue('orderby', 'titleA', 'GET')));
         $startnum = (int)$this->getPassedValue('startnum', 1, 'GET');
 
@@ -87,12 +99,20 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function visit
+     * Redirect the user to the selected link
+     * count the 'hit'
+     * 
+     * @param integer $lid (via GET)
+     * 
+     * @return NULL (redirect)
      */
     public function visit()
     {
         // get parameters we need
-        $lid = (int)$this->getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', 0, 'GET');
+        if (empty($lid)) {
+            return LogUtil::registerArgsError();
+        }
         
         // get link
         $linkObj = $this->entityManager->find('Weblinks_Entity_Link', $lid);
@@ -123,12 +143,22 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function search
+     * Search the links in the DB
+     * This is not the sitewide search
+     * 
+     * @param string $query (via GETPOST) the word(s) to be searched
+     * @param string $orderby (via GETPOST) (optional) (default: 'titleA')
+     * @param integer $startnum (via GETPOST) (optional) (default: 1)
+     * 
+     * @return string (html)
      */
     public function search()
     {
         // get parameters we need
         $query = $this->getPassedValue('query', null, 'GETPOST');
+        if (empty($query)) {
+            return LogUtil::registerArgsError();
+        }
         $orderby = ModUtil::apiFunc('Weblinks', 'user', 'orderby', array('orderby' => $this->getPassedValue('orderby', 'titleA', 'GETPOST')));
         $startnum = (int)$this->getPassedValue('startnum', 1, 'GETPOST');
 
@@ -161,7 +191,9 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function randomlink
+     * Visit a random link from the DB
+     * 
+     * @return NULL (redirect)
      */
     public function randomlink()
     {
@@ -182,12 +214,19 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function viewlinkdetails
+     * View the details of a link
+     * 
+     * @param integer $lid (via GET)
+     * 
+     * @return string (html)
      */
     public function viewlinkdetails()
     {
         // get parameters we need
-        $lid = (int)$this->getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', 0, 'GET');
+        if (empty($lid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::Link', "::$lid", ACCESS_READ), LogUtil::getErrorMsgPermission());
@@ -206,12 +245,16 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function newlinks
+     * View how many links are new in the last n days
+     * 
+     * @param integer $newlinkshowdays (via GET) (optional) (default: 7)
+     * 
+     * @return string (html)
      */
     public function newlinks()
     {
         // get parameters we need
-        $newlinkshowdays = (int)$this->getPassedValue('newlinkshowdays', '7', 'GET');
+        $newlinkshowdays = (int)$this->getPassedValue('newlinkshowdays', 7, 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
@@ -223,12 +266,19 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function newlinksdate
+     * View how many links are new by date
+     * 
+     * @param string $selectdate (via GET)
+     * 
+     * @return string (html)
      */
     public function newlinksdate()
     {
         // get parameters we need
-        $selectdate = DateTime::createFromFormat("Ymd", (int)$this->getPassedValue('selectdate', null, 'GET'));
+        $selectdate = DateTime::createFromFormat("Ymd", (int)$this->getPassedValue('selectdate', 0, 'GET'));
+        if (empty($selectdate)) {
+            return LogUtil::registerArgsError();
+        }
         $start = clone $selectdate;
         $start->setTime(0, 0);
         $end = clone $selectdate;
@@ -255,13 +305,18 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function mostpopular
+     * Display the most popular links (computed by hits) in either raw count or by percentage
+     * 
+     * @param integer $ratenum (via GET) (optional) (default: 5)
+     * @param string $ratetype (via GET) (optional) (default: "num")
+     * 
+     * @return string (html)
      */
     public function mostpopular()
     {
         // get parameters we need
-        $ratenum = (int)$this->getPassedValue('ratenum', null, 'GET');
-        $ratetype = $this->getPassedValue('ratetype', null, 'GET');
+        $ratenum = (int)$this->getPassedValue('ratenum', 5, 'GET');
+        $ratetype = $this->getPassedValue('ratetype', "num", 'GET');
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
@@ -309,12 +364,19 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function brokenlink
+     * Report a broken link
+     * 
+     * @param integer $lid (via GET)
+     * 
+     * @return string (html)
      */
     public function brokenlink()
     {
         // get parameters we need
-        $lid = (int)$this->getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', 0, 'GET');
+        if (empty($lid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         if (!$this->getVar('unregbroken') == 1 &&
@@ -336,13 +398,21 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function brokenlinks
+     * Process broken link request
+     * 
+     * @param integer $lid (via POST)
+     * @param string $submitter (via POST)
+     * 
+     * @return NULL (redirect)
      */
     public function brokenlinks()
     {
         // get parameters we need
-        $lid = (int)$this->getPassedValue('lid', null, 'POST');
+        $lid = (int)$this->getPassedValue('lid', 0, 'POST');
         $submitter = $this->getPassedValue('submitter', null, 'POST');
+        if (empty($lid) || empty($submitter)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         if (!$this->getVar('unregbroken') == 1 &&
@@ -379,12 +449,19 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function modifylinkrequest
+     * Modify a link
+     * 
+     * @param integer $lid (via GET)
+     * 
+     * @return string (html)
      */
     public function modifylinkrequest()
     {
         // get parameters we need
-        $lid = (int)$this->getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', 0, 'GET');
+        if (empty($lid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         if (!$this->getVar('blockunregmodify') == 1 &&
@@ -421,12 +498,19 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function modifylinkrequests
+     * Process modify link request
+     * 
+     * @param array $modlink (via POST)
+     * 
+     * @return NULL (redirect)
      */
     public function modifylinkrequests()
     {
         // get parameters we need
         $modlink = $this->getPassedValue('modlink', array(), 'POST');
+        if (empty($modlink) || !isset($modlink['lid'])) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         if (!$this->getVar('blockunregmodify') == 1 &&
@@ -446,7 +530,9 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function addlink
+     * Submit a link
+     * 
+     * @return string (html)
      */
     public function addlink()
     {
@@ -469,12 +555,22 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * function add
+     * Process a link submission
+     * 
+     * This does not currently do so, but upon validation fail, it should return 
+     *   to the form with data pre-populated. 
+     * 
+     * @param array $newlink (via POST)
+     * 
+     * @return NULL (redirect)
      */
     public function add()
     {
         // get parameters we need
         $newlink = $this->getPassedValue('newlink', array(), 'POST');
+        if (empty($newlink)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         if (!$this->getVar('links_anonaddlinklock') == 1 &&
@@ -509,11 +605,12 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     }
 
     /**
-     * helper function to convert old getPassedValue method to Core 1.3.3-standard
+     * Helper function to convert old getPassedValue method to Core 1.3.3-standard
      * 
      * @param string $variable
      * @param mixed $defaultValue
      * @param string $type
+     * 
      * @return mixed 
      */
     private function getPassedValue($variable, $defaultValue, $type = 'POST')

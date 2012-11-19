@@ -11,10 +11,18 @@ class Weblinks_Api_User extends Zikula_AbstractApi
 {
 
     /**
-     * order function
+     * Convert orderby string to array for use in dql
+     * 
+     * @param string $args['orderby']
+     * 
+     * @return array
      */
     public function orderby($args)
     {
+        // Argument check
+        if (!isset($args['orderby'])) {
+            return LogUtil::registerArgsError();
+        }
         switch ($args['orderby']) {
             case 'titleD':
                 return array('sortby' => 'title', 'sortdir' => 'DESC');
@@ -39,7 +47,11 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     }
 
     /**
-     * get categories with query inside
+     * Search category title for matching query word(s)
+     * 
+     * @param string $args['query']
+     * 
+     * @return array of categories
      */
     public function searchcats($args)
     {
@@ -64,7 +76,11 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     }
 
     /**
-     * get weblinks with query inside
+     * Search links title for matching query word(s)
+     * 
+     * @param string $args['query']
+     * 
+     * @return array of links
      */
     public function search_weblinks($args)
     {
@@ -92,7 +108,9 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     }
 
     /**
-     * count searchlinks
+     * Count how many Link results there are for the search query
+     * 
+     * @return integer
      */
     public function countsearchlinks($args)
     {
@@ -110,7 +128,11 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     }
 
     /**
-     * get random links
+     * Obtain n number random links
+     * 
+     * @param integer $args['num'] (optional) (default: 1)
+     * 
+     * @return mixed (integer/array) of links
      */
     public function random($args)
     {
@@ -159,7 +181,12 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     }
 
     /**
-     * add link rewuest to db
+     * Add link request to db
+     * 
+     * @param array $args new link content
+     * @param integer $args['lid'] the link ID to modify
+     * 
+     * @return boolean
      */
     public function modifylinkrequest($args)
     {
@@ -188,7 +215,11 @@ class Weblinks_Api_User extends Zikula_AbstractApi
     }
 
     /**
-     * add link to db
+     * Add link to db
+     * 
+     * @param array $link
+     * 
+     * @return mixed integer/boolean
      */
     public function add($link)
     {

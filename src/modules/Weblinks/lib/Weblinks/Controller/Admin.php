@@ -12,16 +12,17 @@ use \Weblinks_Entity_Link as Link;
 class Weblinks_Controller_Admin extends Zikula_AbstractController
 {
 
-    /**
-     * function main
-     */
     public function main()
     {
         $this->redirect(ModUtil::url('Weblinks', 'admin', 'view'));
     }
 
     /**
-     * function view
+     * Main admin view
+     * Currently shows all new link requests, broken and modified link requests
+     * Also provides form to validate links (by category if desired)
+     * 
+     * @return string (html)
      */
     public function view()
     {
@@ -42,7 +43,10 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function catview
+     * Category administration
+     * Allow admin to add/modify/delete a category
+     * 
+     * @return string (html)
      */
     public function catview()
     {
@@ -54,12 +58,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function addcategory
+     * Process an add category request
+     * 
+     * @param array $newcategory (via POST)
+     * 
+     * @return NULL (redirect)
      */
     public function addcategory()
     {
         // get parameters we need
-        $newCategory = $this->getPassedValue('newcategory', null, 'POST');
+        $newCategory = $this->getPassedValue('newcategory', array(), 'POST');
+        if (empty($newCategory)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADD), LogUtil::getErrorMsgPermission());
@@ -77,12 +88,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function modcategory
+     * Modify a category
+     * 
+     * @param integer $cid (via POST)
+     * 
+     * @return string (html)
      */
     public function modcategory()
     {
         // get parameters we need
-        $cid = (int)$this->getPassedValue('cid', null, 'POST');
+        $cid = (int)$this->getPassedValue('cid', 0, 'POST');
+        if (empty($cid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -95,12 +113,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function savemodcategory
+     * Process a modify category request
+     * 
+     * @param array $modifiedcategory (via POST)
+     * 
+     * @return NULL (redirect)
      */
     public function savemodcategory()
     {
         // get parameters we need
-        $modifiedCategory = $this->getPassedValue('modifiedcategory', null, 'POST');
+        $modifiedCategory = $this->getPassedValue('modifiedcategory', array(), 'POST');
+        if (empty($modifiedCategory)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -118,12 +143,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function suredelcategory
+     * Present confirmation to delete a category
+     * 
+     * @param integer $cid (via POST)
+     * 
+     * @return string (html)
      */
     public function suredelcategory()
     {
         // get parameters we need
-        $cid = (int)$this->getPassedValue('cid', null, 'POST');
+        $cid = (int)$this->getPassedValue('cid', 0, 'POST');
+        if (empty($cid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
@@ -142,12 +174,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function delcategory
+     * Process delete category request
+     * 
+     * @param integer $cid (via POST)
+     * 
+     * @return NULL (redirect)
      */
     public function delcategory()
     {
         // get parameters we need
-        $cid = (int)$this->getPassedValue('cid', null, 'POST');
+        $cid = (int)$this->getPassedValue('cid', 0, 'POST');
+        if (empty($cid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
@@ -165,7 +204,10 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function linkview
+     * Link administration
+     * Allow admin to add/edit/delete a link
+     * 
+     * @return string (html)
      */
     public function linkview()
     {
@@ -180,12 +222,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function addlink
+     * Process a newlink request from an Admin
+     * 
+     * @param array $link (via POST)
+     * 
+     * @return NULL (redirect)
      */
     public function addlink()
     {
         // get parameters we need
         $link = $this->getPassedValue('link', array(), 'POST');
+        if (empty($link)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADD), LogUtil::getErrorMsgPermission());
@@ -252,14 +301,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function modlink
      * Allow admin to directly modify the link
      * 
+     * @param integer $lid (via GETPOST)
+     * 
+     * @return string (html)
      */
     public function modlink()
     {
         // get parameters we need
-        $lid = (int)$this->getPassedValue('lid', null, 'GETPOST');
+        $lid = (int)$this->getPassedValue('lid', 0, 'GETPOST');
+        if (empty($lid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -281,14 +335,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function modlinks
-     * process modlink input
+     * Process modlink request by admin
      * 
+     * @param array $link (via POST)
+     * 
+     * @return NULL (redirect)
      */
     public function modlinks()
     {
         // get parameters we need
         $link = $this->getPassedValue('link', array(), 'POST');
+        if (empty($link)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -308,12 +367,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function dellink
+     * Process delete link request from admin
+     * 
+     * @param integer $lid (via GET)
+     * 
+     * @return NULL (redirect)
      */
     public function dellink()
     {
         // get parameters we need
-        $lid = (int)$this->getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', 0, 'GET');
+        if (empty($lid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_DELETE), LogUtil::getErrorMsgPermission());
@@ -334,7 +400,11 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function validate
+     * Validate links by category
+     * 
+     * @param integer $cid (via POST) (optional) (default: 0)
+     * 
+     * @return string (html)
      */
     public function validate()
     {
@@ -356,7 +426,9 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function listbrokenlinks
+     * List broken link moderation requests
+     * 
+     * @return string (html)
      */
     public function listbrokenlinks()
     {
@@ -375,12 +447,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function ignorebrokenlinks
+     * Process ignore broken link request
+     * 
+     * @param integer $lid (via GETPOST)
+     * 
+     * @return NULL (redirect)
      */
     public function ignorebrokenlinks()
     {
         // get parameters we need
-        $lid = (int)$this->getPassedValue('lid', null, 'REQUEST');
+        $lid = (int)$this->getPassedValue('lid', 0, 'GETPOST');
+        if (empty($lid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -397,7 +476,9 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function listmodrequests
+     * List modification requests
+     * 
+     * @return string (html)
      */
     public function listmodrequests()
     {
@@ -411,12 +492,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function changemodrequests
+     * Process Link modification request from user
+     * 
+     * @param integer $lid (via GETPOST)
+     * 
+     * @return NULL (redirect)
      */
     public function changemodrequests()
     {
         // get parameters we need
-        $lid = $this->getPassedValue('lid', null, 'REQUEST');
+        $lid = (int)$this->getPassedValue('lid', 0, 'GETPOST');
+        if (empty($lid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -455,12 +543,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function delmodrequests
+     * Delete a user modification request (convert to ACTIVE)
+     * 
+     * @param integer $lid (via GET)
+     * 
+     * @return NULL (redirect)
      */
     public function delmodrequests()
     {
         // get parameters we need
-        $lid = $this->getPassedValue('lid', null, 'GET');
+        $lid = (int)$this->getPassedValue('lid', 0, 'GET');
+        if (empty($lid)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
@@ -479,7 +574,9 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function getconfig
+     * Show modify config form
+     * 
+     * @return string (html)
      */
     public function getconfig()
     {
@@ -490,12 +587,19 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function updateconfig
+     * Update the module config
+     * 
+     * @param array $config (via POST)
+     * 
+     * @return NULL (redirect)
      */
     public function updateconfig()
     {
         // get our input
         $config = $this->getPassedValue('config', array(), 'POST');
+        if (empty($config)) {
+            return LogUtil::registerArgsError();
+        }
 
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
@@ -567,7 +671,9 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * function help
+     * Show helpful information to admin
+     * 
+     * @return string (html)
      */
     public function help()
     {
@@ -578,7 +684,7 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
     }
 
     /**
-     * helper function to convert old getPassedValue method to Core 1.3.3-standard
+     * Helper function to convert old getPassedValue method to Core 1.3.3-standard
      * 
      * @param string $variable
      * @param mixed $defaultValue

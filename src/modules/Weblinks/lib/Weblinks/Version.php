@@ -10,6 +10,10 @@
 class Weblinks_Version extends Zikula_AbstractVersion
 {
 
+    /**
+     * Get module metaData
+     * @return array 
+     */
     public function getMetaData()
     {
         $meta = array();

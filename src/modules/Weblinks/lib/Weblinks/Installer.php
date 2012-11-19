@@ -11,7 +11,7 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
 {
 
     /**
-     * init Weblinks module
+     * Install Weblinks module
      */
     public function Install()
     {
@@ -39,7 +39,7 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
     }
 
     /**
-     * upgrade
+     * Upgrade
      */
     public function Upgrade($oldversion)
     {
@@ -181,7 +181,7 @@ CHANGE  `pn_description`  `description` TEXT CHARACTER SET utf8 COLLATE utf8_gen
     }
 
     /**
-     * delete the Weblinks module
+     * Unistall the Weblinks module
      */
     public function Uninstall()
     {

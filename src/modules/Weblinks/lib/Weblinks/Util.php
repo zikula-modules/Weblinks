@@ -9,6 +9,11 @@
  */
 class Weblinks_Util
 {
+    /**
+     * Provide the default modVar values
+     * 
+     * @return array 
+     */
     public static function getDefaults()
     {
         return array('perpage' => 25,
@@ -28,7 +33,7 @@ class Weblinks_Util
             'thumber' => 0,
             'thumbersize' => 'XL',
             'showPendingContent' => 1,
-            );;
+            );
     }
     
     /**

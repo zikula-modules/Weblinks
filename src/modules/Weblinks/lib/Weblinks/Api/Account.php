@@ -13,8 +13,9 @@ class Weblinks_Api_Account extends Zikula_AbstractApi
     /**
      * Return an array of items to show in the your account panel
      *
-     * @params   uname   string   the user name
-     * @return   array   array of items, or false on failure
+     * @params string $args['uname'] the user name
+     * 
+     * @return mixed array of items, or false on failure
      */
     public function getall($args)
     {

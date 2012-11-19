@@ -13,7 +13,9 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
 {
 
     /**
-     * get available admin panel links
+     * Get available admin panel links
+     * 
+     * @return array $links
      */
     public function getlinks()
     {
@@ -63,7 +65,9 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     }
 
     /**
-     * add/modify a category
+     * Add/modify a category
+     * 
+     * @return boolean
      */
     public function editcategory($category)
     {
@@ -99,7 +103,9 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     }
 
     /**
-     * delete a category
+     * Delete a category
+     * 
+     * @return boolean
      */
     public function delcategory($args)
     {
@@ -121,7 +127,10 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     
     /**
      * Private function to handle recursive category removal
-     * @param Weblinks_Entity_Category $cat 
+     * 
+     * @param Weblinks_Entity_Category $cat
+     * 
+     * @return NULL
      */
     private function recursiveCategoryRemoval(Weblinks_Entity_Category $cat)
     {
@@ -144,12 +153,19 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
         $this->entityManager->remove($cat);
         $this->entityManager->flush();
     }
-    
+
+    /**
+     * Array to track category count before removal
+     * @var array 
+     */
     public static $recursiveCategoryCount = array();
     
     /**
-     * retrieve recursive category count
-     * @param Weblinks_Entity_Category $cat 
+     * Retrieve recursive category count
+     * 
+     * @param Weblinks_Entity_Category $cat
+     * 
+     * @return NULL
      */
     public function doRecursiveCategoryCount(Weblinks_Entity_Category $cat)
     {
@@ -169,7 +185,11 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     }
 
     /**
-     * edit/create a link
+     * Edit/create a link
+     * 
+     * @param array $link
+     * 
+     * @return integer (the link ID)
      */
     public function editlink($link)
     {
@@ -206,7 +226,11 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     }
 
     /**
-     * check links
+     * Validate links by category
+     * 
+     * @param integer $args['cid'] (category ID)
+     * 
+     * @return array $links (result of validation check)
      */
     public function validateLinksByCategory($args)
     {
@@ -240,6 +264,8 @@ class Weblinks_Api_Admin extends Zikula_AbstractApi
     
     /**
      * get links with modrequest
+     * 
+     * @return array $modrequests
      */
     public function modrequests()
     {
