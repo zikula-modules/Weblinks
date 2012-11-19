@@ -228,7 +228,7 @@ class Weblinks_Controller_User extends Zikula_AbstractController
     public function newlinksdate()
     {
         // get parameters we need
-        $selectdate = DateTime::createFromFormat("U", (int)$this->getPassedValue('selectdate', null, 'GET'));
+        $selectdate = DateTime::createFromFormat("Ymd", (int)$this->getPassedValue('selectdate', null, 'GET'));
         $start = clone $selectdate;
         $start->setTime(0, 0);
         $end = clone $selectdate;
