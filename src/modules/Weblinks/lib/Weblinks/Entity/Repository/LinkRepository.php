@@ -132,7 +132,7 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
             $end = new DateTime();
         }
         $dql = "SELECT COUNT(DISTINCT a.lid) FROM Weblinks_Entity_Link a";
-        $dql .= " WHERE a.status = :status";
+        $dql .= " WHERE a.status >= :status";
         $dql .= " AND a.date >= :beginning";
         $dql .= " AND a.date <= :end";
 
