@@ -318,8 +318,6 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
-        $this->checkCsrfToken($this->getPassedValue('csrftoken', NULL, 'GETPOST'));
-
         // get linkarray from db
         $link = $this->entityManager->find('Weblinks_Entity_Link', $lid)->toArray();
         
