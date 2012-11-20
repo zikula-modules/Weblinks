@@ -21,11 +21,11 @@
 }
 #wl-main a.wl-catmain {
   padding: 2px 0 2px 19px;
-  background: url(../../../images/icons/extrasmall/folder_blue.png) no-repeat 0 50%;
+  background: url('../../../images/icons/extrasmall/folder_blue.png') no-repeat 0 50%;
 }
 #wl-main a.wl-catsub {
   padding: 2px 0 2px 19px;
-  background: url(../../../images/icons/extrasmall/folder_green.png) no-repeat 0 50%;
+  background: url('../../../images/icons/extrasmall/folder_green.png') no-repeat 0 50%;
 }
 #wl-main .wl-catname {
   margin:0 0 0.5em 0;
