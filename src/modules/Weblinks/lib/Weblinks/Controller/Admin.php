@@ -287,11 +287,12 @@ class Weblinks_Controller_Admin extends Zikula_AbstractController
                 $sitename = System::getVar('sitename');
                 // $adminmail = System::getVar('adminmail');
                 // $from = $adminmail; ??
-                $subject = DataUtil::formatForDisplay($this->__('Your link at')) . " " . DataUtil::formatForDisplay($sitename);
-                $message = DataUtil::formatForDisplay($this->__('Hello')) . " " . DataUtil::formatForDisplay($link['name']) . ",<br /><br />" . DataUtil::formatForDisplay($this->__("your link submission has been approved for the site's search engine.")) . "<br /><br />" . DataUtil::formatForDisplay($this->__('Link title'))
-                        . ": " . DataUtil::formatForDisplay($link['title']) . "<br />" . DataUtil::formatForDisplay($this->__('URL')) . ": " . DataUtil::formatForDisplay($link['url']) . "<br />" . DataUtil::formatForDisplay($this->__('Description')) . ": " . DataUtil::formatForDisplayHTML($link['description']) . "<br /><br /><br />"
-                        . DataUtil::formatForDisplay($this->__("The site's search engine is available at:")) . "<br /><a href='" . System::getBaseUrl() . "index.php?module=Weblinks'>" . System::getBaseUrl() . "index.php?module=Weblinks</a><br /><br />"
-                        . DataUtil::formatForDisplay($this->__('Thank you for your submission!')) . "<br /><br />" . DataUtil::formatForDisplay($sitename) . " " . DataUtil::formatForDisplay($this->__('Team.')) . "";
+                $webmailLink = ModUtil::url('Weblinks', 'user', 'viewlinkdetails', array('lid' => $lid), null, null, true);
+                $subject = $this->__('Your link at') . " " . DataUtil::formatForDisplay($sitename);
+                $message = $this->__('Hello') . " " . DataUtil::formatForDisplay($link['name']) . ",<br /><br />" . $this->__("your link submission has been approved for the site's search engine.") . "<br /><br />" . $this->__('Link title')
+                        . ": " . DataUtil::formatForDisplay($link['title']) . "<br />" . $this->__('URL') . ": " . DataUtil::formatForDisplay($link['url']) . "<br />" . $this->__('Description') . ": " . DataUtil::formatForDisplayHTML($link['description']) . "<br /><br /><br />"
+                        . $this->__("The link is viewable on the site here:") . "<br /><a href='$webmailLink'>$webmailLink</a><br /><br />"
+                        . $this->__('Thank you for your submission!') . "<br /><br />" . DataUtil::formatForDisplay($sitename) . " " . $this->__('team.');
                 // send the e-mail
                 ModUtil::apiFunc('Mailer', 'user', 'sendmessage', array('toaddress' => $link['email'], 'subject' => $subject, 'body' => $message, 'html' => true));
             }
