@@ -191,7 +191,12 @@ CHANGE  `pn_description`  `description` TEXT CHARACTER SET utf8 COLLATE utf8_gen
         DoctrineHelper::dropSchema($this->entityManager, array(
             'Weblinks_Entity_Link',
             'Weblinks_Entity_Category'));
+        
+        // remove module vars
         $this->delVars();
+
+        // unregister handlers
+        EventUtil::unregisterPersistentModuleHandlers('Weblinks');
 
         // remove hooks
         HookUtil::unregisterSubscriberBundles($this->version->getHookSubscriberBundles());
