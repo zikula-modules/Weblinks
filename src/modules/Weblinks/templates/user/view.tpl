@@ -1,6 +1,8 @@
+{pageaddvar name="javascript" value="jquery"}
+{pageaddvar name='javascript' value='modules/Weblinks/javascript/weblinks-user-view.js'}
 {include file="user/header.tpl"}
 <div class="wl-borderbox">
-    <h3>{gt text="Main-Categories"}</h3>
+    <h3>{gt text="Main categories"}</h3>
 
     <div class="z-clearfix">
         <div class="wl-catrow z-clearfix">
@@ -10,8 +12,11 @@
 
             {math equation="$count+1" assign="count"}
 
-            <dl class="wl-cat">
-                <dt class="wl-catname"><a href="{modurl modname='Weblinks' type='user' func='category' cid=$category.cat_id}" class="wl-catmain">{$category.title|safetext}</a> ({countsublinks cid=$category.cat_id}){categorynewlinkgraphic cat=$category.cat_id}</dt>
+            <dl class="wl-cat" id="category{$category.cat_id}">
+                <dt class="wl-catname"><a href="{modurl modname='Weblinks' type='user' func='category' cid=$category.cat_id}" class="wl-catmain">{$category.title|safetext}</a> 
+                    ({countsublinks cid=$category.cat_id}){categorynewlinkgraphic cat=$category.cat_id}
+                    <a id="categoryToggle{$category.cat_id}" class='wl-toggle-link wl-toggle-link-closed' href='javascript:void(0);'></a>
+                </dt>
                 {if $category.cdescription ne ""}
                 <dd class="wl-catdescr">{$category.cdescription|safehtml}</dd>
                 {/if}
