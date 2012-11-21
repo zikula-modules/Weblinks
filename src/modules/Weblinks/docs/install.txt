@@ -2,10 +2,9 @@
 ###          Installation           ###
 #######################################
 
-Install as any other pnAPI compatible module:
+Install as any other API compatible module:
 
 Upload;
-Regenerate;
 Initialize;
 Activate.
 
@@ -13,11 +12,10 @@ Activate.
 ###             Update              ###
 #######################################
 
-Upgrade from earlier versions just like any other pnAPI compatible module:
+Upgrade from earlier versions just like any other API compatible module:
 
 Delete the 'Web_Links' folder and all folder and files inside;
 Upload;
-Regenerate;
 Upgrade.
 
 #######################################
@@ -61,9 +59,9 @@ Group | Weblinks:: | .* | admin
 
 scribite
 Group | scribite:: | Weblinks:: | comment
-// the group can use scribite in Weblinks textareas if they have no comment permissions (ungeristered Users)
+// the group can use scribite in Weblinks textareas if they have no comment permissions (unregistered Users)
 
-// if a group has add permissions and higher, they can see an icon in their user profil to add links
+// if a group has add permissions and higher, they can see an icon in their user profile to add links
 
 #######################################
 ###   Hint for the pending module   ###
