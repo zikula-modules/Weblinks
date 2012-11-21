@@ -287,14 +287,11 @@ class Weblinks_Controller_User extends Zikula_AbstractController
         // Security check
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Weblinks::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
 
-        // count weblinks from the selected day
-        $totallinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->countByDatePeriod($start, $end);
-
         // get weblinks from the selected day
         $weblinks = $this->entityManager->getRepository('Weblinks_Entity_Link')->getLinks(Link::ACTIVE, ">=", 0, null, 'DESC', 0, 1, $start, $end);
 
         $this->view->assign('dateview', $selectdate->format('M j, Y'))
-                ->assign('totallinks', $totallinks)
+                ->assign('totallinks', count($weblinks))
                 ->assign('weblinks', $weblinks)
                 ->assign('helper', array(
                     'main' => 0, 
