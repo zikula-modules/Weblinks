@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-11 13:36-0500\n"
+"POT-Creation-Date: 2012-11-21 10:28-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,109 +16,110 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/Weblinks/Api/Account.php:42 templates/admin/linkview.tpl:11
-#: templates/admin/linkview.tpl:42 templates/admin/view.tpl:76
+#: lib/Weblinks/Api/Account.php:43 templates/admin/linkview.tpl:11
+#: templates/admin/linkview.tpl:42 templates/admin/view.tpl:84
 #: templates/user/links.tpl:5
 msgid "Add link"
 msgstr ""
 
-#: lib/Weblinks/Api/Admin.php:25 templates/admin/view.tpl:4
+#: lib/Weblinks/Api/Admin.php:27 templates/admin/view.tpl:4
 msgid "Overview"
 msgstr ""
 
-#: lib/Weblinks/Api/Admin.php:31
+#: lib/Weblinks/Api/Admin.php:33
 msgid "Categories administration"
 msgstr ""
 
-#: lib/Weblinks/Api/Admin.php:37
+#: lib/Weblinks/Api/Admin.php:39
 msgid "Links administration"
 msgstr ""
 
-#: lib/Weblinks/Api/Admin.php:43 templates/admin/getconfig.tpl:4
+#: lib/Weblinks/Api/Admin.php:43
+msgid "Broken links"
+msgstr ""
+
+#: lib/Weblinks/Api/Admin.php:45
+msgid "Modification requests"
+msgstr ""
+
+#: lib/Weblinks/Api/Admin.php:51 templates/admin/getconfig.tpl:4
 #: templates/admin/getconfig.tpl:91
 msgid "Settings"
 msgstr ""
 
-#: lib/Weblinks/Api/Admin.php:47 templates/admin/import.tpl:4
-msgid "Import"
-msgstr ""
-
-#: lib/Weblinks/Api/Admin.php:53 templates/admin/help.tpl:4
+#: lib/Weblinks/Api/Admin.php:57 templates/admin/help.tpl:4
 msgid "Help"
 msgstr ""
 
-#: lib/Weblinks/Api/Admin.php:57
+#: lib/Weblinks/Api/Admin.php:61
 msgid "User Link-Index"
 msgstr ""
 
-#: lib/Weblinks/Api/Admin.php:103 lib/Weblinks/Api/Admin.php:245
-#: lib/Weblinks/Api/Admin.php:282 lib/Weblinks/Api/Admin.php:310
-#: lib/Weblinks/Api/Admin.php:376 lib/Weblinks/Api/Admin.php:424
-#: lib/Weblinks/Api/Admin.php:466 lib/Weblinks/Api/Admin.php:497
-#: lib/Weblinks/Api/Admin.php:559 lib/Weblinks/Api/Admin.php:587
-#: lib/Weblinks/Api/User.php:34 lib/Weblinks/Api/User.php:85
-#: lib/Weblinks/Api/User.php:123 lib/Weblinks/Api/User.php:163
-#: lib/Weblinks/Api/User.php:230 lib/Weblinks/Api/User.php:290
-#: lib/Weblinks/Api/User.php:331 lib/Weblinks/Api/User.php:450
-#: lib/Weblinks/Api/User.php:474 lib/Weblinks/Api/User.php:498
-#: lib/Weblinks/Api/User.php:553 lib/Weblinks/Api/User.php:606
-#: lib/Weblinks/Api/User.php:644
-msgid "Error! Could not load items."
-msgstr ""
-
-#: lib/Weblinks/Api/Admin.php:126
+#: lib/Weblinks/Api/Admin.php:85
 msgid "ERROR: The category title exists on this level."
 msgstr ""
 
-#: lib/Weblinks/Api/Admin.php:140
+#: lib/Weblinks/Api/Admin.php:99
 msgid "ERROR: The category was not created: "
 msgstr ""
 
-#: lib/Weblinks/Api/Admin.php:222
+#: lib/Weblinks/Api/Admin.php:222 lib/Weblinks/Api/User.php:261
 msgid "ERROR: The link was not created: "
 msgstr ""
 
-#: lib/Weblinks/Api/Search.php:72 lib/Weblinks/Api/Search.php:92
-msgid "Error! Could not load any link."
+#: lib/Weblinks/Api/Search.php:73
+msgid "Error! Could not save the search results."
 msgstr ""
 
-#: lib/Weblinks/Api/User.php:381
-msgid "Sorry! There is no such link"
+#: lib/Weblinks/Api/User.php:71
+msgid "Error! Could not load items: "
 msgstr ""
 
-#: lib/Weblinks/Api/User.php:520
+#: lib/Weblinks/Api/User.php:103
+msgid "Error! Could not load items."
+msgstr ""
+
+#: lib/Weblinks/Api/User.php:168
+msgid "Sorry! There are no links to select randomly."
+msgstr ""
+
+#: lib/Weblinks/Api/User.php:236
 msgid "Sorry! This URL is already listed in the database!"
 msgstr ""
 
-#: lib/Weblinks/Api/User.php:524
+#: lib/Weblinks/Api/User.php:238
 msgid "Sorry! Error! You must type a URL for the web link!"
 msgstr ""
 
-#: lib/Weblinks/Api/User.php:528
+#: lib/Weblinks/Api/User.php:240
 msgid "Sorry! Error! You must type a title for the URL!"
 msgstr ""
 
-#: lib/Weblinks/Api/User.php:532
+#: lib/Weblinks/Api/User.php:242
 msgid "Sorry! Error! No category!"
 msgstr ""
 
-#: lib/Weblinks/Api/User.php:536
+#: lib/Weblinks/Api/User.php:244
 msgid "Sorry! Error! You must type a description for the URL!"
 msgstr ""
 
-#: lib/Weblinks/Api/User.php:558
-msgid ""
-"You didn't enter an e-mail address. However, your link will still be checked."
+#: lib/Weblinks/Api/User.php:264
+msgid "Thank you! Your link submission has been received."
 msgstr ""
 
-#: lib/Weblinks/Api/User.php:560
-msgid "Thank you! You'll receive an e-mail message when it's approved."
+#: lib/Weblinks/Api/User.php:267
+msgid "It will be checked by the site admin."
+msgstr ""
+
+#: lib/Weblinks/Api/User.php:269
+msgid "You'll receive an e-mail message when it's approved."
 msgstr ""
 
 #: lib/Weblinks/Block/LastWeblinks.php:31
 #: lib/Weblinks/Block/MostPopularWeblinks.php:31
-#: lib/Weblinks/Block/RandomWeblinks.php:31 lib/Weblinks/Version.php:18
-#: lib/Weblinks/Version.php:36 templates/user/header.tpl:4
+#: lib/Weblinks/Block/RandomWeblinks.php:31
+#: lib/Weblinks/ContentType/Links.php:81 lib/Weblinks/Version.php:22
+#: lib/Weblinks/Version.php:40 templates/user/header.tpl:4
 #: templates/user/search.tpl:3
 msgid "Weblinks"
 msgstr ""
@@ -135,232 +136,228 @@ msgstr ""
 msgid "Random Weblinks"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:67
+#: lib/Weblinks/ContentType/Links.php:26
+msgid "Weblinks List"
+msgstr ""
+
+#: lib/Weblinks/ContentType/Links.php:30
+msgid "Displays a list of Weblinks."
+msgstr ""
+
+#: lib/Weblinks/ContentType/Links.php:72
+msgid "Display weblinks from catgories"
+msgstr ""
+
+#: lib/Weblinks/ContentType/Links.php:75
+#, php-format
+msgid "Maximum %s links."
+msgstr ""
+
+#: lib/Weblinks/Controller/Admin.php:83
 msgid "Category successfully added"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:108
+#: lib/Weblinks/Controller/Admin.php:138
 msgid "Category successfully modified"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:149
+#: lib/Weblinks/Controller/Admin.php:199
 msgid "Category successfully deleted"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:189
+#: lib/Weblinks/Controller/Admin.php:249
 msgid "Sorry! Please try again: this link is already listed in the database!"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:195
+#: lib/Weblinks/Controller/Admin.php:255
 msgid "Sorry! Please try again: you need to specify a TITLE for your link!"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:200
+#: lib/Weblinks/Controller/Admin.php:260
 msgid "Sorry! Please try again: you need to specify a URL for your link!"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:207
+#: lib/Weblinks/Controller/Admin.php:267 lib/Weblinks/Controller/User.php:587
 msgid "Error! Hooked content does not validate."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:214
+#: lib/Weblinks/Controller/Admin.php:274
 msgid "Error! Could not add link to db."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:217
+#: lib/Weblinks/Controller/Admin.php:277
 msgid "New link added to the database"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:231
+#: lib/Weblinks/Controller/Admin.php:291
 msgid "Your link at"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:232
+#: lib/Weblinks/Controller/Admin.php:292
 msgid "Hello"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:232
+#: lib/Weblinks/Controller/Admin.php:292
 msgid "your link submission has been approved for the site's search engine."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:232
+#: lib/Weblinks/Controller/Admin.php:292
 #: templates/admin/listmodrequests.tpl:18 templates/admin/validate.tpl:18
 #: templates/user/modifylinkrequest.tpl:16
 msgid "Link title"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:233 templates/admin/linkview.tpl:20
+#: lib/Weblinks/Controller/Admin.php:293 templates/admin/linkview.tpl:20
 #: templates/admin/listmodrequests.tpl:23 templates/admin/modlink.tpl:18
-#: templates/admin/view.tpl:55 templates/user/modifylinkrequest.tpl:20
+#: templates/admin/view.tpl:57 templates/user/modifylinkrequest.tpl:20
 msgid "URL"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:233 templates/admin/catview.tpl:27
-#: templates/admin/listmodrequests.tpl:33 templates/admin/modcategory.tpl:21
-#: templates/admin/view.tpl:63
+#: lib/Weblinks/Controller/Admin.php:293 templates/admin/catview.tpl:27
+#: templates/admin/listmodrequests.tpl:45 templates/admin/modcategory.tpl:21
+#: templates/admin/view.tpl:71
 msgid "Description"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:234
-msgid "The site's search engine is available at:"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:235
-msgid "Thank you for your submission!"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:235
-msgid "Team."
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:260 templates/admin/linkview.tpl:66
-#: templates/admin/validate.tpl:39
-msgid "No link found"
+#: lib/Weblinks/Controller/Admin.php:294
+msgid "The link is viewable on the site here:"
 msgstr ""
 
 #: lib/Weblinks/Controller/Admin.php:295
+msgid "Thank you for your submission!"
+msgstr ""
+
+#: lib/Weblinks/Controller/Admin.php:295
+msgid "team."
+msgstr ""
+
+#: lib/Weblinks/Controller/Admin.php:327 templates/admin/linkview.tpl:66
+#: templates/admin/validate.tpl:37
+msgid "No link found"
+msgstr ""
+
+#: lib/Weblinks/Controller/Admin.php:361
 msgid "Link successfully modified"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:320 lib/Weblinks/Controller/Admin.php:408
+#: lib/Weblinks/Controller/Admin.php:393
 msgid "Link removed from the database"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:344
-msgid "New link removed from the database"
+#: lib/Weblinks/Controller/Admin.php:536
+msgid "Link was changed successfully"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:432
-msgid "Ignore requests"
+#: lib/Weblinks/Controller/Admin.php:538
+msgid "Could not find link."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:481
-msgid "Link was changed successfuly"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:505
+#: lib/Weblinks/Controller/Admin.php:569
 msgid "User link modification requests was ignored"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:589
+#: lib/Weblinks/Controller/Admin.php:666
 msgid "Configuration updated"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:633 lib/Weblinks/Controller/Admin.php:677
-msgid "Weblinks migration: Not Admin"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:637
-msgid "Ratings not available"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:656
-msgid "Error inserting votes in ratings table."
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:659
-#, php-format
-msgid "migrated: %s votes from Weblinks to Ratings"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:681
-msgid "EZComments not available"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:696
-msgid "anonymous user"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:710
-msgid "Error inserting comments in ezcomments table."
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:713
-#, php-format
-msgid "migrated: %s comments from Weblinks to EZComments"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:744
-msgid "Error inserting CmodsWebLinks categories in Weblinks categories table."
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:749
-#, php-format
-msgid "migrated: %s categories from CmodsWebLinks to Weblinks"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:772
-msgid "Error inserting CmodsWebLinks links in Weblinks links table."
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:777
-#, php-format
-msgid "migrated: %s links from CmodsWebLinks to Weblinks"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:796
-msgid ""
-"Error inserting CmodsWebLinks modrequests in Weblinks modrequests table."
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:799
-#, php-format
-msgid "migrated: %s modrequests from CmodsWebLinks to Weblinks"
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:817
-msgid "Error inserting CmodsWebLinks newlinks in Weblinks newlinks table."
-msgstr ""
-
-#: lib/Weblinks/Controller/Admin.php:820
-#, php-format
-msgid "migrated: %s newlinks from CmodsWebLinks to Weblinks"
-msgstr ""
-
-#: lib/Weblinks/Controller/User.php:36
+#: lib/Weblinks/Controller/User.php:39
 msgid "No existing categories"
 msgstr ""
 
-#: lib/Weblinks/Controller/User.php:103
-msgid "Link don't exist!"
+#: lib/Weblinks/Controller/User.php:122
+msgid "Link does not exist!"
 msgstr ""
+
+#: lib/Weblinks/Controller/User.php:428 lib/Weblinks/Controller/User.php:477
+msgid ""
+"This link has already been reported as broken. The site admin will review it "
+"as soon as possible! Thank you!"
+msgstr ""
+
+#: lib/Weblinks/Controller/User.php:432 lib/Weblinks/Controller/User.php:481
+msgid ""
+"This link has already been submitted for modification. The site admin will "
+"review it as soon as possible! Thank you!"
+msgstr ""
+
+#: lib/Weblinks/Controller/User.php:442
+msgid "No link found with that id."
+msgstr ""
+
+#: lib/Weblinks/Controller/User.php:446 lib/Weblinks/Controller/User.php:527
+msgid ""
+"Thank you for the information. Your request has been submitted for "
+"examination."
+msgstr ""
+
+#: lib/Weblinks/Handlers.php:26
+msgid "New link"
+msgid_plural "New links"
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/Weblinks/Handlers.php:32
+msgid "Broken link"
+msgid_plural "Broken links"
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/Weblinks/Handlers.php:38
+msgid "Modified link"
+msgid_plural "Modified links"
+msgstr[0] ""
+msgstr[1] ""
 
 #: lib/Weblinks/Installer.php:24
 #, php-format
 msgid "Error! Could not create tables (%s)."
 msgstr ""
 
-#: lib/Weblinks/Installer.php:134
-msgid ""
-"Error! This version of the Weblinks module requires Zikula 1.2.0 or later. "
-"Installation has been stopped because this requirement is not met."
+#: lib/Weblinks/TaggedObjectMeta/Weblinks.php:54
+msgid "Weblink"
 msgstr ""
 
-#: lib/Weblinks/Version.php:19
+#: lib/Weblinks/TaggedObjectMeta/Weblinks.php:55
+msgid "by"
+msgstr ""
+
+#: lib/Weblinks/TaggedObjectMeta/Weblinks.php:56
+msgid "on"
+msgstr ""
+
+#: lib/Weblinks/TaggedObjectMeta/Weblinks.php:57
+msgid "details"
+msgstr ""
+
+#: lib/Weblinks/TaggedObjectMeta/Weblinks.php:58
+msgid "visit"
+msgstr ""
+
+#: lib/Weblinks/Version.php:23
 msgid "Weblinks Module"
 msgstr ""
 
 #. ! this defines the module's url
-#: lib/Weblinks/Version.php:21
+#: lib/Weblinks/Version.php:25
 msgid "weblinks"
 msgstr ""
 
-#: lib/Weblinks/Version.php:46
+#: lib/Weblinks/Version.php:50
 msgid "Weblinks Filters"
 msgstr ""
 
-#: templates/plugins/function.categorynewlinkgraphic.php:31
-#: templates/plugins/function.newlinkgraphic.php:28
+#: templates/plugins/function.categorynewlinkgraphic.php:30
+#: templates/plugins/function.newlinkgraphic.php:20
 msgid "New today"
 msgstr ""
 
-#: templates/plugins/function.categorynewlinkgraphic.php:34
-#: templates/plugins/function.newlinkgraphic.php:31
+#: templates/plugins/function.categorynewlinkgraphic.php:33
+#: templates/plugins/function.newlinkgraphic.php:23
 msgid "New during last 3 days"
 msgstr ""
 
-#: templates/plugins/function.categorynewlinkgraphic.php:37
-#: templates/plugins/function.newlinkgraphic.php:34
+#: templates/plugins/function.categorynewlinkgraphic.php:36
+#: templates/plugins/function.newlinkgraphic.php:26
 msgid "New this week"
 msgstr ""
 
@@ -402,32 +399,32 @@ msgstr ""
 msgid "Visit this web site"
 msgstr ""
 
-#: templates/plugins/function.orderbyTrans.php:15
+#: templates/plugins/function.orderbyTrans.php:19
 #: templates/user/searchresults.tpl:30 templates/user/sortlinksbymenu.tpl:6
 msgid "Popularity (from fewest hits to most hits)"
 msgstr ""
 
-#: templates/plugins/function.orderbyTrans.php:18
+#: templates/plugins/function.orderbyTrans.php:22
 #: templates/user/searchresults.tpl:30 templates/user/sortlinksbymenu.tpl:6
 msgid "Popularity (from most hits to fewest hits)"
 msgstr ""
 
-#: templates/plugins/function.orderbyTrans.php:21
+#: templates/plugins/function.orderbyTrans.php:25
 #: templates/user/searchresults.tpl:28 templates/user/sortlinksbymenu.tpl:4
 msgid "Title (A to Z)"
 msgstr ""
 
-#: templates/plugins/function.orderbyTrans.php:24
+#: templates/plugins/function.orderbyTrans.php:28
 #: templates/user/searchresults.tpl:28 templates/user/sortlinksbymenu.tpl:4
 msgid "Title (Z to A)"
 msgstr ""
 
-#: templates/plugins/function.orderbyTrans.php:27
+#: templates/plugins/function.orderbyTrans.php:31
 #: templates/user/searchresults.tpl:29 templates/user/sortlinksbymenu.tpl:5
 msgid "Date (oldest links listed first)"
 msgstr ""
 
-#: templates/plugins/function.orderbyTrans.php:30
+#: templates/plugins/function.orderbyTrans.php:34
 #: templates/user/searchresults.tpl:29 templates/user/sortlinksbymenu.tpl:5
 msgid "Date (newest links listed first)"
 msgstr ""
@@ -447,7 +444,7 @@ msgstr ""
 
 #: templates/admin/catview.tpl:14 templates/admin/linkview.tpl:32
 #: templates/admin/modcategory.tpl:13 templates/admin/modlink.tpl:26
-#: templates/admin/view.tpl:67
+#: templates/admin/view.tpl:75
 msgid "Name"
 msgstr ""
 
@@ -456,7 +453,7 @@ msgid "in category"
 msgstr ""
 
 #: templates/admin/catview.tpl:21 templates/admin/modcategory.tpl:18
-#: templates/admin/validate.tpl:34
+#: templates/admin/validate.tpl:28
 msgid "None"
 msgstr ""
 
@@ -464,24 +461,23 @@ msgstr ""
 msgid "Add category"
 msgstr ""
 
-#: templates/admin/catview.tpl:32
-msgid "Add Category"
-msgstr ""
-
-#: templates/admin/catview.tpl:42 templates/admin/catview.tpl:51
-#: templates/admin/modcategory.tpl:9
+#: templates/admin/catview.tpl:42 templates/admin/modcategory.tpl:9
 msgid "Modify a category"
 msgstr ""
 
-#: templates/admin/catview.tpl:46 templates/admin/catview.tpl:64
-#: templates/admin/linkview.tpl:24 templates/admin/listmodrequests.tpl:28
-#: templates/admin/modlink.tpl:38 templates/admin/view.tpl:59
+#: templates/admin/catview.tpl:46 templates/admin/catview.tpl:63
+#: templates/admin/linkview.tpl:24 templates/admin/listmodrequests.tpl:40
+#: templates/admin/modlink.tpl:38 templates/admin/view.tpl:67
 #: templates/user/addlink.tpl:26 templates/user/category.tpl:6
 #: templates/user/linkbox.tpl:22 templates/user/modifylinkrequest.tpl:24
 msgid "Category"
 msgstr ""
 
-#: templates/admin/catview.tpl:60 templates/admin/catview.tpl:69
+#: templates/admin/catview.tpl:50 templates/admin/modcategory.tpl:26
+msgid "Modify category"
+msgstr ""
+
+#: templates/admin/catview.tpl:59 templates/admin/catview.tpl:67
 msgid "Delete category"
 msgstr ""
 
@@ -522,14 +518,14 @@ msgstr ""
 #: templates/admin/getconfig.tpl:79 templates/admin/getconfig.tpl:96
 #: templates/admin/getconfig.tpl:105 templates/admin/getconfig.tpl:114
 #: templates/admin/getconfig.tpl:123 templates/admin/getconfig.tpl:132
-#: templates/admin/getconfig.tpl:141 templates/admin/getconfig.tpl:157
+#: templates/admin/getconfig.tpl:141 templates/admin/getconfig.tpl:163
 msgid "yes"
 msgstr ""
 
 #: templates/admin/getconfig.tpl:81 templates/admin/getconfig.tpl:98
 #: templates/admin/getconfig.tpl:107 templates/admin/getconfig.tpl:116
 #: templates/admin/getconfig.tpl:125 templates/admin/getconfig.tpl:134
-#: templates/admin/getconfig.tpl:143 templates/admin/getconfig.tpl:159
+#: templates/admin/getconfig.tpl:143 templates/admin/getconfig.tpl:165
 msgid "no"
 msgstr ""
 
@@ -563,64 +559,68 @@ msgstr ""
 msgid "Allow unregistered users to post new links?"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:149
+#: templates/admin/getconfig.tpl:147
+msgid "Show pending content in Pending Content block"
+msgstr ""
+
+#: templates/admin/getconfig.tpl:155
 msgid "Screenshots"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:151
+#: templates/admin/getconfig.tpl:157
 msgid ""
 "If you want to use the screenshot function with thumber.de, register here:"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:151
+#: templates/admin/getconfig.tpl:157
 msgid "www.thumber.de"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:154
+#: templates/admin/getconfig.tpl:160
 msgid "Show screenshots with thumber.de?"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:163
+#: templates/admin/getconfig.tpl:169
 msgid "Select size of thumb"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:166
+#: templates/admin/getconfig.tpl:172
 msgid "S (100 x 75)"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:168
+#: templates/admin/getconfig.tpl:174
 msgid "M (120 x 90)"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:170
+#: templates/admin/getconfig.tpl:176
 msgid "L (150 x 113)"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:172
+#: templates/admin/getconfig.tpl:178
 msgid "XL (200 x 150)"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:174
+#: templates/admin/getconfig.tpl:180
 msgid "XXL (250 x 188)"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:176
+#: templates/admin/getconfig.tpl:182
 msgid "XXXL (300 x 255)"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:178
+#: templates/admin/getconfig.tpl:184
 msgid "SXL (400 x 300)"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:184
+#: templates/admin/getconfig.tpl:189
 msgid "Modify configuration"
 msgstr ""
 
-#: templates/admin/getconfig.tpl:185 templates/admin/modcategory.tpl:27
-#: templates/admin/suredelcategory.tpl:21 templates/user/add.tpl:4
-#: templates/user/addlink.tpl:46 templates/user/brokenlink.tpl:20
-#: templates/user/modifylinkrequest.tpl:35 templates/user/searchresults.tpl:43
-msgid "Back"
+#: templates/admin/getconfig.tpl:190 templates/admin/listmodrequests.tpl:74
+#: templates/admin/modcategory.tpl:27 templates/admin/suredelcategory.tpl:27
+#: templates/user/addlink.tpl:45 templates/user/brokenlink.tpl:20
+#: templates/user/modifylinkrequest.tpl:35
+msgid "Cancel"
 msgstr ""
 
 #: templates/admin/help.tpl:9
@@ -733,110 +733,12 @@ msgid ""
 "user profil to add links"
 msgstr ""
 
-#: templates/admin/help.tpl:39
-msgid "Hint for the pending module"
-msgstr ""
-
-#: templates/admin/help.tpl:41
-msgid "http://code.zikula.org/pendingcontent"
-msgstr ""
-
-#: templates/admin/help.tpl:42
-msgid "Name: New Links"
-msgstr ""
-
-#: templates/admin/help.tpl:43
-msgid "URL:  index.php?module=Web_Links&amp;type=admin"
-msgstr ""
-
-#: templates/admin/help.tpl:44
-msgid "SQL:  select count(*) from zk_links_newlink"
-msgstr ""
-
-#: templates/admin/help.tpl:45
-msgid "Name: Broken Links"
-msgstr ""
-
-#: templates/admin/help.tpl:46
-msgid ""
-"URL:  index.php?module=Web_Links&amp;type=admin&amp;func=listbrokenlinks"
-msgstr ""
-
-#: templates/admin/help.tpl:47
-msgid ""
-"SQL:  select count(*) from zk_links_modrequest WHERE zk_links_modrequest."
-"pn_brokenlink = 1"
-msgstr ""
-
-#: templates/admin/help.tpl:48
-msgid "Name: Modify Links"
-msgstr ""
-
-#: templates/admin/help.tpl:49
-msgid ""
-"URL:  index.php?module=Web_Links&amp;type=admin&amp;func=listmodrequests"
-msgstr ""
-
-#: templates/admin/help.tpl:50
-msgid ""
-"SQL:  select count(*) from zk_links_modrequest WHERE zk_links_modrequest."
-"pn_brokenlink = 0"
-msgstr ""
-
-#: templates/admin/help.tpl:51
-msgid "// zk_ if this is your table prefix"
-msgstr ""
-
-#: templates/admin/import.tpl:11
-msgid "Ratings"
-msgstr ""
-
-#: templates/admin/import.tpl:13
-msgid ""
-"With this function <strong>Weblinks-Votes</strong> will be imported to the "
-"<strong>Rating</strong> module.<br /><strong>!Attention!</strong> - befor "
-"you use this function you should set the style of the Ratings."
-msgstr ""
-
-#: templates/admin/import.tpl:17 templates/admin/validate.tpl:32
-msgid "OK"
-msgstr ""
-
-#: templates/admin/import.tpl:27
-msgid "EZComments"
-msgstr ""
-
-#: templates/admin/import.tpl:29
-msgid ""
-"With this function <strong>Weblinks-Comments</strong> will be imported to "
-"the <strong>EZComments</strong> module."
-msgstr ""
-
-#: templates/admin/import.tpl:43
-msgid "CmodsWebLinks"
-msgstr ""
-
-#: templates/admin/import.tpl:45
-msgid ""
-"With this function <strong>CmodsWebLinks</strong> will be imported to the "
-"<strong>Weblinks</strong> module.<br /><strong>!Attention!</strong> - this "
-"function add the CmodsWebLinks categories and links to the Weblinks module "
-"and don't replace it."
-msgstr ""
-
-#: templates/admin/import.tpl:53
-msgid ""
-"CmodsWebLinks isn't activated! Try to import?<br /><strong>!Attention!</"
-"strong> - this function add the CmodsWebLinks categories and links to the "
-"Weblinks module and don't replace it."
-msgstr ""
-
 #: templates/admin/linkview.tpl:4
 msgid "Links Administration"
 msgstr ""
 
 #: templates/admin/linkview.tpl:16 templates/admin/modlink.tpl:14
-#: templates/admin/view.tpl:51
+#: templates/admin/view.tpl:53
 msgid "Page title"
 msgstr ""
 
@@ -845,7 +747,7 @@ msgstr ""
 msgid "Description (255 characters max)"
 msgstr ""
 
-#: templates/admin/linkview.tpl:36 templates/admin/view.tpl:71
+#: templates/admin/linkview.tpl:36 templates/admin/view.tpl:79
 msgid "E-mail address"
 msgstr ""
 
@@ -854,7 +756,7 @@ msgid "Modify/Delete a link"
 msgstr ""
 
 #: templates/admin/linkview.tpl:55 templates/admin/modlink.tpl:10
-#: templates/admin/view.tpl:45 templates/user/modifylinkrequest.tpl:13
+#: templates/admin/view.tpl:47 templates/user/modifylinkrequest.tpl:13
 msgid "Link ID"
 msgstr ""
 
@@ -868,41 +770,62 @@ msgstr ""
 
 #: templates/admin/listbrokenlinks.tpl:8
 msgid ""
-"Ignore (deletes all <strong><em>requests</em></strong> for a given link)"
+"Instructions: confirm the validity of the link. Email the link submitter/"
+"owner by clicking their name. Choose an action to take:"
 msgstr ""
 
-#: templates/admin/listbrokenlinks.tpl:9
-msgid ""
-"Delete (deletes <strong><em>broken link</em></strong> and "
-"<strong><em>requests</em></strong> for a given link)"
+#: templates/admin/listbrokenlinks.tpl:10
+msgid "Ignore: returns the link to normal, active status."
 msgstr ""
 
-#: templates/admin/listbrokenlinks.tpl:14
+#: templates/admin/listbrokenlinks.tpl:11
+msgid "Delete: removes link from database completely."
+msgstr ""
+
+#: templates/admin/listbrokenlinks.tpl:17
 msgid "No broken links found"
 msgstr ""
 
-#: templates/admin/listbrokenlinks.tpl:21
-msgid "Link"
-msgstr ""
-
-#: templates/admin/listbrokenlinks.tpl:22
-#: templates/admin/listmodrequests.tpl:41
-#: templates/admin/listmodrequests.tpl:43 templates/admin/view.tpl:47
-msgid "Submitter"
-msgstr ""
-
-#: templates/admin/listbrokenlinks.tpl:23
-msgid "Link owner"
-msgstr ""
-
 #: templates/admin/listbrokenlinks.tpl:24
-#: templates/admin/listbrokenlinks.tpl:47
-#: templates/admin/listmodrequests.tpl:60
-msgid "Ignore"
+msgid "Link (valid)"
 msgstr ""
 
 #: templates/admin/listbrokenlinks.tpl:25
-#: templates/admin/listbrokenlinks.tpl:52 templates/admin/validate.tpl:28
+#: templates/admin/listmodrequests.tpl:53
+#: templates/admin/listmodrequests.tpl:55 templates/admin/view.tpl:49
+msgid "Submitter"
+msgstr ""
+
+#: templates/admin/listbrokenlinks.tpl:26
+msgid "Link owner"
+msgstr ""
+
+#: templates/admin/listbrokenlinks.tpl:27
+msgid "Actions"
+msgstr ""
+
+#: templates/admin/listbrokenlinks.tpl:37
+#: templates/admin/listmodrequests.tpl:26
+#: templates/admin/listmodrequests.tpl:33 templates/admin/view.tpl:59
+msgid "validates"
+msgstr ""
+
+#: templates/admin/listbrokenlinks.tpl:39
+#: templates/admin/listmodrequests.tpl:28
+#: templates/admin/listmodrequests.tpl:35 templates/admin/view.tpl:61
+msgid "invalid!"
+msgstr ""
+
+#: templates/admin/listbrokenlinks.tpl:59
+#: templates/admin/listmodrequests.tpl:73
+msgid "Ignore"
+msgstr ""
+
+#: templates/admin/listbrokenlinks.tpl:62 templates/admin/validate.tpl:32
+msgid "Edit"
+msgstr ""
+
+#: templates/admin/listbrokenlinks.tpl:65 templates/admin/validate.tpl:32
 msgid "Delete"
 msgstr ""
 
@@ -918,16 +841,16 @@ msgstr ""
 msgid "Proposed"
 msgstr ""
 
-#: templates/admin/listmodrequests.tpl:50
-#: templates/admin/listmodrequests.tpl:52
+#: templates/admin/listmodrequests.tpl:62
+#: templates/admin/listmodrequests.tpl:64
 msgid "Owner"
 msgstr ""
 
-#: templates/admin/listmodrequests.tpl:59
+#: templates/admin/listmodrequests.tpl:72
 msgid "Accept"
 msgstr ""
 
-#: templates/admin/listmodrequests.tpl:70
+#: templates/admin/listmodrequests.tpl:84
 msgid "No link modification requests"
 msgstr ""
 
@@ -939,15 +862,11 @@ msgstr ""
 msgid "Parent category"
 msgstr ""
 
-#: templates/admin/modcategory.tpl:26
-msgid "Modify category"
-msgstr ""
-
 #: templates/admin/modlink.tpl:4
 msgid "Modify Link"
 msgstr ""
 
-#: templates/admin/modlink.tpl:18 templates/admin/view.tpl:55
+#: templates/admin/modlink.tpl:18 templates/admin/view.tpl:57
 msgid "Visit"
 msgstr ""
 
@@ -963,24 +882,33 @@ msgstr ""
 msgid "Hits"
 msgstr ""
 
-#: templates/admin/modlink.tpl:45 templates/admin/view.tpl:77
+#: templates/admin/modlink.tpl:45 templates/admin/view.tpl:85
 msgid "Delete link"
 msgstr ""
 
 #: templates/admin/suredelcategory.tpl:4
-msgid "elete Category"
-msgstr ""
-
 #: templates/admin/suredelcategory.tpl:10
-#: templates/admin/suredelcategory.tpl:20
+#: templates/admin/suredelcategory.tpl:26
 msgid "Delete Category"
 msgstr ""
 
 #: templates/admin/suredelcategory.tpl:15
+#, php-format
 msgid ""
-"Are you sure you want to delete this category, ALL subcategories and ALL "
-"links in this category and these subcategories?"
+"Are you sure you want to delete the <strong>%s</strong> category?<br />ALL "
+"subcategories and ALL links in this category and these subcategories?"
 msgstr ""
+
+#: templates/admin/suredelcategory.tpl:16
+msgid "The following categories and the links within them will be deleted."
+msgstr ""
+
+#: templates/admin/suredelcategory.tpl:19 templates/admin/view.tpl:8
+#: templates/user/view.tpl:38
+msgid "link"
+msgid_plural "links"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/admin/validate.tpl:4
 msgid "Link Validation"
@@ -1003,68 +931,78 @@ msgid "Functions"
 msgstr ""
 
 #: templates/admin/validate.tpl:26
+msgid "OK"
+msgstr ""
+
+#: templates/admin/validate.tpl:30
 msgid "Failed!"
 msgstr ""
 
-#: templates/admin/validate.tpl:28
-msgid "Edit"
-msgstr ""
-
-#: templates/admin/view.tpl:8 templates/user/view.tpl:33
+#: templates/admin/view.tpl:8 templates/user/view.tpl:38
 msgid "There are"
 msgstr ""
 
-#: templates/admin/view.tpl:8 templates/user/view.tpl:33
-msgid "link"
-msgid_plural "links"
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/admin/view.tpl:8 templates/user/view.tpl:33
+#: templates/admin/view.tpl:8 templates/user/view.tpl:38
 msgid "and"
 msgstr ""
 
-#: templates/admin/view.tpl:8 templates/user/view.tpl:33
+#: templates/admin/view.tpl:8 templates/user/view.tpl:38
 msgid "category"
 msgid_plural "categories"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/view.tpl:8 templates/user/view.tpl:33
+#: templates/admin/view.tpl:8 templates/user/view.tpl:38
 msgid "in the database"
 msgstr ""
 
-#: templates/admin/view.tpl:12
+#: templates/admin/view.tpl:13
 msgid "Broken link reports"
 msgstr ""
 
-#: templates/admin/view.tpl:13
+#: templates/admin/view.tpl:14
 msgid "Link modification requests"
 msgstr ""
 
-#: templates/admin/view.tpl:21
+#: templates/admin/view.tpl:23
 msgid "Link validation"
 msgstr ""
 
-#: templates/admin/view.tpl:23 templates/admin/view.tpl:27
+#: templates/admin/view.tpl:25
 msgid "Check category"
 msgstr ""
 
-#: templates/admin/view.tpl:24
+#: templates/admin/view.tpl:26
 msgid "Check ALL categories"
 msgstr ""
 
-#: templates/admin/view.tpl:35
+#: templates/admin/view.tpl:29
+msgid "Validate Categories"
+msgstr ""
+
+#: templates/admin/view.tpl:37
 msgid "Links awaiting validation"
+msgstr ""
+
+#: templates/contenttype/links_edit.tpl:2
+msgid "Headline (optional)"
+msgstr ""
+
+#: templates/contenttype/links_edit.tpl:6
+msgid "Categories"
+msgstr ""
+
+#: templates/contenttype/links_edit.tpl:10
+msgid "Number of links to display"
+msgstr ""
+
+#: templates/contenttype/links_edit.tpl:14
+msgid "template (leave blank for default)"
 msgstr ""
 
 #: templates/search/options.tpl:3 templates/user/mostpopular.tpl:6
 #: templates/user/searchresults.tpl:21
 msgid "Links"
-msgstr ""
-
-#: templates/user/add.tpl:6
-msgid "Thank you! Your link submission has been received."
 msgstr ""
 
 #: templates/user/addlink.tpl:5
@@ -1103,39 +1041,39 @@ msgstr ""
 msgid "Your e-mail address"
 msgstr ""
 
-#: templates/user/addlink.tpl:45
+#: templates/user/addlink.tpl:44
 msgid "Add this URL"
 msgstr ""
 
-#: templates/user/addlink.tpl:53
+#: templates/user/addlink.tpl:52
 msgid "Sorry! You are not a registered user or you have not logged-in."
 msgstr ""
 
-#: templates/user/addlink.tpl:54
+#: templates/user/addlink.tpl:53
 msgid "If you were registered, you could contribute links to this web site."
 msgstr ""
 
-#: templates/user/addlink.tpl:55
+#: templates/user/addlink.tpl:54
 msgid "Becoming a registered user is a quick and easy process."
 msgstr ""
 
-#: templates/user/addlink.tpl:56
+#: templates/user/addlink.tpl:55
 msgid "Why is registration required for access to certain features?"
 msgstr ""
 
-#: templates/user/addlink.tpl:57
+#: templates/user/addlink.tpl:56
 msgid "So that you are offered only the highest-quality content,"
 msgstr ""
 
-#: templates/user/addlink.tpl:58
+#: templates/user/addlink.tpl:57
 msgid "each item is individually reviewed and approved."
 msgstr ""
 
-#: templates/user/addlink.tpl:59
+#: templates/user/addlink.tpl:58
 msgid "The site editor aims to offer useful information only."
 msgstr ""
 
-#: templates/user/addlink.tpl:60
+#: templates/user/addlink.tpl:59
 msgid "Register for a new user account"
 msgstr ""
 
@@ -1147,14 +1085,6 @@ msgstr ""
 msgid ""
 "For security reasons, your user name and IP address will also be recorded "
 "temporarily."
-msgstr ""
-
-#: templates/user/brokenlinks.tpl:3 templates/user/modifylinkrequests.tpl:3
-msgid "Thank you for the information."
-msgstr ""
-
-#: templates/user/brokenlinks.tpl:3 templates/user/modifylinkrequests.tpl:3
-msgid "Your request has been submitted for examination."
 msgstr ""
 
 #: templates/user/category.tpl:13
@@ -1291,6 +1221,10 @@ msgstr ""
 msgid "No matches found to your query"
 msgstr ""
 
+#: templates/user/searchresults.tpl:43
+msgid "Back"
+msgstr ""
+
 #: templates/user/searchresults.tpl:47
 msgid "Try to search"
 msgstr ""
@@ -1299,14 +1233,14 @@ msgstr ""
 msgid "on other search engines"
 msgstr ""
 
-#: templates/user/view.tpl:3
-msgid "Main-Categories"
+#: templates/user/view.tpl:5
+msgid "Main categories"
 msgstr ""
 
-#: templates/user/view.tpl:39
+#: templates/user/view.tpl:44
 msgid "Last links"
 msgstr ""
 
-#: templates/user/view.tpl:51
+#: templates/user/view.tpl:56
 msgid "Most-popular links"
 msgstr ""
