@@ -76,6 +76,9 @@ class Weblinks_Entity_Repository_LinkRepository extends EntityRepository
             $query->setParameter('end', $end);
         }
         if ($category > 0) {
+            if (is_array($category)) {
+                $category = implode(',', $category);
+            }
             $query->setParameter('cat', $category);
         }
         $query->setParameter('status', $status);

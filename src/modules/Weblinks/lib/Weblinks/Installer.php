@@ -33,6 +33,7 @@ class Weblinks_Installer extends Zikula_AbstractInstaller
 
         // register handlers
         EventUtil::registerPersistentModuleHandler('Weblinks', 'get.pending_content', array('Weblinks_Handlers', 'pendingContent'));
+        EventUtil::registerPersistentModuleHandler('Weblinks', 'module.content.gettypes', array('Weblinks_Handlers', 'getTypes'));
 
         // Initialisation successful
         return true;
@@ -172,6 +173,7 @@ CHANGE  `pn_description`  `description` TEXT CHARACTER SET utf8 COLLATE utf8_gen
 
                 // register handlers
                 EventUtil::registerPersistentModuleHandler('Weblinks', 'get.pending_content', array('Weblinks_Handlers', 'pendingContent'));
+                EventUtil::registerPersistentModuleHandler('Weblinks', 'module.content.gettypes', array('Weblinks_Handlers', 'getTypes'));
                 $this->setVar('showPendingContent', 1);
             case '3.0.0':
                 // future code

@@ -41,4 +41,14 @@ class Weblinks_Handlers
         }
     }
 
+    /**
+     * Event handler to provide Content module ContentTypes
+     * @param Zikula_Event $event 
+     */
+    public static function getTypes(Zikula_Event $event)
+    {
+        $types = $event->getSubject();
+        $types->add('Weblinks_ContentType_Links');
+    }
+
 }
