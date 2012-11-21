@@ -1,3 +1,4 @@
+{if $headline}<h2>{$headline}</h2>{/if}
 {if $links}
 <ol class="weblinks">
     {foreach from=$links item='link'}

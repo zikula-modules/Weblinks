@@ -1,10 +1,10 @@
 <div class="z-formrow">
-    {formlabel for='headline' __text='Headline'}
+    {formlabel for='headline' __text='Headline (optional)'}
     {formtextinput id='headline' group='data' maxLength=64}
 </div>
 <div class="z-formrow">
     {formlabel for='categories' __text='Categories'}
-    {formdropdownlist id='categories' selectionMode='multiple' items=$categories}
+    {formdropdownlist id='categories' group='data' selectionMode='multiple' items=$categories}
 </div>
 <div class="z-formrow">
     {formlabel for='limit' __text='Number of links to display'}
