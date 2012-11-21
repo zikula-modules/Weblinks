@@ -8,6 +8,8 @@ Version 3.0.0
 - pending content moved to new standard which requires no configuration. just check
     the box in the admin settings
 - added more information to the delete category page so it is clear what is to be deleted
+- add Content plugin to display list of links by category
+- add javascript subcategory show/hide to main user view
 
 Version 2.1.0 (not released)
 - converted to Gettext
