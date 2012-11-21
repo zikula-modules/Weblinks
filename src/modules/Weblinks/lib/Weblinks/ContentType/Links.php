@@ -16,9 +16,9 @@ class Weblinks_ContentType_Links extends Content_AbstractContentType
     protected $template = '';
     protected $categories = array();
     
-    function __construct()
+    function __construct(Zikula_View $view)
     {
-        parent::__construct();
+        parent::__construct($view);
         $this->_em = ServiceUtil::getService('doctrine.entitymanager');
     }
 
@@ -39,7 +39,7 @@ class Weblinks_ContentType_Links extends Content_AbstractContentType
     }
 
     public function display() {
-        $links = $this->_em->getRepository('Weblinks_Entity_Links')->getLinks(Weblinks_Entity_Link::ACTIVE, ">=", $this->categories, null, 'DESC', $this->limit);
+        $links = $this->_em->getRepository('Weblinks_Entity_Link')->getLinks(Weblinks_Entity_Link::ACTIVE, ">=", $this->categories, null, 'DESC', $this->limit);
         
         $this->view->assign('links', $links)
                 ->assign('headline', $this->headline);
