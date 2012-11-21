@@ -50,11 +50,6 @@ class Weblinks_Entity_Category extends Zikula_EntityAccess
      */
     private $cdescription = '';
 
-    function __construct()
-    {
-        
-    }
-
     public function getCat_id()
     {
         return $this->cat_id;
