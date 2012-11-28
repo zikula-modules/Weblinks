@@ -12,6 +12,11 @@ use \Weblinks_Entity_Link as Link;
 class Weblinks_Controller_Admin extends Zikula_AbstractController
 {
 
+    public function postInitialize()
+    {
+        $this->view->setCaching(false);
+    }
+
     public function main()
     {
         $this->redirect(ModUtil::url('Weblinks', 'admin', 'view'));
