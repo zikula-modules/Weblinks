@@ -23,7 +23,7 @@ class Weblinks_Handlers
             $count = $em->getRepository('Weblinks_Entity_Link')->getCount(Weblinks_Entity_Link::INACTIVE, '=');
             if ($count > 0) {
                 $collection = new Zikula_Collection_Container('Weblinks');
-                $collection->add(new Zikula_Provider_AggregateItem('submission', _n('New link', 'New links', $count, $dom), $count, 'admin', 'linkview'));
+                $collection->add(new Zikula_Provider_AggregateItem('submission', _n('New link', 'New links', $count, $dom), $count, 'admin', 'view'));
                 $event->getSubject()->add($collection);
             }
             $count = $em->getRepository('Weblinks_Entity_Link')->getCount(Weblinks_Entity_Link::ACTIVE_BROKEN, '=');
