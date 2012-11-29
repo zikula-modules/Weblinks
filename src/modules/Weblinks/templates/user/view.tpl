@@ -6,12 +6,8 @@
 
     <div class="z-clearfix">
         <div class="wl-catrow z-clearfix">
-            {assign var="count" value="0"}
             {foreach from=$categories item=category}
             {if $category.parent_id == "0"}
-
-            {math equation="$count+1" assign="count"}
-
             <dl class="wl-cat" id="category{$category.cat_id}">
                 <dt class="wl-catname"><a href="{modurl modname='Weblinks' type='user' func='category' cid=$category.cat_id}" class="wl-catmain">{$category.title|safetext}</a> 
                     ({countsublinks cid=$category.cat_id}){categorynewlinkgraphic cat=$category.cat_id}
@@ -26,10 +22,6 @@
                 {/if}
                 {/foreach}
             </dl>
-
-            {if $count == 2}
-            {assign var="count" value="0"}
-            {/if}
             {/if}
             {/foreach}
         </div>
