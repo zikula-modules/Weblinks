@@ -12,8 +12,8 @@
             <input type="hidden" name="cid" value="{$category->getCat_id()}" />
 
             <div class="z-formrow">
-                <p class='z-warningmsg'>{gt text="Are you sure you want to delete the <strong>%s</strong> category?<br />ALL subcategories and ALL links in this category and these subcategories?" tag1=$category->getTitle()}</p>
-                <p>{gt text='The following categories and the links within them will be deleted.'}</p>
+                <p class='z-warningmsg'>{gt text="Are you sure you want to delete the <strong>%s</strong> category?<br />ALL subcategories and ALL links in this category and these subcategories WILL BE DELETED!" tag1=$category->getTitle()}</p>
+                <p>{gt text='The following categories <strong>and the links within</strong> them will be deleted.'}</p>
                 <ul>
                 {foreach from=$affectedcategories key='key' item='aCat'}
                     <li>{$aCat.title} (#{$key}): {$aCat.count} {gt text='link' plural='links' count=$aCat.count}</li>
