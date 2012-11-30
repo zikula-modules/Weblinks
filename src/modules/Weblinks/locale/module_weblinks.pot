@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-21 10:28-0500\n"
+"POT-Creation-Date: 2012-11-30 16:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,110 +153,111 @@ msgstr ""
 msgid "Maximum %s links."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:83
+#: lib/Weblinks/Controller/Admin.php:88
 msgid "Category successfully added"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:138
+#: lib/Weblinks/Controller/Admin.php:143
 msgid "Category successfully modified"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:199
+#: lib/Weblinks/Controller/Admin.php:204
 msgid "Category successfully deleted"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:249
+#: lib/Weblinks/Controller/Admin.php:254
 msgid "Sorry! Please try again: this link is already listed in the database!"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:255
+#: lib/Weblinks/Controller/Admin.php:260
 msgid "Sorry! Please try again: you need to specify a TITLE for your link!"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:260
+#: lib/Weblinks/Controller/Admin.php:265
 msgid "Sorry! Please try again: you need to specify a URL for your link!"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:267 lib/Weblinks/Controller/User.php:587
+#: lib/Weblinks/Controller/Admin.php:272 lib/Weblinks/Controller/User.php:584
 msgid "Error! Hooked content does not validate."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:274
+#: lib/Weblinks/Controller/Admin.php:279
 msgid "Error! Could not add link to db."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:277
+#: lib/Weblinks/Controller/Admin.php:282
 msgid "New link added to the database"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:291
+#: lib/Weblinks/Controller/Admin.php:296
 msgid "Your link at"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:292
+#: lib/Weblinks/Controller/Admin.php:297
 msgid "Hello"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:292
+#: lib/Weblinks/Controller/Admin.php:297
 msgid "your link submission has been approved for the site's search engine."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:292
-#: templates/admin/listmodrequests.tpl:18 templates/admin/validate.tpl:18
+#: lib/Weblinks/Controller/Admin.php:297
+#: templates/admin/listmodrequests.tpl:18 templates/admin/validate.tpl:20
 #: templates/user/modifylinkrequest.tpl:16
 msgid "Link title"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:293 templates/admin/linkview.tpl:20
+#: lib/Weblinks/Controller/Admin.php:298 templates/admin/linkview.tpl:20
 #: templates/admin/listmodrequests.tpl:23 templates/admin/modlink.tpl:18
-#: templates/admin/view.tpl:57 templates/user/modifylinkrequest.tpl:20
+#: templates/admin/validate.tpl:21 templates/admin/view.tpl:57
+#: templates/user/modifylinkrequest.tpl:20
 msgid "URL"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:293 templates/admin/catview.tpl:27
+#: lib/Weblinks/Controller/Admin.php:298 templates/admin/catview.tpl:27
 #: templates/admin/listmodrequests.tpl:45 templates/admin/modcategory.tpl:21
 #: templates/admin/view.tpl:71
 msgid "Description"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:294
+#: lib/Weblinks/Controller/Admin.php:299
 msgid "The link is viewable on the site here:"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:295
+#: lib/Weblinks/Controller/Admin.php:300
 msgid "Thank you for your submission!"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:295
+#: lib/Weblinks/Controller/Admin.php:300
 msgid "team."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:327 templates/admin/linkview.tpl:66
-#: templates/admin/validate.tpl:37
+#: lib/Weblinks/Controller/Admin.php:332 templates/admin/linkview.tpl:66
+#: templates/admin/validate.tpl:42
 msgid "No link found"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:361
+#: lib/Weblinks/Controller/Admin.php:366
 msgid "Link successfully modified"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:393
+#: lib/Weblinks/Controller/Admin.php:398
 msgid "Link removed from the database"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:536
+#: lib/Weblinks/Controller/Admin.php:541
 msgid "Link was changed successfully"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:538
+#: lib/Weblinks/Controller/Admin.php:543
 msgid "Could not find link."
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:569
+#: lib/Weblinks/Controller/Admin.php:574
 msgid "User link modification requests was ignored"
 msgstr ""
 
-#: lib/Weblinks/Controller/Admin.php:666
+#: lib/Weblinks/Controller/Admin.php:671
 msgid "Configuration updated"
 msgstr ""
 
@@ -268,23 +269,23 @@ msgstr ""
 msgid "Link does not exist!"
 msgstr ""
 
-#: lib/Weblinks/Controller/User.php:428 lib/Weblinks/Controller/User.php:477
+#: lib/Weblinks/Controller/User.php:425 lib/Weblinks/Controller/User.php:474
 msgid ""
 "This link has already been reported as broken. The site admin will review it "
 "as soon as possible! Thank you!"
 msgstr ""
 
-#: lib/Weblinks/Controller/User.php:432 lib/Weblinks/Controller/User.php:481
+#: lib/Weblinks/Controller/User.php:429 lib/Weblinks/Controller/User.php:478
 msgid ""
 "This link has already been submitted for modification. The site admin will "
 "review it as soon as possible! Thank you!"
 msgstr ""
 
-#: lib/Weblinks/Controller/User.php:442
+#: lib/Weblinks/Controller/User.php:439
 msgid "No link found with that id."
 msgstr ""
 
-#: lib/Weblinks/Controller/User.php:446 lib/Weblinks/Controller/User.php:527
+#: lib/Weblinks/Controller/User.php:443 lib/Weblinks/Controller/User.php:524
 msgid ""
 "Thank you for the information. Your request has been submitted for "
 "examination."
@@ -453,7 +454,7 @@ msgid "in category"
 msgstr ""
 
 #: templates/admin/catview.tpl:21 templates/admin/modcategory.tpl:18
-#: templates/admin/validate.tpl:28
+#: templates/admin/validate.tpl:32
 msgid "None"
 msgstr ""
 
@@ -821,11 +822,11 @@ msgstr ""
 msgid "Ignore"
 msgstr ""
 
-#: templates/admin/listbrokenlinks.tpl:62 templates/admin/validate.tpl:32
+#: templates/admin/listbrokenlinks.tpl:62 templates/admin/validate.tpl:37
 msgid "Edit"
 msgstr ""
 
-#: templates/admin/listbrokenlinks.tpl:65 templates/admin/validate.tpl:32
+#: templates/admin/listbrokenlinks.tpl:65 templates/admin/validate.tpl:37
 msgid "Delete"
 msgstr ""
 
@@ -896,15 +897,18 @@ msgstr ""
 #, php-format
 msgid ""
 "Are you sure you want to delete the <strong>%s</strong> category?<br />ALL "
-"subcategories and ALL links in this category and these subcategories?"
+"subcategories and ALL links in this category and these subcategories WILL BE "
+"DELETED!"
 msgstr ""
 
 #: templates/admin/suredelcategory.tpl:16
-msgid "The following categories and the links within them will be deleted."
+msgid ""
+"The following categories <strong>and the links within</strong> them will be "
+"deleted."
 msgstr ""
 
 #: templates/admin/suredelcategory.tpl:19 templates/admin/view.tpl:8
-#: templates/user/view.tpl:38
+#: templates/user/view.tpl:30
 msgid "link"
 msgid_plural "links"
 msgstr[0] ""
@@ -922,37 +926,41 @@ msgstr ""
 msgid "Link Validation: by Category"
 msgstr ""
 
-#: templates/admin/validate.tpl:17 templates/admin/view.tpl:7
+#: templates/admin/validate.tpl:14
+msgid "Please see the note in the module docs about link validation."
+msgstr ""
+
+#: templates/admin/validate.tpl:19 templates/admin/view.tpl:7
 msgid "Status"
 msgstr ""
 
-#: templates/admin/validate.tpl:19
+#: templates/admin/validate.tpl:22
 msgid "Functions"
 msgstr ""
 
-#: templates/admin/validate.tpl:26
+#: templates/admin/validate.tpl:29
 msgid "OK"
 msgstr ""
 
-#: templates/admin/validate.tpl:30
+#: templates/admin/validate.tpl:34
 msgid "Failed!"
 msgstr ""
 
-#: templates/admin/view.tpl:8 templates/user/view.tpl:38
+#: templates/admin/view.tpl:8 templates/user/view.tpl:30
 msgid "There are"
 msgstr ""
 
-#: templates/admin/view.tpl:8 templates/user/view.tpl:38
+#: templates/admin/view.tpl:8 templates/user/view.tpl:30
 msgid "and"
 msgstr ""
 
-#: templates/admin/view.tpl:8 templates/user/view.tpl:38
+#: templates/admin/view.tpl:8 templates/user/view.tpl:30
 msgid "category"
 msgid_plural "categories"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/view.tpl:8 templates/user/view.tpl:38
+#: templates/admin/view.tpl:8 templates/user/view.tpl:30
 msgid "in the database"
 msgstr ""
 
@@ -1237,10 +1245,10 @@ msgstr ""
 msgid "Main categories"
 msgstr ""
 
-#: templates/user/view.tpl:44
+#: templates/user/view.tpl:36
 msgid "Last links"
 msgstr ""
 
-#: templates/user/view.tpl:56
+#: templates/user/view.tpl:48
 msgid "Most-popular links"
 msgstr ""
