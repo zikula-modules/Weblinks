@@ -7,7 +7,7 @@ Weblinks is a link management module for the Zikula Application Framework.
 
 _Released 30 November 2012_
 
-Zikula 1.3.0+ required
+This version work specifically with Zikula Core 1.3.x
 
 
 Development Info
