@@ -8,7 +8,7 @@
  * Please see the NOTICE file distributed with this source code for further
  * information regarding copyright and licensing.
  */
-class Tag_TaggedObjectMeta_Weblinks extends Tag_AbstractTaggedObjectMeta
+class Weblinks_TaggedObjectMeta_Weblinks extends Tag_AbstractTaggedObjectMeta
 {
 
     function __construct($objectId, $areaId, $module, $urlString = null, Zikula_ModUrl $urlObject = null)
