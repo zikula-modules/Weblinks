@@ -11,6 +11,10 @@ use \Weblinks_Entity_Link as Link;
 
 class Weblinks_Controller_User extends Zikula_AbstractController
 {
+    public function postInitialize()
+    {
+        $this->view->setCaching(false);
+    }
 
     /**
      * function main
